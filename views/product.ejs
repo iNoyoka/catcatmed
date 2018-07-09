@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html"; charset="utf-8"/>
+
+	<title>catcatmedProduct</title>
+
+	<link rel="stylesheet" type="text/css" href="stylesheets/home.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script>		
+		//get data from server
+		var productShowOnPageHTML;
+		var product_data;
+		var product;
+		
+		//decide which one be selected
+		var whichProductSelected = [];
+		var whichTagSelected = [0,0,0,0,0,0,0,0];
+		//using javascript object to make selector
+		var brandTag = {A:0,B:0,C:0} //fifteen brand
+		var flavorTag = {chicken:0,beef:0,pork:0}; //how many flavor?
+		var cerealTag = {cereal:0,non_cereal:0};
+		//
+		function GetProductData(){
+			$.post('/clientAskForProduct').done(function(data){				
+				product_data = JSON.parse(data);
+				product = eval('(' + product_data + ')');				
+				
+				//alert(product_data);
+				for(i in product)whichProductSelected.push(0);
+				//alert(whichProductSelected);
+				//show initial productBlock
+				//SelectProductByUsingTag(0);				
+			});	
+		}
+		
+		
+		//
+		function SelectTag(id){
+			var tag = document.getElementById(id);			
+			//change tag css
+			if(tag.className == "click"){
+				tag.className= "clicked";
+				//cerealTag
+				if(id == "cereal" && document.getElementById("non_cereal").className=="clicked")
+					document.getElementById("non_cereal").className = "click";
+				if(id == "non_cereal" && document.getElementById("cereal").className=="clicked")
+					document.getElementById("cereal").className = "click";
+				//priceTag
+				if(id == "highToLow" && document.getElementById("lowToHigh").className=="clicked")
+					document.getElementById("lowToHigh").className = "click";
+				if(id == "lowToHigh" && document.getElementById("highToLow").className=="clicked")
+					document.getElementById("highToLow").className = "click";
+				//brandTag
+
+				//flavorTag
+			}
+			else if(tag.className == "clicked"){
+				if(id != "highToLow" && id != "lowToHigh")
+					tag.className= "click";
+			}
+		}		
+	
+	</script>
+</head>
+<body>
+	<script>
+		GetProductData();
+	</script>
+	<header>
+		<nav class="nav navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span> 
+					</button>
+					<a class="navbar-brand" href="/">首頁</a>
+				</div>
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav">
+						<li><a data-toggle="tab" href="/questionnaire">開始客製化</a></li>
+						<li><a data-toggle="tab" href="/product">商城</a></li>
+						<li><a data-toggle="tab" href="/cart">購物車</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a data-toggle="tab" href="#">Library</a></li>
+						<li><a data-toggle="tab" href="#">關於我們</a></li>
+						<li><a data-toggle="tab" href="/usercenter">會員中心</a></li>
+						<% if (username) { %>
+							<li><a href="/"><%= username %>,歡迎回來!</a></li>
+							<li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span>登出</a></li>
+						<% } else { %>
+							<li><a href="/login"><span class="glyphicon glyphicon-log-in"></span>login</a></li>
+						<% } %>						
+					</ul>
+				</div>
+			</div>
+		</nav> 
+	</header>
+	<container>
+		<style>
+			.click{
+				background-color: #DDDDDD;
+				color: black;
+				padding-top:5px;
+				padding-bottom:5px;
+				border: solid 3px black;
+			}
+			.click:hover{
+				background-color: #888888;
+			}
+			.clicked{
+				background-color: #666666;
+				color: white;
+				padding-top:5px;
+				padding-bottom:5px;
+				border: solid 3px black;
+			}
+		</style>
+		<div style="margin-top:70px">			
+			<div class="col-lg-1"></div>
+			<div class="col-lg-11">
+				<div class="col-lg-2 text-center">
+					<p class="click" id="chicken" onClick="SelectTag(this.id)">chicken</p>
+				</div>
+				<div class="col-lg-2 text-center">
+					<p class="click" id="beef" onClick="SelectTag(this.id)">beef</p>
+				</div>
+				<div class="col-lg-2 text-center">
+					<p class="click" id="fish" onClick="SelectTag(this.id)">fish</p>
+				</div>
+				<div class="col-lg-2 text-center">
+					<p class="click" id="cereal" onClick="SelectTag(this.id)">cereal</p>
+				</div>
+				<div class="col-lg-2 text-center">
+					<p class="click" id="non_cereal" onClick="SelectTag(this.id)">non_cereal</p>
+				</div>
+				<div class="col-lg-2 text-center">
+					<p class="clicked" id="highToLow" onClick="SelectTag(this.id)">價格高到低</p>
+				</div>
+				<div class="col-lg-2 text-center">
+					<p class="click" id="lowToHigh" onClick="SelectTag(this.id)">價格低到高</p>
+				</div>
+			</div>				
+			<div class="col-lg-1"></div>
+			<div class="col-lg-1 text-center">
+				<p class="click" id="brandA" onClick="SelectTag(this.id)">brandA</p>
+			</div>
+			<div class="col-lg-1 text-center">
+				<p class="click" id="brandB" onClick="SelectTag(this.id)">brandB</p>
+			</div>
+			<div class="col-lg-1 text-center">
+				<p class="click" id="brandC" onClick="SelectTag(this.id)">brandC</p>
+			</div>
+		</div>		
+		<div class="col-lg-12 text-center" id="productBlock">dataLoading</div>
+	</container>	
+</body>
+</html>

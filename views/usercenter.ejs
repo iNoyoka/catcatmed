@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html"; charset="utf-8"/>
+
+	<title>catcatmedUserCenter</title>
+
+	<link rel="stylesheet" type="text/css" href="stylesheets/home.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script>
+		$(document).ready(function(){
+			$("#order").click(function(){
+				document.getElementById("tempBlock").innerHTML = "還沒有實作訂單功能";
+			});
+			$("#catcenter").click(function(){
+				document.getElementById("tempBlock").innerHTML = "還沒有實作問卷功能";
+			});
+			$("#question").click(function(){
+				document.getElementById("tempBlock").innerHTML = "還沒有常見問題的文檔";
+			});
+			$("#usercenter").click(function(){
+				location.reload();
+			});
+			$("#changeUserInfo").click(function(){
+				var text = "";
+				text += "請輸入現在的密碼:   <form action='/clientAskForChangePassword' method='post'><input type='password' name='oldPassword'><br>";
+				text += "請輸入新的密碼:     <br><input type='password'><br>";
+				text += "請再次輸入新的密碼: <br><input type='password' name='newPassword'><br>";
+				text += "<br><input type='submit' value='確認更改密碼'>";
+				document.getElementById("tempBlock").innerHTML = text;
+			});			
+		});
+	</script>
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-default navbar-fixed-top text-center">
+			<ul class="nav navbar-nav navbar-left">
+				<li><a href="/">首頁</a></li>
+				<li><a href="/questionnaire">開始客製化</a></li>
+				<li><a href="/product">商城</a></li>
+				<li><a href="/cart">購物車 <span id="productLength"><% if (productLength) {%><%=productLength%><%}%></span></a></li>				
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#">Library</a></li>
+				<li><a href="#">關於我們</a></li>
+				<li><a href="/usercenter"><span class="glyphicon glyphicon-user"></span>會員中心</a></li>
+				<% if (username) { %>
+					<li><a href="/">welcome back, <%= username %> !</a></li>
+					<li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span>登出</a></li>
+				<% } else { %>
+					<li><a href="/login"><span class="glyphicon glyphicon-log-in"></span>login</a></li>
+				<% } %>
+			</ul>
+		</nav>		
+	</header>
+	<container>
+		<style>
+			.task{
+				background-color:white;
+				margin-top: 20px;
+				margin-bottom: 20px;
+				padding: 5px;
+				cursor: pointer;
+			}
+		</style>
+		<div style="background-color:pink;height:500px;margin-top:50px;">
+			<div class="col-lg-3">
+				<div class="task text-center" id="usercenter">會員中心</div>		
+				<div class="task text-center" id="catcenter">貓咪中心</div>
+				<div class="task text-center" id="changeUserInfo">更改會員資料</div>
+				<div class="task text-center" id="question">常見問題</div>
+				<div class="task text-center" id="order">訂單進度與紀錄、退貨或是修改訂單</div>
+			</div>
+			<div class="col-lg-9" id="usercenterBlock" style="height:500px;">
+				<div id="tempBlock">貓咪冷知識</div>
+				</div>
+			</div>
+		</div>
+	</container>
+</body>
+</html>

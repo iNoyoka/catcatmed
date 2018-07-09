@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html"; charset="utf-8"/>
+
+	<title>catcatmedSignup</title>
+
+	<link rel="stylesheet" type="text/css" href="stylesheets/login.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<!-- AJAX -->
+	<script type="text/javascript">
+		$(document).ready(function(){			
+			$("#createForm").ajaxForm(function(){
+				alert("submit success!");
+			});
+		});
+		function GrammarCheck(){
+			if($("#name").val()!=""){
+				if($("#name").val().length > 10) document.getElementById("nameErr").innerHTML = "僅能輸入十個字以下的暱稱";
+				else document.getElementById("nameErr").innerHTML = "";
+			}else if($("#name").val()=="") document.getElementById("nameErr").innerHTML = "";
+			if($("#username").val()!=""){
+				var email = $("#username").val();
+				var pattern = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+				var check = email.match(pattern);
+				if(!check){
+					document.getElementById("usernameErr").innerHTML = "wrong format!";
+					return false;
+				}else{
+					document.getElementById("usernameErr").innerHTML = "";
+					return true;
+				}				
+			}
+			if($("#password").val()!=""){
+				var password = $("#password").val();
+				var pattern = /^\w+$/;
+				var check = password.match(pattern);
+				if(!check){
+					document.getElementById("passwordErr").innerHTML = "僅能填入英數字的組合!";
+					return false;
+				}else{
+					if( password.length < 6 || password.length >20){
+						document.getElementById("passwordErr").innerHTML = "請輸入6~20個字組成的密碼!";
+						return false;
+					}else{
+						document.getElementById("passwordErr").innerHTML = "";
+						return true;
+					}
+				}				
+			}
+			if($("#password").val()=="" && $("#passwordCheck").val()!=""){
+				document.getElementById("passwordCheckErr").innerHTML = "未填寫密碼前，無法確認是否正確!";	
+				return false;				
+			}
+			else if($("#password").val()!="" && $("#passwordCheck").val()!="" && $("#password").val()!=$("#passwordCheck").val()){
+				//密碼不相同
+				document.getElementById("passwordCheckErr").innerHTML = "兩次輸入的密碼不相同";
+				return false;
+			}else{
+				document.getElementById("passwordCheckErr").innerHTML = "";
+				return true;
+			}
+			
+		}
+		function showErrMsg(errMsg){
+			if(errMsg=="errExist") alert("此帳號已經被註冊過囉！");
+			if(errMsg=="errInput") alert("錯誤的輸入格式！");
+			if(errMsg=="errKnown") alert("未知的錯誤！");
+		}
+	</script>
+</head>
+<body>
+	<% if (errMsg) {%>
+		<script>
+			showErrMsg("<%= errMsg %>");
+		</script>		
+	<% } %>
+	<div class="col-lg-3"></div>
+	<div class="loginblock col-lg-6">
+		<div class="col-lg-6">
+			signinwithfb
+		</div>
+		<div class="col-lg-6">
+			<form action="/signupcheck" method="post" id="createForm" onSubmit="return GrammarCheck();">
+				<h3>您希望我們怎麼稱呼你呢?</h3>
+				<input type="text" id="name" name="name" onkeyup="GrammarCheck()">
+				<h4 style="color:red" id="nameErr"></h4>
+				<br>
+				<h3>帳號：</h3>
+				<input type="text" id="username" name="username" onkeyup="GrammarCheck()">
+				<h4>請輸入正常email格式(example:catcatmed@gmail.com)</h4>
+				<br>
+				<h5 style="color:red" id="usernameErr"></h5>
+				<h3>密碼：</h3>
+				<input type="password" id="password" name="password" onkeyup="GrammarCheck()">
+				<h4>僅接受數字與大小寫英文的組合</h4>
+				<h5 style="color:red" id="passwordErr"></h5>
+				<br><br>
+				<h3>再次確認密碼：</h3>
+				<input type="password" id="passwordCheck" onkeyup="GrammarCheck()">
+				<h5 style="color:red" id="passwordCheckErr"></h5>
+				<br><br>
+				<input type="submit" value="建立帳號">
+			</form>
+		</div>		
+	</div>
+	<div class="col-lg-3"></div>	
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html"; charset="utf-8"/>
+
+	<title>catcatmedCart</title>
+
+	<link rel="stylesheet" type="text/css" href="stylesheets/home.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script>
+		var cartShowOnPageHTML;
+		var cart_data;
+		var cart;
+		var cartProductNumber = [];
+		
+		//onload
+		function GetCartData(){
+			$.post('/clientAskForCart').done(function(data){
+				cart_data = JSON.parse(data);
+				cart = eval('(' + cart_data + ')');
+				cartProductNumber = [];
+				
+				ShowCartData(0);
+			})
+		}		
+		function ShowCartData(check){
+			cartShowOnPageHTML = "";
+			for(i in cart){
+				if(check==0)	cartProductNumber.push({key:cart[i].p_id,value:1});
+				cartShowOnPageHTML += "<div style='background-color:gray'>";
+				cartShowOnPageHTML += "<span class='col-lg-2 text-center' style='background-color:white;margin-top:10px;margin-bottom:10px;'>" + "產品編號:" + cart[i].p_id + "</span>";
+				cartShowOnPageHTML += "<span class='col-lg-2 text-center' style='background-color:white;margin-top:10px;margin-bottom:10px;'>" + "產品名稱:" + cart[i].p_name + "</span>";
+				cartShowOnPageHTML += "<span class='col-lg-2 text-center' style='background-color:white;margin-top:10px;margin-bottom:10px;'>" + "產品價格:" + cart[i].price + "</span>";
+				cartShowOnPageHTML += "<span class='col-lg-1 text-center' onClick='MinusNumber(this.id)' id='"+ cart[i].p_id + "_minus" +"' style='background-color:green;margin-top:10px;margin-bottom:10px;cursor:pointer;'>" + "-" + "</span>";
+				cartShowOnPageHTML += "<span class='col-lg-1 text-center' style='background-color:yellow;margin-top:10px;margin-bottom:10px;'>" + cartProductNumber[i].value + "</span>";
+				cartShowOnPageHTML += "<span class='col-lg-1 text-center' onclick='PlusNumber(this.id)' id='"+ cart[i].p_id + "_plus" +"' style='background-color:green;margin-top:10px;margin-bottom:10px;cursor:pointer;'>" + "+" + "</span>";
+				cartShowOnPageHTML += "<span class='col-lg-2 text-center' style='background-color:white;margin-top:10px;margin-bottom:10px;'>" + "總價格:" + cart[i].price*cartProductNumber[i].value + "</span>";
+				cartShowOnPageHTML += "<span class='col-lg-1 text-center' onclick='DeleteInCartProduct(this.id)' id='"+ cart[i].p_id + "_delete" +"' style='background-color:red;margin-top:10px;margin-bottom:10px;cursor:pointer;'>" + "delete" + "</span>";
+				cartShowOnPageHTML += "</div>";
+			}
+			document.getElementById("cart").innerHTML = cartShowOnPageHTML;
+		}
+		function PlusNumber(id){
+			var item = id.slice(0,7);
+			for(i in cartProductNumber){
+				if(cartProductNumber[i].key==item){
+					cartProductNumber[i].value += 1;
+					ShowCartData(1);
+				}
+			}
+		}
+		function MinusNumber(id){
+			var item = id.slice(0,7);
+			for(i in cartProductNumber){
+				if(cartProductNumber[i].key==item){
+					if(cartProductNumber[i].value==1){
+						alert("已經是最低數量了！");
+					}else{
+						cartProductNumber[i].value -= 1;
+						ShowCartData(1);
+					}
+				}
+			}
+		}
+		function DeleteInCartProduct(id){
+			var item = id.slice(0,7);
+			for(i in cartProductNumber){
+				if(cartProductNumber[i].key==item){
+					$.ajax({
+						method : "POST",
+						url : "/deleteProductFromCart",
+						data : {
+							deleteTarget : item
+						}
+					}).done(function(data){
+						location.reload();
+					});
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-default navbar-fixed-top text-center">
+			<ul class="nav navbar-nav navbar-left">
+				<li><a href="/">首頁</a></li>
+				<li><a href="/questionnaire">開始客製化</a></li>
+				<li><a href="/product">商城</a></li>
+				<li><a href="/cart">購物車 <span id="productLength"><% if (productLength) {%><%=productLength%><%}%></span></a></li>					
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#">Library</a></li>
+				<li><a href="#">關於我們</a></li>
+				<li><a href="/usercenter"><span class="glyphicon glyphicon-user"></span>會員中心</a></li>
+				<% if (username) { %>
+					<li><a href="#">welcome back, <%= username %> !</a></li>
+					<li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span>登出</a></li>
+				<% } else { %>
+					<li><a href="/login"><span class="glyphicon glyphicon-log-in"></span>login</a></li>
+				<% } %>
+			</ul>
+		</nav>		
+	</header>
+	<container>
+		<style>
+			.cartBlock{
+				background-color:pink;
+				padding: 50px;
+				margin-top: 70px;
+			}
+		</style>
+		<div>
+			<div class="col-lg-2"></div>
+			<div class="col-lg-8 cartBlock">
+				<% if(productLength) {%>
+					<script>
+						GetCartData();
+					</script>
+					<span>您已經選購了 <%= productLength %> 件商品</span>
+					<div id="cart"></div>
+				<% } else { %>
+					<span>你還沒有選購任何的商品！</span>					
+					<a href="/questionnaire">開始客製化</a>
+					<span> or </span>
+					<a href="/product">前往商城</a>
+				<% } %>
+			</div>
+			<div class="col=lg-2"></div>
+		</div>		
+	</container>	
+</body>
+</html>

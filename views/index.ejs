@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html"; charset="utf-8"/>
+
+	<title>catcatmedHome</title>
+
+	<link rel="stylesheet" type="text/css" href="stylesheets/home.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#mail").click(function(){
+				$.post("/sendmail").done(function(data){
+					alert("you send a mail successfully!");
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-default navbar-fixed-top text-center">
+			<ul class="nav navbar-nav navbar-left">
+				<li><a href="/">首頁</a></li>
+				<li><a href="/questionnaire">開始客製化</a></li>
+				<li><a href="/product">商城</a></li>
+				<li><a href="/cart">購物車 <span id="productLength"><% if (productLength) {%><%=productLength%><%}%></span></a></li>				
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#">Library</a></li>
+				<li><a href="#">關於我們</a></li>
+				<li><a href="/usercenter"><span class="glyphicon glyphicon-user"></span>會員中心</a></li>
+				<% if (username) { %>
+					<li><a href="/">welcome back, <%= username %> !</a></li>
+					<li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span>登出</a></li>
+				<% } else { %>
+					<li><a href="/login"><span class="glyphicon glyphicon-log-in"></span>login</a></li>
+				<% } %>
+			</ul>
+		</nav>		
+	</header>
+	<container>
+		<div class="text-center container-top container-block">
+			<h1>您的貓咪是獨一無二的，我們也是。</h1>
+			<h4>為您的貓咪量身訂製健康又美味的飼料</h4>
+			<h4>吃對的飼料，也要吃對的量</h4>
+			<a href="/questionnaire">let's start</a>
+		</div>
+		<div class="text-center container-block">
+			<h3>IT'S SIMPLE</h3>
+			<div class="col-lg-4 container-step">
+				<h3>tell us about</h3>
+			</div>
+			<div class="col-lg-4 container-step">
+				<h3>our recommend</h3>
+			</div>
+			<div class="col-lg-4 container-step">
+				<h3>package arrive</h3>
+			</div>
+			<h5> </h5>
+		</div>
+		<div class="container-block">
+			<div>
+				<div class="col-lg-6 text-center">
+					<img src="images/index/1.jpg">
+				</div>
+				<div class="col-lg-6 text-center container-special-inner">
+					<h3>誠實的建議</h3>
+					<h4>卡卡貓醫療系統無銷售業績等壓力，以最老實、無偏見的呈現出最適合的飼料</h4>
+				</div>
+			</div>
+			<div>
+				<div class="col-lg-6 text-center container-special-inner">
+					<h3>集合了國內外學術期刊與論文</h3>
+					<h4>卡卡貓醫療系統整合國內外學界、研究單位、以及業界最新的寵物各項資訊，給您最正確，最完善的寵物飲食菜單。</h4>
+				</div>
+				<div class="col-lg-6 text-center">
+					<img src="images/index/2.jpg">
+				</div>
+			</div>
+			<div>
+				<div class="col-lg-6 text-center">
+					<img src="images/index/3.jpg">
+				</div>
+				<div class="col-lg-6 text-center container-special-inner">
+					<h3>農委會產品把關</h3>
+					<h4>你知道任何飼料上架前都需經農委會的審核嗎？卡卡貓幫您將所有未經核准或有不良紀錄之廠商自動移除。</h4>
+				</div>
+			</div>
+			<div>
+				<div class="col-lg-6 text-center container-special-inner">
+					<h3>安心紀錄身體狀況</h3>
+					<h4>貓咪對環境及飲食過敏產生反應固然是飼主最頭痛的問題之一。透過卡卡門智慧演算，我們陪您一步一步了解貓咪的過敏原，找出您最適飼料。</h4>
+				</div>
+				<div class="col-lg-6 text-center">
+					<img src="images/index/4.jpg">
+				</div>
+			</div>
+			<div>
+				<div class="col-lg-6 text-center">
+					<img src="images/index/5.jpg">
+				</div>
+				<div class="col-lg-6 text-center container-special-inner">
+					<h3>獸醫醫療認證</h3>
+					<h4>卡卡貓除有獸醫學界的專業顧問，更定期的與醫界更新伴侶動物醫學知識，確保每位飼主家裡的喵寶吃到最安心的選擇。</h4>
+				</div>
+			</div>
+		</div>
+		<footer>
+			<div class="col-lg-12 text-center">
+				<h3>Here put some info about team</h3>
+				<p>CATCATMEDINFO</p>
+				<% if(username) { %>
+					<a href="#" id="mail">click here to send testing email</a>
+				<% } %>
+			</div>		
+		</footer>
+	</container>	
+</body>
+</html>
