@@ -46,10 +46,7 @@ var datetime = require('node-datetime');
 //------------------------------------------
 // For Account setting
 //------------------------------------------
-// account ccmuserpid
-var pid = 0;
-var ccmuserpid;
-var clientAlreadyLoginTOCCM = [];
+
 //------------------------------------------
 // Each page design
 //------------------------------------------
@@ -135,28 +132,16 @@ app.get('/signup',function(req,res,next){
 	
 });
 
-function ccmuserpidUpdate(){
-	pid = pid + 1;
-	if(pid>=0 && pid<=9) ccmuserpid = "A" + "0000000" + pid.toString();
-	if(pid>=10 && pid<=99) ccmuserpid = "A" + "000000" + pid.toString();
-	if(pid>=100 && pid<=999) ccmuserpid = "A" + "00000" + pid.toString();
-	if(pid>=1000 && pid<=9999) ccmuserpid = "A" + "0000" + pid.toString();
-	if(pid>=10000 && pid<=99999) ccmuserpid = "A" + "000" + pid.toString();
-	if(pid>=100000 && pid<=999999) ccmuserpid = "A" + "00" + pid.toString();
-	if(pid>=1000000 && pid<=9999999) ccmuserpid = "A" + "0" + pid.toString();
-	if(pid>=10000000 && pid<=99999999) ccmuserpid = "A" + pid.toString();
-}
-
 //signup check
 app.post('/signupcheck',function(req,res,next){
 	var name = req.body.name;
 	var username = req.body.username;
 	var password = req.body.password;
 	//check RE for illegal injection
-	//var pattern_name = /^[^<]$/
+	var pattern_name = /^[^<]$/;
 	var pattern_username = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
 	var pattern_password = /^\w+$/;
-	//var check_name = name.match(pattern_name);
+	var check_name = name.match(pattern_name);
 	var check_username = username.match(pattern_username);
 	var check_password = password.match(pattern_password);
 	
@@ -168,8 +153,6 @@ app.post('/signupcheck',function(req,res,next){
 		console.log("[SYS MSG] : RE pass, start building account...");
 		var dt = datetime.create();
 		var formatted = dt.format('Y-m-d H:M:S');
-		ccmuserpidUpdate();
-		console.log(ccmuserpid);
 		//check if database has this email address
 		var sql_check = "SELECT * FROM `useraccount` WHERE username = '"+ username +"'"; 
 		con.query(sql_check,function(err,result){
@@ -177,9 +160,9 @@ app.post('/signupcheck',function(req,res,next){
 			else
 			{
 				if(result[0]==null){
-					var sql = "INSERT INTO useraccount (CCMUserPId, name, username, password, buildtime) VALUES?";
+					var sql = "INSERT INTO useraccount (name, username, password, buildtime) VALUES?";
 					var values = [
-						[ccmuserpid, name, username,password,formatted]
+						[name, username,password,formatted]
 					];
 					con.query(sql,[values],function(err,result){
 						if(err){
