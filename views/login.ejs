@@ -89,6 +89,9 @@
 		.forgotButton:hover{
 			color: #111111;
 		}
+		img{
+			width: 100%;
+		}
 	</style>
 	<% if (errMsg) {%>
 		<script>
@@ -101,14 +104,16 @@
 				<p onClick="location.href=''" class="navLink">聯絡我們</p>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 navBlock">
-				<p onClick="location.href='/'"class="navLink">回到首頁</p>
+				<p onClick="location.href='/'"class="navLink">回首頁</p>
 			</div>
 		</div>		
 	</nav>
 	<container class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
 		<div class="col-lg-5 col-md-5 text-center">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<img class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1" src="images/login/LOGO.png">
+				<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+					<img src="images/login/LOGO.png">
+				</div>				
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 loginBlock">
 				<form action="/logincheck" method="post">
