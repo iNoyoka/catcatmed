@@ -11,19 +11,305 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 	<script>
-		var catName;
+		var customBasicEnum = {
+			boy:"男",
+			girl:"女",
+			_18_:"18歲以下",
+			_18_25:"18-25",
+			_26_35:"26-35",
+			_36_45:"36-45",
+			_46_65:"46-65",
+			_65_:"65歲以上",
+			yes:"是",
+			no:"否",
+			highFreq:"高",
+			medFreq:"中",
+			lowFreq:"低",
+			inside:"室內",
+			outside:"室外",
+			medside:"一半一半",
+			tooThin:"過瘦",
+			aLittleThin:"稍瘦",
+			medium:"適中",
+			aLittleFat:"稍胖",
+			tooFat:"過胖"
+		}
+		var basicInformation = {
+			name:"",
+			catName:"",
+			sex:"",
+			catSex:"",
+			age:"",
+			catAge:"",
+			species:"",
+			ligation:"",
+			pregnancy:"無資料",
+			catWeight:"",
+			catExerciseFreq:"",
+			catSide:"無資料",
+			catSize:""
+		}		
 		//
 		function enterPress(id,event){
 			var x = event.which || event.keyCode;
 			var y = id.slice(0,11) + "Button";
 			if(x==13)  document.getElementById(y).click();
 		}
-		function setCatName(){
-			catName = $("#questionA02Enter").val();
-			for(i=1;i<10;i++){
-				str = "catName" + i;
-				document.getElementById(str).innerHTML = catName;
+		function addToList(id){
+			//questionA01
+			if(id=="questionA01Button"){
+				if($("#questionA01Enter").val()!=""){
+					basicInformation.name = $("#questionA01Enter").val();
+					$("#questionA01").fadeOut(500,function(){
+						$("#questionA02").fadeIn(500,function(){
+							$("#questionA02Enter").focus();
+						});
+					});
+				}
 			}
+			//questionA02
+			if(id=="questionA02Button"){
+				if($("#questionA02Enter").val()!=""){
+					basicInformation.catName = $("#questionA02Enter").val();
+					for(i=1;i<8;i++){
+						var str = "catName" + i;
+						document.getElementById(str).innerHTML = basicInformation.catName;
+					}
+					$("#questionA02").fadeOut(500,function(){
+						$("#questionA03").fadeIn(500);
+					});
+				}
+			}
+			//questionA03
+			if(id=="questionA03_girl"){
+				basicInformation.sex = customBasicEnum.girl;
+				$("#questionA03").fadeOut(500,function(){
+					$("#questionA04").fadeIn(500);
+				});
+			}
+			if(id=="questionA03_boy"){
+				basicInformation.sex = customBasicEnum.boy;
+				$("#questionA03").fadeOut(500,function(){
+					$("#questionA04").fadeIn(500);
+				});
+			}
+			//questionA04
+			if(id=="questionA04_girl"){
+				basicInformation.catSex = customBasicEnum.girl;
+				$("#questionA04").fadeOut(500,function(){
+					$("#questionA05").fadeIn(500);
+				});
+			}
+			if(id=="questionA04_boy"){
+				basicInformation.catSex = customBasicEnum.boy;
+				$("#questionA04").fadeOut(500,function(){
+					$("#questionA05").fadeIn(500);
+				});
+			}
+			//questionA05
+			if(id=="questionA05_18-"){
+				basicInformation.age = customBasicEnum._18_;
+				$("#questionA05").fadeOut(500,function(){
+					$("#questionA06").fadeIn(500);
+				});
+			}
+			if(id=="questionA05_18-25"){
+				basicInformation.age = customBasicEnum._18_25;
+				$("#questionA05").fadeOut(500,function(){
+					$("#questionA06").fadeIn(500);
+				});
+			}
+			if(id=="questionA05_26-35"){
+				basicInformation.age = customBasicEnum._26_35;
+				$("#questionA05").fadeOut(500,function(){
+					$("#questionA06").fadeIn(500);
+				});
+			}
+			if(id=="questionA05_36-45"){
+				basicInformation.age = customBasicEnum._36_45;
+				$("#questionA05").fadeOut(500,function(){
+					$("#questionA06").fadeIn(500);
+				});
+			}
+			if(id=="questionA05_46-65"){
+				basicInformation.age = customBasicEnum._46_65;
+				$("#questionA05").fadeOut(500,function(){
+					$("#questionA06").fadeIn(500);
+				});
+			}
+			if(id=="questionA05_65+"){
+				basicInformation.age = customBasicEnum._65_;
+				$("#questionA05").fadeOut(500,function(){
+					$("#questionA06").fadeIn(500,function(){
+						$("#questionA06Enter").focus();
+					});
+				});
+			}
+			//questionA06
+			if(id=="questionA06Button"){
+				if($("#questionA06Enter").val()!=""){
+					basicInformation.catAge = $("#questionA06Enter").val();
+					$("#questionA06").fadeOut(500,function(){
+						$("#questionA07").fadeIn(500);	
+					});
+				}
+			}
+			//questionA07
+			if(id=="questionA07Button"){
+				if($("#questionA07_nohair").val()!="0"){
+					basicInformation.species = $("#questionA07_nohair").val();
+				}
+				if($("#questionA07_shorthair").val()!="0"){
+					basicInformation.species = $("#questionA07_shorthair").val();
+				}
+				if($("#questionA07_longhair").val()!="0"){
+					basicInformation.species = $("#questionA07_longhair").val();
+				}
+				$("#questionA07").fadeOut(500,function(){
+					$("#questionA08").fadeIn(500);	
+				});
+			}
+			//questionA08
+			if(id=="questionA08_yes"){
+				basicInformation.ligation = customBasicEnum.yes;
+				$("#questionA08").fadeOut(500,function(){
+					$("#questionA10").fadeIn(500);	
+				});
+			}
+			if(id=="questionA08_no"){
+				basicInformation.ligation = customBasicEnum.no;
+				if(basicInformation.catSex==customBasicEnum.girl){
+					$("#questionA08").fadeOut(500,function(){
+						$("#questionA09").fadeIn(500);	
+					});
+				}else{
+					$("#questionA08").fadeOut(500,function(){
+						$("#questionA10").fadeIn(500);	
+					});
+				}
+			}
+			//questionA09
+			if(id=="questionA09_yes"){
+				basicInformation.pregnancy = customBasicEnum.yes;
+				$("#questionA09").fadeOut(500,function(){
+					$("#questionA10").fadeIn(500);	
+				});
+			}
+			if(id=="questionA09_no"){
+				basicInformation.pregnancy = customBasicEnum.no;
+				$("#questionA09").fadeOut(500,function(){
+					$("#questionA10").fadeIn(500);	
+				});
+			}
+			//questionA10
+			if(id=="questionA10Button"){
+				if($("#questionA10Enter").val()!=""){
+					basicInformation.catWeight = $("#questionA10Enter").val();
+					$("#questionA10").fadeOut(500,function(){
+						$("#questionA11").fadeIn(500);	
+					});
+				}
+			}
+			//questionA11
+			if(id=="questionA11_highFreq"){
+				basicInformation.catExerciseFreq = customBasicEnum.highFreq;
+				$("#questionA11").fadeOut(500,function(){
+					$("#questionA12").fadeIn(500);	
+				});
+			}
+			if(id=="questionA11_medFreq"){
+				basicInformation.catExerciseFreq = customBasicEnum.medFreq;
+				$("#questionA11").fadeOut(500,function(){
+					$("#questionA13").fadeIn(500);	
+				});
+			}
+			if(id=="questionA11_lowFreq"){
+				basicInformation.catExerciseFreq = customBasicEnum.lowFreq;
+				$("#questionA11").fadeOut(500,function(){
+					$("#questionA13").fadeIn(500);	
+				});
+			}
+			//questionA12
+			if(id=="questionA12_inside"){
+				basicInformation.catSide = customBasicEnum.inside;
+				$("#questionA12").fadeOut(500,function(){
+					$("#questionA13").fadeIn(500);	
+				});
+			}
+			if(id=="questionA12_outside"){
+				basicInformation.catSide = customBasicEnum.outside;
+				$("#questionA12").fadeOut(500,function(){
+					$("#questionA13").fadeIn(500);	
+				});
+			}
+			if(id=="questionA12_medside"){
+				basicInformation.catSide = customBasicEnum.medside;
+				$("#questionA12").fadeOut(500,function(){
+					$("#questionA13").fadeIn(500);	
+				});
+			}
+			//questionA13
+			if(id=="questionA13_tooThin"){
+				basicInformation.catSize = customBasicEnum.tooThin;
+				$("#questionA13").fadeOut(500,function(){
+					showResult();
+				});
+			}
+			if(id=="questionA13_aLittleThin"){
+				basicInformation.catSize = customBasicEnum.aLittleThin;
+				$("#questionA13").fadeOut(500,function(){
+					showResult();
+				});
+			}
+			if(id=="questionA13_medium"){
+				basicInformation.catSize = customBasicEnum.medium;
+				$("#questionA13").fadeOut(500,function(){
+					showResult();
+				});
+			}
+			if(id=="questionA13_aLittleFat"){
+				basicInformation.catSize = customBasicEnum.aLittleFat;
+				$("#questionA13").fadeOut(500,function(){
+					showResult();
+				});
+			}
+			if(id=="questionA13_tooFat"){
+				basicInformation.catSize = customBasicEnum.tooFat;
+				$("#questionA13").fadeOut(500,function(){
+					showResult();
+				});
+			}
+		}
+		function speciesCheck(id){
+			if(id=="questionA07_nohair"){
+				$("#questionA07_shorthair").val("0");
+				$("#questionA07_longhair").val("0");
+			}
+			if(id=="questionA07_shorthair"){
+				$("#questionA07_nohair").val("0");
+				$("#questionA07_longhair").val("0");
+			}
+			if(id=="questionA07_longhair"){
+				$("#questionA07_nohair").val("0");
+				$("#questionA07_shorthair").val("0");
+			}
+		}
+		function showResult(){
+			var resultInformation = "";
+			resultInformation += "<h3>飼主姓名 : " + basicInformation.name + "</h3>";
+			resultInformation += "<h3>貓貓姓名 : " + basicInformation.catName + "</h3>";
+			resultInformation += "<h3>飼主性別 : " + basicInformation.sex + "</h3>";
+			resultInformation += "<h3>貓貓性別 : " + basicInformation.catSex + "</h3>";
+			resultInformation += "<h3>飼主年齡 : " + basicInformation.age + "</h3>";
+			resultInformation += "<h3>貓貓年齡 : " + basicInformation.catAge + "</h3>";
+			resultInformation += "<h3>貓貓品種 : " + basicInformation.species + "</h3>";
+			resultInformation += "<h3>貓貓結紮 : " + basicInformation.ligation + "</h3>";
+			resultInformation += "<h3>貓貓懷孕 : " + basicInformation.pregnancy + "</h3>";
+			resultInformation += "<h3>貓貓體重 : " + basicInformation.catWeight + "</h3>";
+			resultInformation += "<h3>貓貓活動 : " + basicInformation.catExerciseFreq + "</h3>";
+			resultInformation += "<h3>室內室外 : " + basicInformation.catSide + "</h3>";
+			resultInformation += "<h3>貓貓體型 : " + basicInformation.catSize + "</h3>";
+			document.getElementById("result").innerHTML = resultInformation;
 		}
 	</script>
 </head>
@@ -44,6 +330,9 @@
 			font-weight: bold;
 			text-align: center;
 		}
+		.questionBlock{
+			display: none;
+		}
 		input{
 			outline: none;
 			width: 100%;
@@ -60,6 +349,10 @@
 		  border: solid 2px black;
 		  padding: 0px;
 		  cursor: pointer;
+		}
+		.placeholder:hover{
+			background-color: yellow;
+			transition: 500ms;
 		}
 	</style>
 	<div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
@@ -78,10 +371,10 @@
 					<input type="text" id="questionA01Enter" onkeypress="enterPress(this.id,event)">
 				</div>
 				<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center">
-					<button id="questionA01Button" onclick="javascript:alert('Hello World!')">></button>
+					<button id="questionA01Button" onclick="addToList(this.id);">></button>
 				</div>
 			</div>		
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="questionA02">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="questionA02">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問貓貓的名字</span>
 				</div>
@@ -89,75 +382,265 @@
 					<input type="text" id="questionA02Enter" onkeypress="enterPress(this.id,event)">
 				</div>
 				<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center">
-					<button id="questionA02Button" onclick="setCatName();">></button>
+					<button id="questionA02Button" onclick="addToList(this.id);">></button>
 				</div>	
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="questionA03">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="questionA03">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問你是媽媽還是爸爸？</span>
 				</div>				
 				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="questionA03_girl">
 						<span>媽媽</span>
 					</div>
 				</div>
 				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="questionA03_boy">
 						<span>爸爸</span>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="questionA04">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="questionA04">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span id="catName1">貓貓</span>						
 					<span>是男生還是女生呢？</span>
 				</div>				
 				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="questionA04_boy">
 						<span>男生</span>
 					</div>
 				</div>
 				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="questionA04_girl">
 						<span>女生</span>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="questionA04">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="questionA05">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">					
 					<span>請問您幾歲？</span>
 				</div>				
 				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="questionA05_18-">
 						<span>18以下</span>
 					</div>
 				</div>
 				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="questionA05_18-25">
 						<span>18-25</span>
 					</div>
 				</div>
 				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="questionA05_26-35">
 						<span>26-35</span>
 					</div>
 				</div>
 				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="questionA05_36-45">
 						<span>36-45</span>
 					</div>
 				</div>
 				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="questionA05_46-65">
 						<span>46-65</span>
 					</div>
 				</div>
 				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="questionA05_65+">
 						<span>65歲以上</span>
 					</div>
 				</div>
 			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="questionA06">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span id="catName2">貓貓</span>						
+					<span>幾歲了呢？</span>
+				</div>
+				<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 text-center">
+					<input type="number" id="questionA06Enter" onkeypress="enterPress(this.id,event)">
+				</div>
+				<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center">
+					<button id="questionA06Button" onclick="addToList(this.id);">></button>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="questionA07">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span id="catName3">貓貓</span>						
+					<span>是什麼品種呢？</span>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					<span>無毛貓</span>
+					<select id="questionA07_nohair" onchange="speciesCheck(this.id);">
+						<option value="0"></option>
+						<option value="加拿大無毛貓">加拿大無毛貓</option>
+					</select>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					<span>短毛貓</span>
+					<select id="questionA07_shorthair" onchange="speciesCheck(this.id);">
+						<option value="0"></option>
+						<option value="英短">英短</option>
+						<option value="美短">美短</option>
+						<option value="異短">異短</option>
+						<option value="歐短">歐短</option>
+						<option value="藍貓">藍貓</option>
+						<option value="暹羅">暹羅</option>
+						<option value="狸花">狸花</option>
+						<option value="埃及貓">埃及貓</option>
+						<option value="雪鞋貓">雪鞋貓</option>
+						<option value="曼赤肯">曼赤肯</option>
+						<option value="新加坡貓">新加坡貓</option>
+						<option value="日本短尾">日本短尾</option>
+						<option value="蘇格蘭折耳">蘇格蘭折耳</option>
+						<option value="阿比西尼亞">阿比西尼亞</option>
+						<option value="豹貓/孟加拉貓">豹貓/孟加拉貓</option>
+					</select>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					<span>長毛貓</span>
+					<select id="questionA07_longhair" onchange="speciesCheck(this.id);">
+						<option value="0"></option>
+						<option value="波斯貓">波斯貓</option>
+						<option value="布偶貓">布偶貓</option>
+						<option value="伯曼貓">伯曼貓</option>
+						<option value="緬因貓">緬因貓</option>
+						<option value="金吉拉">金吉拉</option>
+						<option value="挪威森林">挪威森林</option>
+						<option value="西伯利亞">西伯利亞</option>
+						<option value="喜馬拉雅">喜馬拉雅</option>
+						<option value="索馬利貓">索馬利貓</option>
+						<option value="長毛暹羅貓">長毛暹羅貓</option>
+						<option value="塞爾凱克捲毛貓">塞爾凱克捲毛貓</option>
+					</select>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+					<button id="questionA07Button" onclick="addToList(this.id);">></button>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="questionA08">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span id="catName3">貓貓</span>						
+					<span>是否結紮了呢？</span>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="questionA08_yes">
+						<span>是</span>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="questionA08_no">
+						<span>否</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="questionA09">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span id="catName3">貓貓</span>						
+					<span>現在有懷孕嗎？</span>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="questionA09_yes">
+						<span>是</span>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="questionA09_no">
+						<span>否</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="questionA10">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span id="catName4">貓貓</span>						
+					<span>最近一次測量的體重為？</span>
+				</div>
+				<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 text-center">
+					<input type="number" id="questionA10Enter" onkeypress="enterPress(this.id,event)">
+				</div>
+				<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center">
+					<button id="questionA10Button" onclick="addToList(this.id);">></button>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="questionA11">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>玩樂對貓咪而言就是一個運動的方式，請問</span>
+					<span id="catName5">貓貓</span>						
+					<span>運動的頻率？</span>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="questionA11_highFreq">
+						<span>高</span>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="questionA11_medFreq">
+						<span>中</span>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="questionA11_lowFreq">
+						<span>低</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="questionA12">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>請問</span>
+					<span id="catName6">貓貓</span>						
+					<span>是室內貓還是室外貓？</span>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="questionA12_inside">
+						<span>室內</span>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="questionA12_outside">
+						<span>室外</span>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);"id="questionA12_medside">
+						<span>一半一半</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="questionA13">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>請問</span>
+					<span id="catName7">貓貓</span>						
+					<span>的體態長得像下列哪一個？</span>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="questionA13_tooThin">
+						<span>過瘦</span>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="questionA13_aLittleThin">
+						<span>稍瘦</span>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="questionA13_medium">
+						<span>適中</span>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="questionA13_aLittleFat">
+						<span>稍胖</span>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);"  id="questionA13_tooFat">
+						<span>過胖</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="result">
+				
+			</div>
+			<!-- questionnaire up -->
 		</div>
 	</div>	
 </body>
