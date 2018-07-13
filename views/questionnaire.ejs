@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+	<!--
+		MUST CHECK : "id = catNamex" uncorrect number will lead to error.
+	-->
 	<script>
 		var customBasicEnum = {
 			boy:"男",
@@ -212,6 +214,75 @@
 			EBA:"無資料",
 			EBB:"無資料",
 			EBC:"無資料"
+		}
+		//GLOBAL VAR
+		var icon = [0,0,0,0,0,0,0,0,0,0,0,0];
+		//
+		function iconClick(id){
+			if(id=="AIC_IMMU"){
+				icon[0] = inverse(icon[0]);
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="AIC_HEART"){
+				icon[1] = inverse(icon[1]);
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="AIC_MEHAIR"){
+				icon[2] = inverse(icon[2]);
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="AIC_LIHAIR"){
+				icon[3] = inverse(icon[3]);
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="AIC_LOHAIR"){
+				icon[4] = inverse(icon[4]);
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="AIC_SKIN"){
+				icon[5] = inverse(icon[5]);
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="AIC_JOINT"){
+				icon[6] = inverse(icon[6]);
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="AIC_BONE"){
+				icon[7] = inverse(icon[7]);
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="AIC_ADDWEI"){
+				icon[8] = inverse(icon[8]);
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="AIC_OVERWEI"){
+				icon[9] = inverse(icon[9]);
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="AIC_STOMA"){
+				icon[10] = inverse(icon[10]);
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="AIC_STRESS"){
+				icon[11] = inverse(icon[11]);
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+		}
+		function inverse(iconValue){
+			if(iconValue==0) return 1;
+			else return 1;
 		}
 		//
 		function enterPress(id,event){
@@ -580,7 +651,7 @@
 			text-align: center;
 		}
 		.questionBlock{
-			display: none;
+			
 		}
 		input{
 			outline: none;
@@ -602,6 +673,26 @@
 		.placeholder:hover{
 			background-color: yellow;
 			transition: 500ms;
+		}
+		.icon{
+			font-family: Microsoft JhengHei;
+			font-size: 18px;
+			background-color: #FFFF77;
+			border: dashed black 2px;
+			cursor: pointer;
+		}
+		.icon:hover{
+			background-color: #FFCC22;
+		}
+		.iconSelected{			
+			background-color: #FF5511;
+			border: solid black 2px;
+			cursor: pointer;
+			font-family: Microsoft JhengHei;
+			font-size: 18px;
+		}
+		.iconSelected:hover{
+			background-color: red;
 		}
 	</style>
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -911,6 +1002,621 @@
 				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);"  id="BBC_tooFat">
 						<span>過胖</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="ARC">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>請問您來卡卡貓為了...</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder">
+							<h3>特定需求</h3>
+							<h4>貓咪有特殊疾病需要多家照護</h4>
+						</div>							
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder">
+							<h3>日常保健</h3>
+							<h4>加強<span id="catName8">貓貓</span>的身體健康</h4>
+						</div>							
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder">
+							<h3>知識了解</h3>
+							<h4>想先了解看看是否有能幫上我<span id="catName9">貓貓</span>的地方</h4>
+						</div>							
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="ANM">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>請問</span>
+					<span id="catName10">貓貓</span>
+					<span>目前是否有在吃處方飼料？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>有</span>
+						</div>						
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>沒有</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="AWM">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>請問是在吃哪一種處方飼料呢？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder">
+							<span>不確定</span>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<input type="text">
+						<button>></button>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="AIC">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>這次想特別</span>
+					<span id="LinkBetween16&19">base on 16's answer</span>
+					<span>的項目為何呢？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<!--ICON SELECT HERE (CAN MULTI)-->
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_IMMU" onclick="iconClick(this.id)">
+						<span>免疫力</span>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_HEART" onclick="iconClick(this.id)">
+						<span>心臟</span>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_MEHAIR" onclick="iconClick(this.id)">
+						<span>化毛</span>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_LIHAIR" onclick="iconClick(this.id)">
+						<span>亮毛</span>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_LOHAIR" onclick="iconClick(this.id)">
+						<span>脫毛</span>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_SKIN" onclick="iconClick(this.id)">
+						<span>皮膚</span>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_JOINT" onclick="iconClick(this.id)">
+						<span>關節</span>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_BONE" onclick="iconClick(this.id)">
+						<span>骨頭</span>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_ADDWEI" onclick="iconClick(this.id)">
+						<span>增重</span>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_OVERWEI" onclick="iconClick(this.id)">
+						<span>過胖</span>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_STOMA" onclick="iconClick(this.id)">
+						<span>腸胃</span>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_STRESS" onclick="iconClick(this.id)">
+						<span>壓力</span>
+					</div>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="AICButton">
+					<button>></button>
+				</div>
+			</div>
+			<!--優先考量-->
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="AWI">
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="AEM">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>請問您的email是？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<input type="text">
+					<button>></button>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="AFE">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>請問</span>
+					<span id="catName11">貓貓</span>
+					<span>目前有沒有感冒？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>有</span>
+						</div>						
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>沒有</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="AFF">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>請問</span>
+					<span id="catName11">貓貓</span>
+					<span>感冒的頻率？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder">
+							<span>幾乎沒有</span>
+						</div>						
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder">
+							<span>一個月一次</span>
+						</div>						
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder">
+							<span>一個月一次以上</span>
+						</div>						
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="AEI">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>是否有覺得</span>
+					<span id="catName11">貓貓</span>
+					<span>需要額外的免疫力保健呢？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>需要</span>
+						</div>						
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>不需要</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IHE">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>請問</span>
+					<span id="catName11">貓貓</span>
+					<span>有無任何心血管病史？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>有</span>
+						</div>						
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>無</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IWC">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>請問</span>
+					<span id="catName11">貓貓</span>
+					<span>平均一週梳幾次毛？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder">
+							<span>幾乎沒有</span>
+						</div>						
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder">
+							<span>1-2次</span>
+						</div>						
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder">
+							<span>3次以上</span>
+						</div>						
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IDC">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>是否每天梳毛之後，掉毛現象還是很嚴重呢？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>是</span>
+						</div>						
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>否</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IHH">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>請問在幫</span>
+					<span id="catName11">貓貓</span>
+					<span>梳毛時，毛髮當中有硬塊嗎？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>有</span>
+						</div>						
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>沒有</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="ILH">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>請問在幫</span>
+					<span id="catName11">貓貓</span>
+					<span>有無脫毛現象？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>有</span>
+						</div>						
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>沒有</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="ILP">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>請問在幫</span>
+					<span id="catName11">貓貓</span>
+					<span>脫毛的部位為：</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder">
+							<span>前段</span>
+						</div>						
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder">
+							<span>中段</span>
+						</div>						
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder">
+							<span>後段</span>
+						</div>						
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IHS">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>請問</span>
+					<span id="catName11">貓貓</span>
+					<span>的毛髮摸起來：</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder">
+							<span>乾澀無光澤</span>
+						</div>						
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder">
+							<span>健康</span>
+						</div>						
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder">
+							<span>粗糙打結</span>
+						</div>						
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IPO">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>貓咪理毛時，毛髮容易進入到貓咪的身體，請問</span>
+					<span id="catName11">貓貓</span>
+					<span>的排泄物中是否可以看到毛呢？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>是</span>
+						</div>						
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>否</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="ICV">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>請問</span>
+					<span id="catName11">貓貓</span>
+					<span>近兩個禮拜是否有吐毛呢？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>是</span>
+						</div>						
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>否</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="ISR">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>請問近兩個禮拜</span>
+					<span id="catName11">貓貓</span>
+					<span>身體皮膚是否有紅腫現象？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>是</span>
+						</div>						
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>否</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="INR">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>請問目前還有皮膚紅腫的情形嗎？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>有</span>
+						</div>						
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>沒有</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IBC">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>請問獸醫師是否有推薦</span>
+					<span id="catName11">貓貓</span>
+					<span>補充軟骨素或是葡萄糖胺呢？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>是</span>
+						</div>						
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>否</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IEB">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>是否有覺得</span>
+					<span id="catName11">貓貓</span>
+					<span>需要額外的關節保健呢？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>是</span>
+						</div>						
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>否</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IEF">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>請問</span>
+					<span id="catName11">貓貓</span>
+					<span>是否有平常很好動，突然不喜歡動，活動力下降的現象？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>是</span>
+						</div>						
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>否</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IJF">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>請問</span>
+					<span id="catName11">貓貓</span>
+					<span>是否有跳躍力變差的現象？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>是</span>
+						</div>						
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>否</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IVO">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>請問近兩個禮拜，</span>
+					<span id="catName11">貓貓</span>
+					<span>是否有嘔吐或是拉肚子的問題？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>是</span>
+						</div>						
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>否</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IVA">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>請問消化系統問題是偏向？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+						<div class="placeholder">
+							<span>上吐</span>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+						<div class="placeholder">
+							<span>下瀉</span>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+						<div class="placeholder">
+							<span>都有</span>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+						<div class="placeholder">
+							<span>不確定</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IVN">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>請問目前還有</span>
+					<span id="LinkBetween41&42">base on 41's answer</span>
+					<span>的情形呢？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder">
+							<span>逐漸好轉中</span>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder">
+							<span>目前還有持續</span>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder">
+							<span>不確定</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IBP">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>請問近兩個禮拜，</span>
+					<span id="catName11">貓貓</span>
+					<span>是否有發生血便的情形？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>有</span>
+						</div>						
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder">
+							<span>沒有</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IBP">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>請問目前還有血便的情形嗎？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder">
+							<span>逐漸好轉中</span>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder">
+							<span>目前還有持續</span>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder">
+							<span>不確定</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--IPR 複選-->
+			
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IBP">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span id="catName11">貓貓</span>
+					<span>是否有下列問題？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder">
+							<span>口臭</span>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder">
+							<span>過度流口水</span>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder">
+							<span>無</span>
+						</div>
 					</div>
 				</div>
 			</div>
