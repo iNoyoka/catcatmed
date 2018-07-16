@@ -114,7 +114,7 @@
 			IPR_STRB:"來回踱步",
 			IPR_STRC:"四處躲藏",
 			IPR_STRD:"食慾下降",
-			IPR_STRD:"隨地便溺",
+			IPR_STRE:"隨地便溺",
 			IMO_BS:"口臭",
 			IMO_OVERSWEAT:"過度流口水"
 		}
@@ -176,11 +176,16 @@
 			EAB_FORTHUP:"四次以上",
 			EAC_NEVER:"從未",
 			EAC_ONCE:"一次",
-			EAC_TWICE:"兩次",
+			EAC_TWICE:"兩三次",
 			EAC_EACHDAY:"幾乎每天",
 			EAD_BEEF:"牛肉",
-			EAD_GRAND:"穀類",
-			EAD_EGG:"蛋",
+			EAD_SLAM:"羊肉",
+			EAD_CHIC:"雞肉",
+			EAD_DUCK:"鴨肉",
+			EAD_TURK:"火雞",
+			EAD_FISH:"魚",
+			EAD_DEER:"鹿",
+			EAD_PIG:"豬",
 			EAE_LOWFREQ:"頻率低",
 			EAE_HIGHFREQ:"頻率高",
 			EAF_NEVER:"從來沒有",
@@ -217,72 +222,356 @@
 		}
 		//GLOBAL VAR
 		var icon = [0,0,0,0,0,0,0,0,0,0,0,0];
+		var ingredients = [0,0,0,0,0,0,0,0,0];
+		var allergy = [0,0,0,0,0,0,0,0,0,0];
 		//
 		function iconClick(id){
 			if(id=="AIC_IMMU"){
-				icon[0] = inverse(icon[0]);
+				if(icon[0]==0) icon[0] = 1;
+				else icon[0] = 0;
 				var newID = "#" + id;
 				$(newID).toggleClass("icon iconSelected");
 			}
 			if(id=="AIC_HEART"){
-				icon[1] = inverse(icon[1]);
+				if(icon[1]==0) icon[1] = 1;
+				else icon[1] = 0;
 				var newID = "#" + id;
 				$(newID).toggleClass("icon iconSelected");
 			}
 			if(id=="AIC_MEHAIR"){
-				icon[2] = inverse(icon[2]);
+				if(icon[2]==0) icon[2] = 1;
+				else icon[2] = 0;
 				var newID = "#" + id;
 				$(newID).toggleClass("icon iconSelected");
 			}
 			if(id=="AIC_LIHAIR"){
-				icon[3] = inverse(icon[3]);
+				if(icon[3]==0) icon[3] = 1;
+				else icon[3] = 0;
 				var newID = "#" + id;
 				$(newID).toggleClass("icon iconSelected");
 			}
 			if(id=="AIC_LOHAIR"){
-				icon[4] = inverse(icon[4]);
+				if(icon[4]==0) icon[4] = 1;
+				else icon[4] = 0;
 				var newID = "#" + id;
 				$(newID).toggleClass("icon iconSelected");
 			}
 			if(id=="AIC_SKIN"){
-				icon[5] = inverse(icon[5]);
+				if(icon[5]==0) icon[5] = 1;
+				else icon[5] = 0;
 				var newID = "#" + id;
 				$(newID).toggleClass("icon iconSelected");
 			}
 			if(id=="AIC_JOINT"){
-				icon[6] = inverse(icon[6]);
+				if(icon[6]==0) icon[6] = 1;
+				else icon[6] = 0;
 				var newID = "#" + id;
 				$(newID).toggleClass("icon iconSelected");
 			}
 			if(id=="AIC_BONE"){
-				icon[7] = inverse(icon[7]);
+				if(icon[7]==0) icon[7] = 1;
+				else icon[7] = 0;
 				var newID = "#" + id;
 				$(newID).toggleClass("icon iconSelected");
 			}
 			if(id=="AIC_ADDWEI"){
-				icon[8] = inverse(icon[8]);
+				if(icon[8]==0) icon[8] = 1;
+				else icon[8] = 0;
 				var newID = "#" + id;
 				$(newID).toggleClass("icon iconSelected");
 			}
 			if(id=="AIC_OVERWEI"){
-				icon[9] = inverse(icon[9]);
+				if(icon[9]==0) icon[9] = 1;
+				else icon[9] = 0;
 				var newID = "#" + id;
 				$(newID).toggleClass("icon iconSelected");
 			}
 			if(id=="AIC_STOMA"){
-				icon[10] = inverse(icon[10]);
+				if(icon[10]==0) icon[10] = 1;
+				else icon[10] = 0;
 				var newID = "#" + id;
 				$(newID).toggleClass("icon iconSelected");
 			}
 			if(id=="AIC_STRESS"){
-				icon[11] = inverse(icon[11]);
+				if(icon[11]==0) icon[11] = 1;
+				else icon[11] = 0;
 				var newID = "#" + id;
 				$(newID).toggleClass("icon iconSelected");
 			}
-		}
-		function inverse(iconValue){
-			if(iconValue==0) return 1;
-			else return 1;
+			//ingredients
+			if(id=="EFI_BEEF"){
+				if(ingredients[0]==0) ingredients[0] = 1;
+				else ingredients[0] = 0;
+				if(ingredients[8]==1){
+					ingredients[8] = 0;
+					$("#EFI_unsure").toggleClass("icon iconSelected");
+				}
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="EFI_SLAM"){
+				if(ingredients[1]==0) ingredients[1] = 1;
+				else ingredients[1] = 0;
+				if(ingredients[8]==1){
+					ingredients[8] = 0;
+					$("#EFI_unsure").toggleClass("icon iconSelected");
+				}
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="EFI_CHIC"){
+				if(ingredients[2]==0) ingredients[2] = 1;
+				else ingredients[2] = 0;
+				if(ingredients[8]==1){
+					ingredients[8] = 0;
+					$("#EFI_unsure").toggleClass("icon iconSelected");
+				}
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="EFI_DUCK"){
+				if(ingredients[3]==0) ingredients[3] = 1;
+				else ingredients[3] = 0;
+				if(ingredients[8]==1){
+					ingredients[8] = 0;
+					$("#EFI_unsure").toggleClass("icon iconSelected");
+				}
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="EFI_TURK"){
+				if(ingredients[4]==0) ingredients[4] = 1;
+				else ingredients[4] = 0;
+				if(ingredients[8]==1){
+					ingredients[8] = 0;
+					$("#EFI_unsure").toggleClass("icon iconSelected");
+				}
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="EFI_FISH"){
+				if(ingredients[5]==0) ingredients[5] = 1;
+				else ingredients[5] = 0;
+				if(ingredients[8]==1){
+					ingredients[8] = 0;
+					$("#EFI_unsure").toggleClass("icon iconSelected");
+				}
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="EFI_DEER"){
+				if(ingredients[6]==0) ingredients[6] = 1;
+				else ingredients[6] = 0;
+				if(ingredients[8]==1){
+					ingredients[8] = 0;
+					$("#EFI_unsure").toggleClass("icon iconSelected");
+				}
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="EFI_PIG"){
+				if(ingredients[7]==0) ingredients[7] = 1;
+				else ingredients[7] = 0;
+				if(ingredients[8]==1){
+					ingredients[8] = 0;
+					$("#EFI_unsure").toggleClass("icon iconSelected");
+				}
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="EFI_unsure"){
+				if(ingredients[8]==0){
+					if(ingredients[0]==1) $("#EFI_BEEF").toggleClass("icon iconSelected");
+					if(ingredients[1]==1) $("#EFI_SLAM").toggleClass("icon iconSelected");
+					if(ingredients[2]==1) $("#EFI_CHIC").toggleClass("icon iconSelected");
+					if(ingredients[3]==1) $("#EFI_DUCK").toggleClass("icon iconSelected");
+					if(ingredients[4]==1) $("#EFI_TURK").toggleClass("icon iconSelected");
+					if(ingredients[5]==1) $("#EFI_FISH").toggleClass("icon iconSelected");
+					if(ingredients[6]==1) $("#EFI_DEER").toggleClass("icon iconSelected");
+					if(ingredients[7]==1) $("#EFI_PIG").toggleClass("icon iconSelected");
+					for(i in ingredients){
+						if(i!=8){
+							ingredients[i] = 0;
+						}
+						else{
+							ingredients[8] = 1;
+							var newID = "#" + id;
+							$(newID).toggleClass("icon iconSelected");
+						}
+					}
+				}else{
+					ingredients[8] = 0;
+					var newID = "#" + id;
+					$(newID).toggleClass("icon iconSelected");
+				}		
+			}
+			//allergy
+			if(id=="EAD_BEEF"){
+				if(allergy[0]==0) allergy[0] = 1;
+				else allergy[0] = 0;
+				if(allergy[8]==1){
+					allergy[8] = 0;
+					$("#EAD_no").toggleClass("icon iconSelected");
+				}
+				if(allergy[9]==1){
+					allergy[9] = 0;
+					$("#EAD_unsure").toggleClass("icon iconSelected");
+				}
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="EAD_SLAM"){
+				if(allergy[1]==0) allergy[1] = 1;
+				else allergy[1] = 0;
+				if(allergy[8]==1){
+					allergy[8] = 0;
+					$("#EAD_no").toggleClass("icon iconSelected");
+				}
+				if(allergy[9]==1){
+					allergy[9] = 0;
+					$("#EAD_unsure").toggleClass("icon iconSelected");
+				}
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="EAD_CHIC"){
+				if(allergy[2]==0) allergy[2] = 1;
+				else allergy[2] = 0;
+				if(allergy[8]==1){
+					allergy[8] = 0;
+					$("#EAD_no").toggleClass("icon iconSelected");
+				}
+				if(allergy[9]==1){
+					allergy[9] = 0;
+					$("#EAD_unsure").toggleClass("icon iconSelected");
+				}
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="EAD_DUCK"){
+				if(allergy[3]==0) allergy[3] = 1;
+				else allergy[3] = 0;
+				if(allergy[8]==1){
+					allergy[8] = 0;
+					$("#EAD_no").toggleClass("icon iconSelected");
+				}
+				if(allergy[9]==1){
+					allergy[9] = 0;
+					$("#EAD_unsure").toggleClass("icon iconSelected");
+				}
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="EAD_TURK"){
+				if(allergy[4]==0) allergy[4] = 1;
+				else allergy[4] = 0;
+				if(allergy[8]==1){
+					allergy[8] = 0;
+					$("#EAD_no").toggleClass("icon iconSelected");
+				}
+				if(allergy[9]==1){
+					allergy[9] = 0;
+					$("#EAD_unsure").toggleClass("icon iconSelected");
+				}
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="EAD_FISH"){
+				if(allergy[5]==0) allergy[5] = 1;
+				else allergy[5] = 0;
+				if(allergy[8]==1){
+					allergy[8] = 0;
+					$("#EAD_no").toggleClass("icon iconSelected");
+				}
+				if(allergy[9]==1){
+					allergy[9] = 0;
+					$("#EAD_unsure").toggleClass("icon iconSelected");
+				}
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="EAD_DEER"){
+				if(allergy[6]==0) allergy[6] = 1;
+				else allergy[6] = 0;
+				if(allergy[8]==1){
+					allergy[8] = 0;
+					$("#EAD_no").toggleClass("icon iconSelected");
+				}
+				if(allergy[9]==1){
+					allergy[9] = 0;
+					$("#EAD_unsure").toggleClass("icon iconSelected");
+				}
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="EAD_PIG"){
+				if(allergy[7]==0) allergy[7] = 1;
+				else allergy[7] = 0;
+				if(allergy[8]==1){
+					allergy[8] = 0;
+					$("#EAD_no").toggleClass("icon iconSelected");
+				}
+				if(allergy[9]==1){
+					allergy[9] = 0;
+					$("#EAD_unsure").toggleClass("icon iconSelected");
+				}
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="EAD_no"){
+				if(allergy[8]==0){
+					if(allergy[0]==1) $("#EAD_BEEF").toggleClass("icon iconSelected");
+					if(allergy[1]==1) $("#EAD_SLAM").toggleClass("icon iconSelected");
+					if(allergy[2]==1) $("#EAD_CHIC").toggleClass("icon iconSelected");
+					if(allergy[3]==1) $("#EAD_DUCK").toggleClass("icon iconSelected");
+					if(allergy[4]==1) $("#EAD_TURK").toggleClass("icon iconSelected");
+					if(allergy[5]==1) $("#EAD_FISH").toggleClass("icon iconSelected");
+					if(allergy[6]==1) $("#EAD_DEER").toggleClass("icon iconSelected");
+					if(allergy[7]==1) $("#EAD_PIG").toggleClass("icon iconSelected");
+					if(allergy[9]==1) $("#EAD_unsure").toggleClass("icon iconSelected");
+					for(i in allergy){
+						if(i!=8){
+							allergy[i] = 0;
+						}
+						else{
+							allergy[8] = 1;
+							var newID = "#" + id;
+							$(newID).toggleClass("icon iconSelected");
+						}
+					}
+				}else{
+					allergy[8] = 0;
+					var newID = "#" + id;
+					$(newID).toggleClass("icon iconSelected");
+				}	
+			}
+			if(id=="EAD_unsure"){
+				if(allergy[9]==0){
+					if(allergy[0]==1) $("#EAD_BEEF").toggleClass("icon iconSelected");
+					if(allergy[1]==1) $("#EAD_SLAM").toggleClass("icon iconSelected");
+					if(allergy[2]==1) $("#EAD_CHIC").toggleClass("icon iconSelected");
+					if(allergy[3]==1) $("#EAD_DUCK").toggleClass("icon iconSelected");
+					if(allergy[4]==1) $("#EAD_TURK").toggleClass("icon iconSelected");
+					if(allergy[5]==1) $("#EAD_FISH").toggleClass("icon iconSelected");
+					if(allergy[6]==1) $("#EAD_DEER").toggleClass("icon iconSelected");
+					if(allergy[7]==1) $("#EAD_PIG").toggleClass("icon iconSelected");
+					if(allergy[8]==1) $("#EAD_no").toggleClass("icon iconSelected");
+					for(i in allergy){
+						if(i!=9){
+							allergy[i] = 0;
+						}
+						else{
+							allergy[9] = 1;
+							var newID = "#" + id;
+							$(newID).toggleClass("icon iconSelected");
+						}
+					}
+				}else{
+					allergy[9] = 0;
+					var newID = "#" + id;
+					$(newID).toggleClass("icon iconSelected");
+				}	
+			}
 		}
 		//
 		function enterPress(id,event){
@@ -306,7 +595,7 @@
 			if(id=="BCNButton"){
 				if($("#BCNEnter").val()!=""){
 					basicInformation.catName = $("#BCNEnter").val();
-					for(i=1;i<8;i++){
+					for(i=1;i<46;i++){
 						var str = "catName" + i;
 						document.getElementById(str).innerHTML = basicInformation.catName;
 					}
@@ -661,6 +950,7 @@
 		}
 		span{
 			font-size: 20px;
+			font-family: Microsoft JhengHei;
 		}
 		.placeholder {
 		  width: 100%;
@@ -859,7 +1149,7 @@
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BNU">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<span id="catName3">貓貓</span>						
+					<span id="catName4">貓貓</span>						
 					<span>是否結紮了呢？</span>
 				</div>
 				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
@@ -875,7 +1165,7 @@
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BPR">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<span id="catName3">貓貓</span>						
+					<span id="catName5">貓貓</span>						
 					<span>現在有懷孕嗎？</span>
 				</div>
 				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
@@ -891,8 +1181,8 @@
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BPT">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<span id="catName3">貓貓</span>						
-					<span>現在有懷孕嗎？</span>
+					<span id="catName6">貓貓</span>						
+					<span>懷孕多久了呢？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
@@ -919,7 +1209,7 @@
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BCW">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<span id="catName4">貓貓</span>						
+					<span id="catName7">貓貓</span>						
 					<span>最近一次測量的體重為？</span>
 				</div>
 				<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 text-center">
@@ -932,7 +1222,7 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BEF">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>玩樂對貓咪而言就是一個運動的方式，請問</span>
-					<span id="catName5">貓貓</span>						
+					<span id="catName8">貓貓</span>						
 					<span>運動的頻率？</span>
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -954,7 +1244,7 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BSI">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問</span>
-					<span id="catName6">貓貓</span>						
+					<span id="catName9">貓貓</span>						
 					<span>是室內貓還是室外貓？</span>
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -976,7 +1266,7 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BBC">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問</span>
-					<span id="catName7">貓貓</span>						
+					<span id="catName10">貓貓</span>						
 					<span>的體態長得像下列哪一個？</span>
 				</div>
 				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
@@ -1011,21 +1301,21 @@
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" onclick="addToList(this.id);" id="ARC_SPE">
 							<h3>特定需求</h3>
 							<h4>貓咪有特殊疾病需要多家照護</h4>
 						</div>							
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" onclick="addToList(this.id);" id="ARC_DAE">
 							<h3>日常保健</h3>
-							<h4>加強<span id="catName8">貓貓</span>的身體健康</h4>
+							<h4>加強<span id="catName11">貓貓</span>的身體健康</h4>
 						</div>							
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder"  onclick="addToList(this.id);" id="ARC_KNO">
 							<h3>知識了解</h3>
-							<h4>想先了解看看是否有能幫上我<span id="catName9">貓貓</span>的地方</h4>
+							<h4>想先了解看看是否有能幫上我<span id="catName12">貓貓</span>的地方</h4>
 						</div>							
 					</div>
 				</div>
@@ -1033,17 +1323,17 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="ANM">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問</span>
-					<span id="catName10">貓貓</span>
+					<span id="catName13">貓貓</span>
 					<span>目前是否有在吃處方飼料？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" onclick="addToList(this.id);" id="ANM_yes">
 							<span>有</span>
 						</div>						
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" onclick="addToList(this.id);" id="ANM_no">
 							<span>沒有</span>
 						</div>
 					</div>
@@ -1055,13 +1345,13 @@
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="AWM_unsure">
 							<span>不確定</span>
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<input type="text">
-						<button>></button>
+						<input type="text" id="AWMEnter" onkeypress="enterPress(this.id,event)">
+						<button id="AWMButton" onclick="addToList(this.id);">></button>
 					</div>
 				</div>
 			</div>
@@ -1073,45 +1363,45 @@
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<!--ICON SELECT HERE (CAN MULTI)-->
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_IMMU" onclick="iconClick(this.id)">
-						<span>免疫力</span>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="icon" id="AIC_IMMU" onclick="iconClick(this.id)"><span>免疫力</span></div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_HEART" onclick="iconClick(this.id)">
-						<span>心臟</span>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="icon" id="AIC_HEART" onclick="iconClick(this.id)"><span>心臟</span></div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_MEHAIR" onclick="iconClick(this.id)">
-						<span>化毛</span>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="icon" id="AIC_MEHAIR" onclick="iconClick(this.id)"><span>化毛</span></div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_LIHAIR" onclick="iconClick(this.id)">
-						<span>亮毛</span>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="icon" id="AIC_LIHAIR" onclick="iconClick(this.id)"><span>亮毛</span></div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_LOHAIR" onclick="iconClick(this.id)">
-						<span>脫毛</span>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="icon" id="AIC_LOHAIR" onclick="iconClick(this.id)"><span>脫毛</span></div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_SKIN" onclick="iconClick(this.id)">
-						<span>皮膚</span>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="icon" id="AIC_SKIN" onclick="iconClick(this.id)"><span>皮膚</span></div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_JOINT" onclick="iconClick(this.id)">
-						<span>關節</span>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="icon" id="AIC_JOINT" onclick="iconClick(this.id)"><span>關節</span></div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_BONE" onclick="iconClick(this.id)">
-						<span>骨頭</span>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="icon" id="AIC_BONE" onclick="iconClick(this.id)"><span>骨頭</span></div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_ADDWEI" onclick="iconClick(this.id)">
-						<span>增重</span>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="icon" id="AIC_ADDWEI" onclick="iconClick(this.id)"><span>增重</span></div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_OVERWEI" onclick="iconClick(this.id)">
-						<span>過胖</span>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="icon" id="AIC_OVERWEI" onclick="iconClick(this.id)"><span>過胖</span></div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_STOMA" onclick="iconClick(this.id)">
-						<span>腸胃</span>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="icon" id="AIC_STOMA" onclick="iconClick(this.id)"><span>腸胃</span></div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_STRESS" onclick="iconClick(this.id)">
-						<span>壓力</span>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="icon" id="AIC_STRESS" onclick="iconClick(this.id)"><span>壓力</span></div>
 					</div>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="AICButton">
-					<button>></button>
+					<button id="AICButton" onclick="addToList(this.id)">></button>
 				</div>
 			</div>
 			<!--優先考量-->
@@ -1122,24 +1412,24 @@
 					<span>請問您的email是？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<input type="text">
-					<button>></button>
+					<input type="text" id="AEMEnter" onkeypress="enterPress(this.id,event)">
+					<button id="AEMButton" onclick="addToList(this.id)">></button>
 				</div>
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="AFE">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問</span>
-					<span id="catName11">貓貓</span>
+					<span id="catName14">貓貓</span>
 					<span>目前有沒有感冒？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="AFE_yes"  onclick="addToList(this.id)">
 							<span>有</span>
 						</div>						
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="AFE_no"  onclick="addToList(this.id)">
 							<span>沒有</span>
 						</div>
 					</div>
@@ -1148,22 +1438,22 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="AFF">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問</span>
-					<span id="catName11">貓貓</span>
+					<span id="catName15">貓貓</span>
 					<span>感冒的頻率？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="AFF_RARE" onclick="addToList(this.id)">
 							<span>幾乎沒有</span>
 						</div>						
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="AFF_ONEPERMON" onclick="addToList(this.id)">
 							<span>一個月一次</span>
 						</div>						
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="AFF_HIGHFREQ" onclick="addToList(this.id)">
 							<span>一個月一次以上</span>
 						</div>						
 					</div>
@@ -1172,17 +1462,17 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="AEI">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>是否有覺得</span>
-					<span id="catName11">貓貓</span>
+					<span id="catName16">貓貓</span>
 					<span>需要額外的免疫力保健呢？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="AEI_yes" onclick="addToList(this.id)">
 							<span>需要</span>
 						</div>						
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="AEI_no" onclick="addToList(this.id)">
 							<span>不需要</span>
 						</div>
 					</div>
@@ -1191,17 +1481,17 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IHE">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問</span>
-					<span id="catName11">貓貓</span>
+					<span id="catName17">貓貓</span>
 					<span>有無任何心血管病史？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="IHE_yes" onclick="addToList(this.id)">
 							<span>有</span>
 						</div>						
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="IHE_no" onclick="addToList(this.id)">
 							<span>無</span>
 						</div>
 					</div>
@@ -1210,22 +1500,22 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IWC">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問</span>
-					<span id="catName11">貓貓</span>
+					<span id="catName18">貓貓</span>
 					<span>平均一週梳幾次毛？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="IWC_RARE" onclick="addToList(this.id)">
 							<span>幾乎沒有</span>
 						</div>						
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="IWC_1TO2" onclick="addToList(this.id)">
 							<span>1-2次</span>
 						</div>						
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="IWC_3UP" onclick="addToList(this.id)">
 							<span>3次以上</span>
 						</div>						
 					</div>
@@ -1237,12 +1527,12 @@
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="IDC_yes" onclick="addToList(this.id)">
 							<span>是</span>
 						</div>						
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="IDC_no" onclick="addToList(this.id)">
 							<span>否</span>
 						</div>
 					</div>
@@ -1251,17 +1541,17 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IHH">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問在幫</span>
-					<span id="catName11">貓貓</span>
+					<span id="catName19">貓貓</span>
 					<span>梳毛時，毛髮當中有硬塊嗎？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="IHH_yes" onclick="addToList(this.id)">
 							<span>有</span>
 						</div>						
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="IHH_no" onclick="addToList(this.id)">
 							<span>沒有</span>
 						</div>
 					</div>
@@ -1270,17 +1560,17 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="ILH">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問在幫</span>
-					<span id="catName11">貓貓</span>
+					<span id="catName20">貓貓</span>
 					<span>有無脫毛現象？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="ILH_yes" onclick="addToList(this.id)">
 							<span>有</span>
 						</div>						
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="ILH_no" onclick="addToList(this.id)">
 							<span>沒有</span>
 						</div>
 					</div>
@@ -1289,22 +1579,22 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="ILP">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問在幫</span>
-					<span id="catName11">貓貓</span>
+					<span id="catName21">貓貓</span>
 					<span>脫毛的部位為：</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="ILP_FRONT" onclick="addToList(this.id)">
 							<span>前段</span>
 						</div>						
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="ILP_MID" onclick="addToList(this.id)">
 							<span>中段</span>
 						</div>						
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="ILP_BACK" onclick="addToList(this.id)">
 							<span>後段</span>
 						</div>						
 					</div>
@@ -1313,22 +1603,22 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IHS">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問</span>
-					<span id="catName11">貓貓</span>
+					<span id="catName22">貓貓</span>
 					<span>的毛髮摸起來：</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="IHS_DRY" onclick="addToList(this.id)">
 							<span>乾澀無光澤</span>
 						</div>						
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="IHS_HEALTH" onclick="addToList(this.id)">
 							<span>健康</span>
 						</div>						
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="IHS_ROUGH" onclick="addToList(this.id)">
 							<span>粗糙打結</span>
 						</div>						
 					</div>
@@ -1337,17 +1627,17 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IPO">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>貓咪理毛時，毛髮容易進入到貓咪的身體，請問</span>
-					<span id="catName11">貓貓</span>
+					<span id="catName23">貓貓</span>
 					<span>的排泄物中是否可以看到毛呢？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="IPO_yes" onclick="addToList(this.id)">
 							<span>是</span>
 						</div>						
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="IPO_no" onclick="addToList(this.id)">
 							<span>否</span>
 						</div>
 					</div>
@@ -1356,17 +1646,17 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="ICV">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問</span>
-					<span id="catName11">貓貓</span>
+					<span id="catName24">貓貓</span>
 					<span>近兩個禮拜是否有吐毛呢？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="ICV_yes" onclick="addToList(this.id)">
 							<span>是</span>
 						</div>						
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="ICV_no" onclick="addToList(this.id)">
 							<span>否</span>
 						</div>
 					</div>
@@ -1375,17 +1665,17 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="ISR">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問近兩個禮拜</span>
-					<span id="catName11">貓貓</span>
+					<span id="catName25">貓貓</span>
 					<span>身體皮膚是否有紅腫現象？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="ISR_yes" onclick="addToList(this.id)">
 							<span>是</span>
 						</div>						
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="ISR_no" onclick="addToList(this.id)">
 							<span>否</span>
 						</div>
 					</div>
@@ -1397,12 +1687,12 @@
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="INR_yes" onclick="addToList(this.id)">
 							<span>有</span>
 						</div>						
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="INR_no" onclick="addToList(this.id)">
 							<span>沒有</span>
 						</div>
 					</div>
@@ -1411,17 +1701,17 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IBC">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問獸醫師是否有推薦</span>
-					<span id="catName11">貓貓</span>
+					<span id="catName26">貓貓</span>
 					<span>補充軟骨素或是葡萄糖胺呢？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="IBC_yes" onclick="addToList(this.id)">
 							<span>是</span>
 						</div>						
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="IBC_no" onclick="addToList(this.id)">
 							<span>否</span>
 						</div>
 					</div>
@@ -1430,17 +1720,17 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IEB">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>是否有覺得</span>
-					<span id="catName11">貓貓</span>
+					<span id="catName27">貓貓</span>
 					<span>需要額外的關節保健呢？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="IEB_yes" onclick="addToList(this.id)">
 							<span>是</span>
 						</div>						
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="IEB_no" onclick="addToList(this.id)">
 							<span>否</span>
 						</div>
 					</div>
@@ -1449,17 +1739,17 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IEF">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問</span>
-					<span id="catName11">貓貓</span>
+					<span id="catName28">貓貓</span>
 					<span>是否有平常很好動，突然不喜歡動，活動力下降的現象？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="IEF_yes" onclick="addToList(this.id)">
 							<span>是</span>
 						</div>						
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="IEF_no" onclick="addToList(this.id)">
 							<span>否</span>
 						</div>
 					</div>
@@ -1468,17 +1758,17 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IJF">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問</span>
-					<span id="catName11">貓貓</span>
+					<span id="catName29">貓貓</span>
 					<span>是否有跳躍力變差的現象？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="IJF_yes" onclick="addToList(this.id)">
 							<span>是</span>
 						</div>						
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="IJF_no" onclick="addToList(this.id)">
 							<span>否</span>
 						</div>
 					</div>
@@ -1487,17 +1777,17 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IVO">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問近兩個禮拜，</span>
-					<span id="catName11">貓貓</span>
+					<span id="catName30">貓貓</span>
 					<span>是否有嘔吐或是拉肚子的問題？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="IVO_yes" onclick="addToList(this.id)">
 							<span>是</span>
 						</div>						
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="IVO_no" onclick="addToList(this.id)">
 							<span>否</span>
 						</div>
 					</div>
@@ -1509,22 +1799,22 @@
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-						<div class="placeholder">
+						<div class="placeholder" id="IVA_UP" onclick="addToList(this.id)">
 							<span>上吐</span>
 						</div>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-						<div class="placeholder">
+						<div class="placeholder" id="IVA_BOT" onclick="addToList(this.id)">
 							<span>下瀉</span>
 						</div>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-						<div class="placeholder">
+						<div class="placeholder" id="IVA_BOTH" onclick="addToList(this.id)">
 							<span>都有</span>
 						</div>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-						<div class="placeholder">
+						<div class="placeholder" id="IVA_unsure" onclick="addToList(this.id)">
 							<span>不確定</span>
 						</div>
 					</div>
@@ -1538,17 +1828,17 @@
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="IVN_BETTER" onclick="addToList(this.id)">
 							<span>逐漸好轉中</span>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="IVN_FORAWHILE" onclick="addToList(this.id)">
 							<span>目前還有持續</span>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="IVN_unsure" onclick="addToList(this.id)">
 							<span>不確定</span>
 						</div>
 					</div>
@@ -1557,17 +1847,17 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IBP">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問近兩個禮拜，</span>
-					<span id="catName11">貓貓</span>
+					<span id="catName31">貓貓</span>
 					<span>是否有發生血便的情形？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="IBP_yes" onclick="addToList(this.id)">
 							<span>有</span>
 						</div>						
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="IBP_no" onclick="addToList(this.id)">
 							<span>沒有</span>
 						</div>
 					</div>
@@ -1579,42 +1869,82 @@
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="IBN_BETTER" onclick="addToList(this.id)">
 							<span>逐漸好轉中</span>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="IBN_FORAWHILE" onclick="addToList(this.id)">
 							<span>目前還有持續</span>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="IBN_unsure" onclick="addToList(this.id)">
 							<span>不確定</span>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!--IPR 複選-->
-			
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IPR">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span id="catName32">貓貓</span>
+					<span>是否有下列問題？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="placeholder" id="IPR_STRA">
+							<span>過度理毛</span>
+						</div>
+					</div>
+						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="placeholder" id="IPR_STRB">
+							<span>來回踱步</span>
+						</div>
+					</div>
+						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="placeholder" id="IPR_STRC">
+							<span>四處躲藏</span>
+						</div>
+					</div>
+						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="placeholder" id="IPR_STRD">
+							<span>食慾下降</span>
+						</div>
+					</div>
+						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="placeholder" id="IPR_STRE">
+							<span>隨地便溺</span>
+						</div>
+					</div>
+						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="placeholder" id="IPR_no">
+							<span>無</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<button id="IPRButton">></button>
+				</div>
+			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IMO">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<span id="catName11">貓貓</span>
+					<span id="catName33">貓貓</span>
 					<span>是否有下列問題？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="IMO_BS" onclick="addToList(this.id)">
 							<span>口臭</span>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="IMO_OVERSWEAT" onclick="addToList(this.id)">
 							<span>過度流口水</span>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="IMO_no">
 							<span>無</span>
 						</div>
 					</div>
@@ -1623,22 +1953,22 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EEH">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">				
 					<span>飲食可以解決貓咪健康8成以上的身體問題，你願意為了</span>
-					<span id="catName11">貓貓</span>
+					<span id="catName34">貓貓</span>
 					<span>的飲食健康而努力嗎？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="EEH_STRIKE" onclick="addToList(this.id)">
 							<span>全力以赴</span>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="EEH_HARD" onclick="addToList(this.id)">
 							<span>正在努力中</span>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="EEH_FROMNOW" onclick="addToList(this.id)">
 							<span>現在開始</span>
 						</div>
 					</div>
@@ -1650,17 +1980,17 @@
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="EKL_EXP" onclick="addToList(this.id)">
 							<span>專家</span>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="EKL_STU" onclick="addToList(this.id)">
 							<span>學習中</span>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="EKL_BEG" onclick="addToList(this.id)">
 							<span>新手</span>
 						</div>
 					</div>
@@ -1672,17 +2002,17 @@
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="ENL_EXP" onclick="addToList(this.id)">
 							<span>專家</span>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="ENL_STU" onclick="addToList(this.id)">
 							<span>學習中</span>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="ENL_BEG" onclick="addToList(this.id)">
 							<span>新手</span>
 						</div>
 					</div>
@@ -1691,40 +2021,76 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EFB">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問</span>
-					<span id="catName11">貓貓</span>
+					<span id="catName35">貓貓</span>
 					<span>近期吃的飼料品牌為何？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" id="EFB_unsure" onclick="addToList(this.id)">
 							<span>不確定</span>
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<input type="text">
-						<button>></button>
+						<input type="text" id="EFBEnter">
+						<button id="EFBButton">></button>
 					</div>
 				</div>
 			</div>
 			<!--EFI 複選-->
-			
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EFI">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">					
+					<span>那主成分是下列哪些呢？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="icon" id="EFI_BEEF" onclick="iconClick(this.id)"><span>牛肉</span></div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="icon" id="EFI_SLAM" onclick="iconClick(this.id)"><span>羊肉</span></div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="icon" id="EFI_CHIC" onclick="iconClick(this.id)"><span>雞肉</span></div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="icon" id="EFI_DUCK" onclick="iconClick(this.id)"><span>鴨肉</span></div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="icon" id="EFI_TURK" onclick="iconClick(this.id)"><span>火雞</span></div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="icon" id="EFI_FISH" onclick="iconClick(this.id)"><span>魚</span></div>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="icon" id="EFI_DEER" onclick="iconClick(this.id)"><span>鹿</span></div>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="icon" id="EFI_PIG" onclick="iconClick(this.id)"><span>豬</span></div>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="icon" id="EFI_unsure" onclick="iconClick(this.id)"><span>不知道</span></div>
+					</div>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<button id="EFIButton" onclick="addToList(this.id)">></button>
+				</div>
+			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EFG">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">				
 					<span>是有穀還是無穀呢？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="EFG_yes" onclick="addToList(this.id)">
 							<span>有穀</span>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="EFG_no" onclick="addToList(this.id)">
 							<span>無穀</span>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="EFG_unsure" onclick="addToList(this.id)">
 							<span>不確定</span>
 						</div>
 					</div>
@@ -1733,17 +2099,17 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EEC">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">				
 					<span>請問</span>
-					<span id="catName11">貓貓</span>
+					<span id="catName36">貓貓</span>
 					<span>是吃buffet還是定時定量呢？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="EEC_CONTROL" onclick="addToList(this.id)">
 							<span>定時定量</span>
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="EEC_FULL" onclick="addToList(this.id)">
 							<span>吃到飽飽喔</span>
 						</div>
 					</div>
@@ -1752,22 +2118,22 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="ECM">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">				
 					<span>請問您一天餵</span>
-					<span id="catName11">貓貓</span>
+					<span id="catName37">貓貓</span>
 					<span>吃幾餐呢？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="ECM_ONCE" onclick="addToList(this.id)">
 							<span>一餐</span>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="ECM_TWICE" onclick="addToList(this.id)">
 							<span>兩餐</span>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="ECM_UP" onclick="addToList(this.id)">
 							<span>三餐以上</span>
 						</div>
 					</div>
@@ -1775,22 +2141,22 @@
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EES">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">				
-					<span id="catName11">貓貓</span>
+					<span id="catName38">貓貓</span>
 					<span>吃飼料的速度？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="EES_SOON" onclick="addToList(this.id)">
 							<span>馬上吃光光</span>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="EES_SLOW" onclick="addToList(this.id)">
 							<span>慢慢吃，過兩三小時才會吃完</span>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="EES_NEVER" onclick="addToList(this.id)">
 							<span>吃一整天都吃不完</span>
 						</div>
 					</div>
@@ -1798,17 +2164,17 @@
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EAA">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">				
-					<span id="catName11">貓貓</span>
+					<span id="catName39">貓貓</span>
 					<span>是否有吃保健食品呢？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="EAA_yes" onclick="addToList(this.id)">
 							<span>有</span>
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="EAA_no" onclick="addToList(this.id)">
 							<span>無</span>
 						</div>
 					</div>
@@ -1816,22 +2182,22 @@
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EAB">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">				
-					<span id="catName11">貓貓</span>
+					<span id="catName40">貓貓</span>
 					<span>一個月使用幾次化毛膏呢？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="EAB_NEVER" onclick="addToList(this.id)">
 							<span>從未</span>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="EAB_ONCE" onclick="addToList(this.id)">
 							<span>一兩次</span>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="EAB_FORTHUP" onclick="addToList(this.id)">
 							<span>四次以上</span>
 						</div>
 					</div>
@@ -1839,47 +2205,87 @@
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EAC">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">				
-					<span id="catName11">貓貓</span>
+					<span id="catName41">貓貓</span>
 					<span>一週吃幾次罐頭呢？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-						<div class="placeholder">
+						<div class="placeholder" id="EAC_NEVER" onclick="addToList(this.id)">
 							<span>從未</span>
 						</div>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-						<div class="placeholder">
+						<div class="placeholder" id="EAC_ONCE" onclick="addToList(this.id)">
 							<span>一次</span>
 						</div>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-						<div class="placeholder">
+						<div class="placeholder" id="EAC_TWICE" onclick="addToList(this.id)">
 							<span>兩三次</span>
 						</div>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-						<div class="placeholder">
+						<div class="placeholder" id="EAC_EACHDAY" onclick="addToList(this.id)">
 							<span>幾乎每天</span>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!--EAD 複選-->
-			
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EAD">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">					
+					<span id="catName42">貓貓</span>
+					<span>是否有對什麼食物過敏呢？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="icon" id="EAD_BEEF" onclick="iconClick(this.id)"><span>牛肉</span></div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="icon" id="EAD_SLAM" onclick="iconClick(this.id)"><span>羊肉</span></div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="icon" id="EAD_CHIC" onclick="iconClick(this.id)"><span>雞肉</span></div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="icon" id="EAD_DUCK" onclick="iconClick(this.id)"><span>鴨肉</span></div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="icon" id="EAD_TURK" onclick="iconClick(this.id)"><span>火雞</span></div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="icon" id="EAD_FISH" onclick="iconClick(this.id)"><span>魚</span></div>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+						<div class="icon" id="EAD_DEER" onclick="iconClick(this.id)"><span>鹿</span></div>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+						<div class="icon" id="EAD_PIG" onclick="iconClick(this.id)"><span>豬</span></div>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+						<div class="icon" id="EAD_no" onclick="iconClick(this.id)"><span>沒有</span></div>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+						<div class="icon" id="EAD_unsure" onclick="iconClick(this.id)"><span>不知道</span></div>
+					</div>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<button id="EADButton" onclick="addToList(this.id)">></button>
+				</div>
+			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EAE">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">				
-					<span id="catName11">貓貓</span>
+					<span id="catName43">貓貓</span>
 					<span>一天的喝水頻率高還是低呢？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="EAE_HIGHFREQ" onclick="addToList(this.id)">
 							<span>頻率高</span>
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder">
+						<div class="placeholder" id="EAE_LOWFREQ" onclick="addToList(this.id)">
 							<span>頻率低</span>
 						</div>
 					</div>
@@ -1888,27 +2294,27 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EAF">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>您是否有煮東西給</span>
-					<span id="catName11">貓貓</span>
+					<span id="catName44">貓貓</span>
 					<span>的習慣？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-						<div class="placeholder">
+						<div class="placeholder" id="EAF_NEVER" onclick="addToList(this.id)">
 							<span>從來沒有</span>
 						</div>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-						<div class="placeholder">
+						<div class="placeholder" id="EAF_YESBUTHATE" onclick="addToList(this.id)">
 							<span>有，不愛吃</span>
 						</div>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-						<div class="placeholder">
+						<div class="placeholder" id="EAF_ONCE" onclick="addToList(this.id)">
 							<span>一週一兩次</span>
 						</div>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-						<div class="placeholder">
+						<div class="placeholder" id="EAF_THIRD" onclick="addToList(this.id)">
 							<span>一週三次以上</span>
 						</div>
 					</div>
@@ -1917,13 +2323,19 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EBA">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>天氣也是卡卡貓重要的審視資訊之一，請問</span>
-					<span id="catName11">貓貓</span>
+					<span id="catName45">貓貓</span>
 					<span>居住的地方為：</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<select>
+					<select id="EBA_PLACE">
+						<option></option>
 						<option>台北</option>
 						<option>新竹</option>
+						<option>台南</option>
+						<option>高雄</option>
+						<option>澎湖</option>
+						<option>太平島</option>
+						<option>墾丁</option>
 					</select>
 				</div>
 			</div>
@@ -1933,17 +2345,17 @@
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="EBB_FIRST" onclick="addToList(this.id)">
 							<span>第一手拿到</span>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="EBB_WANTTOKNOW" onclick="addToList(this.id)">
 							<span>想了解看看</span>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder">
+						<div class="placeholder" id="EBB_DONTWANT" onclick="addToList(this.id)">
 							<span>不想知道</span>
 						</div>
 					</div>
@@ -1955,22 +2367,22 @@
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-						<div class="placeholder">
+						<div class="placeholder" id="EBC_INTER" onclick="addToList(this.id)">
 							<span>網路</span>
 						</div>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-						<div class="placeholder">
+						<div class="placeholder" id="EBC_FB_IG" onclick="addToList(this.id)">
 							<span>FB / IG</span>
 						</div>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-						<div class="placeholder">
+						<div class="placeholder" id="EBC_FRIEND" onclick="addToList(this.id)">
 							<span>朋友介紹</span>
 						</div>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-						<div class="placeholder">
+						<div class="placeholder" id="EBC_OTHER" onclick="addToList(this.id)">
 							<span>其他</span>
 						</div>
 					</div>
