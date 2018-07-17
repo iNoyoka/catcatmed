@@ -9,6 +9,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!--fonts-->
+	<style>
+		@import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
+		* {
+			font-family: 'Noto Sans TC';
+		}
+ 
+	</style>
+	<link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosanstc.css">
 	<!--
 		MUST CHECK : "id = catNamex" uncorrect number will lead to error.
 	-->
@@ -74,26 +83,23 @@
 			AIC_ADDWEI:"增重",
 			AIC_OVERWEI:"過胖",
 			AIC_STOMA:"腸胃",
-			AIC_STRESS:"壓力",
-			AFF_RARE:"幾乎沒有",
-			AFF_ONEPERMON:"一個月一次",
-			AFF_HIGHFREQ:"一個月一次以上"			
+			AIC_STRESS:"壓力"					
 		}
 		var advancedInformation = {
 			ARC:"無資料",
 			ANM:"無資料",
 			AWM:"無資料",
-			AIC:"無資料",
+			AIC:"",
 			AWI:"無資料",
-			AEM:"無資料",
-			AFE:"無資料",
-			AFF:"無資料",
-			AEI:"無資料"
+			AEM:"無資料"			
 		}
 		var customIconEnum = {
 			YES:"有",
 			NO:"沒有",
 			UNSURE:"不確定",
+			IFF_RARE:"幾乎沒有",
+			IFF_ONEPERMON:"一個月一次",
+			IFF_HIGHFREQ:"一個月一次以上",
 			IWC_RARE:"幾乎沒有",
 			IWC_1TO2:"一到兩次",
 			IWC_3UP:"三次以上",
@@ -119,6 +125,9 @@
 			IMO_OVERSWEAT:"過度流口水"
 		}
 		var iconInformation = {
+			IFE:"無資料",
+			IFF:"無資料",
+			IEI:"無資料",
 			IHE:"無資料",
 			IWC:"無資料",
 			IDC:"無資料",
@@ -224,6 +233,7 @@
 		var icon = [0,0,0,0,0,0,0,0,0,0,0,0];
 		var ingredients = [0,0,0,0,0,0,0,0,0];
 		var allergy = [0,0,0,0,0,0,0,0,0,0];
+		var stress = [0,0,0,0,0,0];
 		//
 		function iconClick(id){
 			if(id=="AIC_IMMU"){
@@ -572,6 +582,79 @@
 					$(newID).toggleClass("icon iconSelected");
 				}	
 			}
+			//stress
+			if(id=="IPR_STRA"){
+				if(stress[0]==0) stress[0]=1;
+				else stress[0] = 0;
+				if(stress[5]==1){
+					stress[5] = 0;
+					$("#IPR_no").toggleClass("icon iconSelected");
+				}
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="IPR_STRB"){
+				if(stress[1]==0) stress[1]=1;
+				else stress[1] = 0;
+				if(stress[5]==1){
+					stress[5] = 0;
+					$("#IPR_no").toggleClass("icon iconSelected");
+				}
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="IPR_STRC"){
+				if(stress[2]==0) stress[2]=1;
+				else stress[2] = 0;
+				if(stress[5]==1){
+					stress[5] = 0;
+					$("#IPR_no").toggleClass("icon iconSelected");
+				}
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="IPR_STRD"){
+				if(stress[3]==0) stress[3]=1;
+				else stress[3] = 0;
+				if(stress[5]==1){
+					stress[5] = 0;
+					$("#IPR_no").toggleClass("icon iconSelected");
+				}
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="IPR_STRE"){
+				if(stress[4]==0) stress[4]=1;
+				else stress[4] = 0;
+				if(stress[5]==1){
+					stress[5] = 0;
+					$("#IPR_no").toggleClass("icon iconSelected");
+				}
+				var newID = "#" + id;
+				$(newID).toggleClass("icon iconSelected");
+			}
+			if(id=="IPR_no"){
+				if(stress[5]==0){
+					if(stress[0]==1) $("#IPR_STRA").toggleClass("icon iconSelected");
+					if(stress[1]==1) $("#IPR_STRB").toggleClass("icon iconSelected");
+					if(stress[2]==1) $("#IPR_STRC").toggleClass("icon iconSelected");
+					if(stress[3]==1) $("#IPR_STRD").toggleClass("icon iconSelected");
+					if(stress[4]==1) $("#IPR_STRE").toggleClass("icon iconSelected");
+					for(i in stress){
+						if(i!=5){
+							stress[i] = 0;
+						}else{
+							stress[5] = 1;
+							var newID = "#" + id;
+							$(newID).toggleClass("icon iconSelected");
+						}
+					}
+				}else{
+					stress[5] = 0;
+					var newID = "#" + id;
+					$(newID).toggleClass("icon iconSelected");
+				}
+			}
 		}
 		//
 		function enterPress(id,event){
@@ -860,33 +943,808 @@
 			if(id=="BBC_tooThin"){
 				basicInformation.catSize = customBasicEnum.tooThin;
 				$("#BBC").fadeOut(500,function(){
-					showResult();
+					//showResult();
 				});
 			}
 			if(id=="BBC_aLittleThin"){
 				basicInformation.catSize = customBasicEnum.aLittleThin;
 				$("#BBC").fadeOut(500,function(){
-					showResult();
+					//showResult();
 				});
 			}
 			if(id=="BBC_medium"){
 				basicInformation.catSize = customBasicEnum.medium;
 				$("#BBC").fadeOut(500,function(){
-					showResult();
+					//showResult();
 				});
 			}
 			if(id=="BBC_aLittleFat"){
 				basicInformation.catSize = customBasicEnum.aLittleFat;
 				$("#BBC").fadeOut(500,function(){
-					showResult();
+					//showResult();
 				});
 			}
 			if(id=="BBC_tooFat"){
 				basicInformation.catSize = customBasicEnum.tooFat;
 				$("#BBC").fadeOut(500,function(){
-					showResult();
+					//showResult();
 				});
 			}
+			//ARC
+			if(id=="ARC_SPE"){ //goto ANM
+				advancedInformation.ARC = customAdvancedEnum.ARC_SPE;
+				$("#ARC").fadeOut(500,function(){
+					$("#ANM").fadeIn(500);
+				});
+			}
+			if(id=="ARC_DAE"){ //goto AIC
+				advancedInformation.ARC = customAdvancedEnum.ARC_DAE;
+				$("#ARC").fadeOut(500,function(){
+					$("#AIC").fadeIn(500);
+				});
+			}
+			if(id=="ARC_KNO"){ //goto AIC
+				advancedInformation.ARC = customAdvancedEnum.ARC_KNO;
+				$("#ARC").fadeOut(500,function(){
+					$("#AIC").fadeIn(500);
+				});
+			}
+			//ANM
+			if(id=="ANM_yes"){ //goto AWM
+				advancedInformation.ANM = customAdvancedEnum.YES;
+				$("#ANM").fadeOut(500,function(){
+					$("#AWM").fadeIn(500,function(){
+						$("#AWMEnter").focus();
+					});
+				});
+			}
+			if(id=="ANM_no"){ //goto AIC
+				advancedInformation.ANM = customAdvancedEnum.NO;
+				$("#ANM").fadeOut(500,function(){
+					$("#AIC").fadeIn(500);
+				});
+			}
+			//AWM //go to end
+			if(id=="AWM_unsure"){
+				advancedInformation.AWM = customAdvancedEnum.UNSURE;
+				$("#AWN").fadeOut(500,function(){
+					//show end here
+				});
+			}
+			if(id=="AWMButton"){
+				if($("#AWMEnter").val()!=""){
+					advancedInformation.AWM = $("#AWMEnter").val();
+					$("#AWN").fadeOut(500,function(){
+						//show end here
+					});
+				}				
+			}
+			//AIC
+			if(id=="AICButton"){
+				if(icon[0]==0 && icon[1]==0 && icon[2]==0 && icon[3]==0 && icon[4]==0 && icon[5]==0 && icon[6]==0 && icon[7]==0 && icon[8]==0 && icon[9]==0 && icon[10]==0 && icon[11]==0){
+					//TODO: show err msg
+				}else{
+					//TODO: make AWI
+					getAWI();
+					$("#AIC").fadeOut(500,function(){
+						$("#AWI").fadeIn(500);
+					});
+				}
+			}
+			//AWI
+			if(id=="AWI_IMMU"){
+				advancedInformation.AWI = customAdvancedEnum.AIC_IMMU;
+				$("#AWI").fadeOut(500,function(){
+					$("#AEM").fadeIn(500,function(){
+						$("#AEMEnter").focus();
+					});
+				});
+			}
+			if(id=="AWI_HEART"){
+				advancedInformation.AWI = customAdvancedEnum.AIC_HEART;
+				$("#AWI").fadeOut(500,function(){
+					$("#AEM").fadeIn(500,function(){
+						$("#AEMEnter").focus();
+					});
+				});
+			}
+			if(id=="AWI_MEHAIR"){
+				advancedInformation.AWI = customAdvancedEnum.AIC_MEHAIR;
+				$("#AWI").fadeOut(500,function(){
+					$("#AEM").fadeIn(500,function(){
+						$("#AEMEnter").focus();
+					});
+				});
+			}
+			if(id=="AWI_LIHAIR"){
+				advancedInformation.AWI = customAdvancedEnum.AIC_LIHAIR;
+				$("#AWI").fadeOut(500,function(){
+					$("#AEM").fadeIn(500,function(){
+						$("#AEMEnter").focus();
+					});
+				});
+			}
+			if(id=="AWI_LOHAIR"){
+				advancedInformation.AWI = customAdvancedEnum.AIC_LOHAIR;
+				$("#AWI").fadeOut(500,function(){
+					$("#AEM").fadeIn(500,function(){
+						$("#AEMEnter").focus();
+					});
+				});
+			}
+			if(id=="AWI_SKIN"){
+				advancedInformation.AWI = customAdvancedEnum.AIC_SKIN;
+				$("#AWI").fadeOut(500,function(){
+					$("#AEM").fadeIn(500,function(){
+						$("#AEMEnter").focus();
+					});
+				});
+			}
+			if(id=="AWI_JOINT"){
+				advancedInformation.AWI = customAdvancedEnum.AIC_JOINT;
+				$("#AWI").fadeOut(500,function(){
+					$("#AEM").fadeIn(500,function(){
+						$("#AEMEnter").focus();
+					});
+				});
+			}
+			if(id=="AWI_BONE"){
+				advancedInformation.AWI = customAdvancedEnum.AIC_BONE;
+				$("#AWI").fadeOut(500,function(){
+					$("#AEM").fadeIn(500,function(){
+						$("#AEMEnter").focus();
+					});
+				});
+			}
+			if(id=="AWI_ADDWEI"){
+				advancedInformation.AWI = customAdvancedEnum.AIC_ADDWEI;
+				$("#AWI").fadeOut(500,function(){
+					$("#AEM").fadeIn(500,function(){
+						$("#AEMEnter").focus();
+					});
+				});
+			}
+			if(id=="AWI_OVERWEI"){
+				advancedInformation.AWI = customAdvancedEnum.AIC_OVERWEI;
+				$("#AWI").fadeOut(500,function(){
+					$("#AEM").fadeIn(500,function(){
+						$("#AEMEnter").focus();
+					});
+				});
+			}
+			if(id=="AWI_STOMA"){
+				advancedInformation.AWI = customAdvancedEnum.AIC_STOMA;
+				$("#AWI").fadeOut(500,function(){
+					$("#AEM").fadeIn(500,function(){
+						$("#AEMEnter").focus();
+					});
+				});
+			}
+			if(id=="AWI_STRESS"){
+				advancedInformation.AWI = customAdvancedEnum.AIC_STRESS;
+				$("#AWI").fadeOut(500,function(){
+					$("#AEM").fadeIn(500,function(){
+						$("#AEMEnter").focus();
+					});
+				});
+			}
+			//AEM
+			if(id=="AEMButton"){
+				if($("#AEMEnter").val()!=""){
+					advancedInformation.AEM = $("#AEMEnter").val();
+					$("#AEM").fadeOut(500,function(){
+						//導向優先考量
+					});
+				}
+			}
+			//--------------------------------------------
+			// IMMU
+			//--------------------------------------------
+			//IFE
+			if(id=="IFE_yes"){
+				iconInformation.IFE = customIconEnum.YES;
+				$("#IFE").fadeOut(500,function(){
+					$("#IFF").fadeIn(500);
+				});
+			}
+			if(id=="IFE_no"){
+				iconInformation.IFE = customIconEnum.NO;
+				$("#IFE").fadeOut(500,function(){
+					$("#IFF").fadeIn(500);
+				});
+			}
+			//IFF
+			if(id=="IFF_RARE"){
+				iconInformation.IFF = customIconEnum.IFF_RARE;
+				$("#IFF").fadeOut(500,function(){
+					$("#IEI").fadeIn(500);
+				});
+			}
+			if(id=="IFF_ONEPERMON"){
+				iconInformation.IFF = customIconEnum.IFF_ONEPERMON;
+				$("#IFF").fadeOut(500,function(){
+					$("#IEI").fadeIn(500);
+				});
+			}
+			if(id=="IFF_HIGHFREQ"){
+				iconInformation.IFF = customIconEnum.IFF_HIGHFREQ;
+				$("#IFF").fadeOut(500,function(){
+					$("#IEI").fadeIn(500);
+				});
+			}
+			//IEI
+			if(id=="IEI_yes"){
+				iconInformation.IEI = customIconEnum.YES;
+				$("#IEI").fadeOut(500,function(){
+					//逐個擊破
+				});
+			}
+			if(id=="IEI_no"){
+				iconInformation.IEI = customIconEnum.NO;
+				$("#IEI").fadeOut(500,function(){
+					//逐個擊破
+				});
+			}
+			//--------------------------------------------
+			// HEART
+			//--------------------------------------------
+			//IHE
+			if(id=="IHE_yes"){
+				iconInformation.IHE = customIconEnum.YES;
+				$("#IHE").fadeOut(500,function(){
+					//逐個擊破
+				});
+			}
+			if(id=="IHE_no"){
+				iconInformation.IHE = customIconEnum.NO;
+				$("#IHE").fadeOut(500,function(){
+					//逐個擊破
+				});
+			}
+			//--------------------------------------------
+			// HAIR, SKIN
+			//--------------------------------------------
+			//IWC
+			if(id=="IWC_RARE"){
+				iconInformation.IWC = customIconEnum.IWC_RARE;
+				$("#IWC").fadeOut(500,function(){
+					$("#IHH").fadeIn(500);
+				});
+			}
+			if(id=="IWC_1TO2"){
+				iconInformation.IWC = customIconEnum.IWC_1TO2;
+				$("#IWC").fadeOut(500,function(){
+					$("#IHH").fadeIn(500);
+				});
+			}
+			if(id="IWC_3UP"){
+				iconInformation.IWC = customIconEnum.IWC_3UP;
+				$("#IWC").fadeOut(500,function(){
+					$("#IDC").fadeIn(500);
+				});
+			}
+			//IDC
+			if(id=="IDC_yes"){
+				iconInformation.IDC = customIconEnum.YES;
+				$("#IDC").fadeOut(500,function(){
+					$("#IHH").fadeIn(500);
+				});
+			}
+			if(id=="IDC_no"){
+				iconInformation.IDC = customIconEnum.NO;
+				$("#IDC").fadeOut(500,function(){
+					$("#IHH").fadeIn(500);
+				});
+			}
+			//IHH
+			if(id=="IHH_yes"){
+				iconInformation.IHH = customIconEnum.YES;
+			}
+			if(id=="IHH_no"){
+				iconInformation.IHH = customIconEnum.NO;
+			}
+			//--------------------------------------------
+			// JOINT, BONE
+			//--------------------------------------------
+			//IEB
+			if(id=="IEB_yes"){
+				iconInformation.IEB = customIconEnum.YES;
+				$("#IEB").fadeOut(500,function(){
+					$("#IBC").fadeIn(500);
+				});
+			}
+			if(id=="IEB_no"){
+				iconInformation.IEB = customIconEnum.NO;
+				$("#IEB").fadeOut(500,function(){
+					$("#IBC").fadeIn(500);
+				});
+			}
+			//IBC
+			if(id=="IBC_yes"){
+				iconInformation.IBC = customIconEnum.YES;
+				$("#IBC").fadeOut(500,function(){
+					$("#IEF").fadeIn(500);
+				});
+			}
+			if(id=="IBC_no"){
+				iconInformation.IBC = customIconEnum.NO;
+				$("#IBC").fadeOut(500,function(){
+					$("#IEF").fadeIn(500);
+				});
+			}
+			//IEF
+			if(id=="IEF_yes"){
+				iconInformation.IEF = customIconEnum.YES;
+				$("#IEF").fadeOut(500,function(){
+					$("#IJF").fadeIn(500);
+				});
+			}
+			if(id=="IEF_no"){
+				iconInformation.IEF = customIconEnum.NO;
+				$("#IEF").fadeOut(500,function(){
+					$("#IJF").fadeIn(500);
+				});
+			}
+			//IJF
+			if(id=="IJF_yes"){
+				iconInformation.IJF = customIconEnum.YES;
+				$("#IJF").fadeOut(500,function(){
+					//
+				});
+			}
+			if(id=="IJF_no"){
+				iconInformation.IJF = customIconEnum.NO;
+				$("#IJF").fadeOut(500,function(){
+					//
+				});
+			}
+			//--------------------------------------------
+			// DIGEST, STRESS
+			//--------------------------------------------
+			//IVO
+			if(id=="IVO_yes"){
+				iconInformation.IVO = customIconEnum.YES;
+				$("#IVO").fadeOut(500,function(){
+					$("#IVA").fadeIn(500);
+				});
+			}
+			if(id=="IVO_no"){
+				iconInformation.IVO = customIconEnum.NO;
+				$("#IVO").fadeOut(500,function(){
+					$("#IBP").fadeIn(500);
+				});
+			}
+			//IVA
+			if(id=="IVA_UP"){
+				iconInformation.IVA = customIconEnum.IVA_UP;
+				$("#IVA").fadeOut(500,function(){
+					$("#IVN").fadeIn(500);
+				});
+			}
+			if(id=="IVA_BOT"){
+				iconInformation.IVA = customIconEnum.IVA_BOT;
+				$("#IVA").fadeOut(500,function(){
+					$("#IVN").fadeIn(500);
+				});
+			}
+			if(id=="IVA_BOTH"){
+				iconInformation.IVA = customIconEnum.IVA_BOTH;
+				$("#IVA").fadeOut(500,function(){
+					$("#IVN").fadeIn(500);
+				});
+			}
+			if(id=="IVA_unsure"){
+				iconInformation.IVA = customIconEnum.UNSURE;
+				$("#IVA").fadeOut(500,function(){
+					$("#IBP").fadeIn(500);
+				});
+			}
+			//IVN
+			if(id=="IVN_BETTER"){
+				iconInformation.IVN = customIconEnum.IVN_BETTER;
+				$("#IVN").fadeOut(500,function(){
+					$("#IBP").fadeIn(500);
+				});
+			}
+			if(id=="IVN_FORAWHILE"){
+				iconInformation.IVN = customIconEnum.IVN_FORAWHILE;
+				$("#IVN").fadeOut(500,function(){
+					$("#IBP").fadeIn(500);
+				});
+			}
+			if(id=="IVN_unsure"){
+				iconInformation.IVN = customIconEnum.UNSURE;
+				$("#IVN").fadeOut(500,function(){
+					$("#IBP").fadeIn(500);
+				});
+			}
+			//IBP
+			if(id=="IBP_yes"){
+				iconInformation.IBP = customIconEnum.YES;
+				$("#IBP").fadeOut(500,function(){
+					$("#IBN").fadeIn(500);
+				});
+			}
+			if(id=="IBP_no"){
+				iconInformation.IBP = customIconEnum.NO;
+				$("#IBP").fadeOut(500,function(){
+					//
+				});
+			}
+			//IBN
+			if(id=="IBN_BETTER"){
+				iconInformation.IBN = customIconEnum.IBN_BETTER;
+				$("#IBN").fadeOut(500,function(){
+					//
+				});
+			}
+			if(id=="IBN_FORAWHILE"){
+				iconInformation.IBN = customIconEnum.IBN_FORAWHILE;
+				$("#IBN").fadeOut(500,function(){
+					//
+				});
+			}
+			if(id=="IBN_unsure"){
+				iconInformation.IBN = customIconEnum.UNSURE;
+				$("#IBN").fadeOut(500,function(){
+					//
+				});
+			}
+			//IPR
+			if(id=="IPRButton"){
+				iconInformation.IBN += stress[0];
+				$("#IPR").fadeOut(500,function(){
+					//
+				});
+			}
+			//--------------------------------------------
+			// MOUTH
+			//--------------------------------------------
+			//IMO
+			if(id=="IMO_BS"){
+				iconInformation.IMO = customIconEnum.IMO_BS;
+				$("#IMO").fadeOut(500,function(){
+					//
+				});
+			}
+			if(id=="IMO_OVERSWEAT"){
+				iconInformation.IMO = customIconEnum.IMO_OVERSWEAT;
+				$("#IMO").fadeOut(500,function(){
+					//
+				});
+			}
+			if(id=="IMO_no"){
+				iconInformation.IMO = customIconEnum.NO;
+				$("#IMO").fadeOut(500,function(){
+					//
+				});
+			}
+			//--------------------------------------------
+			// EXTRA
+			//--------------------------------------------
+			//EEH
+			if(id=="EEH_STRIKE"){
+				extraInformation.EEH = customExtraEnum.EEH_STRIKE;
+				$("#EEH").fadeOut(500,function(){
+					$("#EKL").fadeIn(500);
+				});
+			}
+			if(id=="EEH_HARD"){
+				extraInformation.EEH = customExtraEnum.EEH_HARD;
+				$("#EEH").fadeOut(500,function(){
+					$("#EKL").fadeIn(500);
+				});
+			}
+			if(id=="EEH_FROMNOW"){
+				extraInformation.EEH = customExtraEnum.EEH_FROMNOW;
+				$("#EEH").fadeOut(500,function(){
+					$("#EKL").fadeIn(500);
+				});
+			}
+			//EKL
+			if(id=="EKL_EXP"){
+				extraInformation.EKL = customExtraEnum.EKL_EXP;
+				$("#EKL").fadeOut(500,function(){
+					$("#ENL").fadeIn(500);
+				});
+			}
+			if(id=="EKL_STU"){
+				extraInformation.EKL = customExtraEnum.EKL_STU;
+				$("#EKL").fadeOut(500,function(){
+					$("#ENL").fadeIn(500);
+				});
+			}
+			if(id=="EKL_BEG"){
+				extraInformation.EKL = customExtraEnum.EKL_BEG;
+				$("#EKL").fadeOut(500,function(){
+					$("#ENL").fadeIn(500);
+				});
+			}
+			//ENL
+			if(id=="ENL_EXP"){
+				extraInformation.ENL = customExtraEnum.ENL_EXP;
+				$("#ENL").fadeOut(500,function(){
+					$("#EFB").fadeIn(500,function(){
+						$("#EFBEnter").focus();
+					});
+				});
+			}
+			if(id=="ENL_STU"){
+				extraInformation.ENL = customExtraEnum.ENL_STU;
+				$("#ENL").fadeOut(500,function(){
+					$("#EFB").fadeIn(500,function(){
+						$("#EFBEnter").focus();
+				});
+			}
+			if(id=="ENL_BEG"){
+				extraInformation.ENL = customExtraEnum.ENL_BEG;
+				$("#ENL").fadeOut(500,function(){
+					$("#EFB").fadeIn(500,function(){
+						$("#EFBEnter").focus();
+				});
+			}
+			//EFB
+			if(id=="EFB_unsure"){
+				extraInformation.EFB = customExtraEnum.UNSURE;
+				$("#EFB").fadeOut(500,function(){
+					$("#EFI").fadeIn(500);
+				});
+			}
+			if(id=="EFBButton"){
+				if($("#EFBEnter").val()!=""){
+					extraInformation.EFB = $("#EFBEnter").val();
+					$("#EFB").fadeOut(500,function(){
+						$("#EEC").fadeIn(500);
+					});
+				}
+			}
+			//EFI
+			if(id="EFIButton"){
+				extraInformation.EFI = "";
+				$("#EFI").fadeOut(500,function(){
+					$("#EFG").fadeIn(500);
+				});
+			}
+			//EFG
+			if(id=="EFG_yes"){
+				extraInformation.EFG = customExtraEnum.YES;
+				$("#EFG").fadeOut(500,function(){
+					$("#EEC").fadeIn(500);
+				});
+			}
+			if(id=="EFG_no"){
+				extraInformation.EFG = customExtraEnum.NO;
+				$("#EFG").fadeOut(500,function(){
+					$("#EEC").fadeIn(500);
+				});
+			}
+			if(id=="EFG_unsure"){
+				extraInformation.EFG = customExtraEnum.UNSURE;
+				$("#EFG").fadeOut(500,function(){
+					$("#EEC").fadeIn(500);
+				});
+			}
+			//EEC
+			if(id=="EEC_CONTROL"){
+				extraInformation.EEC = customExtraEnum.EEC_CONTROL;
+				$("#EEC").fadeOut(500,function(){
+					$("#ECM").fadeIn(500);
+				});
+			}
+			if(id=="EEC_FULL"){
+				extraInformation.EEC = customExtraEnum.EEC_FULL;
+				$("#EEC").fadeOut(500,function(){
+					$("#EAA").fadeIn(500);
+				});
+			}
+			//ECM
+			if(id=="ECM_ONCE"){
+				extraInformation.ECM = customExtraEnum.ECM_ONCE;
+				$("#ECM").fadeOut(500,function(){
+					$("#EES").fadeIn(500);
+				});
+			}
+			if(id=="ECM_TWICE"){
+				extraInformation.ECM = customExtraEnum.ECM_TWICE;
+				$("#ECM").fadeOut(500,function(){
+					$("#EES").fadeIn(500);
+				});
+			}
+			if(id=="ECM_UP"){
+				extraInformation.ECM = customExtraEnum.ECM_UP;
+				$("#ECM").fadeOut(500,function(){
+					$("#EES").fadeIn(500);
+				});
+			}
+			//EES
+			if(id=="EES_SOON"){
+				extraInformation.EES = customExtraEnum.EES_SOON;
+				$("#EES").fadeOut(500,function(){
+					$("#EAA").fadeIn(500);
+				});
+			}
+			if(id=="EES_SLOW"){
+				extraInformation.EES = customExtraEnum.EES_SLOW;
+				$("#EES").fadeOut(500,function(){
+					$("#EAA").fadeIn(500);
+				});
+			}
+			if(id=="EES_NEVER"){
+				extraInformation.EES = customExtraEnum.EES_NEVER;
+				$("#EES").fadeOut(500,function(){
+					$("#EAA").fadeIn(500);
+				});
+			}
+			//EAA
+			if(id=="EAA_yes"){
+				extraInformation.EAA = customExtraEnum.YES;
+				$("#EAA").fadeOut(500,function(){
+					$("#EAB").fadeIn(500);
+				});
+			}
+			if(id=="EAA_no"){
+				extraInformation.EAA = customExtraEnum.NO;
+				$("#EAA").fadeOut(500,function(){
+					$("#EAB").fadeIn(500);
+				});
+			}
+			//EAB
+			if(id=="EAB_NEVER"){
+				extraInformation.EAB = customExtraEnum.EAB_NEVER;
+				$("#EAB").fadeOut(500,function(){
+					$("#EAC").fadeIn(500);
+				});
+			}
+			if(id=="EAB_ONCE"){
+				extraInformation.EAB = customExtraEnum.EAB_ONCE;
+				$("#EAB").fadeOut(500,function(){
+					$("#EAC").fadeIn(500);
+				});
+			}
+			if(id=="EAB_FORTHUP"){
+				extraInformation.EAB = customExtraEnum.EAB_FORTHUP;
+				$("#EAB").fadeOut(500,function(){
+					$("#EAC").fadeIn(500);
+				});
+			}
+			//EAC
+			if(id=="EAC_NEVER"){
+				extraInformation.EAC = customExtraEnum.EAC_NEVER;
+				$("#EAC").fadeOut(500,function(){
+					$("#EAD").fadeIn(500);
+				});
+			}
+			if(id=="EAC_ONCE"){
+				extraInformation.EAC = customExtraEnum.EAC_ONCE;
+				$("#EAC").fadeOut(500,function(){
+					$("#EAD").fadeIn(500);
+				});
+			}
+			if(id=="EAC_TWICE"){
+				extraInformation.EAC = customExtraEnum.EAC_TWICE;
+				$("#EAC").fadeOut(500,function(){
+					$("#EAD").fadeIn(500);
+				});
+			}
+			if(id=="EAC_EACHDAY"){
+				extraInformation.EAC = customExtraEnum.EAC_EACHDAY;
+				$("#EAC").fadeOut(500,function(){
+					$("#EAD").fadeIn(500);
+				});
+			}
+			//EAD
+			if(id=="EADButton"){
+				extraInformation.EAD = "";
+				$("#EAD").fadeOut(500,function(){
+					$("#EAE").fadeIn(500);
+				});
+			}
+			//EAE
+			if(id=="EAE_HIGHFREQ"){
+				extraInformation.EAE = customExtraEnum.EAE_HIGHFREQ;
+				$("#EAE").fadeOut(500,function(){
+					$("#EAF").fadeIn(500);
+				});
+			}
+			if(id=="EAE_LOWFREQ"){
+				extraInformation.EAE = customExtraEnum.EAE_LOWFREQ;
+				$("#EAE").fadeOut(500,function(){
+					$("#EAF").fadeIn(500);
+				});
+			}
+			//EAF
+			if(id=="EAF_NEVER"){
+				extraInformation.EAF = customExtraEnum.EAF_NEVER;
+				$("#EAF").fadeOut(500,function(){
+					$("#EBA").fadeIn(500);
+				});
+			}
+			if(id=="EAF_YESBUTHATE"){
+				extraInformation.EAF = customExtraEnum.EAF_YESBUTHATE;
+				$("#EAF").fadeOut(500,function(){
+					$("#EBA").fadeIn(500);
+				});
+			}
+			if(id=="EAF_ONCE"){
+				extraInformation.EAF = customExtraEnum.EAF_ONCE;
+				$("#EAF").fadeOut(500,function(){
+					$("#EBA").fadeIn(500);
+				});
+			}
+			if(id=="EAF_THIRD"){
+				extraInformation.EAF = customExtraEnum.EAF_THIRD;
+				$("#EAF").fadeOut(500,function(){
+					$("#EBA").fadeIn(500);
+				});
+			}
+			//EBA
+			if(id=="EBAButton"){
+				if($("#EBA_PLACE").val()!="0"){
+					extraInformation.EBA = $("#EBA_PLACE").val();
+					$("#EBA").fadeOut(500,function(){
+						$("#EBB").fadeIn(500);
+					});
+				}
+			}
+			//EBB
+			if(id=="EBB_FIRST"){
+				extraInformation.EBB = customExtraEnum.EBB_FIRST;
+				$("#EBB").fadeOut(500,function(){
+					$("#EBC").fadeIn(500);
+				});
+			}
+			if(id=="EBB_WANTTOKNOW"){
+				extraInformation.EBB = customExtraEnum.EBB_WANTTOKNOW;
+				$("#EBB").fadeOut(500,function(){
+					$("#EBC").fadeIn(500);
+				});
+			}
+			if(id=="EBB_DONTWANT"){
+				extraInformation.EBB = customExtraEnum.EBB_DONTWANT;
+				$("#EBB").fadeOut(500,function(){
+					$("#EBC").fadeIn(500);
+				});
+			}
+			//EBC
+			if(id=="EBC_INTER"){
+				extraInformation.EBC = customExtraEnum.EBC_INTER;
+				$("#EBC").fadeOut(500,function(){
+					//
+				});
+			}
+			if(id=="EBC_FB_IG"){
+				extraInformation.EBC = customExtraEnum.EBC_FB_IG;
+				$("#EBC").fadeOut(500,function(){
+					//
+				});
+			}
+			if(id=="EBC_FRIEND"){
+				extraInformation.EBC = customExtraEnum.EBC_FRIEND;
+				$("#EBC").fadeOut(500,function(){
+					//
+				});
+			}
+			if(id=="EBC_OTHER"){
+				extraInformation.EBC = customExtraEnum.EBC_OTHER;
+				$("#EBC").fadeOut(500,function(){
+					//
+				});
+			}
+		}
+		//Generate AWI innerHTML
+		function getAWI(){
+			if(icon[0]==0) $("#AWI_IMMU").toggleClass("questionBlock");
+			if(icon[1]==0) $("#AWI_HEART").toggleClass("questionBlock");
+			if(icon[2]==0) $("#AWI_MEHAIR").toggleClass("questionBlock");
+			if(icon[3]==0) $("#AWI_LIHAIR").toggleClass("questionBlock");
+			if(icon[4]==0) $("#AWI_LOHAIR").toggleClass("questionBlock");
+			if(icon[5]==0) $("#AWI_SKIN").toggleClass("questionBlock");
+			if(icon[6]==0) $("#AWI_JOINT").toggleClass("questionBlock");
+			if(icon[7]==0) $("#AWI_BONE").toggleClass("questionBlock");
+			if(icon[8]==0) $("#AWI_ADDWEI").toggleClass("questionBlock");
+			if(icon[9]==0) $("#AWI_OVERWEI").toggleClass("questionBlock");
+			if(icon[10]==0) $("#AWI_STOMA").toggleClass("questionBlock");
+			if(icon[11]==0) $("#AWI_STRESS").toggleClass("questionBlock");
 		}
 		function speciesCheck(id){
 			if(id=="BSP_nohair"){
@@ -940,7 +1798,7 @@
 			text-align: center;
 		}
 		.questionBlock{
-			
+			display: none;
 		}
 		input{
 			outline: none;
@@ -950,7 +1808,7 @@
 		}
 		span{
 			font-size: 20px;
-			font-family: Microsoft JhengHei;
+			font-family: 'Noto Sans TC';
 		}
 		.placeholder {
 		  width: 100%;
@@ -1406,6 +2264,47 @@
 			</div>
 			<!--優先考量-->
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="AWI">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>請問當中哪一項是您的優先考量呢？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="AWI_IMMU" onclick="addToList(this.id)">
+						<div class="placeholder"><span>免疫力</span></div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="AWI_HEART" onclick="addToList(this.id)">
+						<div class="placeholder"><span>心臟</span></div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="AWI_MEHAIR" onclick="addToList(this.id)">
+						<div class="placeholder"><span>化毛</span></div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="AWI_LIHAIR" onclick="addToList(this.id)">
+						<div class="placeholder"><span>亮毛</span></div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="AWI_LOHAIR" onclick="addToList(this.id)">
+						<div class="placeholder"><span>脫毛</span></div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="AWI_SKIN" onclick="addToList(this.id)">
+						<div class="placeholder"><span>皮膚</span></div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="AWI_JOINT" onclick="addToList(this.id)">
+						<div class="placeholder"><span>關節</span></div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="AWI_BONE" onclick="addToList(this.id)">
+						<div class="placeholder"><span>骨頭</span></div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="AWI_ADDWEI" onclick="addToList(this.id)">
+						<div class="placeholder"><span>增重</span></div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="AWI_OVERWEI" onclick="addToList(this.id)">
+						<div class="placeholder"><span>過胖</span></div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="AWI_STOMA" onclick="addToList(this.id)">
+						<div class="placeholder"><span>腸胃</span></div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="AWI_STRESS" onclick="addToList(this.id)">
+						<div class="placeholder"><span>壓力</span></div>
+					</div>
+				</div>
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="AEM">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -1416,7 +2315,7 @@
 					<button id="AEMButton" onclick="addToList(this.id)">></button>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="AFE">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IFE">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問</span>
 					<span id="catName14">貓貓</span>
@@ -1424,18 +2323,18 @@
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder" id="AFE_yes"  onclick="addToList(this.id)">
+						<div class="placeholder" id="IFE_yes"  onclick="addToList(this.id)">
 							<span>有</span>
 						</div>						
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder" id="AFE_no"  onclick="addToList(this.id)">
+						<div class="placeholder" id="IFE_no"  onclick="addToList(this.id)">
 							<span>沒有</span>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="AFF">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IFF">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問</span>
 					<span id="catName15">貓貓</span>
@@ -1443,23 +2342,23 @@
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder" id="AFF_RARE" onclick="addToList(this.id)">
+						<div class="placeholder" id="IFF_RARE" onclick="addToList(this.id)">
 							<span>幾乎沒有</span>
 						</div>						
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder" id="AFF_ONEPERMON" onclick="addToList(this.id)">
+						<div class="placeholder" id="IFF_ONEPERMON" onclick="addToList(this.id)">
 							<span>一個月一次</span>
 						</div>						
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div class="placeholder" id="AFF_HIGHFREQ" onclick="addToList(this.id)">
+						<div class="placeholder" id="IFF_HIGHFREQ" onclick="addToList(this.id)">
 							<span>一個月一次以上</span>
 						</div>						
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="AEI">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IEI">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>是否有覺得</span>
 					<span id="catName16">貓貓</span>
@@ -1467,12 +2366,12 @@
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder" id="AEI_yes" onclick="addToList(this.id)">
+						<div class="placeholder" id="IEI_yes" onclick="addToList(this.id)">
 							<span>需要</span>
 						</div>						
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder" id="AEI_no" onclick="addToList(this.id)">
+						<div class="placeholder" id="IEI_no" onclick="addToList(this.id)">
 							<span>不需要</span>
 						</div>
 					</div>
@@ -1698,25 +2597,6 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IBC">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<span>請問獸醫師是否有推薦</span>
-					<span id="catName26">貓貓</span>
-					<span>補充軟骨素或是葡萄糖胺呢？</span>
-				</div>
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder" id="IBC_yes" onclick="addToList(this.id)">
-							<span>是</span>
-						</div>						
-					</div>
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="placeholder" id="IBC_no" onclick="addToList(this.id)">
-							<span>否</span>
-						</div>
-					</div>
-				</div>
-			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IEB">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>是否有覺得</span>
@@ -1736,6 +2616,25 @@
 					</div>
 				</div>
 			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IBC">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<span>請問獸醫師是否有推薦</span>
+					<span id="catName26">貓貓</span>
+					<span>補充軟骨素或是葡萄糖胺呢？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder" id="IBC_yes" onclick="addToList(this.id)">
+							<span>是</span>
+						</div>						
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="placeholder" id="IBC_no" onclick="addToList(this.id)">
+							<span>否</span>
+						</div>
+					</div>
+				</div>
+			</div>			
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IEF">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問</span>
@@ -1893,32 +2792,32 @@
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-						<div class="placeholder" id="IPR_STRA">
+						<div class="icon" id="IPR_STRA" onclick="iconClick(this.id)">
 							<span>過度理毛</span>
 						</div>
 					</div>
 						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-						<div class="placeholder" id="IPR_STRB">
+						<div class="icon" id="IPR_STRB" onclick="iconClick(this.id)">
 							<span>來回踱步</span>
 						</div>
 					</div>
 						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-						<div class="placeholder" id="IPR_STRC">
+						<div class="icon" id="IPR_STRC" onclick="iconClick(this.id)">
 							<span>四處躲藏</span>
 						</div>
 					</div>
 						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-						<div class="placeholder" id="IPR_STRD">
+						<div class="icon" id="IPR_STRD" onclick="iconClick(this.id)">
 							<span>食慾下降</span>
 						</div>
 					</div>
 						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-						<div class="placeholder" id="IPR_STRE">
+						<div class="icon" id="IPR_STRE" onclick="iconClick(this.id)">
 							<span>隨地便溺</span>
 						</div>
 					</div>
 						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-						<div class="placeholder" id="IPR_no">
+						<div class="icon" id="IPR_no" onclick="iconClick(this.id)">
 							<span>無</span>
 						</div>
 					</div>
@@ -2328,15 +3227,18 @@
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<select id="EBA_PLACE">
-						<option></option>
-						<option>台北</option>
-						<option>新竹</option>
-						<option>台南</option>
-						<option>高雄</option>
-						<option>澎湖</option>
-						<option>太平島</option>
-						<option>墾丁</option>
+						<option value="0"></option>
+						<option value="台北">台北</option>
+						<option value="新竹">新竹</option>
+						<option value="台南">台南</option>
+						<option value="高雄">高雄</option>
+						<option value="澎湖">澎湖</option>
+						<option value="太平島">太平島</option>
+						<option value="墾丁">墾丁</option>
 					</select>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<button id="EBAButton">></button>
 				</div>
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EBB">
