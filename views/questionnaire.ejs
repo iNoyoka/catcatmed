@@ -55,15 +55,22 @@
 <body class="container" onselectstart="return false">	
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<nav class="col-lg-2 col-lg-offset-10 col-md-4 col-md-offset-8 col-sm-6 col-sm-offset-6 col-xs-6 col-xs-offset-6">
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 navBlock">
+			<div class="navBlock">
 				<p onClick="location.href='/'" class="navLink">儲存並回首頁</p>
 			</div>
 		</nav>
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBlock"></div>
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<!-- say hi to customer -->
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="BHELLO">
+				<span>這是來自爆肝工程師的招呼，請等待兩秒</span>
+				<script>
+					trans_hello();
+				</script>
+			</div>
 			<!-- questionnaire here -->
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="BKN">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 question">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BKN">
+				<div class="question">
 					<span>請 問 您 的 名 字 ？</span>
 				</div>
 				<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 text-center">
@@ -75,7 +82,7 @@
 				</div>
 			</div>		
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BCN">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 question">
+				<div class="question">
 					<span>請 問 貓 貓 的 名 字 ？</span>
 				</div>
 				<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 text-center">
@@ -85,6 +92,13 @@
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
 					<button id="BCNButton" onclick="addToList(this.id);">下 一 題</button>
 				</div>	
+			</div>
+			<!-- show some information -->
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BNICEMEET">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center elementInVisable" id="BNICE_A">
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center elementInVisable" id="BNICE_B">
+				</div>
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BKS">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 question">
@@ -126,34 +140,34 @@
 					<span>請問您幾歲？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+					<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
 						<div class="placeholder" onclick="addToList(this.id);" id="BKA_18-">
-							<span>18以下</span>
+							<span>18歲以下</span>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+					<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
 						<div class="placeholder" onclick="addToList(this.id);" id="BKA_18-25">
-							<span>18-25</span>
+							<span>18-25歲</span>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+					<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
 						<div class="placeholder" onclick="addToList(this.id);" id="BKA_26-35">
-							<span>26-35</span>
+							<span>26-35歲</span>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+					<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
 						<div class="placeholder" onclick="addToList(this.id);" id="BKA_36-45">
-							<span>36-45</span>
+							<span>36-45歲</span>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+					<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
 						<div class="placeholder" onclick="addToList(this.id);" id="BKA_46-65">
-							<span>46-65</span>
+							<span>46-65歲</span>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+					<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
 						<div class="placeholder" onclick="addToList(this.id);" id="BKA_65+">
-							<span>65以上</span>
+							<span>65歲以上</span>
 						</div>
 					</div>
 				</div>				
@@ -169,6 +183,13 @@
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBotBlock"></div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
 					<button id="BCAButton" onclick="addToList(this.id);">下 一 題</button>
+				</div>
+			</div>
+			<!-- show some information -->
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BAGECAL">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center elementInVisable" id="BAGE_A">
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center elementInVisable" id="BAGE_B">
 				</div>
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BSP">
@@ -261,126 +282,142 @@
 				</div>
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BNU">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 question">
 					<span id="catName4">貓貓</span>						
-					<span>是否結紮了呢？</span>
+					<span>是 否 結 紮 了 呢 ？</span>
 				</div>
-				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="BNU_yes">
-						<span>是</span>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-3 col-lg-offset-3 col-md-3 col-md-offset-3">
+						<div class="placeholder" onclick="addToList(this.id);" id="BNU_yes">
+							<span>是</span>
+						</div>
 					</div>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="BNU_no">
-						<span>否</span>
-					</div>
-				</div>
+					<div class="col-lg-3 col-md-3">
+						<div class="placeholder" onclick="addToList(this.id);" id="BNU_no">
+							<span>否</span>
+						</div>
+					</div>	
+				</div>				
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BPR">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 question">
 					<span id="catName5">貓貓</span>						
-					<span>現在有懷孕嗎？</span>
+					<span>現 在 有 懷 孕 嗎 ？</span>
 				</div>
-				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="BPR_yes">
-						<span>是</span>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-3 col-lg-offset-3 col-md-3 col-md-offset-3">
+						<div class="placeholder" onclick="addToList(this.id);" id="BPR_yes">
+							<span>是</span>
+						</div>
 					</div>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="BPR_no">
-						<span>否</span>
+					<div class="col-lg-3 col-md-3">
+						<div class="placeholder" onclick="addToList(this.id);" id="BPR_no">
+							<span>否</span>
+						</div>
 					</div>
-				</div>
+				</div>				
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BPT">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 question">
 					<span id="catName6">貓貓</span>						
-					<span>懷孕多久了呢？</span>
+					<span>懷 孕 多 久 了 呢 ？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-						<div class="col-lg-12 col-md-12 col-sm-13 col-xs-12 placeholder" onclick="addToList(this.id);" id="BPT_1to3">
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+						<div class="placeholder" onclick="addToList(this.id);" id="BPT_1to3">
 							<span>1~3週</span>
 						</div>
 					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-						<div class="col-lg-12 col-md-12 col-sm-13 col-xs-12 placeholder" onclick="addToList(this.id);" id="BPT_3to6">
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+						<div class="placeholder" onclick="addToList(this.id);" id="BPT_3to6">
 							<span>3~6週</span>
 						</div>
 					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-						<div class="col-lg-12 col-md-12 col-sm-13 col-xs-12 placeholder" onclick="addToList(this.id);" id="BPT_6up">
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+						<div class="placeholder" onclick="addToList(this.id);" id="BPT_6up">
 							<span>6週以上</span>
 						</div>
 					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-						<div class="col-lg-12 col-md-12 col-sm-13 col-xs-12 placeholder" onclick="addToList(this.id);" id="BPT_unsure">
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+						<div class="placeholder" onclick="addToList(this.id);" id="BPT_unsure">
 							<span>不確定</span>
 						</div>
 					</div>
 				</div>
 			</div>
+			<!-- show some information -->
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BPREGPAGE">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center elementInVisable" id="BPREGPAGE_A">
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center elementInVisable" id="BPREGPAGE_B">
+				</div>
+			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BCW">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 question">
 					<span id="catName7">貓貓</span>						
-					<span>最近一次測量的體重為？</span>
+					<span>最 近 一 次 測 量 的 體 重 為 ？</span>
 				</div>
 				<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 text-center">
 					<input type="number" id="BCWEnter" onkeypress="enterPress(this.id,event)">
 				</div>
-				<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center">
-					<button id="BCWButton" onclick="addToList(this.id);">></button>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBotBlock"></div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+					<button id="BCWButton" onclick="addToList(this.id);">下 一 題</button>
 				</div>
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BEF">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 question">
 					<span>玩樂對貓咪而言就是一個運動的方式，請問</span>
 					<span id="catName8">貓貓</span>						
 					<span>運動的頻率？</span>
 				</div>
-				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="BEF_highFreq">
-						<span>高</span>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder" onclick="addToList(this.id);" id="BEF_highFreq">
+							<span>高</span>
+						</div>
 					</div>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="BEF_medFreq">
-						<span>中</span>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder" onclick="addToList(this.id);" id="BEF_medFreq">
+							<span>中</span>
+						</div>
 					</div>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="BEF_lowFreq">
-						<span>低</span>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder" onclick="addToList(this.id);" id="BEF_lowFreq">
+							<span>低</span>
+						</div>
 					</div>
-				</div>
+				</div>				
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BSI">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<span>請問</span>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 question">
+					<span>請 問</span>
 					<span id="catName9">貓貓</span>						
-					<span>是室內貓還是室外貓？</span>
+					<span>是 室 內 貓 還 是 室 外 貓 ？</span>
 				</div>
-				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="BSI_inside">
-						<span>室內</span>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder" onclick="addToList(this.id);" id="BSI_inside">
+							<span>室 內</span>
+						</div>
 					</div>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="BSI_outside">
-						<span>室外</span>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder" onclick="addToList(this.id);" id="BSI_outside">
+							<span>室 外</span>
+						</div>
 					</div>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);"id="BSI_medside">
-						<span>一半一半</span>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="placeholder" onclick="addToList(this.id);"id="BSI_medside">
+							<span>一 半 一 半</span>
+						</div>
 					</div>
-				</div>
+				</div>				
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BBC">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<span>請問</span>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 question">
+					<span>請 問</span>
 					<span id="catName10">貓貓</span>						
-					<span>的體態長得像下列哪一個？</span>
+					<span>的 體 態 長 得 像 下 列 哪 一 個 ？</span>
 				</div>
 				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="BBC_tooThin">
@@ -466,6 +503,13 @@
 						<input type="text" id="AWMEnter" onkeypress="enterPress(this.id,event)">
 						<button id="AWMButton" onclick="addToList(this.id);">></button>
 					</div>
+				</div>
+			</div>
+			<!-- show some information -->
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="ASPECIALFOOD">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center elementInVisable" id="ASPECIALFOOD_A">
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center elementInVisable" id="ASPECIALFOOD_B">
 				</div>
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="AIC">
@@ -861,7 +905,7 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="IEB">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>是否有覺得</span>
-					<span id="catName27">貓貓</span>
+					<span id="catName26">貓貓</span>
 					<span>需要額外的關節保健呢？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -880,7 +924,7 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="IBC">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問獸醫師是否有推薦</span>
-					<span id="catName26">貓貓</span>
+					<span id="catName27">貓貓</span>
 					<span>補充軟骨素或是葡萄糖胺呢？</span>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -1156,6 +1200,13 @@
 					</div>
 				</div>
 			</div>
+			<!-- show some information -->
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="EKEEPEXP">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center elementInVisable" id="EKEEPEXP_A">
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center elementInVisable" id="EKEEPEXP_B">
+				</div>
+			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="ENL">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">				
 					<span>說到貓咪營養您是個： </span>
@@ -1176,6 +1227,13 @@
 							<span>新手</span>
 						</div>
 					</div>
+				</div>
+			</div>
+			<!-- show some information -->
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="ENUTRIEXP">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center elementInVisable" id="ENUTRIEXP_A">
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center elementInVisable" id="ENUTRIEXP_B">
 				</div>
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="EFB">

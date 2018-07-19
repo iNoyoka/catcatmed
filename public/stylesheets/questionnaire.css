@@ -22,10 +22,11 @@ body {
 }
 navBlock{
 	cursor: pointer;
-	transition: 300ms;
+	transition: 500ms;
 }
 .navBlock:hover{
 	background-color: #EEEEEE;
+	transition: 500ms;
 }
 .navLink{
 	padding-top : 20px;
@@ -36,6 +37,9 @@ navBlock{
 	text-align: center;
 }
 .questionBlock{
+	display: none;
+}
+.elementInVisable{
 	display: none;
 }
 input[type=text]{
@@ -86,6 +90,9 @@ button:hover{
 span{
 	font-size: 25px;
 	font-family: 'Noto Sans TC',Microsoft JhengHei;
+}
+.smallSpan{
+	font-size: 18px;
 }
 .question{
 	margin-top: 20px;
