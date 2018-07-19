@@ -1,0 +1,133 @@
+body {
+	-moz-user-select:none; 
+	-webkit-user-select: none;
+} 
+.paddingBlock{
+	overflow:hidden;
+	width:100%;
+}
+.paddingBlock:after{
+	content:"";
+	margin-top:15%;
+	display:block;
+}
+.paddingBotBlock{
+	overflow:hidden;
+	width:100%;
+}
+.paddingBotBlock:after{
+	content:"";
+	margin-top:5%;
+	display:block;
+}
+navBlock{
+	cursor: pointer;
+	transition: 300ms;
+}
+.navBlock:hover{
+	background-color: #EEEEEE;
+}
+.navLink{
+	padding-top : 20px;
+	padding-bottom : 20px;
+	font-family: Microsoft JhengHei;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+}
+.questionBlock{
+	display: none;
+}
+input[type=text]{
+	width: 100%;
+	outline-color: #3D5BA8;
+	padding: 10px;
+	background-color: #F1F1F2;
+	text-align: center;
+	font-size: 25px;
+	font-family: 'Noto Sans TC',Microsoft JhengHei;
+	display: inline-block;
+	border: 0px;
+}
+input[type=number]{
+	width: 100%;
+	outline-color: #3D5BA8;
+	padding: 10px;
+	background-color: #F1F1F2;
+	text-align: center;
+	font-size: 25px;
+	font-family: 'Noto Sans TC',Microsoft JhengHei;
+	display: inline-block;
+	border: 0px;
+}
+button{
+	background-color: #F1F1F2;
+	outline: none;
+	transition: 200ms;
+	border: none;
+	border-radius: 20px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	padding-left: 25px;
+	padding-right: 25px;
+	font-family: 'Noto Sans TC',Microsoft JhengHei;
+	font-size: 15px;
+	color: #3D5BA8;
+}
+button:hover{
+	background-color: #3D5BA8;
+	color: #F1F1F2;
+	transition: 200ms;
+}
+.speciesButton{
+	margin: 5px;
+}
+/*font block*/
+span{
+	font-size: 25px;
+	font-family: 'Noto Sans TC',Microsoft JhengHei;
+}
+.question{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+/*color block*/
+.placeholder {
+	width: 100%;
+	transition: 200ms;
+	overflow: hidden;
+	background-color: #F1F1F2;
+	color: #3D5BA8 !important;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	height: 100px;
+	line-height: 100px;
+}
+.placeholder:hover{
+	background-color: #3D5BA8;
+	color: #F1F1F2 !important;
+	transition: 200ms;
+}
+.icon{
+	font-family: Microsoft JhengHei;
+	font-size: 18px;
+	background-color: #FFFF77;
+	border: dashed black 2px;
+	cursor: pointer;
+}
+.icon:hover{
+	background-color: #FFCC22;
+}
+.iconSelected{			
+	background-color: #FF5511;
+	border: solid black 2px;
+	cursor: pointer;
+	font-family: Microsoft JhengHei;
+	font-size: 18px;
+}
+.iconSelected:hover{
+	background-color: red;
+}

@@ -8,2001 +8,256 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<!--fonts-->
-	<style>
-		@import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
-		* {
-			font-family: 'Noto Sans TC';
-		}
- 
-	</style>
-	<link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosanstc.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
 	<!--
 		MUST CHECK : "id = catNamex" uncorrect number will lead to error.
 	-->
-	<script>
-		var customBasicEnum = {
-			boy:"男",
-			girl:"女",
-			_18_:"18歲以下",
-			_18_25:"18-25",
-			_26_35:"26-35",
-			_36_45:"36-45",
-			_46_65:"46-65",
-			_65_:"65歲以上",
-			yes:"是",
-			no:"否",
-			highFreq:"高",
-			medFreq:"中",
-			lowFreq:"低",
-			inside:"室內",
-			outside:"室外",
-			medside:"一半一半",
-			tooThin:"過瘦",
-			aLittleThin:"稍瘦",
-			medium:"適中",
-			aLittleFat:"稍胖",
-			tooFat:"過胖",
-			_1to3:"一到三週",
-			_3to6:"三到六週",
-			_6up:"六週以上",
-			unsure:"不確定",
-		}
-		var basicInformation = {
-			name:"無資料",
-			catName:"無資料",
-			sex:"無資料",
-			catSex:"無資料",
-			age:"無資料",
-			catAge:"無資料",
-			species:"無資料",
-			ligation:"無資料",
-			pregnancy:"無資料",
-			pregnancyTime:"無資料",
-			catWeight:"無資料",
-			catExerciseFreq:"無資料",
-			catSide:"無資料",
-			catSize:"無資料"
-		}
-		var customAdvancedEnum = {
-			ARC_SPE:"特定需求",
-			ARC_DAE:"日常保健",
-			ARC_KNO:"知識了解",
-			YES:"有",
-			NO:"沒有",
-			UNSURE:"不確定",
-			AIC_IMMU:"免疫力",
-			AIC_HEART:"心臟",
-			AIC_MEHAIR:"化毛",
-			AIC_LIHAIR:"亮毛",
-			AIC_LOHAIR:"脫毛",
-			AIC_SKIN:"皮膚",
-			AIC_JOINT:"關節",
-			AIC_BONE:"骨頭",
-			AIC_ADDWEI:"增重",
-			AIC_OVERWEI:"過胖",
-			AIC_STOMA:"腸胃",
-			AIC_STRESS:"壓力"					
-		}
-		var advancedInformation = {
-			ARC:"無資料",
-			ANM:"無資料",
-			AWM:"無資料",
-			AIC:"",
-			AWI:"無資料",
-			AEM:"無資料"			
-		}
-		var customIconEnum = {
-			YES:"有",
-			NO:"沒有",
-			UNSURE:"不確定",
-			IFF_RARE:"幾乎沒有",
-			IFF_ONEPERMON:"一個月一次",
-			IFF_HIGHFREQ:"一個月一次以上",
-			IWC_RARE:"幾乎沒有",
-			IWC_1TO2:"一到兩次",
-			IWC_3UP:"三次以上",
-			ILP_FRONT:"前段",
-			ILP_MID:"中段",
-			ILP_BACK:"後段",
-			IHS_DRY:"乾澀無光澤",
-			IHS_HEALTH:"健康",
-			IHS_ROUGH:"粗糙打結",
-			IVA_UP:"上吐",
-			IVA_BOT:"下瀉",
-			IVA_BOTH:"都有",
-			IVN_BETTER:"逐漸好轉中",
-			IVN_FORAWHILE:"持續一陣子了",
-			IBN_BETTER:"逐漸好轉中",
-			IBN_FORAWHILE:"持續一陣子了",
-			IPR_STRA:"過度理毛",
-			IPR_STRB:"來回踱步",
-			IPR_STRC:"四處躲藏",
-			IPR_STRD:"食慾下降",
-			IPR_STRE:"隨地便溺",
-			IMO_BS:"口臭",
-			IMO_OVERSWEAT:"過度流口水"
-		}
-		var iconInformation = {
-			IFE:"無資料",
-			IFF:"無資料",
-			IEI:"無資料",
-			IHE:"無資料",
-			IWC:"無資料",
-			IDC:"無資料",
-			IHH:"無資料",
-			ILH:"無資料",
-			ILP:"無資料",
-			IHS:"無資料",
-			IPO:"無資料",
-			ICV:"無資料",
-			ISR:"無資料",
-			INR:"無資料",
-			IBC:"無資料",
-			IEB:"無資料",
-			IEF:"無資料",
-			IJF:"無資料",
-			IVO:"無資料",
-			IVA:"無資料",
-			IVN:"無資料",
-			IBP:"無資料",
-			IBN:"無資料",
-			IPR:"無資料",
-			IMO:"無資料"
-		}
-		var customExtraEnum = {
-			YES:"有",
-			NO:"無",
-			UNSURE:"不確定",
-			EEH_STRIKE:"全力以赴",
-			EEH_HARD:"正在努力中",
-			EEH_FROMNOW:"現在開始",
-			EKL_EXP:"專家",
-			EKL_STU:"學習中",
-			EKL_BEG:"新手",
-			ENL_EXP:"專家",
-			ENL_STU:"學習中",
-			ENL_BEG:"新手",
-			EFI_BEEF:"牛肉",
-			EFI_SLAM:"羊肉",
-			EFI_CHIC:"雞肉",
-			EFI_DUCK:"鴨肉",
-			EFI_TURK:"火雞",
-			EFI_FISH:"魚",
-			EFI_DEER:"鹿",
-			EFI_PIG:"豬",
-			EEC_CONTROL:"定時定量",
-			EEC_FULL:"buffet",
-			ECM_ONCE:"一餐",
-			ECM_TWICE:"兩餐",
-			ECM_UP:"三餐以上",
-			EES_SOON:"馬上吃完",
-			EES_SLOW:"慢慢吃",
-			EES_NEVER:"吃不完",
-			EAB_NEVER:"從未",
-			EAB_ONCE:"一兩次",
-			EAB_FORTHUP:"四次以上",
-			EAC_NEVER:"從未",
-			EAC_ONCE:"一次",
-			EAC_TWICE:"兩三次",
-			EAC_EACHDAY:"幾乎每天",
-			EAD_BEEF:"牛肉",
-			EAD_SLAM:"羊肉",
-			EAD_CHIC:"雞肉",
-			EAD_DUCK:"鴨肉",
-			EAD_TURK:"火雞",
-			EAD_FISH:"魚",
-			EAD_DEER:"鹿",
-			EAD_PIG:"豬",
-			EAE_LOWFREQ:"頻率低",
-			EAE_HIGHFREQ:"頻率高",
-			EAF_NEVER:"從來沒有",
-			EAF_YESBUTHATE:"有，不愛吃",
-			EAF_ONCE:"一週一兩次",
-			EAF_THIRD:"三次或以上",
-			EBB_FIRST:"第一手拿到",
-			EBB_WANTTOKNOW:"想了解看看",
-			EBB_DONTWANT:"不想知道",
-			EBC_INTER:"網路",
-			EBC_FB_IG:"Facebook/IG",
-			EBC_FRIEND:"朋友介紹",
-			EBC_OTHER:"其他"
-		}
-		var extraInformation = {
-			EEH:"無資料",
-			EKL:"無資料",
-			ENL:"無資料",
-			EFB:"無資料",
-			EFI:"無資料",
-			EFG:"無資料",
-			EEC:"無資料",
-			ECM:"無資料",
-			EES:"無資料",
-			EAA:"無資料",
-			EAB:"無資料",
-			EAC:"無資料",
-			EAD:"無資料",
-			EAE:"無資料",
-			EAF:"無資料",
-			EBA:"無資料",
-			EBB:"無資料",
-			EBC:"無資料"
-		}
-		//GLOBAL VAR
-		var icon = [0,0,0,0,0,0,0,0,0,0,0,0];
-		var ingredients = [0,0,0,0,0,0,0,0,0];
-		var allergy = [0,0,0,0,0,0,0,0,0,0];
-		var stress = [0,0,0,0,0,0];
-		//
-		function iconClick(id){
-			if(id=="AIC_IMMU"){
-				if(icon[0]==0) icon[0] = 1;
-				else icon[0] = 0;
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="AIC_HEART"){
-				if(icon[1]==0) icon[1] = 1;
-				else icon[1] = 0;
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="AIC_MEHAIR"){
-				if(icon[2]==0) icon[2] = 1;
-				else icon[2] = 0;
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="AIC_LIHAIR"){
-				if(icon[3]==0) icon[3] = 1;
-				else icon[3] = 0;
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="AIC_LOHAIR"){
-				if(icon[4]==0) icon[4] = 1;
-				else icon[4] = 0;
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="AIC_SKIN"){
-				if(icon[5]==0) icon[5] = 1;
-				else icon[5] = 0;
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="AIC_JOINT"){
-				if(icon[6]==0) icon[6] = 1;
-				else icon[6] = 0;
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="AIC_BONE"){
-				if(icon[7]==0) icon[7] = 1;
-				else icon[7] = 0;
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="AIC_ADDWEI"){
-				if(icon[8]==0) icon[8] = 1;
-				else icon[8] = 0;
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="AIC_OVERWEI"){
-				if(icon[9]==0) icon[9] = 1;
-				else icon[9] = 0;
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="AIC_STOMA"){
-				if(icon[10]==0) icon[10] = 1;
-				else icon[10] = 0;
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="AIC_STRESS"){
-				if(icon[11]==0) icon[11] = 1;
-				else icon[11] = 0;
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			//ingredients
-			if(id=="EFI_BEEF"){
-				if(ingredients[0]==0) ingredients[0] = 1;
-				else ingredients[0] = 0;
-				if(ingredients[8]==1){
-					ingredients[8] = 0;
-					$("#EFI_unsure").toggleClass("icon iconSelected");
-				}
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="EFI_SLAM"){
-				if(ingredients[1]==0) ingredients[1] = 1;
-				else ingredients[1] = 0;
-				if(ingredients[8]==1){
-					ingredients[8] = 0;
-					$("#EFI_unsure").toggleClass("icon iconSelected");
-				}
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="EFI_CHIC"){
-				if(ingredients[2]==0) ingredients[2] = 1;
-				else ingredients[2] = 0;
-				if(ingredients[8]==1){
-					ingredients[8] = 0;
-					$("#EFI_unsure").toggleClass("icon iconSelected");
-				}
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="EFI_DUCK"){
-				if(ingredients[3]==0) ingredients[3] = 1;
-				else ingredients[3] = 0;
-				if(ingredients[8]==1){
-					ingredients[8] = 0;
-					$("#EFI_unsure").toggleClass("icon iconSelected");
-				}
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="EFI_TURK"){
-				if(ingredients[4]==0) ingredients[4] = 1;
-				else ingredients[4] = 0;
-				if(ingredients[8]==1){
-					ingredients[8] = 0;
-					$("#EFI_unsure").toggleClass("icon iconSelected");
-				}
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="EFI_FISH"){
-				if(ingredients[5]==0) ingredients[5] = 1;
-				else ingredients[5] = 0;
-				if(ingredients[8]==1){
-					ingredients[8] = 0;
-					$("#EFI_unsure").toggleClass("icon iconSelected");
-				}
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="EFI_DEER"){
-				if(ingredients[6]==0) ingredients[6] = 1;
-				else ingredients[6] = 0;
-				if(ingredients[8]==1){
-					ingredients[8] = 0;
-					$("#EFI_unsure").toggleClass("icon iconSelected");
-				}
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="EFI_PIG"){
-				if(ingredients[7]==0) ingredients[7] = 1;
-				else ingredients[7] = 0;
-				if(ingredients[8]==1){
-					ingredients[8] = 0;
-					$("#EFI_unsure").toggleClass("icon iconSelected");
-				}
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="EFI_unsure"){
-				if(ingredients[8]==0){
-					if(ingredients[0]==1) $("#EFI_BEEF").toggleClass("icon iconSelected");
-					if(ingredients[1]==1) $("#EFI_SLAM").toggleClass("icon iconSelected");
-					if(ingredients[2]==1) $("#EFI_CHIC").toggleClass("icon iconSelected");
-					if(ingredients[3]==1) $("#EFI_DUCK").toggleClass("icon iconSelected");
-					if(ingredients[4]==1) $("#EFI_TURK").toggleClass("icon iconSelected");
-					if(ingredients[5]==1) $("#EFI_FISH").toggleClass("icon iconSelected");
-					if(ingredients[6]==1) $("#EFI_DEER").toggleClass("icon iconSelected");
-					if(ingredients[7]==1) $("#EFI_PIG").toggleClass("icon iconSelected");
-					for(i in ingredients){
-						if(i!=8){
-							ingredients[i] = 0;
-						}
-						else{
-							ingredients[8] = 1;
-							var newID = "#" + id;
-							$(newID).toggleClass("icon iconSelected");
-						}
-					}
-				}else{
-					ingredients[8] = 0;
-					var newID = "#" + id;
-					$(newID).toggleClass("icon iconSelected");
-				}		
-			}
-			//allergy
-			if(id=="EAD_BEEF"){
-				if(allergy[0]==0) allergy[0] = 1;
-				else allergy[0] = 0;
-				if(allergy[8]==1){
-					allergy[8] = 0;
-					$("#EAD_no").toggleClass("icon iconSelected");
-				}
-				if(allergy[9]==1){
-					allergy[9] = 0;
-					$("#EAD_unsure").toggleClass("icon iconSelected");
-				}
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="EAD_SLAM"){
-				if(allergy[1]==0) allergy[1] = 1;
-				else allergy[1] = 0;
-				if(allergy[8]==1){
-					allergy[8] = 0;
-					$("#EAD_no").toggleClass("icon iconSelected");
-				}
-				if(allergy[9]==1){
-					allergy[9] = 0;
-					$("#EAD_unsure").toggleClass("icon iconSelected");
-				}
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="EAD_CHIC"){
-				if(allergy[2]==0) allergy[2] = 1;
-				else allergy[2] = 0;
-				if(allergy[8]==1){
-					allergy[8] = 0;
-					$("#EAD_no").toggleClass("icon iconSelected");
-				}
-				if(allergy[9]==1){
-					allergy[9] = 0;
-					$("#EAD_unsure").toggleClass("icon iconSelected");
-				}
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="EAD_DUCK"){
-				if(allergy[3]==0) allergy[3] = 1;
-				else allergy[3] = 0;
-				if(allergy[8]==1){
-					allergy[8] = 0;
-					$("#EAD_no").toggleClass("icon iconSelected");
-				}
-				if(allergy[9]==1){
-					allergy[9] = 0;
-					$("#EAD_unsure").toggleClass("icon iconSelected");
-				}
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="EAD_TURK"){
-				if(allergy[4]==0) allergy[4] = 1;
-				else allergy[4] = 0;
-				if(allergy[8]==1){
-					allergy[8] = 0;
-					$("#EAD_no").toggleClass("icon iconSelected");
-				}
-				if(allergy[9]==1){
-					allergy[9] = 0;
-					$("#EAD_unsure").toggleClass("icon iconSelected");
-				}
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="EAD_FISH"){
-				if(allergy[5]==0) allergy[5] = 1;
-				else allergy[5] = 0;
-				if(allergy[8]==1){
-					allergy[8] = 0;
-					$("#EAD_no").toggleClass("icon iconSelected");
-				}
-				if(allergy[9]==1){
-					allergy[9] = 0;
-					$("#EAD_unsure").toggleClass("icon iconSelected");
-				}
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="EAD_DEER"){
-				if(allergy[6]==0) allergy[6] = 1;
-				else allergy[6] = 0;
-				if(allergy[8]==1){
-					allergy[8] = 0;
-					$("#EAD_no").toggleClass("icon iconSelected");
-				}
-				if(allergy[9]==1){
-					allergy[9] = 0;
-					$("#EAD_unsure").toggleClass("icon iconSelected");
-				}
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="EAD_PIG"){
-				if(allergy[7]==0) allergy[7] = 1;
-				else allergy[7] = 0;
-				if(allergy[8]==1){
-					allergy[8] = 0;
-					$("#EAD_no").toggleClass("icon iconSelected");
-				}
-				if(allergy[9]==1){
-					allergy[9] = 0;
-					$("#EAD_unsure").toggleClass("icon iconSelected");
-				}
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="EAD_no"){
-				if(allergy[8]==0){
-					if(allergy[0]==1) $("#EAD_BEEF").toggleClass("icon iconSelected");
-					if(allergy[1]==1) $("#EAD_SLAM").toggleClass("icon iconSelected");
-					if(allergy[2]==1) $("#EAD_CHIC").toggleClass("icon iconSelected");
-					if(allergy[3]==1) $("#EAD_DUCK").toggleClass("icon iconSelected");
-					if(allergy[4]==1) $("#EAD_TURK").toggleClass("icon iconSelected");
-					if(allergy[5]==1) $("#EAD_FISH").toggleClass("icon iconSelected");
-					if(allergy[6]==1) $("#EAD_DEER").toggleClass("icon iconSelected");
-					if(allergy[7]==1) $("#EAD_PIG").toggleClass("icon iconSelected");
-					if(allergy[9]==1) $("#EAD_unsure").toggleClass("icon iconSelected");
-					for(i in allergy){
-						if(i!=8){
-							allergy[i] = 0;
-						}
-						else{
-							allergy[8] = 1;
-							var newID = "#" + id;
-							$(newID).toggleClass("icon iconSelected");
-						}
-					}
-				}else{
-					allergy[8] = 0;
-					var newID = "#" + id;
-					$(newID).toggleClass("icon iconSelected");
-				}	
-			}
-			if(id=="EAD_unsure"){
-				if(allergy[9]==0){
-					if(allergy[0]==1) $("#EAD_BEEF").toggleClass("icon iconSelected");
-					if(allergy[1]==1) $("#EAD_SLAM").toggleClass("icon iconSelected");
-					if(allergy[2]==1) $("#EAD_CHIC").toggleClass("icon iconSelected");
-					if(allergy[3]==1) $("#EAD_DUCK").toggleClass("icon iconSelected");
-					if(allergy[4]==1) $("#EAD_TURK").toggleClass("icon iconSelected");
-					if(allergy[5]==1) $("#EAD_FISH").toggleClass("icon iconSelected");
-					if(allergy[6]==1) $("#EAD_DEER").toggleClass("icon iconSelected");
-					if(allergy[7]==1) $("#EAD_PIG").toggleClass("icon iconSelected");
-					if(allergy[8]==1) $("#EAD_no").toggleClass("icon iconSelected");
-					for(i in allergy){
-						if(i!=9){
-							allergy[i] = 0;
-						}
-						else{
-							allergy[9] = 1;
-							var newID = "#" + id;
-							$(newID).toggleClass("icon iconSelected");
-						}
-					}
-				}else{
-					allergy[9] = 0;
-					var newID = "#" + id;
-					$(newID).toggleClass("icon iconSelected");
-				}	
-			}
-			//stress
-			if(id=="IPR_STRA"){
-				if(stress[0]==0) stress[0]=1;
-				else stress[0] = 0;
-				if(stress[5]==1){
-					stress[5] = 0;
-					$("#IPR_no").toggleClass("icon iconSelected");
-				}
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="IPR_STRB"){
-				if(stress[1]==0) stress[1]=1;
-				else stress[1] = 0;
-				if(stress[5]==1){
-					stress[5] = 0;
-					$("#IPR_no").toggleClass("icon iconSelected");
-				}
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="IPR_STRC"){
-				if(stress[2]==0) stress[2]=1;
-				else stress[2] = 0;
-				if(stress[5]==1){
-					stress[5] = 0;
-					$("#IPR_no").toggleClass("icon iconSelected");
-				}
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="IPR_STRD"){
-				if(stress[3]==0) stress[3]=1;
-				else stress[3] = 0;
-				if(stress[5]==1){
-					stress[5] = 0;
-					$("#IPR_no").toggleClass("icon iconSelected");
-				}
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="IPR_STRE"){
-				if(stress[4]==0) stress[4]=1;
-				else stress[4] = 0;
-				if(stress[5]==1){
-					stress[5] = 0;
-					$("#IPR_no").toggleClass("icon iconSelected");
-				}
-				var newID = "#" + id;
-				$(newID).toggleClass("icon iconSelected");
-			}
-			if(id=="IPR_no"){
-				if(stress[5]==0){
-					if(stress[0]==1) $("#IPR_STRA").toggleClass("icon iconSelected");
-					if(stress[1]==1) $("#IPR_STRB").toggleClass("icon iconSelected");
-					if(stress[2]==1) $("#IPR_STRC").toggleClass("icon iconSelected");
-					if(stress[3]==1) $("#IPR_STRD").toggleClass("icon iconSelected");
-					if(stress[4]==1) $("#IPR_STRE").toggleClass("icon iconSelected");
-					for(i in stress){
-						if(i!=5){
-							stress[i] = 0;
-						}else{
-							stress[5] = 1;
-							var newID = "#" + id;
-							$(newID).toggleClass("icon iconSelected");
-						}
-					}
-				}else{
-					stress[5] = 0;
-					var newID = "#" + id;
-					$(newID).toggleClass("icon iconSelected");
-				}
-			}
-		}
-		//
-		function enterPress(id,event){
-			var x = event.which || event.keyCode;
-			var y = id.slice(0,3) + "Button";
-			if(x==13)  document.getElementById(y).click();
-		}
-		function addToList(id){
-			//BKN
-			if(id=="BKNButton"){
-				if($("#BKNEnter").val()!=""){
-					basicInformation.name = $("#BKNEnter").val();
-					$("#BKN").fadeOut(500,function(){
-						$("#BCN").fadeIn(500,function(){
-							$("#BCNEnter").focus();
-						});
-					});
-				}
-			}
-			//BCN
-			if(id=="BCNButton"){
-				if($("#BCNEnter").val()!=""){
-					basicInformation.catName = $("#BCNEnter").val();
-					for(i=1;i<46;i++){
-						var str = "catName" + i;
-						document.getElementById(str).innerHTML = basicInformation.catName;
-					}
-					$("#BCN").fadeOut(500,function(){
-						$("#BKS").fadeIn(500);
-					});
-				}
-			}
-			//BKS
-			if(id=="BKS_girl"){
-				basicInformation.sex = customBasicEnum.girl;
-				$("#BKS").fadeOut(500,function(){
-					$("#BCS").fadeIn(500);
-				});
-			}
-			if(id=="BKS_boy"){
-				basicInformation.sex = customBasicEnum.boy;
-				$("#BKS").fadeOut(500,function(){
-					$("#BCS").fadeIn(500);
-				});
-			}
-			//BCS
-			if(id=="BCS_girl"){
-				basicInformation.catSex = customBasicEnum.girl;
-				$("#BCS").fadeOut(500,function(){
-					$("#BKA").fadeIn(500);
-				});
-			}
-			if(id=="BCS_boy"){
-				basicInformation.catSex = customBasicEnum.boy;
-				$("#BCS").fadeOut(500,function(){
-					$("#BKA").fadeIn(500);
-				});
-			}
-			//BKA
-			if(id=="BKA_18-"){
-				basicInformation.age = customBasicEnum._18_;
-				$("#BKA").fadeOut(500,function(){
-					$("#BCA").fadeIn(500,function(){
-						$("#BCAEnter").focus();
-					});
-				});
-			}
-			if(id=="BKA_18-25"){
-				basicInformation.age = customBasicEnum._18_25;
-				$("#BKA").fadeOut(500,function(){
-					$("#BCA").fadeIn(500,function(){
-						$("#BCAEnter").focus();
-					});
-				});
-			}
-			if(id=="BKA_26-35"){
-				basicInformation.age = customBasicEnum._26_35;
-				$("#BKA").fadeOut(500,function(){
-					$("#BCA").fadeIn(500,function(){
-						$("#BCAEnter").focus();
-					});
-				});
-			}
-			if(id=="BKA_36-45"){
-				basicInformation.age = customBasicEnum._36_45;
-				$("#BKA").fadeOut(500,function(){
-					$("#BCA").fadeIn(500,function(){
-						$("#BCAEnter").focus();
-					});
-				});
-			}
-			if(id=="BKA_46-65"){
-				basicInformation.age = customBasicEnum._46_65;
-				$("#BKA").fadeOut(500,function(){
-					$("#BCA").fadeIn(500,function(){
-						$("#BCAEnter").focus();
-					});
-				});
-			}
-			if(id=="BKA_65+"){
-				basicInformation.age = customBasicEnum._65_;
-				$("#BKA").fadeOut(500,function(){
-					$("#BCA").fadeIn(500,function(){
-						$("#BCAEnter").focus();
-					});
-				});
-			}
-			//BCA
-			if(id=="BCAButton"){
-				if($("#BCAEnter").val()!=""){
-					basicInformation.catAge = $("#BCAEnter").val();
-					$("#BCA").fadeOut(500,function(){
-						$("#BSP").fadeIn(500);	
-					});
-				}
-			}
-			//BSP
-			if(id=="BSPButton"){
-				if($("#BSP_nohair").val()!="0"){
-					basicInformation.species = $("#BSP_nohair").val();
-				}
-				if($("#BSP_shorthair").val()!="0"){
-					basicInformation.species = $("#BSP_shorthair").val();
-				}
-				if($("#BSP_longhair").val()!="0"){
-					basicInformation.species = $("#BSP_longhair").val();
-				}
-				$("#BSP").fadeOut(500,function(){
-					$("#BNU").fadeIn(500);	
-				});
-			}
-			//BNU
-			if(id=="BNU_yes"){
-				basicInformation.ligation = customBasicEnum.yes;
-				$("#BNU").fadeOut(500,function(){
-					$("#BCW").fadeIn(500,function(){
-						$("#BCWEnter").focus();
-					});	
-				});
-			}
-			if(id=="BNU_no"){
-				basicInformation.ligation = customBasicEnum.no;
-				if(basicInformation.catSex==customBasicEnum.girl){
-					$("#BNU").fadeOut(500,function(){
-						$("#BPR").fadeIn(500);	
-					});
-				}else{
-					$("#BNU").fadeOut(500,function(){
-						$("#BCW").fadeIn(500,function(){
-							$("#BCWEnter").focus();
-						});	
-					});
-				}
-			}
-			//BPR
-			if(id=="BPR_yes"){
-				basicInformation.pregnancy = customBasicEnum.yes;
-				$("#BPR").fadeOut(500,function(){
-					$("#BPT").fadeIn(500);	
-				});
-			}
-			if(id=="BPR_no"){
-				basicInformation.pregnancy = customBasicEnum.no;
-				$("#BPR").fadeOut(500,function(){
-					$("#BCW").fadeIn(500,function(){
-						$("#BCWEnter").focus();
-					});	
-				});
-			}
-			//BPT
-			if(id=="BPT_1to3"){
-				basicInformation.pregnancyTime = customBasicEnum._1to3;
-				$("#BPT").fadeOut(500,function(){
-					$("#BCW").fadeIn(500,function(){
-						$("#BCWEnter").focus();
-					});	
-				});
-			}
-			if(id=="BPT_3to6"){
-				basicInformation.pregnancyTime = customBasicEnum._3to6;
-				$("#BPT").fadeOut(500,function(){
-					$("#BCW").fadeIn(500,function(){
-						$("#BCWEnter").focus();
-					});	
-				});
-			}
-			if(id=="BPT_6up"){
-				basicInformation.pregnancyTime = customBasicEnum._6up;
-				$("#BPT").fadeOut(500,function(){
-					$("#BCW").fadeIn(500,function(){
-						$("#BCWEnter").focus();
-					});	
-				});
-			}
-			if(id=="BPT_unsure"){
-				basicInformation.pregnancyTime = customBasicEnum.unsure;
-				$("#BPT").fadeOut(500,function(){
-					$("#BCW").fadeIn(500,function(){
-						$("#BCWEnter").focus();
-					});	
-				});
-			}
-			//BCW
-			if(id=="BCWButton"){
-				if($("#BCWEnter").val()!=""){
-					basicInformation.catWeight = $("#BCWEnter").val();
-					$("#BCW").fadeOut(500,function(){
-						$("#BEF").fadeIn(500);	
-					});
-				}
-			}
-			//BEF
-			if(id=="BEF_highFreq"){
-				basicInformation.catExerciseFreq = customBasicEnum.highFreq;
-				$("#BEF").fadeOut(500,function(){
-					$("#BSI").fadeIn(500);	
-				});
-			}
-			if(id=="BEF_medFreq"){
-				basicInformation.catExerciseFreq = customBasicEnum.medFreq;
-				if(basicInformation.pregnancy==customBasicEnum.yes){
-					$("#BEF").fadeOut(500,function(){
-						showResult();
-						$("#result").fadeIn(500);	
-					});
-				}else{
-					$("#BEF").fadeOut(500,function(){
-						$("#BCC").fadeIn(500);	
-					});
-				}
-			}
-			if(id=="BEF_lowFreq"){
-				basicInformation.catExerciseFreq = customBasicEnum.lowFreq;
-				if(basicInformation.pregnancy==customBasicEnum.yes){
-					$("#BEF").fadeOut(500,function(){
-						showResult();
-						$("#result").fadeIn(500);	
-					});
-				}else{
-					$("#BEF").fadeOut(500,function(){
-						$("#BCC").fadeIn(500);	
-					});
-				}
-			}
-			//BSI
-			if(id=="BSI_inside"){
-				basicInformation.catSide = customBasicEnum.inside;
-				if(basicInformation.pregnancy==customBasicEnum.yes){
-					$("#BSI").fadeOut(500,function(){
-						showResult();
-						$("#result").fadeIn(500);	
-					});
-				}else{
-					$("#BSI").fadeOut(500,function(){
-						$("#BCC").fadeIn(500);	
-					});
-				}
-			}
-			if(id=="BSI_outside"){
-				basicInformation.catSide = customBasicEnum.outside;
-				if(basicInformation.pregnancy==customBasicEnum.yes){
-					$("#BSI").fadeOut(500,function(){
-						showResult();
-						$("#result").fadeIn(500);	
-					});
-				}else{
-					$("#BSI").fadeOut(500,function(){
-						$("#BCC").fadeIn(500);	
-					});
-				}
-			}
-			if(id=="BSI_medside"){
-				basicInformation.catSide = customBasicEnum.medside;
-				if(basicInformation.pregnancy==customBasicEnum.yes){
-					$("#BSI").fadeOut(500,function(){
-						showResult();
-						$("#result").fadeIn(500);	
-					});
-				}else{
-					$("#BSI").fadeOut(500,function(){
-						$("#BCC").fadeIn(500);	
-					});
-				}
-			}
-			//BBC
-			if(id=="BBC_tooThin"){
-				basicInformation.catSize = customBasicEnum.tooThin;
-				$("#BBC").fadeOut(500,function(){
-					//showResult();
-				});
-			}
-			if(id=="BBC_aLittleThin"){
-				basicInformation.catSize = customBasicEnum.aLittleThin;
-				$("#BBC").fadeOut(500,function(){
-					//showResult();
-				});
-			}
-			if(id=="BBC_medium"){
-				basicInformation.catSize = customBasicEnum.medium;
-				$("#BBC").fadeOut(500,function(){
-					//showResult();
-				});
-			}
-			if(id=="BBC_aLittleFat"){
-				basicInformation.catSize = customBasicEnum.aLittleFat;
-				$("#BBC").fadeOut(500,function(){
-					//showResult();
-				});
-			}
-			if(id=="BBC_tooFat"){
-				basicInformation.catSize = customBasicEnum.tooFat;
-				$("#BBC").fadeOut(500,function(){
-					//showResult();
-				});
-			}
-			//ARC
-			if(id=="ARC_SPE"){ //goto ANM
-				advancedInformation.ARC = customAdvancedEnum.ARC_SPE;
-				$("#ARC").fadeOut(500,function(){
-					$("#ANM").fadeIn(500);
-				});
-			}
-			if(id=="ARC_DAE"){ //goto AIC
-				advancedInformation.ARC = customAdvancedEnum.ARC_DAE;
-				$("#ARC").fadeOut(500,function(){
-					$("#AIC").fadeIn(500);
-				});
-			}
-			if(id=="ARC_KNO"){ //goto AIC
-				advancedInformation.ARC = customAdvancedEnum.ARC_KNO;
-				$("#ARC").fadeOut(500,function(){
-					$("#AIC").fadeIn(500);
-				});
-			}
-			//ANM
-			if(id=="ANM_yes"){ //goto AWM
-				advancedInformation.ANM = customAdvancedEnum.YES;
-				$("#ANM").fadeOut(500,function(){
-					$("#AWM").fadeIn(500,function(){
-						$("#AWMEnter").focus();
-					});
-				});
-			}
-			if(id=="ANM_no"){ //goto AIC
-				advancedInformation.ANM = customAdvancedEnum.NO;
-				$("#ANM").fadeOut(500,function(){
-					$("#AIC").fadeIn(500);
-				});
-			}
-			//AWM //go to end
-			if(id=="AWM_unsure"){
-				advancedInformation.AWM = customAdvancedEnum.UNSURE;
-				$("#AWN").fadeOut(500,function(){
-					//show end here
-				});
-			}
-			if(id=="AWMButton"){
-				if($("#AWMEnter").val()!=""){
-					advancedInformation.AWM = $("#AWMEnter").val();
-					$("#AWN").fadeOut(500,function(){
-						//show end here
-					});
-				}				
-			}
-			//AIC
-			if(id=="AICButton"){
-				if(icon[0]==0 && icon[1]==0 && icon[2]==0 && icon[3]==0 && icon[4]==0 && icon[5]==0 && icon[6]==0 && icon[7]==0 && icon[8]==0 && icon[9]==0 && icon[10]==0 && icon[11]==0){
-					//TODO: show err msg
-				}else{
-					//TODO: make AWI
-					getAWI();
-					$("#AIC").fadeOut(500,function(){
-						$("#AWI").fadeIn(500);
-					});
-				}
-			}
-			//AWI
-			if(id=="AWI_IMMU"){
-				advancedInformation.AWI = customAdvancedEnum.AIC_IMMU;
-				$("#AWI").fadeOut(500,function(){
-					$("#AEM").fadeIn(500,function(){
-						$("#AEMEnter").focus();
-					});
-				});
-			}
-			if(id=="AWI_HEART"){
-				advancedInformation.AWI = customAdvancedEnum.AIC_HEART;
-				$("#AWI").fadeOut(500,function(){
-					$("#AEM").fadeIn(500,function(){
-						$("#AEMEnter").focus();
-					});
-				});
-			}
-			if(id=="AWI_MEHAIR"){
-				advancedInformation.AWI = customAdvancedEnum.AIC_MEHAIR;
-				$("#AWI").fadeOut(500,function(){
-					$("#AEM").fadeIn(500,function(){
-						$("#AEMEnter").focus();
-					});
-				});
-			}
-			if(id=="AWI_LIHAIR"){
-				advancedInformation.AWI = customAdvancedEnum.AIC_LIHAIR;
-				$("#AWI").fadeOut(500,function(){
-					$("#AEM").fadeIn(500,function(){
-						$("#AEMEnter").focus();
-					});
-				});
-			}
-			if(id=="AWI_LOHAIR"){
-				advancedInformation.AWI = customAdvancedEnum.AIC_LOHAIR;
-				$("#AWI").fadeOut(500,function(){
-					$("#AEM").fadeIn(500,function(){
-						$("#AEMEnter").focus();
-					});
-				});
-			}
-			if(id=="AWI_SKIN"){
-				advancedInformation.AWI = customAdvancedEnum.AIC_SKIN;
-				$("#AWI").fadeOut(500,function(){
-					$("#AEM").fadeIn(500,function(){
-						$("#AEMEnter").focus();
-					});
-				});
-			}
-			if(id=="AWI_JOINT"){
-				advancedInformation.AWI = customAdvancedEnum.AIC_JOINT;
-				$("#AWI").fadeOut(500,function(){
-					$("#AEM").fadeIn(500,function(){
-						$("#AEMEnter").focus();
-					});
-				});
-			}
-			if(id=="AWI_BONE"){
-				advancedInformation.AWI = customAdvancedEnum.AIC_BONE;
-				$("#AWI").fadeOut(500,function(){
-					$("#AEM").fadeIn(500,function(){
-						$("#AEMEnter").focus();
-					});
-				});
-			}
-			if(id=="AWI_ADDWEI"){
-				advancedInformation.AWI = customAdvancedEnum.AIC_ADDWEI;
-				$("#AWI").fadeOut(500,function(){
-					$("#AEM").fadeIn(500,function(){
-						$("#AEMEnter").focus();
-					});
-				});
-			}
-			if(id=="AWI_OVERWEI"){
-				advancedInformation.AWI = customAdvancedEnum.AIC_OVERWEI;
-				$("#AWI").fadeOut(500,function(){
-					$("#AEM").fadeIn(500,function(){
-						$("#AEMEnter").focus();
-					});
-				});
-			}
-			if(id=="AWI_STOMA"){
-				advancedInformation.AWI = customAdvancedEnum.AIC_STOMA;
-				$("#AWI").fadeOut(500,function(){
-					$("#AEM").fadeIn(500,function(){
-						$("#AEMEnter").focus();
-					});
-				});
-			}
-			if(id=="AWI_STRESS"){
-				advancedInformation.AWI = customAdvancedEnum.AIC_STRESS;
-				$("#AWI").fadeOut(500,function(){
-					$("#AEM").fadeIn(500,function(){
-						$("#AEMEnter").focus();
-					});
-				});
-			}
-			//AEM
-			if(id=="AEMButton"){
-				if($("#AEMEnter").val()!=""){
-					advancedInformation.AEM = $("#AEMEnter").val();
-					$("#AEM").fadeOut(500,function(){
-						//導向優先考量
-					});
-				}
-			}
-			//--------------------------------------------
-			// IMMU
-			//--------------------------------------------
-			//IFE
-			if(id=="IFE_yes"){
-				iconInformation.IFE = customIconEnum.YES;
-				$("#IFE").fadeOut(500,function(){
-					$("#IFF").fadeIn(500);
-				});
-			}
-			if(id=="IFE_no"){
-				iconInformation.IFE = customIconEnum.NO;
-				$("#IFE").fadeOut(500,function(){
-					$("#IFF").fadeIn(500);
-				});
-			}
-			//IFF
-			if(id=="IFF_RARE"){
-				iconInformation.IFF = customIconEnum.IFF_RARE;
-				$("#IFF").fadeOut(500,function(){
-					$("#IEI").fadeIn(500);
-				});
-			}
-			if(id=="IFF_ONEPERMON"){
-				iconInformation.IFF = customIconEnum.IFF_ONEPERMON;
-				$("#IFF").fadeOut(500,function(){
-					$("#IEI").fadeIn(500);
-				});
-			}
-			if(id=="IFF_HIGHFREQ"){
-				iconInformation.IFF = customIconEnum.IFF_HIGHFREQ;
-				$("#IFF").fadeOut(500,function(){
-					$("#IEI").fadeIn(500);
-				});
-			}
-			//IEI
-			if(id=="IEI_yes"){
-				iconInformation.IEI = customIconEnum.YES;
-				$("#IEI").fadeOut(500,function(){
-					//逐個擊破
-				});
-			}
-			if(id=="IEI_no"){
-				iconInformation.IEI = customIconEnum.NO;
-				$("#IEI").fadeOut(500,function(){
-					//逐個擊破
-				});
-			}
-			//--------------------------------------------
-			// HEART
-			//--------------------------------------------
-			//IHE
-			if(id=="IHE_yes"){
-				iconInformation.IHE = customIconEnum.YES;
-				$("#IHE").fadeOut(500,function(){
-					//逐個擊破
-				});
-			}
-			if(id=="IHE_no"){
-				iconInformation.IHE = customIconEnum.NO;
-				$("#IHE").fadeOut(500,function(){
-					//逐個擊破
-				});
-			}
-			//--------------------------------------------
-			// HAIR, SKIN
-			//--------------------------------------------
-			//IWC
-			if(id=="IWC_RARE"){
-				iconInformation.IWC = customIconEnum.IWC_RARE;
-				$("#IWC").fadeOut(500,function(){
-					$("#IHH").fadeIn(500);
-				});
-			}
-			if(id=="IWC_1TO2"){
-				iconInformation.IWC = customIconEnum.IWC_1TO2;
-				$("#IWC").fadeOut(500,function(){
-					$("#IHH").fadeIn(500);
-				});
-			}
-			if(id="IWC_3UP"){
-				iconInformation.IWC = customIconEnum.IWC_3UP;
-				$("#IWC").fadeOut(500,function(){
-					$("#IDC").fadeIn(500);
-				});
-			}
-			//IDC
-			if(id=="IDC_yes"){
-				iconInformation.IDC = customIconEnum.YES;
-				$("#IDC").fadeOut(500,function(){
-					$("#IHH").fadeIn(500);
-				});
-			}
-			if(id=="IDC_no"){
-				iconInformation.IDC = customIconEnum.NO;
-				$("#IDC").fadeOut(500,function(){
-					$("#IHH").fadeIn(500);
-				});
-			}
-			//IHH
-			if(id=="IHH_yes"){
-				iconInformation.IHH = customIconEnum.YES;
-			}
-			if(id=="IHH_no"){
-				iconInformation.IHH = customIconEnum.NO;
-			}
-			//--------------------------------------------
-			// JOINT, BONE
-			//--------------------------------------------
-			//IEB
-			if(id=="IEB_yes"){
-				iconInformation.IEB = customIconEnum.YES;
-				$("#IEB").fadeOut(500,function(){
-					$("#IBC").fadeIn(500);
-				});
-			}
-			if(id=="IEB_no"){
-				iconInformation.IEB = customIconEnum.NO;
-				$("#IEB").fadeOut(500,function(){
-					$("#IBC").fadeIn(500);
-				});
-			}
-			//IBC
-			if(id=="IBC_yes"){
-				iconInformation.IBC = customIconEnum.YES;
-				$("#IBC").fadeOut(500,function(){
-					$("#IEF").fadeIn(500);
-				});
-			}
-			if(id=="IBC_no"){
-				iconInformation.IBC = customIconEnum.NO;
-				$("#IBC").fadeOut(500,function(){
-					$("#IEF").fadeIn(500);
-				});
-			}
-			//IEF
-			if(id=="IEF_yes"){
-				iconInformation.IEF = customIconEnum.YES;
-				$("#IEF").fadeOut(500,function(){
-					$("#IJF").fadeIn(500);
-				});
-			}
-			if(id=="IEF_no"){
-				iconInformation.IEF = customIconEnum.NO;
-				$("#IEF").fadeOut(500,function(){
-					$("#IJF").fadeIn(500);
-				});
-			}
-			//IJF
-			if(id=="IJF_yes"){
-				iconInformation.IJF = customIconEnum.YES;
-				$("#IJF").fadeOut(500,function(){
-					//
-				});
-			}
-			if(id=="IJF_no"){
-				iconInformation.IJF = customIconEnum.NO;
-				$("#IJF").fadeOut(500,function(){
-					//
-				});
-			}
-			//--------------------------------------------
-			// DIGEST, STRESS
-			//--------------------------------------------
-			//IVO
-			if(id=="IVO_yes"){
-				iconInformation.IVO = customIconEnum.YES;
-				$("#IVO").fadeOut(500,function(){
-					$("#IVA").fadeIn(500);
-				});
-			}
-			if(id=="IVO_no"){
-				iconInformation.IVO = customIconEnum.NO;
-				$("#IVO").fadeOut(500,function(){
-					$("#IBP").fadeIn(500);
-				});
-			}
-			//IVA
-			if(id=="IVA_UP"){
-				iconInformation.IVA = customIconEnum.IVA_UP;
-				$("#IVA").fadeOut(500,function(){
-					$("#IVN").fadeIn(500);
-				});
-			}
-			if(id=="IVA_BOT"){
-				iconInformation.IVA = customIconEnum.IVA_BOT;
-				$("#IVA").fadeOut(500,function(){
-					$("#IVN").fadeIn(500);
-				});
-			}
-			if(id=="IVA_BOTH"){
-				iconInformation.IVA = customIconEnum.IVA_BOTH;
-				$("#IVA").fadeOut(500,function(){
-					$("#IVN").fadeIn(500);
-				});
-			}
-			if(id=="IVA_unsure"){
-				iconInformation.IVA = customIconEnum.UNSURE;
-				$("#IVA").fadeOut(500,function(){
-					$("#IBP").fadeIn(500);
-				});
-			}
-			//IVN
-			if(id=="IVN_BETTER"){
-				iconInformation.IVN = customIconEnum.IVN_BETTER;
-				$("#IVN").fadeOut(500,function(){
-					$("#IBP").fadeIn(500);
-				});
-			}
-			if(id=="IVN_FORAWHILE"){
-				iconInformation.IVN = customIconEnum.IVN_FORAWHILE;
-				$("#IVN").fadeOut(500,function(){
-					$("#IBP").fadeIn(500);
-				});
-			}
-			if(id=="IVN_unsure"){
-				iconInformation.IVN = customIconEnum.UNSURE;
-				$("#IVN").fadeOut(500,function(){
-					$("#IBP").fadeIn(500);
-				});
-			}
-			//IBP
-			if(id=="IBP_yes"){
-				iconInformation.IBP = customIconEnum.YES;
-				$("#IBP").fadeOut(500,function(){
-					$("#IBN").fadeIn(500);
-				});
-			}
-			if(id=="IBP_no"){
-				iconInformation.IBP = customIconEnum.NO;
-				$("#IBP").fadeOut(500,function(){
-					//
-				});
-			}
-			//IBN
-			if(id=="IBN_BETTER"){
-				iconInformation.IBN = customIconEnum.IBN_BETTER;
-				$("#IBN").fadeOut(500,function(){
-					//
-				});
-			}
-			if(id=="IBN_FORAWHILE"){
-				iconInformation.IBN = customIconEnum.IBN_FORAWHILE;
-				$("#IBN").fadeOut(500,function(){
-					//
-				});
-			}
-			if(id=="IBN_unsure"){
-				iconInformation.IBN = customIconEnum.UNSURE;
-				$("#IBN").fadeOut(500,function(){
-					//
-				});
-			}
-			//IPR
-			if(id=="IPRButton"){
-				iconInformation.IBN += stress[0];
-				$("#IPR").fadeOut(500,function(){
-					//
-				});
-			}
-			//--------------------------------------------
-			// MOUTH
-			//--------------------------------------------
-			//IMO
-			if(id=="IMO_BS"){
-				iconInformation.IMO = customIconEnum.IMO_BS;
-				$("#IMO").fadeOut(500,function(){
-					//
-				});
-			}
-			if(id=="IMO_OVERSWEAT"){
-				iconInformation.IMO = customIconEnum.IMO_OVERSWEAT;
-				$("#IMO").fadeOut(500,function(){
-					//
-				});
-			}
-			if(id=="IMO_no"){
-				iconInformation.IMO = customIconEnum.NO;
-				$("#IMO").fadeOut(500,function(){
-					//
-				});
-			}
-			//--------------------------------------------
-			// EXTRA
-			//--------------------------------------------
-			//EEH
-			if(id=="EEH_STRIKE"){
-				extraInformation.EEH = customExtraEnum.EEH_STRIKE;
-				$("#EEH").fadeOut(500,function(){
-					$("#EKL").fadeIn(500);
-				});
-			}
-			if(id=="EEH_HARD"){
-				extraInformation.EEH = customExtraEnum.EEH_HARD;
-				$("#EEH").fadeOut(500,function(){
-					$("#EKL").fadeIn(500);
-				});
-			}
-			if(id=="EEH_FROMNOW"){
-				extraInformation.EEH = customExtraEnum.EEH_FROMNOW;
-				$("#EEH").fadeOut(500,function(){
-					$("#EKL").fadeIn(500);
-				});
-			}
-			//EKL
-			if(id=="EKL_EXP"){
-				extraInformation.EKL = customExtraEnum.EKL_EXP;
-				$("#EKL").fadeOut(500,function(){
-					$("#ENL").fadeIn(500);
-				});
-			}
-			if(id=="EKL_STU"){
-				extraInformation.EKL = customExtraEnum.EKL_STU;
-				$("#EKL").fadeOut(500,function(){
-					$("#ENL").fadeIn(500);
-				});
-			}
-			if(id=="EKL_BEG"){
-				extraInformation.EKL = customExtraEnum.EKL_BEG;
-				$("#EKL").fadeOut(500,function(){
-					$("#ENL").fadeIn(500);
-				});
-			}
-			//ENL
-			if(id=="ENL_EXP"){
-				extraInformation.ENL = customExtraEnum.ENL_EXP;
-				$("#ENL").fadeOut(500,function(){
-					$("#EFB").fadeIn(500,function(){
-						$("#EFBEnter").focus();
-					});
-				});
-			}
-			if(id=="ENL_STU"){
-				extraInformation.ENL = customExtraEnum.ENL_STU;
-				$("#ENL").fadeOut(500,function(){
-					$("#EFB").fadeIn(500,function(){
-						$("#EFBEnter").focus();
-				});
-			}
-			if(id=="ENL_BEG"){
-				extraInformation.ENL = customExtraEnum.ENL_BEG;
-				$("#ENL").fadeOut(500,function(){
-					$("#EFB").fadeIn(500,function(){
-						$("#EFBEnter").focus();
-				});
-			}
-			//EFB
-			if(id=="EFB_unsure"){
-				extraInformation.EFB = customExtraEnum.UNSURE;
-				$("#EFB").fadeOut(500,function(){
-					$("#EFI").fadeIn(500);
-				});
-			}
-			if(id=="EFBButton"){
-				if($("#EFBEnter").val()!=""){
-					extraInformation.EFB = $("#EFBEnter").val();
-					$("#EFB").fadeOut(500,function(){
-						$("#EEC").fadeIn(500);
-					});
-				}
-			}
-			//EFI
-			if(id="EFIButton"){
-				extraInformation.EFI = "";
-				$("#EFI").fadeOut(500,function(){
-					$("#EFG").fadeIn(500);
-				});
-			}
-			//EFG
-			if(id=="EFG_yes"){
-				extraInformation.EFG = customExtraEnum.YES;
-				$("#EFG").fadeOut(500,function(){
-					$("#EEC").fadeIn(500);
-				});
-			}
-			if(id=="EFG_no"){
-				extraInformation.EFG = customExtraEnum.NO;
-				$("#EFG").fadeOut(500,function(){
-					$("#EEC").fadeIn(500);
-				});
-			}
-			if(id=="EFG_unsure"){
-				extraInformation.EFG = customExtraEnum.UNSURE;
-				$("#EFG").fadeOut(500,function(){
-					$("#EEC").fadeIn(500);
-				});
-			}
-			//EEC
-			if(id=="EEC_CONTROL"){
-				extraInformation.EEC = customExtraEnum.EEC_CONTROL;
-				$("#EEC").fadeOut(500,function(){
-					$("#ECM").fadeIn(500);
-				});
-			}
-			if(id=="EEC_FULL"){
-				extraInformation.EEC = customExtraEnum.EEC_FULL;
-				$("#EEC").fadeOut(500,function(){
-					$("#EAA").fadeIn(500);
-				});
-			}
-			//ECM
-			if(id=="ECM_ONCE"){
-				extraInformation.ECM = customExtraEnum.ECM_ONCE;
-				$("#ECM").fadeOut(500,function(){
-					$("#EES").fadeIn(500);
-				});
-			}
-			if(id=="ECM_TWICE"){
-				extraInformation.ECM = customExtraEnum.ECM_TWICE;
-				$("#ECM").fadeOut(500,function(){
-					$("#EES").fadeIn(500);
-				});
-			}
-			if(id=="ECM_UP"){
-				extraInformation.ECM = customExtraEnum.ECM_UP;
-				$("#ECM").fadeOut(500,function(){
-					$("#EES").fadeIn(500);
-				});
-			}
-			//EES
-			if(id=="EES_SOON"){
-				extraInformation.EES = customExtraEnum.EES_SOON;
-				$("#EES").fadeOut(500,function(){
-					$("#EAA").fadeIn(500);
-				});
-			}
-			if(id=="EES_SLOW"){
-				extraInformation.EES = customExtraEnum.EES_SLOW;
-				$("#EES").fadeOut(500,function(){
-					$("#EAA").fadeIn(500);
-				});
-			}
-			if(id=="EES_NEVER"){
-				extraInformation.EES = customExtraEnum.EES_NEVER;
-				$("#EES").fadeOut(500,function(){
-					$("#EAA").fadeIn(500);
-				});
-			}
-			//EAA
-			if(id=="EAA_yes"){
-				extraInformation.EAA = customExtraEnum.YES;
-				$("#EAA").fadeOut(500,function(){
-					$("#EAB").fadeIn(500);
-				});
-			}
-			if(id=="EAA_no"){
-				extraInformation.EAA = customExtraEnum.NO;
-				$("#EAA").fadeOut(500,function(){
-					$("#EAB").fadeIn(500);
-				});
-			}
-			//EAB
-			if(id=="EAB_NEVER"){
-				extraInformation.EAB = customExtraEnum.EAB_NEVER;
-				$("#EAB").fadeOut(500,function(){
-					$("#EAC").fadeIn(500);
-				});
-			}
-			if(id=="EAB_ONCE"){
-				extraInformation.EAB = customExtraEnum.EAB_ONCE;
-				$("#EAB").fadeOut(500,function(){
-					$("#EAC").fadeIn(500);
-				});
-			}
-			if(id=="EAB_FORTHUP"){
-				extraInformation.EAB = customExtraEnum.EAB_FORTHUP;
-				$("#EAB").fadeOut(500,function(){
-					$("#EAC").fadeIn(500);
-				});
-			}
-			//EAC
-			if(id=="EAC_NEVER"){
-				extraInformation.EAC = customExtraEnum.EAC_NEVER;
-				$("#EAC").fadeOut(500,function(){
-					$("#EAD").fadeIn(500);
-				});
-			}
-			if(id=="EAC_ONCE"){
-				extraInformation.EAC = customExtraEnum.EAC_ONCE;
-				$("#EAC").fadeOut(500,function(){
-					$("#EAD").fadeIn(500);
-				});
-			}
-			if(id=="EAC_TWICE"){
-				extraInformation.EAC = customExtraEnum.EAC_TWICE;
-				$("#EAC").fadeOut(500,function(){
-					$("#EAD").fadeIn(500);
-				});
-			}
-			if(id=="EAC_EACHDAY"){
-				extraInformation.EAC = customExtraEnum.EAC_EACHDAY;
-				$("#EAC").fadeOut(500,function(){
-					$("#EAD").fadeIn(500);
-				});
-			}
-			//EAD
-			if(id=="EADButton"){
-				extraInformation.EAD = "";
-				$("#EAD").fadeOut(500,function(){
-					$("#EAE").fadeIn(500);
-				});
-			}
-			//EAE
-			if(id=="EAE_HIGHFREQ"){
-				extraInformation.EAE = customExtraEnum.EAE_HIGHFREQ;
-				$("#EAE").fadeOut(500,function(){
-					$("#EAF").fadeIn(500);
-				});
-			}
-			if(id=="EAE_LOWFREQ"){
-				extraInformation.EAE = customExtraEnum.EAE_LOWFREQ;
-				$("#EAE").fadeOut(500,function(){
-					$("#EAF").fadeIn(500);
-				});
-			}
-			//EAF
-			if(id=="EAF_NEVER"){
-				extraInformation.EAF = customExtraEnum.EAF_NEVER;
-				$("#EAF").fadeOut(500,function(){
-					$("#EBA").fadeIn(500);
-				});
-			}
-			if(id=="EAF_YESBUTHATE"){
-				extraInformation.EAF = customExtraEnum.EAF_YESBUTHATE;
-				$("#EAF").fadeOut(500,function(){
-					$("#EBA").fadeIn(500);
-				});
-			}
-			if(id=="EAF_ONCE"){
-				extraInformation.EAF = customExtraEnum.EAF_ONCE;
-				$("#EAF").fadeOut(500,function(){
-					$("#EBA").fadeIn(500);
-				});
-			}
-			if(id=="EAF_THIRD"){
-				extraInformation.EAF = customExtraEnum.EAF_THIRD;
-				$("#EAF").fadeOut(500,function(){
-					$("#EBA").fadeIn(500);
-				});
-			}
-			//EBA
-			if(id=="EBAButton"){
-				if($("#EBA_PLACE").val()!="0"){
-					extraInformation.EBA = $("#EBA_PLACE").val();
-					$("#EBA").fadeOut(500,function(){
-						$("#EBB").fadeIn(500);
-					});
-				}
-			}
-			//EBB
-			if(id=="EBB_FIRST"){
-				extraInformation.EBB = customExtraEnum.EBB_FIRST;
-				$("#EBB").fadeOut(500,function(){
-					$("#EBC").fadeIn(500);
-				});
-			}
-			if(id=="EBB_WANTTOKNOW"){
-				extraInformation.EBB = customExtraEnum.EBB_WANTTOKNOW;
-				$("#EBB").fadeOut(500,function(){
-					$("#EBC").fadeIn(500);
-				});
-			}
-			if(id=="EBB_DONTWANT"){
-				extraInformation.EBB = customExtraEnum.EBB_DONTWANT;
-				$("#EBB").fadeOut(500,function(){
-					$("#EBC").fadeIn(500);
-				});
-			}
-			//EBC
-			if(id=="EBC_INTER"){
-				extraInformation.EBC = customExtraEnum.EBC_INTER;
-				$("#EBC").fadeOut(500,function(){
-					//
-				});
-			}
-			if(id=="EBC_FB_IG"){
-				extraInformation.EBC = customExtraEnum.EBC_FB_IG;
-				$("#EBC").fadeOut(500,function(){
-					//
-				});
-			}
-			if(id=="EBC_FRIEND"){
-				extraInformation.EBC = customExtraEnum.EBC_FRIEND;
-				$("#EBC").fadeOut(500,function(){
-					//
-				});
-			}
-			if(id=="EBC_OTHER"){
-				extraInformation.EBC = customExtraEnum.EBC_OTHER;
-				$("#EBC").fadeOut(500,function(){
-					//
-				});
-			}
-		}
-		//Generate AWI innerHTML
-		function getAWI(){
-			if(icon[0]==0) $("#AWI_IMMU").toggleClass("questionBlock");
-			if(icon[1]==0) $("#AWI_HEART").toggleClass("questionBlock");
-			if(icon[2]==0) $("#AWI_MEHAIR").toggleClass("questionBlock");
-			if(icon[3]==0) $("#AWI_LIHAIR").toggleClass("questionBlock");
-			if(icon[4]==0) $("#AWI_LOHAIR").toggleClass("questionBlock");
-			if(icon[5]==0) $("#AWI_SKIN").toggleClass("questionBlock");
-			if(icon[6]==0) $("#AWI_JOINT").toggleClass("questionBlock");
-			if(icon[7]==0) $("#AWI_BONE").toggleClass("questionBlock");
-			if(icon[8]==0) $("#AWI_ADDWEI").toggleClass("questionBlock");
-			if(icon[9]==0) $("#AWI_OVERWEI").toggleClass("questionBlock");
-			if(icon[10]==0) $("#AWI_STOMA").toggleClass("questionBlock");
-			if(icon[11]==0) $("#AWI_STRESS").toggleClass("questionBlock");
-		}
-		function speciesCheck(id){
-			if(id=="BSP_nohair"){
-				$("#BSP_shorthair").val("0");
-				$("#BSP_longhair").val("0");
-			}
-			if(id=="BSP_shorthair"){
-				$("#BSP_nohair").val("0");
-				$("#BSP_longhair").val("0");
-			}
-			if(id=="BSP_longhair"){
-				$("#BSP_nohair").val("0");
-				$("#BSP_shorthair").val("0");
-			}
-		}
-		function showResult(){
-			var resultInformation = "";
-			resultInformation += "<h3>飼主姓名 : " + basicInformation.name + "</h3>";
-			resultInformation += "<h3>貓貓姓名 : " + basicInformation.catName + "</h3>";
-			resultInformation += "<h3>飼主性別 : " + basicInformation.sex + "</h3>";
-			resultInformation += "<h3>貓貓性別 : " + basicInformation.catSex + "</h3>";
-			resultInformation += "<h3>飼主年齡 : " + basicInformation.age + "</h3>";
-			resultInformation += "<h3>貓貓年齡 : " + basicInformation.catAge + "</h3>";
-			resultInformation += "<h3>貓貓品種 : " + basicInformation.species + "</h3>";
-			resultInformation += "<h3>貓貓結紮 : " + basicInformation.ligation + "</h3>";
-			resultInformation += "<h3>貓貓懷孕 : " + basicInformation.pregnancy + "</h3>";			
-			resultInformation += "<h3>懷孕時間 : " + basicInformation.pregnancyTime + "</h3>";			
-			resultInformation += "<h3>貓貓體重 : " + basicInformation.catWeight + "</h3>";
-			resultInformation += "<h3>貓貓活動 : " + basicInformation.catExerciseFreq + "</h3>";
-			resultInformation += "<h3>室內室外 : " + basicInformation.catSide + "</h3>";
-			resultInformation += "<h3>貓貓體型 : " + basicInformation.catSize + "</h3>";
-			document.getElementById("result").innerHTML = resultInformation;
-		}
-	</script>
-</head>
-<body class="container">
+	<link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosanstc.css">
 	<style>
-		.navBlock{
-			cursor: pointer;
-			transition: 300ms;
-		}
-		.navBlock:hover{
-			background-color: #EEEEEE;
-		}
-		.navLink{
-			padding-top : 20px;
-			padding-bottom : 20px;
-			font-family: Microsoft JhengHei;
-			font-size: 16px;
-			font-weight: bold;
-			text-align: center;
-		}
-		.questionBlock{
-			display: none;
-		}
-		input{
-			outline: none;
-			width: 100%;
-			padding: 0px;
-			text-align: center;
-		}
-		span{
-			font-size: 20px;
+		@import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
+		{
 			font-family: 'Noto Sans TC';
 		}
-		.placeholder {
-		  width: 100%;
-		  overflow: hidden;
-		  background-color: pink;
-		  border: solid 2px black;
-		  padding: 0px;
-		  cursor: pointer;
+	</style>	
+	<!--script link-->
+	<script type="text/javascript"> 	 
+		function clickIE4(){
+			if (event.button==2){
+				return false;    
+			}  
 		}
-		.placeholder:hover{
-			background-color: yellow;
-			transition: 500ms;
+		function clickNS4(e){
+			if (document.layers || document.getElementById && !document.all){
+				if (e.which==2 || e.which==3){
+					return false;      
+				}	    
+			}  
 		}
-		.icon{
-			font-family: Microsoft JhengHei;
-			font-size: 18px;
-			background-color: #FFFF77;
-			border: dashed black 2px;
-			cursor: pointer;
+		function OnDeny(){    
+			if (event.ctrlKey || event.keyCode==78 && event.ctrlKey || event.altKey || event.altKey && event.keyCode==115){
+				return false;    
+			}  
 		}
-		.icon:hover{
-			background-color: #FFCC22;
+		if (document.layers){
+			document.captureEvents(Event.MOUSEDOWN);
+			document.onmousedown = clickNS4;
+			document.onkeydown = OnDeny();  
 		}
-		.iconSelected{			
-			background-color: #FF5511;
-			border: solid black 2px;
-			cursor: pointer;
-			font-family: Microsoft JhengHei;
-			font-size: 18px;
-		}
-		.iconSelected:hover{
-			background-color: red;
-		}
-	</style>
+		else if (document.all && !document.getElementById){
+			document.onmousedown = clickIE4;    
+			document.onkeydown = OnDeny();  
+		}		 
+		document.oncontextmenu = new Function("return false");  	 
+	</script>	
+	<script src="javascript/questionnaire.js"></script>
+	<link rel="stylesheet" type="text/css" href="stylesheets/questionnaire.css">
+</head>
+<body class="container" onselectstart="return false">	
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-		<nav class="col-lg-2 col-lg-offset-10 col-md-2 col-md-offset-10 col-sm-4 col-sm-offset-8 col-xs-4 col-xs-offset-8">
+		<nav class="col-lg-2 col-lg-offset-10 col-md-4 col-md-offset-8 col-sm-6 col-sm-offset-6 col-xs-6 col-xs-offset-6">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 navBlock">
 				<p onClick="location.href='/'" class="navLink">儲存並回首頁</p>
 			</div>
 		</nav>
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBlock"></div>
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<!-- questionnaire here -->
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="BKN">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-					<span>請問您的名字</span>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 question">
+					<span>請 問 您 的 名 字 ？</span>
 				</div>
 				<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 text-center">
 					<input type="text" id="BKNEnter" onkeypress="enterPress(this.id,event)">
 				</div>
-				<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center">
-					<button id="BKNButton" onclick="addToList(this.id);">></button>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBotBlock"></div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+					<button id="BKNButton" onclick="addToList(this.id);">下 一 題</button>
 				</div>
 			</div>		
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BCN">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<span>請問貓貓的名字</span>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 question">
+					<span>請 問 貓 貓 的 名 字 ？</span>
 				</div>
 				<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 text-center">
 					<input type="text" id="BCNEnter" onkeypress="enterPress(this.id,event)">
 				</div>
-				<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center">
-					<button id="BCNButton" onclick="addToList(this.id);">></button>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBotBlock"></div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+					<button id="BCNButton" onclick="addToList(this.id);">下 一 題</button>
 				</div>	
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BKS">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<span>請問你是媽媽還是爸爸？</span>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 question">
+					<span>請 問 你 是 爸 爸 還 是 媽 媽 ？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">					
+					<div class="col-lg-3 col-lg-offset-3 col-md-3 col-md-offset-3">
+						<div class="placeholder" onclick="addToList(this.id);" id="BKS_boy">
+							<span>爸 爸</span>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-3">
+						<div class="placeholder" onclick="addToList(this.id);" id="BKS_girl">
+							<span>媽 媽</span>
+						</div>
+					</div>
 				</div>				
-				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="BKS_girl">
-						<span>媽媽</span>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="BKS_boy">
-						<span>爸爸</span>
-					</div>
-				</div>
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BCS">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 question">
 					<span id="catName1">貓貓</span>						
-					<span>是男生還是女生呢？</span>
+					<span>是 男 生 還 是 女 生 呢 ？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-3 col-lg-offset-3 col-md-3 col-md-offset-3">
+						<div class="placeholder" onclick="addToList(this.id);" id="BCS_boy">
+							<span>男 生</span>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-3">
+						<div class="placeholder" onclick="addToList(this.id);" id="BCS_girl">
+							<span>女 生</span>
+						</div>
+					</div>
 				</div>				
-				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="BCS_boy">
-						<span>男生</span>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="BCS_girl">
-						<span>女生</span>
-					</div>
-				</div>
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BKA">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">					
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 question">					
 					<span>請問您幾歲？</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+						<div class="placeholder" onclick="addToList(this.id);" id="BKA_18-">
+							<span>18以下</span>
+						</div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+						<div class="placeholder" onclick="addToList(this.id);" id="BKA_18-25">
+							<span>18-25</span>
+						</div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+						<div class="placeholder" onclick="addToList(this.id);" id="BKA_26-35">
+							<span>26-35</span>
+						</div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+						<div class="placeholder" onclick="addToList(this.id);" id="BKA_36-45">
+							<span>36-45</span>
+						</div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+						<div class="placeholder" onclick="addToList(this.id);" id="BKA_46-65">
+							<span>46-65</span>
+						</div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+						<div class="placeholder" onclick="addToList(this.id);" id="BKA_65+">
+							<span>65以上</span>
+						</div>
+					</div>
 				</div>				
-				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="BKA_18-">
-						<span>18以下</span>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="BKA_18-25">
-						<span>18-25</span>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="BKA_26-35">
-						<span>26-35</span>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="BKA_36-45">
-						<span>36-45</span>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="BKA_46-65">
-						<span>46-65</span>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 placeholder" onclick="addToList(this.id);" id="BKA_65+">
-						<span>65歲以上</span>
-					</div>
-				</div>
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BCA">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 question">
 					<span id="catName2">貓貓</span>						
-					<span>幾歲了呢？</span>
+					<span>幾 歲 了 呢 ？</span>
 				</div>
 				<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 text-center">
 					<input type="number" id="BCAEnter" onkeypress="enterPress(this.id,event)">
 				</div>
-				<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center">
-					<button id="BCAButton" onclick="addToList(this.id);">></button>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBotBlock"></div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+					<button id="BCAButton" onclick="addToList(this.id);">下 一 題</button>
 				</div>
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BSP">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 question">
 					<span id="catName3">貓貓</span>						
-					<span>是什麼品種呢？</span>
+					<span>的 品 種 是 </span>
+					<span id="modalSpecies">？</span>
 				</div>
-				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-					<span>無毛貓</span>
-					<select id="BSP_nohair" onchange="speciesCheck(this.id);">
-						<option value="0"></option>
-						<option value="加拿大無毛貓">加拿大無毛貓</option>
-					</select>
+				<!--ADD MODAL HERE-->
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+						<div class="placeholder" data-toggle="modal" data-target="#nohairModal">
+							<span>無 毛 貓</span>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+						<div class="placeholder" data-toggle="modal" data-target="#shorthairModal">
+							<span>短 毛 貓</span>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+						<div class="placeholder" data-toggle="modal" data-target="#longhairModal">
+							<span>長 毛 貓</span>
+						</div>
+					</div>
 				</div>
-				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-					<span>短毛貓</span>
-					<select id="BSP_shorthair" onchange="speciesCheck(this.id);">
-						<option value="0"></option>
-						<option value="英短">英短</option>
-						<option value="美短">美短</option>
-						<option value="異短">異短</option>
-						<option value="歐短">歐短</option>
-						<option value="藍貓">藍貓</option>
-						<option value="暹羅">暹羅</option>
-						<option value="狸花">狸花</option>
-						<option value="埃及貓">埃及貓</option>
-						<option value="雪鞋貓">雪鞋貓</option>
-						<option value="曼赤肯">曼赤肯</option>
-						<option value="新加坡貓">新加坡貓</option>
-						<option value="日本短尾">日本短尾</option>
-						<option value="蘇格蘭折耳">蘇格蘭折耳</option>
-						<option value="阿比西尼亞">阿比西尼亞</option>
-						<option value="豹貓/孟加拉貓">豹貓/孟加拉貓</option>
-					</select>
+				<div class="modal fade" id="nohairModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				    <div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<span class="modal-title">無 毛 貓</span>
+							</div>
+							<div class="modal-body">
+								<button type="button" class="btn btn-default speciesButton" data-dismiss="modal" id="no1" onclick="chooseSpecies(this.id)">加 拿 大 無 毛 貓</button>
+							</div>							
+						</div>
+					</div>
 				</div>
-				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-					<span>長毛貓</span>
-					<select id="BSP_longhair" onchange="speciesCheck(this.id);">
-						<option value="0"></option>
-						<option value="波斯貓">波斯貓</option>
-						<option value="布偶貓">布偶貓</option>
-						<option value="伯曼貓">伯曼貓</option>
-						<option value="緬因貓">緬因貓</option>
-						<option value="金吉拉">金吉拉</option>
-						<option value="挪威森林">挪威森林</option>
-						<option value="西伯利亞">西伯利亞</option>
-						<option value="喜馬拉雅">喜馬拉雅</option>
-						<option value="索馬利貓">索馬利貓</option>
-						<option value="長毛暹羅貓">長毛暹羅貓</option>
-						<option value="塞爾凱克捲毛貓">塞爾凱克捲毛貓</option>
-					</select>
+				<div class="modal fade" id="shorthairModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				    <div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<span class="modal-title">短 毛 貓</span>
+							</div>
+							<div class="modal-body">
+								<button type="button" class="btn btn-default speciesButton" data-dismiss="modal" id="sh1" onclick="chooseSpecies(this.id)">英 短</button>
+								<button type="button" class="btn btn-default speciesButton" data-dismiss="modal" id="sh2" onclick="chooseSpecies(this.id)">美 短</button>
+								<button type="button" class="btn btn-default speciesButton" data-dismiss="modal" id="sh3" onclick="chooseSpecies(this.id)">異 短</button>
+								<button type="button" class="btn btn-default speciesButton" data-dismiss="modal" id="sh4" onclick="chooseSpecies(this.id)">歐 短</button>
+								<button type="button" class="btn btn-default speciesButton" data-dismiss="modal" id="sh5" onclick="chooseSpecies(this.id)">藍 貓</button>
+								<button type="button" class="btn btn-default speciesButton" data-dismiss="modal" id="sh6" onclick="chooseSpecies(this.id)">暹 羅</button>
+								<button type="button" class="btn btn-default speciesButton" data-dismiss="modal" id="sh7" onclick="chooseSpecies(this.id)">狸 花</button>
+								<button type="button" class="btn btn-default speciesButton" data-dismiss="modal" id="sh8" onclick="chooseSpecies(this.id)">埃 及 貓</button>
+								<button type="button" class="btn btn-default speciesButton" data-dismiss="modal" id="sh9" onclick="chooseSpecies(this.id)">雪 鞋 貓</button>
+								<button type="button" class="btn btn-default speciesButton" data-dismiss="modal" id="sh10" onclick="chooseSpecies(this.id)">曼 赤 肯</button>
+								<button type="button" class="btn btn-default speciesButton" data-dismiss="modal" id="sh11" onclick="chooseSpecies(this.id)">新 加 坡 貓</button>
+								<button type="button" class="btn btn-default speciesButton" data-dismiss="modal" id="sh12" onclick="chooseSpecies(this.id)">日 本 短 尾</button>
+								<button type="button" class="btn btn-default speciesButton" data-dismiss="modal" id="sh13" onclick="chooseSpecies(this.id)">蘇 格 蘭 折 耳</button>
+								<button type="button" class="btn btn-default speciesButton" data-dismiss="modal" id="sh14" onclick="chooseSpecies(this.id)">阿 比 西 尼 亞</button>
+								<button type="button" class="btn btn-default speciesButton" data-dismiss="modal" id="sh15" onclick="chooseSpecies(this.id)">孟 加 拉 貓</button>
+							</div>							
+						</div>
+					</div>
 				</div>
+				<div class="modal fade" id="longhairModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				    <div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<span class="modal-title">長 毛 貓</span>
+							</div>
+							<div class="modal-body">
+								<button type="button" class="btn btn-default speciesButton" data-dismiss="modal" id="lo1" onclick="chooseSpecies(this.id)">波 斯 貓</button>
+								<button type="button" class="btn btn-default speciesButton" data-dismiss="modal" id="lo2" onclick="chooseSpecies(this.id)">布 偶 貓</button>
+								<button type="button" class="btn btn-default speciesButton" data-dismiss="modal" id="lo3" onclick="chooseSpecies(this.id)">伯 曼 貓</button>
+								<button type="button" class="btn btn-default speciesButton" data-dismiss="modal" id="lo4" onclick="chooseSpecies(this.id)">緬 因 貓</button>
+								<button type="button" class="btn btn-default speciesButton" data-dismiss="modal" id="lo5" onclick="chooseSpecies(this.id)">金 吉 拉</button>
+								<button type="button" class="btn btn-default speciesButton" data-dismiss="modal" id="lo6" onclick="chooseSpecies(this.id)">挪 威 森 林</button>
+								<button type="button" class="btn btn-default speciesButton" data-dismiss="modal" id="lo7" onclick="chooseSpecies(this.id)">西 伯 利 亞</button>
+								<button type="button" class="btn btn-default speciesButton" data-dismiss="modal" id="lo8" onclick="chooseSpecies(this.id)">喜 馬 拉 雅</button>
+								<button type="button" class="btn btn-default speciesButton" data-dismiss="modal" id="lo9" onclick="chooseSpecies(this.id)">索 馬 利 貓</button>
+								<button type="button" class="btn btn-default speciesButton" data-dismiss="modal" id="lo10" onclick="chooseSpecies(this.id)">長 毛 暹 羅 貓</button>
+								<button type="button" class="btn btn-default speciesButton" data-dismiss="modal" id="lo11" onclick="chooseSpecies(this.id)">塞 爾 凱 克 捲 毛 貓</button>
+							</div>							
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBotBlock"></div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-					<button id="BSPButton" onclick="addToList(this.id);">></button>
+					<button id="BSPButton" onclick="addToList(this.id);">下 一 題</button>
 				</div>
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BNU">
@@ -2153,7 +408,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="ARC">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="ARC">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問您來卡卡貓為了...</span>
 				</div>
@@ -2178,7 +433,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="ANM">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="ANM">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問</span>
 					<span id="catName13">貓貓</span>
@@ -2197,7 +452,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="AWM">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="AWM">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問是在吃哪一種處方飼料呢？</span>
 				</div>
@@ -2213,7 +468,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="AIC">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="AIC">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>這次想特別</span>
 					<span id="LinkBetween16&19">base on 16's answer</span>
@@ -2221,41 +476,44 @@
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<!--ICON SELECT HERE (CAN MULTI)-->
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-						<div class="icon" id="AIC_IMMU" onclick="iconClick(this.id)"><span>免疫力</span></div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_IMMU" onclick="iconClick(this.id)">
+						<span>免疫力</span>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-						<div class="icon" id="AIC_HEART" onclick="iconClick(this.id)"><span>心臟</span></div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_HEART" onclick="iconClick(this.id)">
+						<span>心臟</span>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-						<div class="icon" id="AIC_MEHAIR" onclick="iconClick(this.id)"><span>化毛</span></div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_MEHAIR" onclick="iconClick(this.id)">
+						<span>化毛</span>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-						<div class="icon" id="AIC_LIHAIR" onclick="iconClick(this.id)"><span>亮毛</span></div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_LIHAIR" onclick="iconClick(this.id)">
+						<span>亮毛</span>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-						<div class="icon" id="AIC_LOHAIR" onclick="iconClick(this.id)"><span>脫毛</span></div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_LOHAIR" onclick="iconClick(this.id)">
+						<span>脫毛</span>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-						<div class="icon" id="AIC_SKIN" onclick="iconClick(this.id)"><span>皮膚</span></div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_SKIN" onclick="iconClick(this.id)">
+						<span>皮膚</span>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-						<div class="icon" id="AIC_JOINT" onclick="iconClick(this.id)"><span>關節</span></div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_JOINT" onclick="iconClick(this.id)">
+						<span>關節</span>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-						<div class="icon" id="AIC_BONE" onclick="iconClick(this.id)"><span>骨頭</span></div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_BONE" onclick="iconClick(this.id)">
+						<span>骨頭</span>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-						<div class="icon" id="AIC_ADDWEI" onclick="iconClick(this.id)"><span>增重</span></div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon questionBlock" id="AIC_ADDWEI" onclick="iconClick(this.id)">
+						<span>增重</span>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-						<div class="icon" id="AIC_OVERWEI" onclick="iconClick(this.id)"><span>過胖</span></div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon questionBlock" id="AIC_OVERWEI" onclick="iconClick(this.id)">
+						<span>過胖</span>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-						<div class="icon" id="AIC_STOMA" onclick="iconClick(this.id)"><span>腸胃</span></div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_STOMA" onclick="iconClick(this.id)">
+						<span>腸胃</span>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-						<div class="icon" id="AIC_STRESS" onclick="iconClick(this.id)"><span>壓力</span></div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_STRESS" onclick="iconClick(this.id)">
+						<span>壓力</span>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 icon" id="AIC_MOUTH" onclick="iconClick(this.id)">
+						<span>口腔</span>
 					</div>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="AICButton">
@@ -2263,7 +521,7 @@
 				</div>
 			</div>
 			<!--優先考量-->
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="AWI">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="AWI">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問當中哪一項是您的優先考量呢？</span>
 				</div>
@@ -2304,9 +562,12 @@
 					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="AWI_STRESS" onclick="addToList(this.id)">
 						<div class="placeholder"><span>壓力</span></div>
 					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="AWI_MOUTH" onclick="addToList(this.id)">
+						<div class="placeholder"><span>口腔</span></div>
+					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="AEM">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="AEM">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問您的email是？</span>
 				</div>
@@ -2315,7 +576,7 @@
 					<button id="AEMButton" onclick="addToList(this.id)">></button>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IFE">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="IFE">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問</span>
 					<span id="catName14">貓貓</span>
@@ -2334,7 +595,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IFF">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="IFF">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問</span>
 					<span id="catName15">貓貓</span>
@@ -2358,7 +619,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IEI">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="IEI">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>是否有覺得</span>
 					<span id="catName16">貓貓</span>
@@ -2377,7 +638,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IHE">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="IHE">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問</span>
 					<span id="catName17">貓貓</span>
@@ -2396,7 +657,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IWC">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="IWC">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問</span>
 					<span id="catName18">貓貓</span>
@@ -2420,7 +681,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IDC">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="IDC">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>是否每天梳毛之後，掉毛現象還是很嚴重呢？</span>
 				</div>
@@ -2437,7 +698,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IHH">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="IHH">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問在幫</span>
 					<span id="catName19">貓貓</span>
@@ -2456,9 +717,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="ILH">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="ILH">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<span>請問在幫</span>
+					<span>請問</span>
 					<span id="catName20">貓貓</span>
 					<span>有無脫毛現象？</span>
 				</div>
@@ -2475,9 +736,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="ILP">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="ILP">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<span>請問在幫</span>
+					<span>請問</span>
 					<span id="catName21">貓貓</span>
 					<span>脫毛的部位為：</span>
 				</div>
@@ -2499,7 +760,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IHS">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="IHS">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問</span>
 					<span id="catName22">貓貓</span>
@@ -2523,7 +784,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IPO">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="IPO">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>貓咪理毛時，毛髮容易進入到貓咪的身體，請問</span>
 					<span id="catName23">貓貓</span>
@@ -2542,7 +803,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="ICV">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="ICV">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問</span>
 					<span id="catName24">貓貓</span>
@@ -2561,7 +822,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="ISR">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="ISR">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問近兩個禮拜</span>
 					<span id="catName25">貓貓</span>
@@ -2580,7 +841,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="INR">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="INR">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問目前還有皮膚紅腫的情形嗎？</span>
 				</div>
@@ -2597,7 +858,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IEB">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="IEB">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>是否有覺得</span>
 					<span id="catName27">貓貓</span>
@@ -2616,7 +877,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IBC">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="IBC">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問獸醫師是否有推薦</span>
 					<span id="catName26">貓貓</span>
@@ -2635,7 +896,7 @@
 					</div>
 				</div>
 			</div>			
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IEF">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="IEF">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問</span>
 					<span id="catName28">貓貓</span>
@@ -2654,7 +915,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IJF">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="IJF">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問</span>
 					<span id="catName29">貓貓</span>
@@ -2673,7 +934,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IVO">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="IVO">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問近兩個禮拜，</span>
 					<span id="catName30">貓貓</span>
@@ -2692,7 +953,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IVA">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="IVA">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問消化系統問題是偏向？</span>
 				</div>
@@ -2719,7 +980,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IVN">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="IVN">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問目前還有</span>
 					<span id="LinkBetween41&42">base on 41's answer</span>
@@ -2743,7 +1004,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IBP">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="IBP">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問近兩個禮拜，</span>
 					<span id="catName31">貓貓</span>
@@ -2762,7 +1023,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IBN">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="IBN">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問目前還有血便的情形嗎？</span>
 				</div>
@@ -2785,7 +1046,7 @@
 				</div>
 			</div>
 			<!--IPR 複選-->
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IPR">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="IPR">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span id="catName32">貓貓</span>
 					<span>是否有下列問題？</span>
@@ -2823,10 +1084,10 @@
 					</div>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<button id="IPRButton">></button>
+					<button id="IPRButton" onclick="addToList(this.id)">></button>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="IMO">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="IMO">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span id="catName33">貓貓</span>
 					<span>是否有下列問題？</span>
@@ -2849,7 +1110,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EEH">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="EEH">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">				
 					<span>飲食可以解決貓咪健康8成以上的身體問題，你願意為了</span>
 					<span id="catName34">貓貓</span>
@@ -2873,7 +1134,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EKL">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="EKL">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">				
 					<span>說到飼育貓咪您是個： </span>
 				</div>
@@ -2895,7 +1156,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="ENL">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="ENL">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">				
 					<span>說到貓咪營養您是個： </span>
 				</div>
@@ -2917,7 +1178,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EFB">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="EFB">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>請問</span>
 					<span id="catName35">貓貓</span>
@@ -2931,12 +1192,12 @@
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 						<input type="text" id="EFBEnter">
-						<button id="EFBButton">></button>
+						<button id="EFBButton" onclick="addToList(this.id)">></button>
 					</div>
 				</div>
 			</div>
 			<!--EFI 複選-->
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EFI">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="EFI">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">					
 					<span>那主成分是下列哪些呢？</span>
 				</div>
@@ -2973,7 +1234,7 @@
 					<button id="EFIButton" onclick="addToList(this.id)">></button>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EFG">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="EFG">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">				
 					<span>是有穀還是無穀呢？</span>
 				</div>
@@ -2995,7 +1256,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EEC">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="EEC">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">				
 					<span>請問</span>
 					<span id="catName36">貓貓</span>
@@ -3014,7 +1275,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="ECM">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="ECM">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">				
 					<span>請問您一天餵</span>
 					<span id="catName37">貓貓</span>
@@ -3038,7 +1299,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EES">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="EES">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">				
 					<span id="catName38">貓貓</span>
 					<span>吃飼料的速度？</span>
@@ -3061,7 +1322,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EAA">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="EAA">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">				
 					<span id="catName39">貓貓</span>
 					<span>是否有吃保健食品呢？</span>
@@ -3079,7 +1340,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EAB">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="EAB">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">				
 					<span id="catName40">貓貓</span>
 					<span>一個月使用幾次化毛膏呢？</span>
@@ -3102,7 +1363,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EAC">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="EAC">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">				
 					<span id="catName41">貓貓</span>
 					<span>一週吃幾次罐頭呢？</span>
@@ -3131,7 +1392,7 @@
 				</div>
 			</div>
 			<!--EAD 複選-->
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EAD">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="EAD">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">					
 					<span id="catName42">貓貓</span>
 					<span>是否有對什麼食物過敏呢？</span>
@@ -3172,7 +1433,7 @@
 					<button id="EADButton" onclick="addToList(this.id)">></button>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EAE">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="EAE">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">				
 					<span id="catName43">貓貓</span>
 					<span>一天的喝水頻率高還是低呢？</span>
@@ -3190,7 +1451,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EAF">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="EAF">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>您是否有煮東西給</span>
 					<span id="catName44">貓貓</span>
@@ -3219,7 +1480,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EBA">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="EBA">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<span>天氣也是卡卡貓重要的審視資訊之一，請問</span>
 					<span id="catName45">貓貓</span>
@@ -3238,10 +1499,10 @@
 					</select>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<button id="EBAButton">></button>
+					<button id="EBAButton" onclick="addToList(this.id)">></button>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EBB">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="EBB">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">					
 					<span>如果有可靠的貓咪最新研究您希望？</span>
 				</div>
@@ -3263,7 +1524,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="EBC">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="EBC">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">				
 					<span>請問您怎麼知道我們的？ </span>
 				</div>
