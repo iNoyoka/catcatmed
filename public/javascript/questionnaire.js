@@ -2196,7 +2196,6 @@ function redirectIcon(){
 		$("#IMO").fadeIn(500);
 	}
 	else{
-		alert("icon question complete!");
 		$("#EEH").fadeIn(500);
 	}
 }
