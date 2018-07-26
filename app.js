@@ -308,7 +308,69 @@ app.post('/deleteProductFromCart',function(req,res,next){
 app.get('/questionnaire',function(req,res,next){
 	res.render('questionnaire');
 });
-
+app.post('/questionnaireSaveandQuit',function(req,res,next){
+	req.session.recordQuestionnaire = true;
+	//
+	req.session.basicInformation = req.body.basicInformation;
+	req.session.advancedInformation = req.body.advancedInformation;
+	req.session.iconInformation = req.body.iconInformation;
+	req.session.extraInformation = req.body.extraInformation;	
+	req.session.iconTravelList = req.body.iconTravelList;	
+	req.session.iconTraveledList = req.body.iconTraveledList;	
+	req.session.recordTravelList = req.body.recordTravelList;
+	req.session.currentPage = req.body.currentPage;	
+	req.session.icon = req.body.icon;	
+	req.session.ingredients = req.body.ingredients;	
+	req.session.allergy = req.body.allergy;	
+	req.session.stress = req.body.stress;
+	res.redirect('/');
+	//test
+	//console.log("[SYS MSG] : SAVE COMPLETE!");
+});
+app.post('/questionnaireRequest',function(req,res,next){
+	if(req.session.recordQuestionnaire==null){
+		res.send("lackOfHistory");
+	}else{
+		res.send("historyExist");
+	}
+});
+app.post('/questionnaireAskRecordData',function(req,res,next){
+	if(req.body.request=="basicInformation")
+		res.send(req.session.basicInformation);
+	else if(req.body.request=="advancedInformation")
+		res.send(req.session.advancedInformation);
+	else if(req.body.request=="iconInformation")
+		res.send(req.session.iconInformation);
+	else if(req.body.request=="extraInformation")
+		res.send(req.session.extraInformation);
+	else console.log("[SYS ERR] : REQUEST FAILURE!");
+});
+app.post('/questionnaireAskArray',function(req,res,next){
+	if(req.body.request=="currentPage"){
+		res.send(req.session.currentPage);
+	}
+	else if(req.body.request=="iconTravelList"){
+		res.send(req.session.iconTravelList);
+	}
+	else if(req.body.request=="iconTraveledList"){
+		res.send(req.session.iconTraveledList);
+	}
+	else if(req.body.request=="recordTravelList"){
+		res.send(req.session.recordTravelList);
+	}
+	else if(req.body.request=="icon"){
+		res.send(req.session.icon);
+	}
+	else if(req.body.request=="ingredients"){
+		res.send(req.session.ingredients);
+	}
+	else if(req.body.request=="allergy"){
+		res.send(req.session.allergy);
+	}
+	else if(req.body.request=="stress"){
+		res.send(req.session.stress);
+	}
+});
 //------------------------------------------
 // Get User Center Page
 //------------------------------------------

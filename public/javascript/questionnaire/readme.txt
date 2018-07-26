@@ -1,0 +1,4 @@
+A> 除非是複選題，不然基本上不會動到itemControl_multiSelect
+B> 新增或減少問題，除了要增加div在 views/questionnaire中(需命名)，還必須調整transformPage
+C> 若是單純動畫的頁面，需要在transformPage最下方的切換頁面函式新增例外，還必須在transformForOnlyAnimationPage中新增新的函示
+D> 承上，若不是純動畫的頁面，需要檢查enumData裡面有沒有在全域函數中受到宣告，並且必須在onloadSave中新增相對應傳到server的變數

@@ -1,14 +1,15 @@
 body {
 	-moz-user-select:none; 
 	-webkit-user-select: none;
-} 
+}
+/* USE FOR PADDING BLOCKS */ 
 .paddingBlock{
 	overflow:hidden;
 	width:100%;
 }
 .paddingBlock:after{
 	content:"";
-	margin-top:15%;
+	margin-top:10%;
 	display:block;
 }
 .paddingBotBlock{
@@ -20,6 +21,7 @@ body {
 	margin-top:5%;
 	display:block;
 }
+/* LINK BUTTON */
 navBlock{
 	cursor: pointer;
 	transition: 500ms;
@@ -31,17 +33,41 @@ navBlock{
 .navLink{
 	padding-top : 20px;
 	padding-bottom : 20px;
-	font-family: Microsoft JhengHei;
+	font-family: 'Noto Sans TC',Microsoft JhengHei;
 	font-size: 16px;
-	font-weight: bold;
 	text-align: center;
 }
+
+.backBlock{
+	border-radius: 4px;
+	border: none;
+	color: #3D5BA8;
+	background-color: #F1F1F2;
+	text-align: center;
+	padding: 10px;
+	transition: 500ms;
+	cursor: pointer;
+}
+.backBlock:hover{
+	padding-right: 25px;
+}
+/* QUESTION PART */
 .questionBlock{
 	display: none;
+}
+.questionnaireInner{
+	overflow:hidden;
+	width:100%;
+}
+.questionnaireInner:after{
+	content:"";
+	margin-top:30%;
+	display:block;
 }
 .elementInVisable{
 	display: none;
 }
+/*  */
 input[type=text]{
 	width: 100%;
 	outline-color: #3D5BA8;
@@ -119,22 +145,29 @@ span{
 	transition: 200ms;
 }
 .icon{
-	font-family: Microsoft JhengHei;
 	font-size: 18px;
-	background-color: #FFFF77;
-	border: dashed black 2px;
+	background-color: #F1F1F2;
+	color:  #3D5BA8;
 	cursor: pointer;
+	margin-top: 8px;
+	margin-bottom: 8px;
+	padding: 10px;
+	border-radius: 10px;
+	transition: 200ms;
 }
 .icon:hover{
-	background-color: #FFCC22;
+	background-color: #87A7D6;
+	color: #F1F1F2;
+	transition: 200ms;
 }
 .iconSelected{			
-	background-color: #FF5511;
-	border: solid black 2px;
+	background-color: #3D5BA8;
+	color: #F1F1F2;
 	cursor: pointer;
-	font-family: Microsoft JhengHei;
 	font-size: 18px;
-}
-.iconSelected:hover{
-	background-color: red;
+	margin-top: 8px;
+	margin-bottom: 8px;
+	padding: 10px;
+	border-radius: 10px;
+	transition: 200ms;
 }
