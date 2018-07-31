@@ -2,164 +2,244 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html"; charset="utf-8"/>
-
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	
 	<title>catcatmedProduct</title>
 
-	<link rel="stylesheet" type="text/css" href="stylesheets/home.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/product.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-	<script>		
-		//get data from server
-		var productShowOnPageHTML;
-		var product_data;
-		var product;
-		
-		//decide which one be selected
-		var whichProductSelected = [];
-		var whichTagSelected = [0,0,0,0,0,0,0,0];
-		//using javascript object to make selector
-		var brandTag = {A:0,B:0,C:0} //fifteen brand
-		var flavorTag = {chicken:0,beef:0,pork:0}; //how many flavor?
-		var cerealTag = {cereal:0,non_cereal:0};
-		//
-		function GetProductData(){
-			$.post('/clientAskForProduct').done(function(data){				
-				product_data = JSON.parse(data);
-				product = eval('(' + product_data + ')');				
-				
-				//alert(product_data);
-				for(i in product)whichProductSelected.push(0);
-				//alert(whichProductSelected);
-				//show initial productBlock
-				//SelectProductByUsingTag(0);				
-			});	
+    <link rel="stylesheet" href="bootstrap-3.3.7/css/bootstrap.min.css">
+    <script src="javascript/jquery/jquery_v-3-3-1.js"></script>
+    <script src="bootstrap-3.3.7/js/bootstrap.min.js"></script>	
+	<style>
+		@import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
+		{
+			font-family: 'Noto Sans TC';
 		}
-		
-		
-		//
-		function SelectTag(id){
-			var tag = document.getElementById(id);			
-			//change tag css
-			if(tag.className == "click"){
-				tag.className= "clicked";
-				//cerealTag
-				if(id == "cereal" && document.getElementById("non_cereal").className=="clicked")
-					document.getElementById("non_cereal").className = "click";
-				if(id == "non_cereal" && document.getElementById("cereal").className=="clicked")
-					document.getElementById("cereal").className = "click";
-				//priceTag
-				if(id == "highToLow" && document.getElementById("lowToHigh").className=="clicked")
-					document.getElementById("lowToHigh").className = "click";
-				if(id == "lowToHigh" && document.getElementById("highToLow").className=="clicked")
-					document.getElementById("highToLow").className = "click";
-				//brandTag
-
-				//flavorTag
-			}
-			else if(tag.className == "clicked"){
-				if(id != "highToLow" && id != "lowToHigh")
-					tag.className= "click";
-			}
-		}		
-	
+	</style>
+	<script>
+		$(document).ready(function(){
+			$("#grandSwitch").click(function(){
+				if($("#grandCheckBox").prop("checked")){
+					document.getElementById("switchResult").innerHTML = "<span>無穀</span>";
+				}else{
+					document.getElementById("switchResult").innerHTML = "<span>有穀</span>";
+				}
+			});
+		});
 	</script>
 </head>
 <body>
+	<!--預設問卷-->
 	<script>
-		GetProductData();
+		$(document).ready(function(){
+			//$("#productModal").modal();
+		});
 	</script>
-	<header>
-		<nav class="nav navbar-default">
-			<div class="container-fluid">
+	<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" id="productModal">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<div class="productModal_inner">
+						<div class="productModalInfo">
+							<h5>請問貓孩的重量？</h5>
+							<input type="number" placeholder="貓咪體重會影響建議食用的份量。">
+						</div>
+						<div class="productModalInfo">
+							<h5>這隻貓孩每餐分量的多寡？</h5>
+							<div class="productIcon text-center">
+								<img src="images/product/icon/immu.png">
+							</div>
+							<div class="productIcon text-center">
+								<img src="images/product/icon/lohair.png">
+							</div>
+						</div>
+						<div class="productModalInfo">
+							<h4>我們的建議：</h4>
+							<h5>因為寵物的體重及食量，我們推薦給您一天餵XX克，是否要增加或是減少呢？</h5>
+							<div>
+								<div class="productCustom_inner productCustom_inner_left">
+								減少一些</div><div class="productCustom_inner">
+								維持建議量</div><div class="productCustom_inner productCustom_inner_right">
+								增加一些</div>
+							</div>						
+						</div>
+						<div class="productModalInfo">							
+							<h5>請問您以前買飼料的價位大約落在哪邊呢？</h5>
+							<div>
+								<div class="productCustomPrice_inner productCustom_inner_left">
+								A</div><div class="productCustomPrice_inner">
+								B</div><div class="productCustomPrice_inner">
+								C</div><div class="productCustomPrice_inner productCustom_inner_right">
+								D</div>
+							</div>
+						</div>
+					</div>
+				</div>				
+			</div>
+		</div>
+	</div>
+	<!--預設問卷 END-->	
+	<!--header-->	
+	<div class="header">
+		<nav class="nav navbar-default navbar-fixed-top">
+			<div class="container">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
-						<span class="icon-bar"></span> 
+						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="/">首頁</a>
+					<ul class="nav navbar-nav navLogo">
+						<li><a href="/" class="navbar-brand">卡卡貓LOGO</a></li>
+					</ul>
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav">
-						<li><a data-toggle="tab" href="/questionnaire">開始客製化</a></li>
-						<li><a data-toggle="tab" href="/product">商城</a></li>
-						<li><a data-toggle="tab" href="/cart">購物車</a></li>
+						<li><a href="/questionnaire">開始懂他</a></li>
+						<li><a href="#">營養知識</a></li>
+						<li><a href="#">關於我們</a></li>
+						<li><a href="/product">購物商場</a></li>						
 					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li><a data-toggle="tab" href="#">Library</a></li>
-						<li><a data-toggle="tab" href="#">關於我們</a></li>
-						<li><a data-toggle="tab" href="/usercenter">會員中心</a></li>
+					<ul class="nav navbar-nav navbar-right">						
 						<% if (username) { %>
 							<li><a href="/"><%= username %>,歡迎回來!</a></li>
+							<li><a href="/usercenter">會員中心</a></li>
 							<li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span>登出</a></li>
 						<% } else { %>
-							<li><a href="/login"><span class="glyphicon glyphicon-log-in"></span>login</a></li>
-						<% } %>						
+							<li><a href="/login"><span class="navButton">登入</span></a></li>
+							<li><a href="/signup"><span class="navButton">註冊</span></a></li>
+						<% } %>
+						<li><a href="/cart">購物車</a></li>
 					</ul>
 				</div>
 			</div>
-		</nav> 
-	</header>
-	<container>
-		<style>
-			.click{
-				background-color: #DDDDDD;
-				color: black;
-				padding-top:5px;
-				padding-bottom:5px;
-				border: solid 3px black;
-			}
-			.click:hover{
-				background-color: #888888;
-			}
-			.clicked{
-				background-color: #666666;
-				color: white;
-				padding-top:5px;
-				padding-bottom:5px;
-				border: solid 3px black;
-			}
-		</style>
-		<div style="margin-top:70px">			
-			<div class="col-lg-1"></div>
-			<div class="col-lg-11">
-				<div class="col-lg-2 text-center">
-					<p class="click" id="chicken" onClick="SelectTag(this.id)">chicken</p>
+		</nav>
+	</div>
+	<!--header END-->
+	<div class="body">
+		<div class="container">
+			<div class="flavor_inner col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="flavor_inner_half col-lg-6 col-md-6 col-sm-6 col-xs-6">
+					<div class="flavorTag col-lg-3 col-md-3 col-sm-6 col-xs-6"><img src="images/product/tempBlock.png"></div>
+					<div class="flavorTag col-lg-3 col-md-3 col-sm-6 col-xs-6"><img src="images/product/tempBlock.png"></div>
+					<div class="flavorTag col-lg-3 col-md-3 col-sm-6 col-xs-6"><img src="images/product/tempBlock.png"></div>
+					<div class="flavorTag col-lg-3 col-md-3 col-sm-6 col-xs-6"><img src="images/product/tempBlock.png"></div>
 				</div>
-				<div class="col-lg-2 text-center">
-					<p class="click" id="beef" onClick="SelectTag(this.id)">beef</p>
+				<div class="flavor_inner_half col-lg-6 col-md-6 col-sm-6 col-xs-6">
+					<div class="flavorTag col-lg-3 col-md-3 col-sm-6 col-xs-6"><img src="images/product/tempBlock.png"></div>
+					<div class="flavorTag col-lg-3 col-md-3 col-sm-6 col-xs-6"><img src="images/product/tempBlock.png"></div>
+					<div class="flavorTag col-lg-3 col-md-3 col-sm-6 col-xs-6"><img src="images/product/tempBlock.png"></div>
+					<div class="flavorTag col-lg-3 col-md-3 col-sm-6 col-xs-6"><img src="images/product/tempBlock.png"></div>
 				</div>
-				<div class="col-lg-2 text-center">
-					<p class="click" id="fish" onClick="SelectTag(this.id)">fish</p>
-				</div>
-				<div class="col-lg-2 text-center">
-					<p class="click" id="cereal" onClick="SelectTag(this.id)">cereal</p>
-				</div>
-				<div class="col-lg-2 text-center">
-					<p class="click" id="non_cereal" onClick="SelectTag(this.id)">non_cereal</p>
-				</div>
-				<div class="col-lg-2 text-center">
-					<p class="clicked" id="highToLow" onClick="SelectTag(this.id)">價格高到低</p>
-				</div>
-				<div class="col-lg-2 text-center">
-					<p class="click" id="lowToHigh" onClick="SelectTag(this.id)">價格低到高</p>
-				</div>
-			</div>				
-			<div class="col-lg-1"></div>
-			<div class="col-lg-1 text-center">
-				<p class="click" id="brandA" onClick="SelectTag(this.id)">brandA</p>
 			</div>
-			<div class="col-lg-1 text-center">
-				<p class="click" id="brandB" onClick="SelectTag(this.id)">brandB</p>
+			<div class="select_inner col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="grand_switch col-lg-2 col-md-2 col-sm-4 col-xs-5">
+					<div class="switchTop">
+						<label class="switch">
+							<input type="checkbox" checked id="grandCheckBox">
+							<span class="slider round" id="grandSwitch"></span>
+						</label>
+					</div>					
+					<div class="switchResult" id="switchResult">
+						<span>有穀</span>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"></div>
+				<div class="col-lg-2 col-md-2 col-sm-6 col-xs-6">
+					<div class="dropdown">
+						<button class="dropbtn">品牌</button>
+					    <div class="dropdown-content">
+							<p>XX</p>
+							<p>YY</p>
+							<p>ZZ</p>
+					    </div>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-6 col-xs-6">
+					<div class="dropdown">
+						<button class="dropbtn">進階選項</button>
+					    <div class="dropdown-content">
+							<p>價格由低到高</p>
+							<p>價格由高到低</p>
+					    </div>
+					</div>
+				</div>
 			</div>
-			<div class="col-lg-1 text-center">
-				<p class="click" id="brandC" onClick="SelectTag(this.id)">brandC</p>
+			
+			<div class="product_inner col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<!--商品-->
+				<div class="product col-lg-4 col-md-4 col-sm-6 col-xs-12">
+					<div class="productItem" data-toggle="modal" data-target="#nohairModal">
+						<div class="productItemImg">
+						</div>
+						<div class="productItemBar text-center">
+							<h4>商品名稱</h4>
+							<h5>NTD 250</h5>
+						</div>
+					</div>
+				</div>
+				
+				<!--商品 END-->
+				<!--商品資訊-->
+				<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" id="nohairModal">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-body">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<div class="basicProductInfo_inner">
+									<div class="basicImg basicImg-sm basicInfo">
+									</div>
+									<div class="basicInformation basicInformation-sm basicInfo text-center">
+										<h4>商品名稱</h4>
+										<h4>NTD 250</h4>
+										<button class="basicInformationButton" data-dismiss="modal">放入購物車</button>
+										<div class="basicInformationDetail text-left">
+											<h5>內容量:1540g</h5>
+											<h5>建議用量(日):110g</h5>
+											<h5>產地:台灣</h5>
+										</div>
+									</div>
+								</div>
+								<hr>
+								<div class="advancedProduct">
+									<div class="advancedProduct_inner">
+										<div class="advancedInfomationIcon">
+											<div class="icon">
+											<img src="images/product/icon/heart.png"></div><div class="icon">
+											<img src="images/product/icon/immu.png"></div><div class="icon">
+											<img src="images/product/icon/stress.png"></div><div class="icon">
+											<img src="images/product/icon/preg.png"></div>									
+										</div>
+										<div class="advancedInfo text-center">
+											<h4 class="advancedHead">商品特色</h4>
+											<h5 class="advancedIntro">補充毛孩好心情的關鍵營養</h5>
+											<h5 class="advancedIntro">由植物、酵母菌等濃縮萃取的天然胺基酸，幫助毛孩面對壓力，天天好心情</h5>
+										</div>
+										<div class="advancedInfo text-center">
+											<h4 class="advancedHead">商品特色</h4>
+											<h5 class="advancedIntro">補充毛孩好心情的關鍵營養</h5>
+											<h5 class="advancedIntro">由植物、酵母菌等濃縮萃取的天然胺基酸，幫助毛孩面對壓力，天天好心情</h5>
+										</div>
+										<div class="advancedInfo text-center">
+											<h4 class="advancedHead">商品特色</h4>
+											<h5 class="advancedIntro">補充毛孩好心情的關鍵營養</h5>
+											<h5 class="advancedIntro">由植物、酵母菌等濃縮萃取的天然胺基酸，幫助毛孩面對壓力，天天好心情</h5>
+										</div>
+									</div>										
+								</div>
+							</div>				
+						</div>
+					</div>
+				</div>
+				<!--商品資訊 END-->
 			</div>
-		</div>		
-		<div class="col-lg-12 text-center" id="productBlock">dataLoading</div>
-	</container>	
+		</div>
+	</div>
+	<div class="footer">
+		<div class="container">
+		</div>
+	</div>
 </body>
 </html>

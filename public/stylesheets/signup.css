@@ -16,13 +16,13 @@ nav{
 	text-align: center;
 	margin: 0 !important;
 }
-.loginBlock{
+.signupBlock{
 	background-color: #F1F1F2;
 	padding-bottom: 30px;
 	padding-top: 30px;
 	box-shadow:0 3px 5px 2px rgba(0,0,0,0.5);
 }
-.loginBlock input[type=text]{
+.signupBlock input[type=text]{
 	width: 100%;
 	background-color: white;
 	text-align: center;
@@ -33,7 +33,7 @@ nav{
 	padding: 5px 0;
 	font-family: 'Noto Sans TC',monospace,Microsoft JhengHei;
 }
-.loginBlock input[type=password]{
+.signupBlock input[type=password]{
 	width: 100%;
 	background-color: white;
 	text-align: center;
@@ -44,7 +44,7 @@ nav{
 	padding: 5px 0;
 	font-family: 'Noto Sans TC',monospace,Microsoft JhengHei;
 }
-.loginBlock input[type=submit]{
+.signupBlock input[type=submit]{
 	color: white;
 	background-color: #3D5BA8;
 	padding:5px;
@@ -56,24 +56,20 @@ nav{
 	font-size: 15px;
 	cursor: pointer;
 }
-.loginBlock input[type=submit]:hover{
+.signupBlock input[type=submit]:hover{
 	color: white;
 	background-color: #87A7D6;
 	transition: 300ms;
 }
 p{
-	margin: 0 !important;
+	margin: 0 auto !important;
 	font-family: 'Noto Sans TC',Microsoft JhengHei;
 	color: black;
 	font-size: 15px;
 }
-.signupButton{
-	cursor: pointer;
-	margin: 10px auto !important;
-}
-.forgotButton{
-	cursor: pointer;
-	margin: 10px auto !important;
+p1{
+	font-size: 8px;
+	color: red;
 }
 img{
 	width: 100%;

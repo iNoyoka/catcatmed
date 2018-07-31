@@ -6,15 +6,14 @@ function trans_hello(){
 	var functionA = setInterval(myFunction,2000);
 	function myFunction(){
 		transformPage("#BHELLO","#BKN");
-		$("#backButton_TOP").fadeIn(1000);
 		clearInterval(functionA);
 	}
 }
 function trans_welcomeBack(){
-	var functionA = setInterval(myFunction,5000);
+	var functionA = setInterval(myFunction,1000);
 	function myFunction(){
 		transformPage("#BWELCOMEBACK",currentPage);
-		$("#backButton_TOP").fadeIn(1000);
+		if(currentPage != "#BKN" && currentPage != "#BHELLO") $("#backButton_TOP").fadeIn(10);
 		clearInterval(functionA);
 	}
 }
@@ -33,7 +32,7 @@ function trans_nicetomeetyou(){
 		});
 	}
 	function myFunctionB(){
-		transformPage("#BNICEMEET","#BKS");
+		transformPage("#BNICEMEET","#BCS");
 		clearInterval(functionB);
 	}
 }

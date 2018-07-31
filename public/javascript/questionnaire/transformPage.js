@@ -13,9 +13,10 @@ function enterPress(id,event){
 function addToList(id){	
 	//BKN BCN
 	if(id=="BKNButton"){
-		if($("#BKNEnter").val()!=""){
+		if($("#BKNEnter").val()!="" && basicInformation.sex != "無資料" && basicInformation.age != "無資料"){
 			basicInformation.name = $("#BKNEnter").val();
-			transformPage("#BKN","#AIC");
+			transformPage("#BKN","#BCN");
+			$("#backButton_TOP").fadeIn(10);
 		}
 	}
 	//BCN
@@ -28,51 +29,17 @@ function addToList(id){
 					document.getElementById(str).innerHTML = basicInformation.catName;				
 				}				
 			}
-			transformPage("#BCN","#BNICEMEET")				
+			transformPage("#BCN","#BNICEMEET");		
 		}
-	}
-	//BKS
-	if(id=="BKS_girl"){
-		basicInformation.sex = customBasicEnum.girl;
-		transformPage("#BKS","#BCS");
-	}
-	if(id=="BKS_boy"){
-		basicInformation.sex = customBasicEnum.boy;
-		transformPage("#BKS","#BCS");
 	}
 	//BCS
 	if(id=="BCS_girl"){
 		basicInformation.catSex = customBasicEnum.girl;
-		transformPage("#BCS","#BKA");
+		transformPage("#BCS","#BCA");
 	}
 	if(id=="BCS_boy"){
 		basicInformation.catSex = customBasicEnum.boy;
-		transformPage("#BCS","#BKA");
-	}
-	//BKA
-	if(id=="BKA_18-"){
-		basicInformation.age = customBasicEnum._18_;
-		transformPage("#BKA","#BCA");
-	}
-	if(id=="BKA_18-25"){
-		basicInformation.age = customBasicEnum._18_25;
-		transformPage("#BKA","#BCA");
-	}
-	if(id=="BKA_26-35"){
-		basicInformation.age = customBasicEnum._26_35;
-		transformPage("#BKA","#BCA");
-	}
-	if(id=="BKA_36-45"){
-		basicInformation.age = customBasicEnum._36_45;
-		transformPage("#BKA","#BCA");
-	}
-	if(id=="BKA_46-65"){
-		basicInformation.age = customBasicEnum._46_65;
-		transformPage("#BKA","#BCA");
-	}
-	if(id=="BKA_65+"){
-		basicInformation.age = customBasicEnum._65_;
-		transformPage("#BKA","#BCA");
+		transformPage("#BCS","#BCA");
 	}
 	//BCA
 	if(id=="BCAButton"){
@@ -235,7 +202,7 @@ function addToList(id){
 	}
 	//AIC
 	if(id=="AICButton"){
-		if(icon[0]==0 && icon[1]==0 && icon[2]==0 && icon[3]==0 && icon[4]==0 && icon[5]==0 && icon[6]==0 && icon[7]==0 && icon[8]==0 && icon[9]==0 && icon[10]==0 && icon[11]==0){
+		if(icon[0]==0 && icon[1]==0 && icon[2]==0 && icon[3]==0 && icon[4]==0 && icon[5]==0 && icon[6]==0 && icon[7]==0 && icon[8]==0 && icon[9]==0 && icon[10]==0 && icon[11]==0 && icon[12]==0){
 			alert("請至少選擇一樣要關心的部分！");
 		}else{			
 			transformPage("#AIC","#AWI");
@@ -291,7 +258,7 @@ function addToList(id){
 		transformPage("#AWI","#AEM");
 	}
 	if(id=="AWI_MOUTH"){
-		advancedInformation.AWI = customAdvancedEnum.AWI_MOUTH;
+		advancedInformation.AWI = customAdvancedEnum.AIC_MOUTH;
 		transformPage("#AWI","#AEM");
 	}
 	//----------------------------------------------------
@@ -877,206 +844,165 @@ function addToList(id){
 			newPage = recordTravelList.pop();
 			transformPageBack(currentPage,newPage);
 		}
-		else if(newPage=="#BHELLO"){
+		/*else if(newPage=="#BKN"){
 			$("#backButton_TOP").fadeOut(500);
 			transformPageBack(currentPage,newPage);
-		}
+		}*/
 		else transformPageBack(currentPage,newPage);
+		$("#backButton_TOP").fadeOut(10);
 	}	
 }
 //-------------------------------------------------------------
 // PAGE TRANSFORM with ANIMATION with RECORD HISTORY
 // 		A. SOME PAGES ARE ANIMATION ONLY, NEED 'IF' DETECTION
-//		B. WHILE LEAVE '#AWI', call functio to create iconList
+//		B. WHILE LEAVE '#AWI', call function to create iconList
 //-------------------------------------------------------------
 function transformPage(originalPage,newPage){
-	// 進入AWI之前，產生 AWI 的內容 --> function in 'js/questionnaire/itemControl_multiSelect.js'
-	if(originalPage=="#AIC")createAWI();
-	//
-	if(originalPage!="#temp" && originalPage!="#BWELCOMEBACK") recordTravelList.push(originalPage);
+	// AWI CONTROLER
+	if(originalPage=="#AIC")createAWI();	
+	// WHILE RELOAD PAGE
+	if(originalPage!="#temp" && originalPage!="#BWELCOMEBACK"){
+		recordTravelList.push(originalPage);
+		transformAnimation(originalPage,newPage);
+	}	
 	if(newPage!="#BWELCOMEBACK")currentPage = newPage;
-	$(originalPage).fadeOut(10,function(){
-		$(newPage).fadeIn(10,function(){
-			// ADDITIONAL REQUEST OF FUNCTION && animationLock
-			if(newPage=="#BHELLO"){
-				animationLock = 1;
-				trans_hello();
-			}
-			if(newPage=="#BWELCOMEBACK"){
-				animationLock = 1;
-				trans_welcomeBack();
-			}
-			if(newPage=="#BNICEMEET"){
-				animationLock = 1;
-				trans_nicetomeetyou();
-			}
-			if(newPage=="#BAGECAL"){
-				animationLock = 1;
-				trans_agePage();	
-			}		
-			if(newPage=="#BPREGPAGE"){
-				animationLock = 1;
-				trans_pregpage();
-			}
-			if(newPage=="#ASPECIALFOOD"){
-				animationLock = 1;
-				trans_specialfood();
-			}
-			if(newPage=="#EKEEPEXP"){
-				animationLock = 1;
-				trans_keepexpert();
-			}
-			if(newPage=="#ENUTRIEXP"){
-				animationLock = 1;
-				trans_nutritionexpert();
-			}
-			if(newPage=="#IAW"){
-				animationLock = 1;
-				trans_addwei();
-			}
-			if(newPage=="#ILW"){
-				animationLock = 1;
-				trans_overwei();
-			}
-			if(newPage=="#RESULT"){
-				animationLock = 1;
-				showResult();
-			}
-			if(originalPage=="#BHELLO"){
-				animationLock = 0;
-			}
-			if(originalPage=="#BWELCOMEBACK"){
-				animationLock = 0;
-			}
-			if(originalPage=="#BNICEMEET"){
-				animationLock = 0;
-			}
-			if(originalPage=="#BAGECAL"){
-				animationLock = 0;
-			}
-			if(originalPage=="#BPREGPAGE"){
-				animationLock = 0;
-			}
-			if(originalPage=="#ASPECIALFOOD"){
-				animationLock = 0;
-			}
-			if(originalPage=="#EKEEPEXP"){
-				animationLock = 0;
-			}
-			if(originalPage=="#ENUTRIEXP"){
-				animationLock = 0;
-			}
-			if(originalPage=="#IAW"){
-				animationLock = 0;
-			}
-			if(originalPage=="#ILW"){
-				animationLock = 0;
-			}
-			if(originalPage=="#RESULT"){
-				animationLock = 0;
-			}
-			//generate iconList while choose in AWI
-			if(originalPage=="#AWI"){
-				createIconTravelList();
-				createAWI();
-			}
+	//transform animation
+	specialAnimationControler(originalPage,newPage);
+	$(originalPage).fadeOut(200,function(){
+		$(newPage).fadeIn(200,function(){
+			if(currentPage != "#BKN" && currentPage != "#BHELLO") $("#backButton_TOP").fadeIn(10);
 		});
-	});
+	});	
 }
 function transformPageBack(originalPage,newPage){
-	// 進入AWI之前，產生 AWI 的內容 --> function in 'js/questionnaire/itemControl_multiSelect.js'
+	// AWI CONTROLER
 	if(originalPage=="#AEM")createAWI();	
-	//
+	// TRAVELING ICON
 	if(originalPage == iconTraveledList[iconTraveledList.length - 1]) iconTravelList.push(iconTraveledList.pop());
 	//
+	transformBackAnimation(originalPage,newPage);
+	specialAnimationControler(originalPage,newPage);
 	currentPage = newPage;
-	$(originalPage).fadeOut(10,function(){
-		$(newPage).fadeIn(10,function(){
-			// send data to backend after each transformPage
-			//sendCurrentDataToServer(0);
-			// ADDITIONAL REQUEST OF FUNCTION && animationLock
-			if(newPage=="#BHELLO"){
-				animationLock = 1;
-				trans_hello();
-			}
-			if(newPage=="#BWELCOMEBACK"){
-				animationLock = 1;
-				trans_welcomeBack();
-			}
-			if(newPage=="#BNICEMEET"){
-				animationLock = 1;
-				trans_nicetomeetyou();
-			}
-			if(newPage=="#BAGECAL"){
-				animationLock = 1;
-				trans_agePage();	
-			}		
-			if(newPage=="#BPREGPAGE"){
-				animationLock = 1;
-				trans_pregpage();
-			}
-			if(newPage=="#ASPECIALFOOD"){
-				animationLock = 1;
-				trans_specialfood();
-			}
-			if(newPage=="#EKEEPEXP"){
-				animationLock = 1;
-				trans_keepexpert();
-			}
-			if(newPage=="#ENUTRIEXP"){
-				animationLock = 1;
-				trans_nutritionexpert();
-			}
-			if(newPage=="#IAW"){
-				animationLock = 1;
-				trans_addwei();
-			}
-			if(newPage=="#ILW"){
-				animationLock = 1;
-				trans_overwei();
-			}
-			if(newPage=="#RESULT"){
-				animationLock = 1;
-				showResult();
-			}
-			if(originalPage=="#BHELLO"){
-				animationLock = 0;
-			}
-			if(originalPage=="#BWELCOMEBACK"){
-				animationLock = 0;
-			}
-			if(originalPage=="#BNICEMEET"){
-				animationLock = 0;
-			}
-			if(originalPage=="#BAGECAL"){
-				animationLock = 0;
-			}
-			if(originalPage=="#BPREGPAGE"){
-				animationLock = 0;
-			}
-			if(originalPage=="#ASPECIALFOOD"){
-				animationLock = 0;
-			}
-			if(originalPage=="#EKEEPEXP"){
-				animationLock = 0;
-			}
-			if(originalPage=="#ENUTRIEXP"){
-				animationLock = 0;
-			}
-			if(originalPage=="#IAW"){
-				animationLock = 0;
-			}
-			if(originalPage=="#ILW"){
-				animationLock = 0;
-			}
-			if(originalPage=="#RESULT"){
-				animationLock = 0;
-			}
-			//generate iconList while choose in AWI
+	$(originalPage).fadeOut(200,function(){
+		$(newPage).fadeIn(200,function(){
+			if(currentPage != "#BKN" && currentPage != "#BHELLO") $("#backButton_TOP").fadeIn(10);
+		});
+	});	
+}
+function specialAnimationControler(originalPage,newPage){
+	if(newPage=="#BHELLO"){
+		animationLock = 1;
+		trans_hello();
+	}
+	if(newPage=="#BWELCOMEBACK"){
+		animationLock = 1;
+		trans_welcomeBack();
+	}
+	if(newPage=="#BNICEMEET"){
+		animationLock = 1;
+		trans_nicetomeetyou();
+	}
+	if(newPage=="#BAGECAL"){
+		animationLock = 1;
+		trans_agePage();	
+	}		
+	if(newPage=="#BPREGPAGE"){
+		animationLock = 1;
+		trans_pregpage();
+	}
+	if(newPage=="#ASPECIALFOOD"){
+		animationLock = 1;
+		trans_specialfood();
+	}
+	if(newPage=="#EKEEPEXP"){
+		animationLock = 1;
+		trans_keepexpert();
+	}
+	if(newPage=="#ENUTRIEXP"){
+		animationLock = 1;
+		trans_nutritionexpert();
+	}
+	if(newPage=="#IAW"){
+		animationLock = 1;
+		trans_addwei();
+	}
+	if(newPage=="#ILW"){
+		animationLock = 1;
+		trans_overwei();
+	}
+	if(newPage=="#RESULT"){
+		animationLock = 1;
+		showResult();
+	}
+	if(originalPage=="#BHELLO"){
+		animationLock = 0;
+	}
+	if(originalPage=="#BWELCOMEBACK"){
+		animationLock = 0;
+	}
+	if(originalPage=="#BNICEMEET"){
+		animationLock = 0;
+	}
+	if(originalPage=="#BAGECAL"){
+		animationLock = 0;
+	}
+	if(originalPage=="#BPREGPAGE"){
+		animationLock = 0;
+	}
+	if(originalPage=="#ASPECIALFOOD"){
+		animationLock = 0;
+	}
+	if(originalPage=="#EKEEPEXP"){
+		animationLock = 0;
+	}
+	if(originalPage=="#ENUTRIEXP"){
+		animationLock = 0;
+	}
+	if(originalPage=="#IAW"){
+		animationLock = 0;
+	}
+	if(originalPage=="#ILW"){
+		animationLock = 0;
+	}
+	if(originalPage=="#RESULT"){
+		animationLock = 0;
+	}
+}
+function transformAnimation(originalPage,newPage){
+	var width = $(window).width();
+	var paddingRight = 0;
+	var functionA = setInterval(myFunctionA,1);
+	function myFunctionA(){
+		$(originalPage).css("right",paddingRight+"px");
+		paddingRight += 5;
+		if(paddingRight >= width){
+			clearInterval(functionA);
+			$(originalPage).css("right",0+"px");
+			// AWI CONTROLER
 			if(originalPage=="#AWI"){
 				createIconTravelList();
 				createAWI();
 			}
-		});
-	});
+			return true;
+		}
+	}
+}
+function transformBackAnimation(originalPage,newPage){
+	var width = $(window).width();
+	var paddingLeft = 0;
+	var functionA = setInterval(myFunctionA,1);
+	function myFunctionA(){
+		$(originalPage).css("left",paddingLeft+"px");
+		paddingLeft += 5;
+		if(paddingLeft >= width){
+			clearInterval(functionA);
+			$(originalPage).css("left",0+"px");
+			// AWI CONTROLER
+			if(originalPage=="#AWI"){
+				createIconTravelList();
+				createAWI();
+			}
+			return true;
+		}
+	}
 }

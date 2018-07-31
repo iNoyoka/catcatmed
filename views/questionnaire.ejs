@@ -6,9 +6,9 @@
 	<title>catcatmed</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
+    <link rel="stylesheet" href="bootstrap-3.3.7/css/bootstrap.min.css">
+    <script src="javascript/jquery/jquery_v-3-3-1.js"></script>
+    <script src="bootstrap-3.3.7/js/bootstrap.min.js"></script>
 	<!--
 		MUST CHECK : "id = catNamex" uncorrect number will lead to error.
 	-->
@@ -18,7 +18,7 @@
 		{
 			font-family: 'Noto Sans TC';
 		}
-	</style>	
+	</style>
 	<!--禁止右鍵與反白 for UX-->
 	<script type="text/javascript"> 	 
 		function clickIE4(){
@@ -99,14 +99,14 @@
 	<script>
 		onloadWebUpdateInfo();
 	</script>
-	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
 		<nav class="col-lg-2 col-lg-offset-10 col-md-4 col-md-offset-8 col-sm-6 col-sm-offset-6 col-xs-6 col-xs-offset-6">
 			<div class="navBlock">
-				<p onClick="sendCurrentDataToServer(1);" class="navLink">儲存並回首頁</p>
+				<p onClick="sendCurrentDataToServer(1);" class="navLink">回首頁</p>
 			</div>
 		</nav>
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBlock"></div>
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 questionnaireInner">			
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 questionnaireInner">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBlock elementInVisable"></div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<!-- say hi to customer -->
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BHELLO">
@@ -115,26 +115,76 @@
 				<!-- questionnaire here -->
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BKN">
 					<div class="question">
-						<span>請 問 您 的 名 字 ？</span>
+						<span>請問您的名字？</span>
 					</div>
 					<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 text-center">
 						<input type="text" id="BKNEnter" onkeypress="enterPress(this.id,event)">
 					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 question">
+						<span>請問您是貓孩的爸爸還是媽媽？</span>
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">					
+						<div class="col-lg-2 col-lg-offset-4 col-md-2 col-md-offset-4 col-sm-3 col-sm-offset-3 col-xs-8 col-xs-offset-2">
+							<div class="icon" onclick="iconClick(this.id);" id="BKS_boy">
+								<span class="options">爸爸</span>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-2">
+							<div class="icon" onclick="iconClick(this.id);" id="BKS_girl">
+								<span class="options">媽媽</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 question">					
+						<span>請問您的年齡？</span>
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
+							<div class="icon" onclick="iconClick(this.id);" id="BKA_18-">
+								<span class="options">18以下</span>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
+							<div class="icon" onclick="iconClick(this.id);" id="BKA_18-25">
+								<span class="options">18-25</span>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
+							<div class="icon" onclick="iconClick(this.id);" id="BKA_26-35">
+								<span class="options">26-35</span>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
+							<div class="icon" onclick="iconClick(this.id);" id="BKA_36-45">
+								<span class="options">36-45</span>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
+							<div class="icon" onclick="iconClick(this.id);" id="BKA_46-65">
+								<span class="options">46-65</span>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
+							<div class="icon" onclick="iconClick(this.id);" id="BKA_65-">
+								<span class="options">65+</span>
+							</div>
+						</div>
+					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBotBlock"></div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-						<button id="BKNButton" onclick="addToList(this.id);">下 一 題</button>
+						<button id="BKNButton" onclick="addToList(this.id);">開始填寫</button>
 					</div>
 				</div>		
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BCN">
 					<div class="question">
-						<span>請 問 貓 貓 的 名 字 ？</span>
+						<span>請問貓貓的名字？</span>
 					</div>
 					<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 text-center">
 						<input type="text" id="BCNEnter" onkeypress="enterPress(this.id,event)">
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBotBlock"></div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-						<button id="BCNButton" onclick="addToList(this.id);">下 一 題</button>
+						<button id="BCNButton" onclick="addToList(this.id);">下一題</button>
 					</div>	
 				</div>
 				<!-- show some information -->
@@ -144,74 +194,20 @@
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center elementInVisable" id="BNICE_B">
 					</div>
 				</div>
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BKS">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 question">
-						<span>請 問 你 是 爸 爸 還 是 媽 媽 ？</span>
-					</div>
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">					
-						<div class="col-lg-3 col-lg-offset-3 col-md-3 col-md-offset-3">
-							<div class="placeholder" onclick="addToList(this.id);" id="BKS_boy">
-								<span>爸 爸</span>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-3">
-							<div class="placeholder" onclick="addToList(this.id);" id="BKS_girl">
-								<span>媽 媽</span>
-							</div>
-						</div>
-					</div>				
-				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BCS">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 question">
 						<span id="catName1">貓貓</span>						
 						<span>是 男 生 還 是 女 生 呢 ？</span>
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<div class="col-lg-3 col-lg-offset-3 col-md-3 col-md-offset-3">
+						<div class="col-lg-2 col-lg-offset-4 col-md-2 col-md-offset-4">
 							<div class="placeholder" onclick="addToList(this.id);" id="BCS_boy">
-								<span>男 生</span>
+								<span class="options">男 生</span>
 							</div>
 						</div>
-						<div class="col-lg-3 col-md-3">
+						<div class="col-lg-2 col-md-2">
 							<div class="placeholder" onclick="addToList(this.id);" id="BCS_girl">
-								<span>女 生</span>
-							</div>
-						</div>
-					</div>				
-				</div>
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BKA">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 question">					
-						<span>請問您幾歲？</span>
-					</div>
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
-							<div class="placeholder" onclick="addToList(this.id);" id="BKA_18-">
-								<span>18歲以下</span>
-							</div>
-						</div>
-						<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
-							<div class="placeholder" onclick="addToList(this.id);" id="BKA_18-25">
-								<span>18-25歲</span>
-							</div>
-						</div>
-						<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
-							<div class="placeholder" onclick="addToList(this.id);" id="BKA_26-35">
-								<span>26-35歲</span>
-							</div>
-						</div>
-						<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
-							<div class="placeholder" onclick="addToList(this.id);" id="BKA_36-45">
-								<span>36-45歲</span>
-							</div>
-						</div>
-						<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
-							<div class="placeholder" onclick="addToList(this.id);" id="BKA_46-65">
-								<span>46-65歲</span>
-							</div>
-						</div>
-						<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
-							<div class="placeholder" onclick="addToList(this.id);" id="BKA_65+">
-								<span>65歲以上</span>
+								<span class="options">女 生</span>
 							</div>
 						</div>
 					</div>				
@@ -246,17 +242,17 @@
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 							<div class="placeholder" data-toggle="modal" data-target="#nohairModal">
-								<span>無 毛 貓</span>
+								<span class="options">無 毛 貓</span>
 							</div>
 						</div>
 						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 							<div class="placeholder" data-toggle="modal" data-target="#shorthairModal">
-								<span>短 毛 貓</span>
+								<span class="options">短 毛 貓</span>
 							</div>
 						</div>
 						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 							<div class="placeholder" data-toggle="modal" data-target="#longhairModal">
-								<span>長 毛 貓</span>
+								<span class="options">長 毛 貓</span>
 							</div>
 						</div>
 					</div>
@@ -333,12 +329,12 @@
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="col-lg-3 col-lg-offset-3 col-md-3 col-md-offset-3">
 							<div class="placeholder" onclick="addToList(this.id);" id="BNU_yes">
-								<span>是</span>
+								<span class="options">是</span>
 							</div>
 						</div>
 						<div class="col-lg-3 col-md-3">
 							<div class="placeholder" onclick="addToList(this.id);" id="BNU_no">
-								<span>否</span>
+								<span class="options">否</span>
 							</div>
 						</div>	
 					</div>				
@@ -351,12 +347,12 @@
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="col-lg-3 col-lg-offset-3 col-md-3 col-md-offset-3">
 							<div class="placeholder" onclick="addToList(this.id);" id="BPR_yes">
-								<span>是</span>
+								<span class="options">是</span>
 							</div>
 						</div>
 						<div class="col-lg-3 col-md-3">
 							<div class="placeholder" onclick="addToList(this.id);" id="BPR_no">
-								<span>否</span>
+								<span class="options">否</span>
 							</div>
 						</div>
 					</div>				
@@ -1716,12 +1712,12 @@
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BWELCOMEBACK">
 					<span>先等待三秒讓伺服器畫好你之前填的東西辣</span>
 				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBlock elementInVisable"></div>
 				<!-- WHILE BACK -->
 				<div id="temp"></div>
 				<!-- questionnaire up -->
 			</div>
 		</div>
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBlock"></div>
 		<div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
 			<div class="backBlock elementInVisable" id="backButton_TOP" onclick="addToList(this.id);">
 				<span class="smallSpan">back</span>

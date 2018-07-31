@@ -154,6 +154,16 @@ function stepByStepIconList(){
 			stepByStepIconList();
 		}
 	}
+	//both joint and bone
+	else if(iconRecord[6]==1 && iconRecord[7]==1){
+		iconRecord[6] = 0;
+		iconRecord[7] = 0;
+		alreadyInList.JOINT = 1;
+		alreadyInList.BONE = 1;
+		tempList.push("#IEB");
+		tempList.push("#IBC");
+		stepByStepIconList();
+	}
 	else if(iconRecord[6]==1){
 		iconRecord[6] = 0;
 		alreadyInList.JOINT = 1;
@@ -186,6 +196,17 @@ function stepByStepIconList(){
 		alreadyInList.OVERWEI = 1;
 		iconRecord[9] = 0;
 		tempList.push("#ILW");
+		stepByStepIconList();
+	}
+	//both stoma and stress
+	else if(iconRecord[10]==1 && iconRecord[11]==1){
+		iconRecord[10] = 0;
+		iconRecord[11] = 0;
+		alreadyInList.STOMA = 1;
+		alreadyInList.STRESS = 1;
+		tempList.push("#IVO");
+		tempList.push("#IBP");
+		tempList.push("#IPR");
 		stepByStepIconList();
 	}
 	else if(iconRecord[10]==1){

@@ -74,7 +74,7 @@ input[type=text]{
 	padding: 10px;
 	background-color: #F1F1F2;
 	text-align: center;
-	font-size: 25px;
+
 	font-family: 'Noto Sans TC',Microsoft JhengHei;
 	display: inline-block;
 	border: 0px;
@@ -85,7 +85,7 @@ input[type=number]{
 	padding: 10px;
 	background-color: #F1F1F2;
 	text-align: center;
-	font-size: 25px;
+	font-size: 1.1em;
 	font-family: 'Noto Sans TC',Microsoft JhengHei;
 	display: inline-block;
 	border: 0px;
@@ -114,7 +114,7 @@ button:hover{
 }
 /*font block*/
 span{
-	font-size: 25px;
+	font-size: 1.5em;
 	font-family: 'Noto Sans TC',Microsoft JhengHei;
 }
 .smallSpan{
@@ -123,6 +123,7 @@ span{
 .question{
 	margin-top: 20px;
 	margin-bottom: 20px;
+	font-weight: bold;
 }
 /*color block*/
 .placeholder {
@@ -132,42 +133,58 @@ span{
 	background-color: #F1F1F2;
 	color: #3D5BA8 !important;
 	border: none;
-	border-radius: 10px;
 	cursor: pointer;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	height: 100px;
-	line-height: 100px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.placeholder:after{
+	content:"";
+	margin-top: 100%;
+	display: block;
 }
 .placeholder:hover{
 	background-color: #3D5BA8;
 	color: #F1F1F2 !important;
 	transition: 200ms;
 }
+.placeholder .options{
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	right: 0;
+	top:50%;
+    transform:translateY(-50%);
+}
 .icon{
-	font-size: 18px;
 	background-color: #F1F1F2;
 	color:  #3D5BA8;
 	cursor: pointer;
-	margin-top: 8px;
-	margin-bottom: 8px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 	padding: 10px;
-	border-radius: 10px;
-	transition: 200ms;
+	width: 100%;
+	overflow: hidden;	
+}
+.icon:after{
+	content:"";
+	margin-top: 100%;
+	display: block;
 }
 .icon:hover{
 	background-color: #87A7D6;
 	color: #F1F1F2;
 	transition: 200ms;
 }
+.icon .options{
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	right: 0;
+	top:50%;
+    transform:translateY(-50%);
+	font-size: 1.1em !important;
+}
 .iconSelected{			
-	background-color: #3D5BA8;
-	color: #F1F1F2;
-	cursor: pointer;
-	font-size: 18px;
-	margin-top: 8px;
-	margin-bottom: 8px;
-	padding: 10px;
-	border-radius: 10px;
-	transition: 200ms;
+	background-color: #3D5BA8 !important;
+	color: #F1F1F2 !important;
 }
