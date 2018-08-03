@@ -2,20 +2,113 @@
 // LET USER KNOW
 //-----------------------------
 //Generate AWI innerHTML
-function createAWI(){
-	if(icon[0]==0) {$("#AWI_IMMU").toggleClass("elementInVisable");}
-	if(icon[1]==0) {$("#AWI_HEART").toggleClass("elementInVisable");}
-	if(icon[2]==0) {$("#AWI_MEHAIR").toggleClass("elementInVisable");}
-	if(icon[3]==0) {$("#AWI_LIHAIR").toggleClass("elementInVisable");}
-	if(icon[4]==0) {$("#AWI_LOHAIR").toggleClass("elementInVisable");}
-	if(icon[5]==0) {$("#AWI_SKIN").toggleClass("elementInVisable");}
-	if(icon[6]==0) {$("#AWI_JOINT").toggleClass("elementInVisable");}
-	if(icon[7]==0) {$("#AWI_BONE").toggleClass("elementInVisable");}
-	if(icon[8]==0) {$("#AWI_ADDWEI").toggleClass("elementInVisable");}
-	if(icon[9]==0) {$("#AWI_OVERWEI").toggleClass("elementInVisable");}
-	if(icon[10]==0) {$("#AWI_STOMA").toggleClass("elementInVisable");}
-	if(icon[11]==0) {$("#AWI_STRESS").toggleClass("elementInVisable");}
-	if(icon[12]==0) {$("#AWI_MOUTH").toggleClass("elementInVisable");}
+function createAWI(AWINumber){
+	var innerHTML = "";
+	var AWIList = [];
+	var AWINameList = [];
+	if(icon[0]==1) {AWIList.push("AWI_IMMU");AWINameList.push("免疫力");}
+	if(icon[1]==1) {AWIList.push("AWI_HEART");AWINameList.push("心臟");}
+	if(icon[2]==1) {AWIList.push("AWI_MEHAIR");AWINameList.push("化毛");}
+	if(icon[3]==1) {AWIList.push("AWI_LIHAIR");AWINameList.push("亮毛");}
+	if(icon[4]==1) {AWIList.push("AWI_LOHAIR");AWINameList.push("脫毛");}
+	if(icon[5]==1) {AWIList.push("AWI_SKIN");AWINameList.push("皮膚");}
+	if(icon[6]==1) {AWIList.push("AWI_JOINT");AWINameList.push("關節");}
+	if(icon[7]==1) {AWIList.push("AWI_BONE");AWINameList.push("骨頭");}
+	if(icon[8]==1) {AWIList.push("AWI_ADDWEI");AWINameList.push("增重");}
+	if(icon[9]==1) {AWIList.push("AWI_OVERWEI");AWINameList.push("減肥");}
+	if(icon[10]==1) {AWIList.push("AWI_STOMA");AWINameList.push("腸胃");}
+	if(icon[11]==1) {AWIList.push("AWI_STRESS");AWINameList.push("壓力");}
+	if(icon[12]==1) {AWIList.push("AWI_MOUTH");AWINameList.push("口腔");}
+	if(AWINumber == 1){
+		innerHTML += '<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5"></div>';
+		innerHTML += '<div class="col-lg-2 col-md-2 col-sm-2 vol-xs-2" id="'+AWIList.pop()+'" onclick="addToList(this.id)"><div class="placeholder"><span class="options">'+AWINameList.pop()+'</span></div></div>';
+	}else if(AWINumber == 2){
+		innerHTML += '<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"></div>';
+		for(i=0;i<2;i++){
+			innerHTML += '<div class="col-lg-2 col-md-2 col-sm-2 vol-xs-2" id="'+AWIList.pop()+'" onclick="addToList(this.id)"><div class="placeholder"><span class="options">'+AWINameList.pop()+'</span></div></div>';
+		}
+	}else if(AWINumber == 3){
+		innerHTML += '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>';
+		for(i=0;i<3;i++){
+			innerHTML += '<div class="col-lg-2 col-md-2 col-sm-2 vol-xs-2" id="'+AWIList.pop()+'" onclick="addToList(this.id)"><div class="placeholder"><span class="options">'+AWINameList.pop()+'</span></div></div>';
+		}
+	}else if(AWINumber == 4){
+		innerHTML += '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>';
+		for(i=0;i<4;i++){
+			innerHTML += '<div class="col-lg-2 col-md-2 col-sm-2 vol-xs-2" id="'+AWIList.pop()+'" onclick="addToList(this.id)"><div class="placeholder"><span class="options">'+AWINameList.pop()+'</span></div></div>';
+		}
+	}else if(AWINumber == 5){
+		innerHTML += '<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>';
+		for(i=0;i<5;i++){
+			innerHTML += '<div class="col-lg-2 col-md-2 col-sm-2 vol-xs-2" id="'+AWIList.pop()+'" onclick="addToList(this.id)"><div class="placeholder"><span class="options">'+AWINameList.pop()+'</span></div></div>';
+		}
+	}else if(AWINumber == 6){
+		for(i=0;i<6;i++){
+			innerHTML += '<div class="col-lg-2 col-md-2 col-sm-2 vol-xs-2" id="'+AWIList.pop()+'" onclick="addToList(this.id)"><div class="placeholder"><span class="options">'+AWINameList.pop()+'</span></div></div>';
+		}
+	}else if(AWINumber == 7){
+		innerHTML += '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>';
+		for(i=0;i<4;i++){
+			innerHTML += '<div class="col-lg-2 col-md-2 col-sm-2 vol-xs-2" id="'+AWIList.pop()+'" onclick="addToList(this.id)"><div class="placeholder"><span class="options">'+AWINameList.pop()+'</span></div></div>';
+		}
+		innerHTML += '<div class="col-lg-12 col-md-12"></div>';
+		innerHTML += '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>';
+		for(i=0;i<3;i++){
+			innerHTML += '<div class="col-lg-2 col-md-2 col-sm-2 vol-xs-2" id="'+AWIList.pop()+'" onclick="addToList(this.id)"><div class="placeholder"><span class="options">'+AWINameList.pop()+'</span></div></div>';
+		}
+	}else if(AWINumber == 8){
+		innerHTML += '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>';
+		for(i=0;i<4;i++){
+			innerHTML += '<div class="col-lg-2 col-md-2 col-sm-2 vol-xs-2" id="'+AWIList.pop()+'" onclick="addToList(this.id)"><div class="placeholder"><span class="options">'+AWINameList.pop()+'</span></div></div>';
+		}
+		innerHTML += '<div class="col-lg-12 col-md-12"></div>';
+		innerHTML += '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>';
+		for(i=0;i<4;i++){
+			innerHTML += '<div class="col-lg-2 col-md-2 col-sm-2 vol-xs-2" id="'+AWIList.pop()+'" onclick="addToList(this.id)"><div class="placeholder"><span class="options">'+AWINameList.pop()+'</span></div></div>';
+		}
+	}else if(AWINumber == 9){
+		innerHTML += '<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>';
+		for(i=0;i<5;i++){
+			innerHTML += '<div class="col-lg-2 col-md-2 col-sm-2 vol-xs-2" id="'+AWIList.pop()+'" onclick="addToList(this.id)"><div class="placeholder"><span class="options">'+AWINameList.pop()+'</span></div></div>';
+		}
+		innerHTML += '<div class="col-lg-12 col-md-12"></div>';
+		innerHTML += '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>';
+		for(i=0;i<4;i++){
+			innerHTML += '<div class="col-lg-2 col-md-2 col-sm-2 vol-xs-2" id="'+AWIList.pop()+'" onclick="addToList(this.id)"><div class="placeholder"><span class="options">'+AWINameList.pop()+'</span></div></div>';
+		}
+	}else if(AWINumber == 10){
+		innerHTML += '<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>';
+		for(i=0;i<5;i++){
+			innerHTML += '<div class="col-lg-2 col-md-2 col-sm-2 vol-xs-2" id="'+AWIList.pop()+'" onclick="addToList(this.id)"><div class="placeholder"><span class="options">'+AWINameList.pop()+'</span></div></div>';
+		}
+		innerHTML += '<div class="col-lg-12 col-md-12"></div>';
+		innerHTML += '<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>';
+		for(i=0;i<5;i++){
+			innerHTML += '<div class="col-lg-2 col-md-2 col-sm-2 vol-xs-2" id="'+AWIList.pop()+'" onclick="addToList(this.id)"><div class="placeholder"><span class="options">'+AWINameList.pop()+'</span></div></div>';
+		}
+	}else if(AWINumber == 11){
+		for(i=0;i<6;i++){
+			innerHTML += '<div class="col-lg-2 col-md-2 col-sm-2 vol-xs-2" id="'+AWIList.pop()+'" onclick="addToList(this.id)"><div class="placeholder"><span class="options">'+AWINameList.pop()+'</span></div></div>';
+		}
+		innerHTML += '<div class="col-lg-12 col-md-12"></div>';
+		innerHTML += '<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>';
+		for(i=0;i<5;i++){
+			innerHTML += '<div class="col-lg-2 col-md-2 col-sm-2 vol-xs-2" id="'+AWIList.pop()+'" onclick="addToList(this.id)"><div class="placeholder"><span class="options">'+AWINameList.pop()+'</span></div></div>';
+		}
+	}else if(AWINumber == 12){
+		for(i=0;i<6;i++){
+			innerHTML += '<div class="col-lg-2 col-md-2 col-sm-2 vol-xs-2" id="'+AWIList.pop()+'" onclick="addToList(this.id)"><div class="placeholder"><span class="options">'+AWINameList.pop()+'</span></div></div>';
+		}
+		for(i=0;i<6;i++){
+			innerHTML += '<div class="col-lg-2 col-md-2 col-sm-2 vol-xs-2" id="'+AWIList.pop()+'" onclick="addToList(this.id)"><div class="placeholder"><span class="options">'+AWINameList.pop()+'</span></div></div>';
+		}
+	}
+	innerHTML += '</div>';
+	innerHTML += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">';
+	innerHTML += '<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 text-center"><button id="AWIButton" onclick="addToList(this.id);">下 一 步</button></div>';
+	innerHTML += '</div>';					
+	innerHTML += '</div>';
+	return innerHTML;
 }
 //-----------------------------
 // MULTIPLE SELECT:

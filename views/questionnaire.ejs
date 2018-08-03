@@ -93,6 +93,8 @@
 	<script src="javascript/questionnaire/enumData.js"></script>
 	<script src="javascript/questionnaire/createIconList.js"></script>
 	<script src="javascript/questionnaire/onloadSave.js"></script>
+	<script src="javascript/questionnaire/drawQuestionList.js"></script>
+	<script src="javascript/questionnaire/drawQuestion.js"></script>
 	<link rel="stylesheet" type="text/css" href="stylesheets/questionnaire.css">
 </head>
 <body class="container" onselectstart="return false">
@@ -105,7 +107,7 @@
 				<p onClick="sendCurrentDataToServer(1);" class="navLink">回首頁</p>
 			</div>
 		</nav>
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 questionnaireInner">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 questionnaireInner" id="questionnaireInner">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBlock elementInVisable"></div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<!-- say hi to customer -->
@@ -197,17 +199,17 @@
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BCS">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 question">
 						<span id="catName1">貓貓</span>						
-						<span>是 男 生 還 是 女 生 呢 ？</span>
+						<span>是男生還是女生呢？</span>
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="col-lg-2 col-lg-offset-4 col-md-2 col-md-offset-4">
 							<div class="placeholder" onclick="addToList(this.id);" id="BCS_boy">
-								<span class="options">男 生</span>
+								<span class="options">男生</span>
 							</div>
 						</div>
 						<div class="col-lg-2 col-md-2">
 							<div class="placeholder" onclick="addToList(this.id);" id="BCS_girl">
-								<span class="options">女 生</span>
+								<span class="options">女生</span>
 							</div>
 						</div>
 					</div>				
@@ -215,7 +217,7 @@
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="BCA">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 question">
 						<span id="catName2">貓貓</span>						
-						<span>幾 歲 了 呢 ？</span>
+						<span>幾歲了呢？</span>
 					</div>
 					<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 text-center">
 						<input type="number" id="BCAEnter" onkeypress="enterPress(this.id,event)">
@@ -542,7 +544,7 @@
 							<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 text-center">
 								<button id="AWMButton" onclick="addToList(this.id);">下 一 步</button>
 							</div>
-						</div>					
+						</div>
 					</div>
 				</div>
 				<!-- show some information -->

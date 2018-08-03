@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html"; charset="utf-8"/>
+
+	<title>catcatmedHome</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap-3.3.7/css/bootstrap.min.css">
+    <script src="javascript/jquery/jquery_v-3-3-1.js"></script>
+    <script src="bootstrap-3.3.7/js/bootstrap.min.js"></script>
+
+	<script>
+		function testAlgo(){
+			$.ajax({
+				method : "POST",
+				url : "/testAlgo",
+				data : {
+					catage_year : $("#catage_year").val(),
+					catage_month : $("#catage_month").val(),
+					catwei_front : $("#catwei_front").val(),
+					catwei_back : $("#catwei_back").val(),
+					catBCS : $("#catBCS").val(),
+					activity : $("#activity").val(),
+					neutured : $("#neutured").val(),
+					preg : $("#preg").val(),
+					pregtime : $("#pregtime").val(),
+					milkyCat : $("#milkyCat").val(),
+					kittyAge : $("#kittyAge").val(),
+					kittyNumber : $("#kittyNumber").val(),
+					sexCat : $("#sexCat").val(),
+				}
+			}).done(function(data){
+				document.getElementById("result").innerHTML = data;
+			});
+		}
+	</script>	
+</head>
+<body>
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+		<h3>測試演算法囉~</h3>
+		<form>
+			<p>年齡</p>
+			<input type="number" id="catage_year" value=0><span>歲</span>
+			<input type="number" id="catage_month" value=0><span>月</span>
+			<p>體重</p>
+			<input type="number" id="catwei_front" value=0><span>.</span>
+			<input type="number" id="catwei_back" value=0><span>公斤</span>
+			<p>BCS(3~9)</p>
+			<select id="catBCS">
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+			</select>
+			<p>activity</p>
+			<select id="activity">
+				<option value="低">低</option>
+				<option value="中">中</option>
+				<option value="高">高</option>
+			</select>
+			<p>結紮?</p>
+			<select id="neutured">
+				<option value="是">是</option>
+				<option value="否">否</option>
+			</select>
+			<hr>
+			<p>懷孕?</p>
+			<select id="preg">
+				<option value="否">否</option>
+				<option value="是">是</option>
+			</select>
+			<p>懷孕時間</p>
+			<select id="pregtime">
+				<option value="1_3">1_3</option>
+				<option value="4_6">4_6</option>
+				<option value="6up">6up</option>
+			</select>
+			<hr>
+			<p>泌乳貓?</p>
+			<select id="milkyCat">
+				<option value="否">否</option>
+				<option value="是">是</option>
+			</select>
+			<p>小貓多大了?</p>
+			<select id="kittyAge">
+				<option value="1_2week">1_2week</option>
+				<option value="3week">3week</option>
+				<option value="4week">4week</option>
+				<option value="5week">5week</option>
+				<option value="6week">6week</option>
+			</select>
+			<p>有幾隻小貓?</p>
+			<input type="number" id="kittyNumber" value=1>
+			<hr>
+			<p>交配貓?</p>
+			<select id="sexCat">
+				<option value="否">否</option>
+				<option value="是">是</option>
+			</select>
+			<hr>
+		</form>
+		<button onclick="testAlgo();" style="margin-top: 10px;">測試演算法</button>
+	</div>
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+		<h3>進階篩選功能區</h3>
+		
+	</div>
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<h3>結果</h3>
+		<div id="result"></div>
+	</div>
+</body>
+</html>

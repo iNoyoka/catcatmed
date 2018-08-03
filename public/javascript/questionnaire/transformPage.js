@@ -22,13 +22,7 @@ function addToList(id){
 	//BCN
 	if(id=="BCNButton"){
 		if($("#BCNEnter").val()!=""){
-			basicInformation.catName = $("#BCNEnter").val();
-			for(i=1;i<46;i++){
-				if(i!=11 && i!=12){
-					var str = "catName" + i;
-					document.getElementById(str).innerHTML = basicInformation.catName;				
-				}				
-			}
+			basicInformation.catName = $("#BCNEnter").val();			
 			transformPage("#BCN","#BNICEMEET");		
 		}
 	}
@@ -42,23 +36,14 @@ function addToList(id){
 		transformPage("#BCS","#BCA");
 	}
 	//BCA
-	if(id=="BCAButton"){
-		if($("#BCAEnter").val()!=""){
-			basicInformation.catAge = $("#BCAEnter").val();
-			transformPage("#BCA","#BAGECAL");
-		}
+	if(id=="BCAButton"){		
+		transformPage("#BCA","#BAGECAL");		
 	}
 	//BSP
 	if(id=="BSPButton"){
 		if(species!=""){
 			basicInformation.species = species;				
 			transformPage("#BSP","#BNU");
-			// IF 貓咪屬於無毛的品種 -> 將脫毛、亮毛、化毛的 ICON 選項設為隱藏
-			if(species=="no1"){
-				$("#AIC_MEHAIR_TOP").toggleClass("elementInVisable");
-				$("#AIC_LOHAIR_TOP").toggleClass("elementInVisable");
-				$("#AIC_LIHAIR_TOP").toggleClass("elementInVisable");
-			}
 		}
 	}
 	//BNU
@@ -144,8 +129,7 @@ function addToList(id){
 	//BBC
 	if(id=="BBC_tooThin"){
 		basicInformation.catSize = customBasicEnum.tooThin;
-		transformPage("#BBC","#ARC");
-		$("#AIC_ADDWEI_TOP").toggleClass("elementInVisable");	
+		transformPage("#BBC","#ARC");		
 	}
 	if(id=="BBC_aLittleThin"){
 		basicInformation.catSize = customBasicEnum.aLittleThin;
@@ -161,24 +145,20 @@ function addToList(id){
 	}
 	if(id=="BBC_tooFat"){
 		basicInformation.catSize = customBasicEnum.tooFat;
-		transformPage("#BBC","#ARC");
-		$("#AIC_OVERWEI_TOP").toggleClass("elementInVisable");
+		transformPage("#BBC","#ARC");		
 	}
 	//ARC
 	if(id=="ARC_SPE"){
 		advancedInformation.ARC = customAdvancedEnum.ARC_SPE;
-		transformPage("#ARC","#ANM");
-		document.getElementById("LinkBetweenARC_AIC").innerHTML = "注重";
+		transformPage("#ARC","#ANM");		
 	}
 	if(id=="ARC_DAE"){
 		advancedInformation.ARC = customAdvancedEnum.ARC_DAE;
-		transformPage("#ARC","#AIC");
-		document.getElementById("LinkBetweenARC_AIC").innerHTML = "探索";
+		transformPage("#ARC","#AIC");		
 	}
 	if(id=="ARC_KNO"){
 		advancedInformation.ARC = customAdvancedEnum.ARC_KNO;
-		transformPage("#ARC","#AIC");
-		document.getElementById("LinkBetweenARC_AIC").innerHTML = "了解";
+		transformPage("#ARC","#AIC");		
 	}
 	//ANM
 	if(id=="ANM_yes"){
@@ -204,7 +184,7 @@ function addToList(id){
 	if(id=="AICButton"){
 		if(icon[0]==0 && icon[1]==0 && icon[2]==0 && icon[3]==0 && icon[4]==0 && icon[5]==0 && icon[6]==0 && icon[7]==0 && icon[8]==0 && icon[9]==0 && icon[10]==0 && icon[11]==0 && icon[12]==0){
 			alert("請至少選擇一樣要關心的部分！");
-		}else{			
+		}else{
 			transformPage("#AIC","#AWI");
 		}
 	}
@@ -523,16 +503,13 @@ function addToList(id){
 	//IVA
 	if(id=="IVA_UP"){
 		iconInformation.IVA = customIconEnum.IVA_UP;
-		document.getElementById("LinkBetweenIVA_IVN").innerHTML = "嘔吐";
 		transformPage("#IVA","#IVN");
 	}
 	if(id=="IVA_BOT"){
 		iconInformation.IVA = customIconEnum.IVA_BOT;
-		document.getElementById("LinkBetweenIVA_IVN").innerHTML = "拉肚子";
 		transformPage("#IVA","#IVN");
 	}
 	if(id=="IVA_BOTH"){
-		document.getElementById("LinkBetweenIVA_IVN").innerHTML = "上吐下瀉";
 		iconInformation.IVA = customIconEnum.IVA_BOTH;
 		transformPage("#IVA","#IVN");
 	}
@@ -844,10 +821,6 @@ function addToList(id){
 			newPage = recordTravelList.pop();
 			transformPageBack(currentPage,newPage);
 		}
-		/*else if(newPage=="#BKN"){
-			$("#backButton_TOP").fadeOut(500);
-			transformPageBack(currentPage,newPage);
-		}*/
 		else transformPageBack(currentPage,newPage);
 		$("#backButton_TOP").fadeOut(10);
 	}	
@@ -859,20 +832,15 @@ function addToList(id){
 //-------------------------------------------------------------
 function transformPage(originalPage,newPage){
 	// AWI CONTROLER
-	if(originalPage=="#AIC")createAWI();	
+	if(originalPage=="#AWI") createIconTravelList();
 	// WHILE RELOAD PAGE
 	if(originalPage!="#temp" && originalPage!="#BWELCOMEBACK"){
 		recordTravelList.push(originalPage);
-		transformAnimation(originalPage,newPage);
+		transformAnimation(originalPage);
 	}	
 	if(newPage!="#BWELCOMEBACK")currentPage = newPage;
 	//transform animation
-	specialAnimationControler(originalPage,newPage);
-	$(originalPage).fadeOut(200,function(){
-		$(newPage).fadeIn(200,function(){
-			if(currentPage != "#BKN" && currentPage != "#BHELLO") $("#backButton_TOP").fadeIn(10);
-		});
-	});	
+	clearQuestion(originalPage,newPage);	
 }
 function transformPageBack(originalPage,newPage){
 	// AWI CONTROLER
@@ -880,7 +848,7 @@ function transformPageBack(originalPage,newPage){
 	// TRAVELING ICON
 	if(originalPage == iconTraveledList[iconTraveledList.length - 1]) iconTravelList.push(iconTraveledList.pop());
 	//
-	transformBackAnimation(originalPage,newPage);
+	transformBackAnimation(originalPage);
 	specialAnimationControler(originalPage,newPage);
 	currentPage = newPage;
 	$(originalPage).fadeOut(200,function(){
@@ -889,7 +857,7 @@ function transformPageBack(originalPage,newPage){
 		});
 	});	
 }
-function specialAnimationControler(originalPage,newPage){
+function specialAnimationControlerIn(newPage){
 	if(newPage=="#BHELLO"){
 		animationLock = 1;
 		trans_hello();
@@ -933,7 +901,9 @@ function specialAnimationControler(originalPage,newPage){
 	if(newPage=="#RESULT"){
 		animationLock = 1;
 		showResult();
-	}
+	}	
+}
+function specialAnimationControlerOut(originalPage){
 	if(originalPage=="#BHELLO"){
 		animationLock = 0;
 	}
@@ -968,7 +938,7 @@ function specialAnimationControler(originalPage,newPage){
 		animationLock = 0;
 	}
 }
-function transformAnimation(originalPage,newPage){
+function transformAnimation(originalPage){
 	var width = $(window).width();
 	var paddingRight = 0;
 	var functionA = setInterval(myFunctionA,1);
@@ -978,16 +948,11 @@ function transformAnimation(originalPage,newPage){
 		if(paddingRight >= width){
 			clearInterval(functionA);
 			$(originalPage).css("right",0+"px");
-			// AWI CONTROLER
-			if(originalPage=="#AWI"){
-				createIconTravelList();
-				createAWI();
-			}
 			return true;
 		}
 	}
 }
-function transformBackAnimation(originalPage,newPage){
+function transformBackAnimation(originalPage){
 	var width = $(window).width();
 	var paddingLeft = 0;
 	var functionA = setInterval(myFunctionA,1);
@@ -997,11 +962,6 @@ function transformBackAnimation(originalPage,newPage){
 		if(paddingLeft >= width){
 			clearInterval(functionA);
 			$(originalPage).css("left",0+"px");
-			// AWI CONTROLER
-			if(originalPage=="#AWI"){
-				createIconTravelList();
-				createAWI();
-			}
 			return true;
 		}
 	}
