@@ -1,0 +1,304 @@
+/* product modal */
+.productModal_inner{
+	padding: 20px;
+}
+.productModalInfo{
+	width: 60%;
+	margin:5% 20%;
+}
+.productModalInfo input[type=number]{
+	width: 100%;
+	border: none;
+	padding: 10px;
+	background-color: #F1F1F2;
+	outline: none;
+}
+.productIcon{
+	width: 40%;
+	margin-left: 8%;
+	display: inline-block;
+}
+.productCustom_inner{
+	width: 33%;
+	display: inline-block;
+	text-align: center;
+	font-family: 'Noto Sans TC';
+	background-color: #F1F1F2;
+	color: #3D5BA8;
+	padding: 10px;
+	cursor: pointer;
+}
+.productCustom_inner:hover{
+	background-color: #3D5BA8;
+	color: #F1F1F2;
+	transition: 300ms;
+}
+.productCustom_inner_left{
+	border-top-left-radius: 20px;
+	border-bottom-left-radius: 20px;
+}
+.productCustom_inner_right{
+	border-top-right-radius: 20px;
+	border-bottom-right-radius: 20px;
+}
+.productCustomPrice_inner{
+	width: 25%;
+	display: inline-block;
+	text-align: center;
+	font-family: 'Noto Sans TC';
+	background-color: #F1F1F2;
+	color: #3D5BA8;
+	padding: 10px;
+	cursor: pointer;
+}
+.productCustomPrice_inner:hover{
+	background-color: #3D5BA8;
+	color: #F1F1F2;
+	transition: 300ms;
+}
+
+.container{
+}
+.flavor_inner{
+	width: 100%;
+	padding: 10px 0;
+}
+.flavor_inner_half{
+	padding: 0 !important;
+}
+.flavorTag{
+	padding: 10px;
+	cursor: pointer;
+}
+.select_inner{
+	width: 100%;
+	padding: 15px 0;
+	margin: 10px 0;
+}
+/*switch*/
+.grand_switch{
+	margin: 10px 0;
+}
+.switchTop{
+	width: 60%;
+	float: left;
+}
+.switch{	
+	height: 30px;
+}
+.switch input[type=checkbox]{display: none;}
+.slider{
+	position: absolute;
+	cursor: pointer;
+	top: 0;left: 0;right: 0;bottom: 0;
+	width: 50%;
+	margin-left: 15px;
+	background-color: gray;
+	-webkit-transition: 400ms;
+	transition: 400ms;
+}
+input:checked + .slider {
+  background-color: #3D5BA8;
+}
+/* RWD 微調 ------------*/
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 30px;
+  width: 30px;
+  left: 5%;
+  bottom: 5px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+input:checked + .slider:before {
+  left: 62%;
+}
+/* RWD 微調 ------------*/
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+.switchResult{
+	width: 40%;
+	height: 40px;
+	line-height: 40px;
+	float: right;
+	text-align: center;
+	font-family: 'Noto Sans TC';
+	color: gray;
+}
+/* Style The Dropdown Button */
+.dropbtn {
+    background-color: #F1F1F2;
+    color: gray;
+    padding: 10px;
+    font-size: 16px;
+	font-family: 'Noto Sans TC';
+    border: none;
+    cursor: pointer;
+	width: 100%;
+	border-radius: 20px;
+	margin: 10px 0;
+	outline: none;
+}
+/* dropbutton */
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+	width: 100%;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 100%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content p{
+    color: gray;
+    padding: 12px 16px;
+    text-decoration: none;
+	font-family: 'Noto Sans TC';
+    display: block;
+	cursor: pointer;
+	margin: 0;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content p:hover {
+	background-color: #3D5BA8;
+	color: white;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+	background-color: #3D5BA8;
+	color: white;
+}
+/* product part start */
+.product{
+	padding: 10px;
+	margin: 10px 0;
+}
+.productItem{
+	cursor: pointer;
+}
+.productItemImg{
+	height: 200px;
+	background-color: #F1F1F2;
+}
+.productItemBar{	
+	background-color: black;
+	color: white;
+	padding: 10px;
+	font-family: 'Noto Sans TC';
+}
+.productItem:hover .productItemImg{
+	background-color: gray;
+	transition: 500ms;
+}
+/* BASIC */
+@media only screen and (max-width: 480px){
+	.basicImg-sm{
+		width: 80% !important;
+		margin-left: 10% !important;
+	}
+	.basicInformation-sm{
+		width: 60% !important;
+		margin-left: 20% !important;
+	}
+}
+.basicProductInfo_inner{
+	padding-top: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.basicInfo{
+	display: inline-block;
+}
+.basicImg{
+	height: 150px;
+	background-color: #F1F1F2;
+	width: 50%;
+	margin-left: 25%;
+}
+.basicInformation{
+	width: 100%;
+}
+.basicInformation h4{
+	font-weight: bold;
+	padding: 5px 0;
+}
+.basicInformationButton{
+	border: none;
+	border-radius: 20px;
+	font-family: 'Noto Sans TC';
+	width: 26%;
+	text-align: center;
+	padding: 10px 0;
+	background-color: #F1F1F2;
+	color: #3D5BA8;
+	margin: 4px 37%;
+	outline: none;
+}
+.basicInformationButton:hover{
+	background-color: #3D5BA8;
+	color: white;
+	transition: 300ms;
+}
+/* ADVANCED */
+.advancedProduct{
+	padding-bottom: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.advancedProduct_inner{
+	overflow: scroll;
+	overflow-x: hidden;
+}
+.advancedInfo{
+	width: 90%;
+	margin: 5% 5%;
+}
+.advancedInfomationIcon{
+	width: 80%;
+	margin-left: 11%;
+}
+.advancedHead{
+	margin: 20px 0;
+}
+.advancedIntro{
+	color: gray;
+	font-size: 10px !important;
+}
+.icon{
+	width: 20%;
+	margin: 2.5%;
+	display: inline-block;
+	cursor: pointer;
+}
+/* product part end */
+.footer{
+	height: 250px;
+	background-color: black;
+}
+img{
+	width: 100%;
+}

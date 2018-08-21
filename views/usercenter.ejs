@@ -6,6 +6,7 @@
 	<title>catcatmedUserCenter</title>
 
 	<link rel="stylesheet" type="text/css" href="stylesheets/home.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/header.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -37,27 +38,41 @@
 	</script>
 </head>
 <body>
-	<header>
-		<nav class="navbar navbar-default navbar-fixed-top text-center">
-			<ul class="nav navbar-nav navbar-left">
-				<li><a href="/">首頁</a></li>
-				<li><a href="/questionnaire">開始客製化</a></li>
-				<li><a href="/product">商城</a></li>
-				<li><a href="/cart">購物車 <span id="productLength"><% if (productLength) {%><%=productLength%><%}%></span></a></li>				
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">Library</a></li>
-				<li><a href="#">關於我們</a></li>
-				<li><a href="/usercenter"><span class="glyphicon glyphicon-user"></span>會員中心</a></li>
-				<% if (username) { %>
-					<li><a href="/">welcome back, <%= username %> !</a></li>
-					<li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span>登出</a></li>
-				<% } else { %>
-					<li><a href="/login"><span class="glyphicon glyphicon-log-in"></span>login</a></li>
-				<% } %>
-			</ul>
-		</nav>		
-	</header>
+	<div class="header">
+		<nav class="nav navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<ul class="nav navbar-nav navLogo">
+						<li><a href="/" class="navbar-brand">卡卡貓LOGO</a></li>
+					</ul>
+				</div>
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav">
+						<li><a href="/questionnaire">開始懂他</a></li>
+						<li><a href="/library">營養知識</a></li>
+						<li><a href="#">關於我們</a></li>
+						<li><a href="/product">購物商場</a></li>						
+					</ul>
+					<ul class="nav navbar-nav navbar-right">						
+						<% if (username) { %>
+							<li><a href="/"><%= username %>,歡迎回來!</a></li>
+							<li><a href="/usercenter">會員中心</a></li>
+							<li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span>登出</a></li>
+						<% } else { %>
+							<li><a href="/login"><span class="navButton">登入</span></a></li>
+							<li><a href="/signup"><span class="navButton">註冊</span></a></li>
+						<% } %>
+						<li><a href="/cart">購物車</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
 	<container>
 		<style>
 			.task{

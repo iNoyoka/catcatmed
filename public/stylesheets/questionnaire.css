@@ -5,6 +5,22 @@ body {
 p{
 	font-family : 'Noto Sans TC',Microsoft JhengHei;
 }
+.body{
+	/*overflow: hidden;*/
+}
+@media only screen and (max-width: 992px){
+	.smSize{
+		padding: 0;
+	}
+}
+@media only screen and (max-width: 768px){
+	.xsSize{
+		padding: 0;
+	}
+}
+button{
+	margin: 10px 0;
+}
 /* USE FOR PADDING BLOCKS */ 
 .paddingBlock{
 	overflow:hidden;
@@ -56,18 +72,16 @@ navBlock{
 /* QUESTION PART */
 .questionBlock{
 	display: none;
+	position: relative;
 }
 .questionnaireInner{
-	overflow:hidden;
 	width:100%;
-	height: 90vh;
-}
-.questionnaireInner:after{
-	content:"";
-	margin-top:100%;
-	display:block;
+	position: relative;
 }
 .elementInVisable{
+	display: none !important;
+}
+.animationInvisable{
 	display: none;
 }
 /*  */
@@ -77,10 +91,10 @@ input[type=text]{
 	padding: 10px;
 	background-color: #F1F1F2;
 	text-align: center;
-
 	font-family: 'Noto Sans TC',Microsoft JhengHei;
 	display: inline-block;
 	border: 0px;
+	margin: 10px 0;
 }
 input[type=number]{
 	width: 100%;
@@ -117,46 +131,74 @@ button:hover{
 }
 /*font block*/
 span{
-	font-size: 1.5em;
+	font-size: 1.3em;
 	font-family: 'Noto Sans TC',Microsoft JhengHei;
 }
 .smallSpan{
-	font-size: 18px;
+	font-size: 1.1em;
 }
 .question{
 	margin-top: 20px;
 	margin-bottom: 20px;
+	font-size: 1.6em !important;
 	font-weight: bold;
+	font-family: 'Noto Sans TC',Microsoft JhengHei;
 }
 /*color block*/
-.placeholder {
+.AIC_IMG{
+	cursor: pointer;
+	border-radius: 15px;
+}
+.AIC_IMG:hover{
+	background-color: #DDDDDD;
+}
+.answer {
 	width: 100%;
 	transition: 200ms;
 	overflow: hidden;
 	background-color: #F1F1F2;
 	color: #3D5BA8 !important;
 	border: none;
+	border-radius: 999em;
 	cursor: pointer;
 	margin-top: 10px;
 	margin-bottom: 10px;
+	position: relative;
 }
-.placeholder:after{
+.answer:after{
 	content:"";
 	margin-top: 100%;
 	display: block;
 }
-.placeholder:hover{
+.answer:hover{
 	background-color: #3D5BA8;
 	color: #F1F1F2 !important;
 	transition: 200ms;
 }
-.placeholder .options{
+.answer .options{
 	position: absolute;
 	width: 100%;
 	text-align: center;
 	right: 0;
 	top:50%;
     transform:translateY(-50%);
+}
+.answer img{
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	right: 0;	
+}
+.answer_TOP{
+	cursor: pointer;
+}
+.answer_TOP:hover p{
+	color: #3D5BA8;
+}
+.answer_TOP:hover .answer{
+	background-color: #3D5BA8;
+	color: #F1F1F2 !important;
+	transition: 200ms;
 }
 .icon{
 	background-color: #F1F1F2;
@@ -166,7 +208,8 @@ span{
 	margin-bottom: 10px;
 	padding: 10px;
 	width: 100%;
-	overflow: hidden;	
+	overflow: hidden;
+	border-radius: 999em;
 }
 .icon:after{
 	content:"";
@@ -174,7 +217,7 @@ span{
 	display: block;
 }
 .icon:hover{
-	background-color: #87A7D6;
+	background-color: #87A7D6 !important;
 	color: #F1F1F2;
 	transition: 200ms;
 }
@@ -200,11 +243,14 @@ span{
     font-size: 16px;
 	font-family: 'Noto Sans TC';
     border: none;
-	border-radius : 0px !important;
+	border-radius : 0 !important;
     cursor: pointer;
 	width: 60%;
 	margin: 10px 0;
 	outline: none;
+}
+.dropbtnSquare{
+	border-radius : 999em !important;
 }
 .dropbtnSquare:after{
 	content:"";
@@ -268,4 +314,84 @@ span{
 .dropPlace{
 	position: absolute;
 	top: -50px;
+}
+.progressBar{
+	background-color: #5675C4;
+	width: 100%;
+	position: fixed;
+	overflow: hidden;
+	bottom: 0;
+	transition: 300ms;
+}
+.progressBar:after{
+	content: "";
+	margin-top: 6em;
+	display: block;
+}
+.progress{
+	background-color: #3D5BA8;
+	width: 6em;
+	height: 6em;
+	bottom: 3em;
+	left: 50%;
+	transform:translateX(-50%);
+	margin: 0 auto;
+	position: fixed;
+	border-radius: 999em;
+	border: none;
+}
+.progress * {
+	position: absolute;
+}
+.progress-left,.progress-right{
+	background-color: #F1F1F2;
+	width: 6em;
+	height: 6em;
+	margin: 0 auto;
+	position: absolute;
+	border-radius: 999em;
+	border: none;
+}
+.progress-right{clip:rect(0,auto,auto,3em);}
+.progress-left{clip:rect(0,3em,auto,0);}
+.progressImg{
+	background-color: #F1F1F2;
+	width: 5em;
+	height: 5em;
+	margin: 0.5em;
+	position: absolute;
+	border-radius: 999em;
+	border: none;
+}
+.backButton{
+	position: fixed;
+	width: 10em;
+	height: 3em;
+	bottom: 8em;
+	left: 6em;
+	background-color: #F1F1F2;
+	color: #3D5BA8;
+	border-radius: 5em;
+	box-shadow: 1px 6px 10px 0px rgba(0,0,0,0.3);
+	cursor: pointer;
+	transition: 300ms;
+}
+.backButton:hover{
+	background-color: #3D5BA8;
+	color: #F1F1F2;
+	transition: 300ms;
+}
+.backButton .options{
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	right: 0;
+	top:50%;
+    transform:translateY(-50%);
+}
+/* ANIMATION */
+.BHELLO-img{
+	position: absolute;
+	left: 50%;
+	transform:translateX(-50%);
 }

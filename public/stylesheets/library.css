@@ -1,0 +1,50 @@
+.selector_inner{
+	position: relative;
+	width: 100%;
+}
+.selector{
+	width: 14%;
+	overflow: hidden;
+	position: relative;
+	margin: 0 1.3%;
+	background-color: green;
+	display: inline-block;
+}
+.selector:after{
+	content: "";
+	margin-top:100%;
+	display: block;
+}
+.selector .options{
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	right: 0;
+	top:50%;
+    transform:translateY(-50%);
+}
+.selectorLeftButton{
+	position: absolute;
+	left: -25px;
+	top:50%;
+    transform:translateY(-60%);
+}
+.selectorRightButton{
+	position: absolute;
+	right: -25px;
+	top:50%;
+    transform:translateY(-60%);
+}
+/* LIBRARY INFO */
+.ingredientsImg{
+	width: 97.4%;
+	margin: 20px 1.3%;
+	overflow: hidden;
+	position: relative;
+	background-color: green;
+}
+.ingredientsImg:after{
+	content: "";
+	margin-top: 30%;
+	display: block;
+}

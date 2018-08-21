@@ -36,12 +36,14 @@ var basicInformation = {
 	sex:"無資料",
 	catSex:"無資料",
 	age:"無資料",
-	catAge:"無資料",
+	catAgeYear:"無資料",
+	catAgeMonth:"無資料",
 	species:"無資料",
 	ligation:"無資料",
 	pregnancy:"無資料",
 	pregnancyTime:"無資料",
-	catWeight:"無資料",
+	catWeightKilo:"無資料",
+	catWeightGram:"無資料",
 	catExerciseFreq:"無資料",
 	catSide:"無資料",
 	catSize:"無資料"
@@ -223,11 +225,16 @@ var currentPage = "#BHELLO";
 // FOR MULTIPLE's GLOBAL VAR
 //--------------------------------------------------
 var icon = [0,0,0,0,0,0,0,0,0,0,0,0,0];
-var ingredients = [0,0,0,0,0,0,0,0,0];
-var allergy = [0,0,0,0,0,0,0,0,0,0];
+var ingredients = [0,0,0,0,0,0,0,0,0,0,0,0];
+var allergy = [0,0,0,0,0,0,0,0,0,0,0,0];
 var stress = [0,0,0,0,0,0];
 //--------------------------------------------------
 // FIRST PAGE & SPECIES
 //--------------------------------------------------
-var species;
+var catSpecies = "";
 var keeperAge = [0,0,0,0,0,0];
+var catage_year_var = "0";
+var catage_month_var = "0";
+var catwei_kilo_var = "0";
+var catwei_gram_var = "0";
+var progressPercent = 0;

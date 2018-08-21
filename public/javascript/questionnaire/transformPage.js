@@ -36,15 +36,27 @@ function addToList(id){
 		transformPage("#BCS","#BCA");
 	}
 	//BCA
-	if(id=="BCAButton"){		
-		transformPage("#BCA","#BAGECAL");		
+	if(id=="BCAButton"){
+		if(catage_year_var!="0" || catage_month_var!="0"){
+			var year = parseInt(catage_year_var);
+			var month = parseInt(catage_month_var);
+			basicInformation.catAgeYear = year;
+			basicInformation.catAgeMonth = month;
+			transformPage("#BCA","#BAGECAL");	
+		}else{
+			alert("請填寫"+basicInformation.catName+"的年齡喔~");
+		}			
 	}
 	//BSP
 	if(id=="BSPButton"){
-		if(species!=""){
-			basicInformation.species = species;				
+		if(catSpecies!=""){
+			basicInformation.species = catSpecies;				
 			transformPage("#BSP","#BNU");
 		}
+	}
+	if(id=="BSPMix"){
+		basicInformation.species = "Mix";
+		transformPage("#BSP","#BNU");
 	}
 	//BNU
 	if(id=="BNU_yes"){
@@ -85,10 +97,15 @@ function addToList(id){
 	}
 	//BCW
 	if(id=="BCWButton"){
-		if($("#BCWEnter").val()!=""){
-			basicInformation.catWeight = $("#BCWEnter").val();
-			transformPage("#BCW","#BEF");
-		}
+		if(catwei_kilo_var!="0" || catwei_gram_var!="0"){
+			var kilo = parseInt(catwei_kilo_var);
+			var gram = parseInt(catwei_gram_var);
+			basicInformation.catWeightKilo = kilo;
+			basicInformation.catWeightGram = gram;
+			transformPage("#BCW","#BEF");	
+		}else{
+			alert("請填寫"+basicInformation.catName+"的體重喔~");
+		}	
 	}
 	//BEF
 	if(id=="BEF_highFreq"){
@@ -816,13 +833,17 @@ function addToList(id){
 	// USE ANILOCK & BBLOCK to avoid buggy
 	//---------------------------------------
 	if(id=="backButton_TOP" && animationLock==0){
+		animationLock = 1;
 		var newPage = recordTravelList.pop();
 		if(newPage=="#BNICEMEET" || newPage=="#BAGECAL" || newPage=="#BPREGPAGE" || newPage=="#ASPECIALFOOD" || newPage=="#EKEEPEXP" || newPage=="#ENUTRIEXP" || newPage=="#RESULT"){
 			newPage = recordTravelList.pop();
 			transformPageBack(currentPage,newPage);
+		}else if(newPage=="#BKN"){
+			newPage = recordTravelList.pop();
+			transformPageBack(currentPage,newPage);
+			showVanishProgressBar();
 		}
 		else transformPageBack(currentPage,newPage);
-		$("#backButton_TOP").fadeOut(10);
 	}	
 }
 //-------------------------------------------------------------
@@ -840,7 +861,8 @@ function transformPage(originalPage,newPage){
 	}	
 	if(newPage!="#BWELCOMEBACK")currentPage = newPage;
 	//transform animation
-	clearQuestion(originalPage,newPage);	
+	clearQuestion(originalPage,newPage);
+	calculateProgressPercent();
 }
 function transformPageBack(originalPage,newPage){
 	// AWI CONTROLER
@@ -848,94 +870,87 @@ function transformPageBack(originalPage,newPage){
 	// TRAVELING ICON
 	if(originalPage == iconTraveledList[iconTraveledList.length - 1]) iconTravelList.push(iconTraveledList.pop());
 	//
-	transformBackAnimation(originalPage);
-	specialAnimationControler(originalPage,newPage);
+	clearQuestion(originalPage,newPage);
 	currentPage = newPage;
-	$(originalPage).fadeOut(200,function(){
-		$(newPage).fadeIn(200,function(){
-			if(currentPage != "#BKN" && currentPage != "#BHELLO") $("#backButton_TOP").fadeIn(10);
-		});
-	});	
+	calculateProgressPercent();
 }
 function specialAnimationControlerIn(newPage){
 	if(newPage=="#BHELLO"){
-		animationLock = 1;
-		trans_hello();
+		trans_hello();		
 	}
 	if(newPage=="#BWELCOMEBACK"){
-		animationLock = 1;
 		trans_welcomeBack();
 	}
 	if(newPage=="#BNICEMEET"){
-		animationLock = 1;
 		trans_nicetomeetyou();
+		showVanishProgressBar();
 	}
 	if(newPage=="#BAGECAL"){
-		animationLock = 1;
-		trans_agePage();	
+		trans_agePage();
+		showVanishProgressBar();
 	}		
 	if(newPage=="#BPREGPAGE"){
-		animationLock = 1;
 		trans_pregpage();
+		showVanishProgressBar();
 	}
 	if(newPage=="#ASPECIALFOOD"){
-		animationLock = 1;
 		trans_specialfood();
+		showVanishProgressBar();
 	}
 	if(newPage=="#EKEEPEXP"){
-		animationLock = 1;
 		trans_keepexpert();
+		showVanishProgressBar();
 	}
 	if(newPage=="#ENUTRIEXP"){
-		animationLock = 1;
 		trans_nutritionexpert();
+		showVanishProgressBar();
 	}
 	if(newPage=="#IAW"){
-		animationLock = 1;
 		trans_addwei();
+		showVanishProgressBar();
 	}
 	if(newPage=="#ILW"){
-		animationLock = 1;
 		trans_overwei();
+		showVanishProgressBar();
 	}
 	if(newPage=="#RESULT"){
-		animationLock = 1;
 		showResult();
 	}	
 }
 function specialAnimationControlerOut(originalPage){
 	if(originalPage=="#BHELLO"){
-		animationLock = 0;
+	}
+	if(originalPage=="#BKN"){
+		showVanishProgressBar();
 	}
 	if(originalPage=="#BWELCOMEBACK"){
-		animationLock = 0;
+		showVanishProgressBar();
 	}
 	if(originalPage=="#BNICEMEET"){
-		animationLock = 0;
+		showVanishProgressBar();
 	}
 	if(originalPage=="#BAGECAL"){
-		animationLock = 0;
+		showVanishProgressBar();
 	}
 	if(originalPage=="#BPREGPAGE"){
-		animationLock = 0;
+		showVanishProgressBar();
 	}
 	if(originalPage=="#ASPECIALFOOD"){
-		animationLock = 0;
+		showVanishProgressBar();
 	}
 	if(originalPage=="#EKEEPEXP"){
-		animationLock = 0;
+		showVanishProgressBar();
 	}
 	if(originalPage=="#ENUTRIEXP"){
-		animationLock = 0;
+		showVanishProgressBar();
 	}
 	if(originalPage=="#IAW"){
-		animationLock = 0;
+		showVanishProgressBar();
 	}
 	if(originalPage=="#ILW"){
-		animationLock = 0;
+		showVanishProgressBar();
 	}
 	if(originalPage=="#RESULT"){
-		animationLock = 0;
 	}
 }
 function transformAnimation(originalPage){
@@ -965,4 +980,7 @@ function transformBackAnimation(originalPage){
 			return true;
 		}
 	}
+}
+function calculateProgressPercent(){
+	//if()... progressPercent = x;
 }

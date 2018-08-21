@@ -74,34 +74,39 @@ app.post('/testAlgo',function(req,res,next){
 	var kittyAge = req.body.kittyAge;
 	var kittyNumber = parseInt(req.body.kittyNumber);
 	var sexCat = req.body.sexCat;
+	var dailyProteinSelector = req.body.dailyProteinSelector;
+	var metabolismSelector = req.body.metabolismSelector;
 	//
 	var fat = 0;
 	var idealWeight = 0;
 	var RERCoefficient = 0 ;
+	var ageRERCoefficient = 0;
 	var RER = 0;
 	var activityCoefficient;
 	var neuturedCoefficient;
 	var kcal = 1;
 	var childCoefficient;
 	var milkyCatCoefficient;
+	var milkyCatPercentage;
 	var catType; //幼貓 懷孕貓 泌乳貓 交配貓 老貓 老老貓 成貓 胖成貓 
+	var count = 0;
 	//----------------------------------------------------------
 	// DECIDE TYPE OF CAT
 	//----------------------------------------------------------
 	if(catage_year>=1 && catage_year<7){ //成貓
-		if(catBCS>=7){			//胖成貓
+		if(catBCS>=6){			//胖成貓
 			catType = "胖成貓";
 		}else{ 					//一般成貓
 			catType = "成貓";
 		}
 	}else if(catage_year>=7 && catage_year<12){ //老貓		
-		if(catBCS>=7){			//胖成貓
+		if(catBCS>=6){			//胖成貓
 			catType = "胖老貓";
 		}else{ 					//一般成貓
 			catType = "老貓";
 		}
 	}else if(catage_year>=12){
-		if(catBCS>=7){			//胖成貓
+		if(catBCS>=6){			//胖成貓
 			catType = "胖老老貓";
 		}else{ 					//一般成貓
 			catType = "老老貓";
@@ -122,27 +127,28 @@ app.post('/testAlgo',function(req,res,next){
 	// CALCULATE COEFFICIENT
 	//----------------------------------------------------------
 	if(catType == "成貓" || catType == "胖成貓" || catType == "交配貓"){
-		if(catBCS==3) fat = 10;
-		if(catBCS==4) fat = 20;
-		if(catBCS==5) fat = 20;
-		if(catBCS==6) fat = 30;
-		if(catBCS==7) fat = 40;
-		if(catBCS==8) fat = 50;
-		if(catBCS==9) fat = 60;
-		idealWeight = catWeight-catWeight*(fat-20)/100;
-		if(catBCS==3) RERCoefficient = 140;	
-		if(catBCS==4) RERCoefficient = 120;	
-		if(catBCS==5) RERCoefficient = 120;	
-		if(catBCS==6) RERCoefficient = 100;	
-		if(catBCS==7) RERCoefficient = 100;	
-		if(catBCS==8) RERCoefficient = 80;	
-		if(catBCS==9) RERCoefficient = 80;
-		RER = 70*(Math.pow(catWeight,0.75));
+		if(catBCS==1) fat = 5;
+		if(catBCS==2) fat = 10;
+		if(catBCS==3) fat = 20;
+		if(catBCS==4) fat = 30;
+		if(catBCS==5) fat = 40;
+		if(catBCS==6) fat = 50;
+		if(catBCS==7) fat = 60;
+		idealWeight = catWeight*(100-fat)/100/0.8;
+		if(catBCS==1) RERCoefficient = 140;	
+		if(catBCS==2) RERCoefficient = 120;	
+		if(catBCS==3) RERCoefficient = 120;	
+		if(catBCS==4) RERCoefficient = 100;	
+		if(catBCS==5) RERCoefficient = 100;	
+		if(catBCS==6) RERCoefficient = 80;	
+		if(catBCS==7) RERCoefficient = 80;
+		RER = 70*(Math.pow(idealWeight,0.75));
 		if(activity=="高") activityCoefficient = 1.333333333;
 		if(activity=="中") activityCoefficient = 1.083333333;
 		if(activity=="低") activityCoefficient = 1;
 		if(neutured=="是") neuturedCoefficient = 1;
-		if(neutured=="否") neuturedCoefficient = 1.166666667;	
+		if(neutured=="否") neuturedCoefficient = 1.166666667;
+		
 		kcal = RERCoefficient/100*RER*activityCoefficient*neuturedCoefficient;
 	}
 	else if(catType == "幼貓"){
@@ -167,109 +173,209 @@ app.post('/testAlgo',function(req,res,next){
 		kcal = RERCoefficient * RER;
 	}
 	else if(catType == "泌乳貓"){
-		if(kittyAge == "1_2week") milkyCatCoefficient = 30;
-		if(kittyAge == "3week") milkyCatCoefficient = 45;
-		if(kittyAge == "4week") milkyCatCoefficient = 55;
-		if(kittyAge == "5week") milkyCatCoefficient = 65;
-		if(kittyAge == "6week") milkyCatCoefficient = 90;
+		if(kittyAge == "1_2week"){
+			milkyCatCoefficient = 2.3;
+			milkyCatPercentage = 0.3;
+		}
+		if(kittyAge == "3week"){
+			milkyCatCoefficient = 2.5;
+			milkyCatPercentage = 0.45;
+		}
+		if(kittyAge == "4week"){
+			milkyCatCoefficient = 3;
+			milkyCatPercentage = 0.55;
+		}
+		if(kittyAge == "5week"){
+			milkyCatCoefficient = 3.5;
+			milkyCatPercentage = 0.65;
+		}
+		if(kittyAge == "6week"){
+			milkyCatCoefficient = 4;
+			milkyCatPercentage = 0.9;
+		}
 		RER = 70*(Math.pow(catWeight,0.75))*1.2;
-		kcal = RER + milkyCatCoefficient/100*RER*kittyNumber;
+		kcal = RER*milkyCatCoefficient + milkyCatPercentage*RER*kittyNumber;
 	}
 	else if(catType == "老貓" || catType == "胖老貓" || catType == "老老貓" || catType == "胖老老貓"){
-		if(catBCS==3) fat = 10;
-		if(catBCS==4) fat = 20;
-		if(catBCS==5) fat = 20;
-		if(catBCS==6) fat = 30;
-		if(catBCS==7) fat = 40;
-		if(catBCS==8) fat = 50;
-		if(catBCS==9) fat = 60;
-		idealWeight = catWeight*(1-fat/100);
-		RER = 70*(Math.pow(catWeight,0.75));
-		if(catType == "老貓" || catType == "胖老貓"){
-			if(catBCS==3) RERCoefficient = 140;
-			if(catBCS==4) RERCoefficient = 140;
-			if(catBCS==5) RERCoefficient = 130;
-			if(catBCS==6) RERCoefficient = 130;
-			if(catBCS==7) RERCoefficient = 120;
-			if(catBCS==8) RERCoefficient = 120;
-			if(catBCS==9) RERCoefficient = 110;
-		}else{
-			if(catBCS==3) RERCoefficient = 160;
-			if(catBCS==4) RERCoefficient = 160;
-			if(catBCS==5) RERCoefficient = 150;
-			if(catBCS==6) RERCoefficient = 140;
-			if(catBCS==7) RERCoefficient = 130;
-			if(catBCS==8) RERCoefficient = 120;
-			if(catBCS==9) RERCoefficient = 110;
-		}
-		if(activity=="高") activityCoefficient = 1.333333333;
-		if(activity=="中") activityCoefficient = 1.083333333;
+		if(catBCS==1) fat = 5;
+		if(catBCS==2) fat = 10;
+		if(catBCS==3) fat = 20;
+		if(catBCS==4) fat = 30;
+		if(catBCS==5) fat = 40;
+		if(catBCS==6) fat = 50;
+		if(catBCS==7) fat = 60;
+		idealWeight = catWeight*(100-fat)/100/0.8;
+		RER = 70*(Math.pow(idealWeight,0.75));
+		if(catBCS==1) RERCoefficient = 140;
+		if(catBCS==2) RERCoefficient = 120;
+		if(catBCS==3) RERCoefficient = 120;
+		if(catBCS==4) RERCoefficient = 100;
+		if(catBCS==5) RERCoefficient = 100;
+		if(catBCS==6) RERCoefficient = 80;
+		if(catBCS==7) RERCoefficient = 80;
+		if(catage_year==7) ageRERCoefficient = 110;
+		if(catage_year==8) ageRERCoefficient = 120;
+		if(catage_year==9 || catage_year==10) ageRERCoefficient = 130;
+		if(catage_year==11) ageRERCoefficient = 140;
+		if(catage_year==12) ageRERCoefficient = 150;
+		if(catage_year>=13) ageRERCoefficient = 160;
+		if(activity=="高") activityCoefficient = 1.222;
+		if(activity=="中") activityCoefficient = 1.111;
 		if(activity=="低") activityCoefficient = 1;
 		if(neutured=="是") neuturedCoefficient = 1;
 		if(neutured=="否") neuturedCoefficient = 1.166666667;
-		kcal = RERCoefficient/100*RER*activityCoefficient*neuturedCoefficient;
+		kcal = RERCoefficient/100*RER*activityCoefficient*neuturedCoefficient*ageRERCoefficient/100;
 	}
 	//find data
-	var sql = "SELECT * FROM `fooddata`";
+	var sql = "SELECT * FROM `productdb`";
 	var list = [];
 	var listNumber = 0;
 	var innerHTML = "";
+	var algoresult = "[";
 	//console.log("post");
 	con.query(sql,function(err,result){
 		if(err) throw err;
-		else{			
-			for(i in result){
-				if(catType == "成貓"){
-					if(result[i].fat>10&&result[i].fat<30&&result[i].fiber<5&&result[i].protein>30&&result[i].protein<45)
+		else{
+			//---------------------------------------
+			// BASIC PAUL SELECTOR (初次基本篩選])
+			//---------------------------------------
+			for(i in result){				
+				if(catType == "成貓"){					
+					if(result[i].DRY_fat>10&&result[i].DRY_fat<30&&result[i].DRY_fiber<5&&result[i].DRY_protein>30&&result[i].DRY_protein<45)
 					{
 						list.push(i);
 						listNumber += 1;
 					}
 				}else if(catType == "胖成貓"){
-					if(result[i].fat>9&&result[i].fat<17&&result[i].fiber>5&&result[i].fiber<15&&result[i].protein>30&&result[i].protein<45)
+					if(result[i].DRY_fat>9&&result[i].DRY_fat<17&&result[i].DRY_fiber>5&&result[i].DRY_fiber<15&&result[i].DRY_protein>30&&result[i].DRY_protein<45)
 					{
 						list.push(i);
 						listNumber += 1;
 					}
 				}else if(catType == "幼貓"){
-					if(result[i].fat>18&&result[i].fat<35&&result[i].protein>35&&result[i].protein<50)
+					if(result[i].DRY_fat>18&&result[i].DRY_fat<35&&result[i].DRY_protein>35&&result[i].DRY_protein<50)
 					{
 						list.push(i);
 						listNumber += 1;
 					}
 				}else if(catType == "懷孕貓"){
-					if(result[i].fat>18&&result[i].fat<35&&result[i].protein>35&&result[i].protein<50)
+					if(result[i].DRY_fat>18&&result[i].DRY_fat<35&&result[i].DRY_protein>35&&result[i].DRY_protein<50)
 					{
 						list.push(i);
 						listNumber += 1;
 					}
 				}else if(catType == "泌乳貓"){
-					if(result[i].fat>18&&result[i].fat<35&&result[i].protein>35&&result[i].protein<50)
+					if(result[i].DRY_fat>18&&result[i].DRY_fat<35&&result[i].DRY_protein>35&&result[i].DRY_protein<50)
 					{
 						list.push(i);
 						listNumber += 1;
 					}
 				}else if(catType == "交配貓"){
-					if(result[i].fat>10&&result[i].fat<30&&result[i].protein>30&&result[i].protein<45)
+					if(result[i].DRY_fat>10&&result[i].DRY_fat<30&&result[i].DRY_protein>30&&result[i].DRY_protein<45)
 					{
 						list.push(i);
 						listNumber += 1;
 					}
 				}else if(catType == "老貓" || catType == "胖老貓"){
-					if(result[i].fat>18&&result[i].fat<25&&result[i].fiber<=5&&result[i].protein>30&&result[i].protein<45)
+					if(result[i].DRY_fat>18&&result[i].DRY_fat<25&&result[i].DRY_fiber<=5&&result[i].DRY_protein>30&&result[i].DRY_protein<45)
 					{
 						list.push(i);
 						listNumber += 1;
 					}
 				}else if(catType == "老老貓" || catType == "胖老老貓"){
-					if(result[i].fat>10&&result[i].fat<18&&result[i].fiber>5&&result[i].fiber<15&&result[i].protein>30&&result[i].protein<45)
+					if(result[i].DRY_fat>10&&result[i].DRY_fat<18&&result[i].DRY_fiber>5&&result[i].DRY_fiber<15&&result[i].DRY_protein>30&&result[i].DRY_protein<45)
 					{
 						list.push(i);
 						listNumber += 1;
 					}
 				}
+			}
+			//---------------------------------------
+			// ADVANCED RAX SELECTOR (進階篩選器)
+			//---------------------------------------
+			// Daily Protein Selector
+			if(dailyProteinSelector != "default"){
+				listTemp = []
+				listTempNum = 0;								
+				for(i=0;i<listNumber;i++){
+					var j = list.pop();					
+					var x = kcal/result[j].kcal*10*result[j].DRY_protein;
+					if(catType == "成貓"){
+						if(5.5*catWeight < x && 11.5*catWeight > x){		
+							listTemp.push(j);
+							listTempNum += 1;
+						}
+					}else if(catType == "老貓"){
+						if(6*catWeight < x && 8.5*catWeight){
+							listTemp.push(j);
+							listTempNum += 1;
+						}
+					}
+				}
+				for(i=0;i<listTempNum;i++){
+					list.push(listTemp.pop());
+				}
+				listNumber = listTempNum;
+			}
+			// Metabolism Selector
+			if(metabolismSelector == "typeA"){
+				listTemp = []
+				listTempNum = 0;
+				if(catType == "成貓"){				
+					for(i=0;i<listNumber;i++){
+						var j = list.pop();					
+						var x = kcal/result[j].kcal*10*result[j].DRY_protein;
+						if(3.5*x/kcal >= 0.4){		
+							listTemp.push(j);
+							listTempNum += 1;
+						}
+					}
+					for(i=0;i<listTempNum;i++){
+						list.push(listTemp.pop());
+					}
+					listNumber = listTempNum;				
+				}
+			}else if(metabolismSelector == "typeB"){
+				listTemp = []
+				listTempNum = 0;
+				for(i=0;i<listNumber;i++){
+					var j = list.pop();					
+					var y_pro = kcal/result[j].kcal*10*result[j].DRY_protein;
+					var y_fat = kcal/result[j].kcal*10*result[j].DRY_fat;
+					var y_carbon = kcal/result[j].kcal*10*result[j].DRY_carbohydrate;
+					var y = (y_pro*3.5+y_fat*8.5+y_carbon*3.5)/(kcal/result[j].kcal*1000);
+					if(catType == "成貓"){
+						if(y > 4 && y < 5){		
+							listTemp.push(j);
+							listTempNum += 1;
+						}
+					}else if(catType == "胖成貓"){
+						if(y > 3.3 && y < 3.8){
+							listTemp.push(j);
+							listTempNum += 1;
+						}
+					}else if(catType == "老貓" || catType == "老老貓"){
+						if(y > 4 && y < 4.5){
+							listTemp.push(j);
+							listTempNum += 1;
+						}
+					}else if(catType == "胖老貓" || catType == "胖老老貓"){
+						if(y > 3.5 && y < 4){
+							listTemp.push(j);
+							listTempNum += 1;
+						}
+					}			
+				}
+				for(i=0;i<listTempNum;i++){
+					list.push(listTemp.pop());
+				}
+				listNumber = listTempNum;			
 				
 			}
+		
+			//---------------------------------------
+			// SEND INFORMATION TO FRONT END
+			//---------------------------------------
 			innerHTML += "<h4>分類 ： "+catType+"</h4>";
 			innerHTML += "<h4>fat ： "+fat+"%</h4>";
 			innerHTML += "<h4>idealWeight ： "+idealWeight+"kg</h4>";
@@ -279,13 +385,27 @@ app.post('/testAlgo',function(req,res,next){
 			innerHTML += "<hr>";
 			for(i=0;i<listNumber;i++){
 				var j = list.pop();
-				innerHTML += "<h5>飼料牌子 ： "+result[j].brand+"</h5>";
-				innerHTML += "<h5>飼料名稱 ： "+result[j].productName+"</h5>";
-				innerHTML += "<h5>protein ： "+result[j].protein+"</h5>";
-				innerHTML += "<h5>fiber ： "+result[j].fiber+"</h5>";
-				innerHTML += "<h5>fat ： "+result[j].fat+"</h5>";
+				count++;
+				innerHTML += "<div class='col-lg-3 col-md-3'>";
+				innerHTML += "<h5 style='height:60px'>飼料名稱 ： "+result[j].productName+"</h5>";
+				innerHTML += "<h5>原產地 ： "+result[j].productOriginal+"</h5>";
+				innerHTML += "<h5>價格 ： "+result[j].price+"</h5>";
+				innerHTML += "<h5>kcal ： "+result[j].kcal+"</h5>";
+				innerHTML += "<h5>肉等級 ： "+result[j].MeatLevel_total+"</h5>";
+				innerHTML += "<h5>protein ： "+result[j].DRY_protein+"</h5>";
+				innerHTML += "<h5>fiber ： "+result[j].DRY_fiber+"</h5>";
+				innerHTML += "<h5>fat ： "+result[j].DRY_fat+"</h5>";
+				innerHTML += "<h5>ash ： "+result[j].DRY_ash+"</h5>";
 				innerHTML += "<hr>";
-				if(i==listNumber-1) res.send(innerHTML);
+				innerHTML += "</div>";
+				if(i==listNumber-1){
+					innerHTML += "<h5>經由此貓咪條件篩選而出個結果數:"+count+"</h5>";
+					res.send(innerHTML);					
+				}
+			}
+			if(listNumber==0){
+				innerHTML += "<h5>經由此貓咪條件篩選而出個結果數:"+count+"</h5>";
+				res.send(innerHTML);
 			}
 			
 		}
@@ -539,7 +659,7 @@ app.post('/deleteProductFromCart',function(req,res,next){
 
 /* Questionnaire Part */
 app.get('/questionnaire',function(req,res,next){
-	res.render('questionnaire_ver2');
+	res.render('questionnaire');
 });
 app.post('/questionnaireSaveandQuit',function(req,res,next){
 	req.session.recordQuestionnaire = true;
@@ -605,6 +725,12 @@ app.post('/questionnaireAskArray',function(req,res,next){
 	}
 });
 //------------------------------------------
+// SHOW ALGORITHM RESULT
+//------------------------------------------
+app.get('/algorithmResult',function(req,res,next){
+	res.render('algorithmResult');
+});
+//------------------------------------------
 // Get User Center Page
 //------------------------------------------
 app.get('/usercenter',function(req,res,next){
@@ -624,7 +750,13 @@ app.post('/clientAskForChangePassword',function(req,res,next){
 		}
 	});
 });
-
+//------------------------------------------
+// LIBRARY
+//------------------------------------------
+app.get('/library',function(req,res,next){
+	if(req.session.cart==null) req.session.cart = [];
+	res.render('library',{username: req.session.name,productLength:req.session.cart.length});
+});
 //------------------------------------------
 // SEND MAIL
 //------------------------------------------

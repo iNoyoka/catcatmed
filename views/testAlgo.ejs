@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html"; charset="utf-8"/>
 
-	<title>catcatmedHome</title>
+	<title>testAlgorithmTemp</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="bootstrap-3.3.7/css/bootstrap.min.css">
@@ -29,8 +29,10 @@
 					kittyAge : $("#kittyAge").val(),
 					kittyNumber : $("#kittyNumber").val(),
 					sexCat : $("#sexCat").val(),
+					dailyProteinSelector : $("#dailyProteinSelector").val(),
+					metabolismSelector : $("#metabolismSelector").val()
 				}
-			}).done(function(data){
+			}).done(function(data){			
 				document.getElementById("result").innerHTML = data;
 			});
 		}
@@ -107,10 +109,22 @@
 	</div>
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 		<h3>進階篩選功能區</h3>
-		
+		<p>每日所需蛋白質克數篩選 Selector</p>
+		<select id="dailyProteinSelector">
+			<option value="default">預設</option>
+			<option value="typeA">kcal/result.kcal*10*result.DRY_protein</option>
+		</select>
+		<hr>
+		<p>代謝功能 Selector</p>
+		<select id="metabolismSelector">
+			<option value="default">預設</option>
+			<option value="typeA">3.5*protein(%)*daily(g) >= 40%</option>
+			<option value="typeB">(g)*DM*(C*3.5+P*3.5+F*8.5)/(g) between ...</option>
+		</select>
 	</div>
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<h3>結果</h3>
+		<div id="basic">
 		<div id="result"></div>
 	</div>
 </body>
