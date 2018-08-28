@@ -18,6 +18,7 @@
 			font-family: 'Noto Sans TC';
 		}
 	</style>
+	<script src="javascript/library.js"></script>
 </head>
 <body>
 	<!--header-->	
@@ -59,25 +60,46 @@
 	<!--header END-->
 	<div class="body">
 		<div class="container">
-			<div class="selector_inner">
-				<div class="selectorLeftButton"><</div>
-				<div class="selector">
-				<span class="options">??</span></div><div class="selector">
-				<span class="options">??</span></div><div class="selector">
-				<span class="options">??</span></div><div class="selector">
-				<span class="options">??</span></div><div class="selector">
-				<span class="options">??</span></div><div class="selector">
-				<span class="options">??</span></div>
-				<div class="selectorRightButton">></div>				
+			<div class="row">
+				<div id="librarySelector" class="col-lg-3 librarySelector">
+					<div class="librarySelector_inner">
+						<div class="librarySelector_title"><span>主成分</span></div>
+						<div id = "beef" onclick="showLibraryInformation(this.id)" class="librarySelector_item librarySelector_item_selected"><span>牛肉</span><span class="librarySelector_item_EN">beef</span></div>
+						<div id = "pork" onclick="showLibraryInformation(this.id)" class="librarySelector_item"><span>豬肉</span><span class="librarySelector_item_EN">pork</span></div>
+						<div id = "lamb" onclick="showLibraryInformation(this.id)" class="librarySelector_item"><span>羊肉</span><span class="librarySelector_item_EN">lamb</span></div>
+						<div id = "chicken" onclick="showLibraryInformation(this.id)" class="librarySelector_item"><span>雞肉</span><span class="librarySelector_item_EN">chicken</span></div>
+						<div id = "duck" onclick="showLibraryInformation(this.id)" class="librarySelector_item"><span>鴨肉</span><span class="librarySelector_item_EN">duck</span></div>
+						<div id = "fish" onclick="showLibraryInformation(this.id)" class="librarySelector_item"><span>魚肉</span><span class="librarySelector_item_EN">fish</span></div>
+						<div id = "deer" onclick="showLibraryInformation(this.id)" class="librarySelector_item"><span>鹿肉</span><span class="librarySelector_item_EN">deer</span></div>
+						<div id = "turkey" onclick="showLibraryInformation(this.id)" class="librarySelector_item"><span>火雞肉</span><span class="librarySelector_item_EN">turkey</span></div>
+						<div class="librarySelector_title"><span>重要元素</span></div>
+						<div id = "Glucosamine" onclick="showLibraryInformation(this.id)" class="librarySelector_item"><span>葡萄糖胺/軟骨素</span><span class="librarySelector_item_EN">Glucosamine</span></div>
+						<div id = "Amino_Acid" onclick="showLibraryInformation(this.id)" class="librarySelector_item"><span>離胺酸</span><span class="librarySelector_item_EN">Amino Acid</span></div>
+						<div id = "Taurine" onclick="showLibraryInformation(this.id)" class="librarySelector_item"><span>牛磺酸</span><span class="librarySelector_item_EN">Taurine</span></div>						
+						<div id = "Lecithin" onclick="showLibraryInformation(this.id)" class="librarySelector_item"><span>卵磷脂</span><span class="librarySelector_item_EN">Lecithin</span></div>
+						<div id = "LCarnitine" onclick="showLibraryInformation(this.id)" class="librarySelector_item"><span>左旋肉鹼</span><span class="librarySelector_item_EN">L-carnitine</span></div>
+						<div id = "Omega" onclick="showLibraryInformation(this.id)" class="librarySelector_item"><span>Omega-3/Omega-6</span></div>
+						<div class="librarySelector_title"><span>微量元素</span></div>
+						<div id = "Zincum" onclick="showLibraryInformation(this.id)" class="librarySelector_item"><span>鋅</span><span class="librarySelector_item_EN">Zincum</span></div>
+						<div id = "Magnesium" onclick="showLibraryInformation(this.id)" class="librarySelector_item"><span>鎂</span><span class="librarySelector_item_EN">Magnesium</span></div>
+						<div id = "Natrium" onclick="showLibraryInformation(this.id)" class="librarySelector_item"><span>鈉</span><span class="librarySelector_item_EN">Natrium</span></div>
+						<div id = "Calcium" onclick="showLibraryInformation(this.id)" class="librarySelector_item"><span>鈣</span><span class="librarySelector_item_EN">Calcium</span></div>
+						<div id = "Cuprum" onclick="showLibraryInformation(this.id)" class="librarySelector_item"><span>銅</span><span class="librarySelector_item_EN">Cuprum</span></div>
+					</div>
+				</div>
+				<div id="libraryInformation" class="col-lg-9 libraryInformation">
+						<h3>牛肉 Beef</h3><br><br>
+						<h4>成分資訊</h4><br>
+						<h5>蛋白質 : 20%</h5>
+						<h5>脂肪含量 : 低</h5>
+						<br><h4>營養資訊</h4><br>
+						<h5>內含的維生素A和B群可以預防貧血，且有豐富的鐵質可預防缺鐵性貧血。<br>蛋白質、胺基酸、醣類因容易被吸收，成為生長時做為細胞組織所需要。<br>中醫認為牛肉屬溫性，有暖胃作用。由於牛肉纖維較粗，且含有較多膽固醇，相對較不易消化，因此餵食毛孩前需剁碎為優。</h5>
+						<br><h4>補鐵冠軍、血紅素鐵</h4><br>
+						<h5>包括豬、牛、羊等的肌肉和內臟，顏色較深，呈暗紅色，故俗稱「紅肉」<br>顏色越紅，所含血紅素鐵越多</h5>
+						<br><h4>維生素</h4><br>
+						<h5>以維生素A和維生素B群為主</h5>
+				</div>
 			</div>
-			<div class="ingredientsImg">
-			</div>
-			<div class="ingredientsInfo">
-			</div>
-		</div>
-	</div>
-	<div class="footer">
-		<div class="container">
 		</div>
 	</div>
 </body>

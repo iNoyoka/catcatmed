@@ -32,30 +32,34 @@ function drawQuestion(newPage){
 				
 				try{
 				if(questionInformation[i].icon==true){
-					if(questionInformation[i].iconNumber == 1){
-						var iconList = questionInformation[i].iconList;
+					innerHTML = "";
+					innerHTML += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="'+id+'">';
+					var iconList = [];
+					for(j=0;j<questionInformation[i].iconNumber;j++){
+						iconList.push(questionInformation[i].iconList[j]);
+					}
+					if(questionInformation[i].iconNumber == 1){						
 						innerHTML += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">';
-						innerHTML += '<img class="col-lg-2 col-lg-offset-5 col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4" src="'+targetIconName(iconList.pop())+'">';
+						innerHTML += '<img style="width: 8%" src="'+targetIconName(iconList.pop())+'">';
 						innerHTML += '</div>';
-					}else if(questionInformation[i].iconNumber == 2){
-						var iconList = questionInformation[i].iconList;
+					}else if(questionInformation[i].iconNumber == 2){						
 						innerHTML += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">';
-						innerHTML += '<img class="col-lg-2 col-lg-offset-4 col-md-2 col-md-offset-4 col-sm-4 col-sm-offset-2 col-xs-4 col-xs-offset-2" src="'+targetIconName(iconList.pop())+'">';
-						innerHTML += '<img class="col-lg-2 col-md-2 col-sm-4 col-xs-4" src="'+targetIconName(iconList.pop())+'">';
+						innerHTML += '<img style="width: 8%" src="'+targetIconName(iconList.pop())+'">';
+						innerHTML += '<img style="width: 8%" src="'+targetIconName(iconList.pop())+'">';
 						innerHTML += '</div>';
-					}else if(questionInformation[i].iconNumber == 3){
-						var iconList = questionInformation[i].iconList;
+					}else if(questionInformation[i].iconNumber == 3){						
 						innerHTML += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">';
-						innerHTML += '<img class="col-lg-2 col-lg-offset-3 col-md-2 col-md-offset-3 col-sm-4 col-xs-4" src="'+targetIconName(iconList.pop())+'">';
-						innerHTML += '<img class="col-lg-2 col-md-2 col-sm-4 col-xs-4" src="'+targetIconName(iconList.pop())+'">';
-						innerHTML += '<img class="col-lg-2 col-md-2 col-sm-4 col-xs-4" src="'+targetIconName(iconList.pop())+'">';
+						innerHTML += '<img style="width: 8%" src="'+targetIconName(iconList.pop())+'">';
+						innerHTML += '<img style="width: 8%" src="'+targetIconName(iconList.pop())+'">';
+						innerHTML += '<img style="width: 8%" src="'+targetIconName(iconList.pop())+'">';
 						innerHTML += '</div>';
 					}
+				}else{
+					innerHTML += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="'+id+'">';
 				}
 				}
 				catch(err){alert("LOADING ICON FAILED");}
 				
-				innerHTML += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="'+id+'">';
 				innerHTML += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  question">'+question+'</div>';
 				innerHTML += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">';
 				if(questionInformation[i].answerType == "A"){
@@ -87,28 +91,28 @@ function drawQuestion(newPage){
 						for(j=0;j<2;j++){
 							innerHTML += '<div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 answer_TOP" onclick="addToList(this.id);" id="'+questionInformation[i].answerId[j]+'">';
 							innerHTML += '<div class="answer"><img src="'+questionInformation[i].answerImg[j]+'"></div>';
-							innerHTML += '<p class="col-lg-12 col-md-12 col-sm-12 col-xs-12">'+questionInformation[i].answer[j]+'</p></div>';
+							innerHTML += '<p">'+questionInformation[i].answer[j]+'</p></div>';
 						}
 					}else if(questionInformation[i].answerNumber == 3){
 						innerHTML += '<div class="col-lg-3 col-md-3"></div>';
 						for(j=0;j<3;j++){
 							innerHTML += '<div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 answer_TOP" onclick="addToList(this.id);" id="'+questionInformation[i].answerId[j]+'">';
 							innerHTML += '<div class="answer"><img src="'+questionInformation[i].answerImg[j]+'"></div>';
-							innerHTML += '<p class="col-lg-12 col-md-12 col-sm-12 col-xs-12">'+questionInformation[i].answer[j]+'</p></div>';
+							innerHTML += '<p>'+questionInformation[i].answer[j]+'</p></div>';
 						}
 					}else if(questionInformation[i].answerNumber == 4){
 						innerHTML += '<div class="col-lg-2 col-md-2"></div>';
 						for(j=0;j<4;j++){
 							innerHTML += '<div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 answer_TOP" onclick="addToList(this.id);" id="'+questionInformation[i].answerId[j]+'">';
 							innerHTML += '<div class="answer"><img src="'+questionInformation[i].answerImg[j]+'"></div>';
-							innerHTML += '<p class="col-lg-12 col-md-12 col-sm-12 col-xs-12">'+questionInformation[i].answer[j]+'</p></div>';
+							innerHTML += '<p>'+questionInformation[i].answer[j]+'</p></div>';
 						}
 					}else if(questionInformation[i].answerNumber == 5){
 						innerHTML += '<div class="col-lg-1 col-md-1"></div>';
 						for(j=0;j<5;j++){
 							innerHTML += '<div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 answer_TOP" onclick="addToList(this.id);" id="'+questionInformation[i].answerId[j]+'">';
 							innerHTML += '<div class="answer"><img src="'+questionInformation[i].answerImg[j]+'"></div>';
-							innerHTML += '<p class="col-lg-12 col-md-12 col-sm-12 col-xs-12">'+questionInformation[i].answer[j]+'</p></div>';
+							innerHTML += '<p>'+questionInformation[i].answer[j]+'</p></div>';
 						}
 					}
 				}				
@@ -125,14 +129,19 @@ function drawQuestion(newPage){
 				innerHTML = "";
 				//icon part
 				if(questionInformation[i].icon==true){
-					if(questionInformation[i].iconNumber == 1){
-						var iconList = questionInformation[i].iconList;
+					var iconList = [];
+					for(j=0;j<questionInformation[i].iconNumber;j++){
+						iconList.push(questionInformation[i].iconList[j]);
+					}
+					innerHTML += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="'+id+'">';
+					if(questionInformation[i].iconNumber == 1){						
 						innerHTML += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">';
-						innerHTML += '<img class="col-lg-2 col-lg-offset-5 col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4" src="'+targetIconName(iconList.pop())+'">';
+						innerHTML += '<img style="width: 8%" src="'+targetIconName(iconList.pop())+'">';
 						innerHTML += '</div>';
 					}
-				}
-				innerHTML += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="'+id+'">';
+				}else{
+					innerHTML += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center questionBlock" id="'+id+'">';
+				}				
 				innerHTML += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  question">'+question+'</div>';
 				innerHTML += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">';
 				if(questionInformation[i].answerType == "A"){
@@ -146,16 +155,15 @@ function drawQuestion(newPage){
 					if(questionInformation[i].answerNumber == 12){
 						for(j=0;j<6;j++){
 							innerHTML += '<div class="col-lg-2 col-md-2">';
-							innerHTML += '<div class="AIC_IMG" id="'+questionInformation[i].answerId[j]+'" onclick="iconClick(this.id)"><img src="images/questionnaire/icons-'+questionInformation[i].answerImg[j]+'.png"></div></div>';
+							innerHTML += '<div class="_IMG" id="'+questionInformation[i].answerId[j]+'" onclick="iconClick(this.id)"><img class="multiSelect_IMG" src="images/questionnaire/icons-'+questionInformation[i].answerImg[j]+'.png"><p style="margin-bottom: 5px;">'+questionInformation[i].answer[j]+'</p></div></div>';
 						}
 						for(j=0;j<6;j++){
 							innerHTML += '<div class="col-lg-2 col-md-2">';
-							innerHTML += '<div class="AIC_IMG" id="'+questionInformation[i].answerId[j+6]+'" onclick="iconClick(this.id)"><img src="images/questionnaire/icons-'+questionInformation[i].answerImg[j+6]+'.png"></div></div>';
+							innerHTML += '<div class="_IMG" id="'+questionInformation[i].answerId[j+6]+'" onclick="iconClick(this.id)"><img class="multiSelect_IMG" src="images/questionnaire/icons-'+questionInformation[i].answerImg[j+6]+'.png"><p style="margin-bottom: 5px;">'+questionInformation[i].answer[j+6]+'</p></div></div>';
 						}
 					}
 				}				
 				innerHTML += '</div>';
-				innerHTML += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBlock"></div>';
 				innerHTML += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">';
 				innerHTML += '<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 text-center"><button id="'+id+'Button" onclick="addToList(this.id);">下 一 步</button></div>';
 				innerHTML += '</div>';					
@@ -583,7 +591,7 @@ function clearQuestion(originalPage,newPage){
 	});
 	/* BACK BUTTON & PROGRESS */
 	transformAnimation(originalPage);
-	specialAnimationControlerOut(originalPage);
+	specialAnimationControlerOut(originalPage,newPage);
 }
 function showVanishProgressBar(){
 	$("#backButton_TOP").toggleClass("elementInVisable");
@@ -669,6 +677,7 @@ function targetIconName(iconName){
 	if(iconName=="LOHAIR") return "images/questionnaire/icon/black/LOHAIR.png";
 	if(iconName=="LIHAIR") return "images/questionnaire/icon/black/LIHAIR.png";
 	if(iconName=="MEHAIR") return "images/questionnaire/icon/black/MEHAIR.png";
+	if(iconName=="SKIN") return "images/questionnaire/icon/black/SKIN.png";
 	if(iconName=="JOINT") return "images/questionnaire/icon/black/JOINT.png";
 	if(iconName=="BONE") return "images/questionnaire/icon/black/BONE.png";
 	if(iconName=="STOMA") return "images/questionnaire/icon/black/STOMA.png";

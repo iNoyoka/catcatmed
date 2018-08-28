@@ -93,12 +93,24 @@ function trans_hello(){
 	}	
 }
 function trans_welcomeBack(){
-	var functionA = setInterval(myFunction,1000);
-	document.getElementById("BWELCOMEBACK").innerHTML = "歡迎回來";
-	function myFunction(){
+	var Ainner = "<span>歡迎回來, "+basicInformation.name+".</span><br>";
+	var Binner = "<span>正在為您載入資料，請稍等...</span>";	
+	document.getElementById("BWELCOMEBACK").innerHTML = "<div id = 'BWELCOMEBACK_A' class='animationInvisable'></div><div id = 'BWELCOMEBACK_B' class='animationInvisable'></div>";
+	document.getElementById("BWELCOMEBACK_A").innerHTML = Ainner;
+	document.getElementById("BWELCOMEBACK_B").innerHTML = Binner;
+	var functionA = setInterval(myFunctionA,0);
+	var functionB = setInterval(myFunctionB,4500);
+	function myFunctionA(){
+		$("#BWELCOMEBACK_A").fadeIn(1500,function(){
+			$("#BWELCOMEBACK_B").fadeIn(1500,function(){
+				clearInterval(functionA);
+			});
+		});
+	}
+	function myFunctionB(){
 		transformPage("#BWELCOMEBACK",currentPage);
 		if(currentPage != "#BKN" && currentPage != "#BHELLO") $("#backButton_TOP").fadeIn(10);
-		clearInterval(functionA);
+		clearInterval(functionB);
 	}
 }
 function trans_nicetomeetyou(){
@@ -338,7 +350,7 @@ function showResult(){
 	var Ainner = "<span>感謝您的填寫！</span>";
 	var Binner = "<br><br><span>卡卡貓正在對於填卷結果進行分析，分析完成之後會將結果寄送到您的email！</span>";
 	var Cinner = "<br><span>希望您能有一個美好的一天~</span>";
-	var Dinner = "<br><br><button><a href='/'>點 此 返 回 首 頁</a></button>";
+	var Dinner = "<br><br><button><a href='/testAlgo'>點 此 返 回 首 頁</a></button>";
 	document.getElementById("RESULT").innerHTML = "<div id = 'RESULT_A' class='animationInvisable'></div><div id = 'RESULT_B' class='animationInvisable'></div><div id = 'RESULT_C' class='animationInvisable'></div><div id = 'RESULT_D' class='animationInvisable'></div>";
 	document.getElementById("RESULT_A").innerHTML = Ainner;
 	document.getElementById("RESULT_B").innerHTML = Binner;

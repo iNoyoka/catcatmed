@@ -583,7 +583,7 @@ var questionInformation = [
 		id : "EFI",
 		type : "D",
 		catname : false,
-		question : "那主成分是下列哪些呢？",
+		question : "那主成分是下列哪些呢？(複選)",
 		icon: false,
 		answerType: "B",
 		answerNumber : 12,

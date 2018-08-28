@@ -366,9 +366,9 @@ function iconClick(id){
 			if(ingredients[5]==1) $("#EFI_FISH").toggleClass("iconSelected");
 			if(ingredients[6]==1) $("#EFI_DEER").toggleClass("iconSelected");
 			if(ingredients[7]==1) $("#EFI_PIG").toggleClass("iconSelected");
-			if(ingredients[8]==1) $("#EFI_PIG").toggleClass("iconSelected");
-			if(ingredients[9]==1) $("#EFI_PIG").toggleClass("iconSelected");
-			if(ingredients[10]==1) $("#EFI_PIG").toggleClass("iconSelected");
+			if(ingredients[8]==1) $("#EFI_BEAN").toggleClass("iconSelected");
+			if(ingredients[9]==1) $("#EFI_SEAFOOD").toggleClass("iconSelected");
+			if(ingredients[10]==1) $("#EFI_EGG").toggleClass("iconSelected");
 			for(i in ingredients){
 				if(i!=11){
 					ingredients[i] = 0;
@@ -506,9 +506,9 @@ function iconClick(id){
 			if(allergy[5]==1) $("#EAD_FISH").toggleClass("iconSelected");
 			if(allergy[6]==1) $("#EAD_DEER").toggleClass("iconSelected");
 			if(allergy[7]==1) $("#EAD_PIG").toggleClass("iconSelected");
-			if(allergy[8]==1) $("#EAD_no").toggleClass("iconSelected");
-			if(allergy[9]==1) $("#EAD_no").toggleClass("iconSelected");
-			if(allergy[10]==1) $("#EAD_no").toggleClass("iconSelected");
+			if(allergy[8]==1) $("#EAD_BEAN").toggleClass("iconSelected");
+			if(allergy[9]==1) $("#EAD_SEAFOOD").toggleClass("iconSelected");
+			if(allergy[10]==1) $("#EAD_EGG").toggleClass("iconSelected");
 			for(i in allergy){
 				if(i!=11){
 					allergy[i] = 0;
@@ -609,7 +609,7 @@ function iconClick(id){
 			basicInformation.sex = customBasicEnum.boy;
 		}else if(basicInformation.sex == customBasicEnum.boy){
 			$("#BKS_boy").toggleClass("iconSelected");
-			basicInformation.sex = "無資料"
+			basicInformation.sex = "無資料";
 		}
 	}
 	if(id=="BKS_girl"){

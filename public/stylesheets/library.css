@@ -1,50 +1,39 @@
-.selector_inner{
-	position: relative;
-	width: 100%;
+.librarySelector{
+	background-color: #F1F1F2;
+	border-radius: 10px;
 }
-.selector{
-	width: 14%;
-	overflow: hidden;
-	position: relative;
-	margin: 0 1.3%;
-	background-color: green;
-	display: inline-block;
+.librarySelector_title{
+	background-color: #F1F1F2;
+	margin: 15px 0;
+	font-size: 18px;
+	font-weight: bold;
 }
-.selector:after{
-	content: "";
-	margin-top:100%;
-	display: block;
+.librarySelector_item{
+	margin: 10px 0;
+	cursor: pointer;
+	padding: 5px 15px;
+	border-radius: 8px;
+	transition: 500ms;
 }
-.selector .options{
-	position: absolute;
-	width: 100%;
-	text-align: center;
-	right: 0;
-	top:50%;
-    transform:translateY(-50%);
+.librarySelector_item:hover{
+	background-color: gray;
+	color: white;
+	transition: 500ms;
+	padding-left: 40px;
 }
-.selectorLeftButton{
-	position: absolute;
-	left: -25px;
-	top:50%;
-    transform:translateY(-60%);
+.librarySelector_item_EN{
+	color: #F1F1F2;
+	padding-left: 10px;
 }
-.selectorRightButton{
-	position: absolute;
-	right: -25px;
-	top:50%;
-    transform:translateY(-60%);
+.librarySelector_item:hover .librarySelector_item_EN{
+	color: white;
 }
-/* LIBRARY INFO */
-.ingredientsImg{
-	width: 97.4%;
-	margin: 20px 1.3%;
-	overflow: hidden;
-	position: relative;
-	background-color: green;
+.librarySelector_item_selected{
+	padding-left: 40px !important;
+	background-color: black  !important;
+	transition: 500ms;
+	color: white;
 }
-.ingredientsImg:after{
-	content: "";
-	margin-top: 30%;
-	display: block;
+.libraryInformation{
+	padding-left: 100px !important;
 }

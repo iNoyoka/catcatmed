@@ -917,14 +917,14 @@ function specialAnimationControlerIn(newPage){
 		showResult();
 	}	
 }
-function specialAnimationControlerOut(originalPage){
+function specialAnimationControlerOut(originalPage,newPage){
 	if(originalPage=="#BHELLO"){
 	}
 	if(originalPage=="#BKN"){
 		showVanishProgressBar();
 	}
 	if(originalPage=="#BWELCOMEBACK"){
-		showVanishProgressBar();
+		if(newPage!="#BKN")showVanishProgressBar();
 	}
 	if(originalPage=="#BNICEMEET"){
 		showVanishProgressBar();

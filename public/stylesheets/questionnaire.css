@@ -145,12 +145,25 @@ span{
 	font-family: 'Noto Sans TC',Microsoft JhengHei;
 }
 /*color block*/
+._IMG{
+	cursor: pointer;
+	border-radius: 15px;
+	padding-bottom: 5px;
+	margin-bottom: 8px;
+}
+._IMG:hover{
+	background-color: #DDDDDD;
+}
 .AIC_IMG{
 	cursor: pointer;
 	border-radius: 15px;
 }
 .AIC_IMG:hover{
 	background-color: #DDDDDD;
+}
+.multiSelect_IMG{
+	width: 80%;
+	margin: 10% 10%;
 }
 .answer {
 	width: 100%;
@@ -217,7 +230,7 @@ span{
 	display: block;
 }
 .icon:hover{
-	background-color: #87A7D6 !important;
+	background-color: #87A7D6;
 	color: #F1F1F2;
 	transition: 200ms;
 }

@@ -194,10 +194,13 @@ function rebuildIcon(){
 		if(ingredients[5]==1) $("#EFI_FISH").toggleClass("iconSelected");
 		if(ingredients[6]==1) $("#EFI_DEER").toggleClass("iconSelected");
 		if(ingredients[7]==1) $("#EFI_PIG").toggleClass("iconSelected");
-		if(ingredients[8]==1) $("#EFI_unsure").toggleClass("iconSelected");
+		if(ingredients[8]==1) $("#EFI_BEAN").toggleClass("iconSelected");
+		if(ingredients[9]==1) $("#EFI_SEAFOOD").toggleClass("iconSelected");
+		if(ingredients[10]==1) $("#EFI_EGG").toggleClass("iconSelected");
+		if(ingredients[11]==1) $("#EFI_unsure").toggleClass("iconSelected");
 	}
 	//EAD
-	if(currentPage=="#EFI"){
+	if(currentPage=="#EAD"){
 		if(allergy[0]==1) $("#EAD_BEEF").toggleClass("iconSelected");
 		if(allergy[1]==1) $("#EAD_SLAM").toggleClass("iconSelected");
 		if(allergy[2]==1) $("#EAD_CHIC").toggleClass("iconSelected");
@@ -206,11 +209,13 @@ function rebuildIcon(){
 		if(allergy[5]==1) $("#EAD_FISH").toggleClass("iconSelected");
 		if(allergy[6]==1) $("#EAD_DEER").toggleClass("iconSelected");
 		if(allergy[7]==1) $("#EAD_PIG").toggleClass("iconSelected");
-		if(allergy[8]==1) $("#EAD_no").toggleClass("iconSelected");
-		if(allergy[9]==1) $("#EAD_unsure").toggleClass("iconSelected");
+		if(allergy[8]==1) $("#EAD_BEAN").toggleClass("iconSelected");
+		if(allergy[9]==1) $("#EAD_SEAFOOD").toggleClass("iconSelected");
+		if(allergy[10]==1) $("#EAD_EGG").toggleClass("iconSelected");
+		if(allergy[11]==1) $("#EAD_unsure").toggleClass("iconSelected");
 	}
 	//IPR
-	if(currentPage=="#EFI"){
+	if(currentPage=="#IPR"){
 		if(stress[0]==1) $("#IPR_STRA").toggleClass("iconSelected");
 		if(stress[1]==1) $("#IPR_STRB").toggleClass("iconSelected");
 		if(stress[2]==1) $("#IPR_STRC").toggleClass("iconSelected");
@@ -219,7 +224,7 @@ function rebuildIcon(){
 		if(stress[5]==1) $("#IPR_no").toggleClass("iconSelected");	
 	}
 	//FIRST PAGE
-	if(currentPage=="#EFI"){
+	if(currentPage=="#BKN"){
 		if(basicInformation.sex == customBasicEnum.boy) $("#BKS_boy").toggleClass("iconSelected");
 		if(basicInformation.sex == customBasicEnum.girl) $("#BKS_girl").toggleClass("iconSelected");
 		if(basicInformation.age == customBasicEnum._18_) {$("#BKA_18-").toggleClass("iconSelected");keeperAge[0] = 1;}	
