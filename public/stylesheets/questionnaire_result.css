@@ -201,16 +201,17 @@ input:checked + .slider:before {
 	cursor: pointer;
 }
 .productItemImg{
-	height: 200px;
 	background-color: #F1F1F2;
 }
 .productItemBar{	
-	background-color: black;
-	color: white;
+	background-color: #F1F1F2;
+	color: black;
+	border: 2px solid black;
+	border-radius: 10px;
 	padding: 10px;
 	font-family: 'Noto Sans TC';
 }
-.productItem:hover .productItemImg{
+.productItem:hover .productItemBar{
 	background-color: gray;
 	transition: 500ms;
 }

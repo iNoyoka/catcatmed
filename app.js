@@ -75,6 +75,9 @@ app.get('/', function(req, res, next) {
 	res.render('index', { username: req.session.name,productLength:req.session.cart.length});
 });
 /*testalgo*/
+app.get('/questionnaire_result',function(req,res,next){
+	res.render('questionnaire_result');
+});
 app.get('/testAlgo',function(req,res,next){
 	res.render('testAlgo');
 });

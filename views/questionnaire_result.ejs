@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html"; charset="utf-8"/>
+
+	<title>catcatmed</title>
+
+	<link rel="stylesheet" type="text/css" href="stylesheets/header.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap-3.3.7/css/bootstrap.min.css">
+    <script src="javascript/jquery/jquery_v-3-3-1.js"></script>
+    <script src="bootstrap-3.3.7/js/bootstrap.min.js"></script>
+	<!--
+		MUST CHECK : "id = catNamex" uncorrect number will lead to error.
+	-->
+	<link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosanstc.css">
+	<style>
+		@import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
+		{
+			font-family: 'Noto Sans TC';
+		}
+	</style>
+	<!--禁止右鍵與反白 for UX-->
+	<script type="text/javascript"> 	 
+		function clickIE4(){
+			if (event.button==2){
+				return false;    
+			}  
+		}
+		function clickNS4(e){
+			if (document.layers || document.getElementById && !document.all){
+				if (e.which==2 || e.which==3){
+					return false;      
+				}	    
+			}  
+		}
+		function OnDeny(){    
+			if (event.ctrlKey || event.keyCode==78 && event.ctrlKey || event.altKey || event.altKey && event.keyCode==115){
+				return false;    
+			}  
+		}
+		if (document.layers){
+			document.captureEvents(Event.MOUSEDOWN);
+			document.onmousedown = clickNS4;
+			document.onkeydown = OnDeny();  
+		}
+		else if (document.all && !document.getElementById){
+			document.onmousedown = clickIE4;    
+			document.onkeydown = OnDeny();  
+		}		 
+		document.oncontextmenu = new Function("return false"); 	
+		
+		$(function(){		
+			var percent = progressPercent;
+			var baseColor = $('.progress').css('background-color');
+			if( percent<=50 ){
+				$('.progress-right').css('transform','rotate('+(percent*3.6)+'deg)');
+			}else {
+				$('.progress-right').css({
+					'transform':'rotate(0deg)',
+					'background-color':baseColor
+				});
+				$('.progress-left').css('transform','rotate('+((percent-50)*3.6)+'deg)');
+			}
+		});
+	</script>
+</head>
+<body>
+	<!-- HEADER -->
+	<div>
+		<nav class="nav navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<ul class="nav navbar-nav navLogo">
+						<li><a href="/testAlgo" class="navbar-brand">卡卡貓LOGO</a></li>
+					</ul>
+				</div>
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav">					
+					</ul>
+					<ul class="nav navbar-nav navbar-right">	
+						<li><a href="/">回首頁</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav> 	
+	</div>
+	<!-- BODY -->
+</body>
+</html>
