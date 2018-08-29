@@ -22,7 +22,11 @@ function sendCurrentDataToServer(exit){
 			exit : exit
 		}
 	}).done(function(data){
-		window.location.href = '/';
+		if(exit==1){
+			window.location.href = '/';
+		}else{
+			window.location.href = '/questionnaire_result';
+		}
 	});
 }
 

@@ -348,9 +348,9 @@ function trans_overwei(){
 }
 function showResult(){
 	var Ainner = "<span>感謝您的填寫！</span>";
-	var Binner = "<br><br><span>卡卡貓正在對於填卷結果進行分析，分析完成之後會將結果寄送到您的email！</span>";
-	var Cinner = "<br><span>希望您能有一個美好的一天~</span>";
-	var Dinner = "<br><br><button><a href='/testAlgo'>點 此 返 回 首 頁</a></button>";
+	var Binner = "<br><span>按下下方的「分析開始」按鈕</span>";
+	var Cinner = "<br><span>卡卡貓就會為您的貓咪選出最適合的飼料！</span>";
+	var Dinner = "<br><br><button onclick='sendCurrentDataToServer(0)'><a href='/questionnaire_result'>分析開始</a></button>";
 	document.getElementById("RESULT").innerHTML = "<div id = 'RESULT_A' class='animationInvisable'></div><div id = 'RESULT_B' class='animationInvisable'></div><div id = 'RESULT_C' class='animationInvisable'></div><div id = 'RESULT_D' class='animationInvisable'></div>";
 	document.getElementById("RESULT_A").innerHTML = Ainner;
 	document.getElementById("RESULT_B").innerHTML = Binner;
