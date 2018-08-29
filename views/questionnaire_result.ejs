@@ -64,8 +64,19 @@
 			}
 		});
 	</script>
+	<script>
+		function CallResultList(){
+			$.ajax({
+				method : "POST",
+				url : "/questionnaire_result"
+			}).done(function(data){
+				document.getElementById("result").innerHTML = data;
+			});
+		}
+	</script>
 </head>
 <body>
+	<script>CallResultList();</script>
 	<!-- HEADER -->
 	<div>
 		<nav class="nav navbar-default navbar-fixed-top">
@@ -91,5 +102,9 @@
 		</nav> 	
 	</div>
 	<!-- BODY -->
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<h3>結果</h3>
+		<div id="result"></div>
+	</div>
 </body>
 </html>

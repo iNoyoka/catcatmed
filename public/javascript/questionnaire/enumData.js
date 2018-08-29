@@ -25,9 +25,9 @@ var customBasicEnum = {
 	medium:"適中",
 	aLittleFat:"稍胖",
 	tooFat:"過胖",
-	_1to3:"一到三週",
-	_3to6:"三到六週",
-	_6up:"六週以上",
+	_1to3:"1_3",
+	_3to6:"4_6",
+	_6up:"6up",
 	unsure:"不確定",
 }
 var basicInformation = {
