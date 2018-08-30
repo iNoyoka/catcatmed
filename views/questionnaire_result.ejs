@@ -3,8 +3,9 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html"; charset="utf-8"/>
 
-	<title>catcatmed</title>
+	<title>catcatmed| Result</title>
 
+	<link rel="stylesheet" type="text/css" href="stylesheets/questionnaire_result.css">
 	<link rel="stylesheet" type="text/css" href="stylesheets/header.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="bootstrap-3.3.7/css/bootstrap.min.css">
@@ -49,28 +50,91 @@
 			document.onkeydown = OnDeny();  
 		}		 
 		document.oncontextmenu = new Function("return false"); 	
-		
-		$(function(){		
-			var percent = progressPercent;
-			var baseColor = $('.progress').css('background-color');
-			if( percent<=50 ){
-				$('.progress-right').css('transform','rotate('+(percent*3.6)+'deg)');
-			}else {
-				$('.progress-right').css({
-					'transform':'rotate(0deg)',
-					'background-color':baseColor
-				});
-				$('.progress-left').css('transform','rotate('+((percent-50)*3.6)+'deg)');
-			}
-		});
 	</script>
 	<script>
+		var listA = [];
+		var listB = [];
+		var listC = [];
+		var listD = [];
+		var listE = [];
+		//
+		var name_zh;
+		var brand_zh;
+		var brand_en;
+		var original;
+		var price;
+		var protein;
+		var fat;
+		var carbohydrate;
+		var DRY_protein;
+		var DRY_fat;
+		var DRY_carbohydrate;
+		var goodMeat;
+		var potentialAlergent;
+		var proteinLevel;
+		var fatLevel;
+		var carbohydrateLevel;
+		var dailyNeedWater;
+		var dailyNeedkcal;
+		var dailyNeedGram;
+		var ingredient;
+		//
+		var currentProduct;
 		function CallResultList(){
 			$.ajax({
 				method : "POST",
 				url : "/questionnaire_result"
 			}).done(function(data){
-				document.getElementById("result").innerHTML = data;
+				var data_s = data.split('#');
+				listA = JSON.parse(data_s[0]);
+				listB = JSON.parse(data_s[1]);
+				listC = JSON.parse(data_s[2]);
+				listD = JSON.parse(data_s[3]);
+				listE = JSON.parse(data_s[4]);
+				currentProduct = listA[0].productCode;
+				//
+				name_zh = listA[0].name_zh;
+				brand_zh = listA[0].brand_zh;
+				brand_en = listA[0].brand_en;
+				original = listA[0].original;
+				price = listA[0].price;
+				protein = listA[0].protein;
+				fat = listA[0].fat;
+				carbohydrate = listA[0].carbohydrate;
+				DRY_protein = listA[0].DRY_protein;
+				DRY_fat = listA[0].DRY_fat;
+				DRY_carbohydrate = listA[0].DRY_carbohydrate;
+				goodMeat = listA[0].goodMeat;
+				potentialAlergent = listA[0].potentialAlergent;
+				proteinLevel = listA[0].proteinLevel;
+				fatLevel = listA[0].fatLevel;
+				carbohydrateLevel = listA[0].carbohydrateLevel;
+				dailyNeedWater = listA[0].dailyNeedWater;
+				dailyNeedkcal = listA[0].dailyNeedkcal;
+				dailyNeedGram = listA[0].dailyNeedGram;
+				ingredient = listA[0].ingredient;
+				//
+				var leftInnerHTML = '';
+				var rightInnerHTML = '';
+				for(i=0;i<listA.length&&i<4;i++){
+					if(i==0){
+						leftInnerHTML += '<div id="'+listA[i].productCode+'" class="productBlock_item productBlock_item_selected"><h4>'+listA[i].name_zh+'</h4><h4>NTD '+listA[i].price+' / kg</h4></div>';
+					}else{
+						leftInnerHTML += '<div id="'+listA[i].productCode+'" class="productBlock_item"><h4>'+listA[i].name_zh+'</h4><h4>NTD '+listA[i].price+' / kg</h4></div>';
+					}
+				}
+				
+				rightInnerHTML += '<div class="row"><div class="col-lg-6 col-md-6"></div><div class="col-lg-6 col-md-6"><h3>'+name_zh+'</h3><h4>'+brand_zh+'</h4><h4>'+brand_en+'</h4><h4>'+original+'</h4><button>加入購物車</button></div></div><hr>';
+				rightInnerHTML += '<div class="row"><div class="col-lg-6 col-md-6"><h4>您的貓咪一天需要：</h4><h5>水 : '+dailyNeedWater+'ml</h5><h5>熱量 : '+dailyNeedkcal+'kcal</h5><h5>飼料 : '+dailyNeedGram+'g(動態調整)</h5></div>';
+				rightInnerHTML += '<div class="col-lg-6 col-md-6"><h4>此飼料與您的貓咪合適性：</h4><h5>蛋白質OK</h5><h5>脂肪OK</h5><h5>碳水化合物OK</h5></div></div>';
+				rightInnerHTML += '<div class="row"><div class="col-lg-6 col-md-6"><h4>濕重資訊</h4><h5>蛋白質：'+protein+'%</h5><h5>脂質：'+fat+'%</h5><h5>碳水化合物：'+carbohydrate+'%</h5></div>';
+				rightInnerHTML += '<div class="col-lg-6 col-md-6"><h4>乾重資訊</h4><h5>蛋白質：'+DRY_protein+'%</h5><h5>脂質：'+DRY_fat+'%</h5><h5>碳水化合物：'+DRY_carbohydrate+'%</h5></div></div>';
+				rightInnerHTML += '<h5>'+proteinLevel+'</h5><h5>'+fatLevel+'</h5><h5>'+carbohydrateLevel+'</h5>';
+				rightInnerHTML += '<hr><div class="row"><div class="col-lg-6 col-md-6"><h4>優良原料</h4><h5>'+goodMeat+'</h5></div>';
+				rightInnerHTML += '<div class="col-lg-6 col-md-6"><h4>可能過敏成分</h4><h5>'+potentialAlergent+'</h5></div></div>';
+				rightInnerHTML += '<h4>成分</h4><h5>'+ingredient+'</h5>';
+				document.getElementById('productBlock').innerHTML = leftInnerHTML;
+				document.getElementById('productInformation').innerHTML = rightInnerHTML;
 			});
 		}
 	</script>
@@ -102,9 +166,23 @@
 		</nav> 	
 	</div>
 	<!-- BODY -->
-	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-		<h3>結果</h3>
-		<div id="result"></div>
+	<div class="body"></div>
+	<div class="container">
+		<div class="col-lg-4 col-md-4 text-center">
+			<form>
+				<select>
+					<option>150~250</option>
+					<option>250~350</option>
+					<option>350~450</option>
+					<option>450~550</option>
+					<option>550+</option>
+				</select>
+			</form>
+			<div id="productBlock" class="productBlock"></div>
+		</div>
+		<div class="col-lg-8 col-md-8">
+			<div id="productInformation" class="productInformation"></div>
+		</div>
 	</div>
 </body>
 </html>

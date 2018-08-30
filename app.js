@@ -106,16 +106,10 @@ app.post('/questionnaire_result',function(req,res,next){
 		var activityCoefficient;
 		var neuturedCoefficient;
 		var kcal = 1;
-		var kcal_fat;
 		var childCoefficient;
 		var milkyCatCoefficient;
 		var milkyCatPercentage;
-		var catType; //幼貓 懷孕貓 泌乳貓 交配貓 老貓 老老貓 成貓 胖成貓 
-		var count = 0;
-		//資料分析
-		var protein_low = 35;
-		var protein_high = 35;
-		var proteinAllList = [];
+		var catType; //幼貓 懷孕貓 泌乳貓 交配貓 老貓 老老貓 成貓 胖成貓 		
 		//----------------------------------------------------------
 		// DECIDE TYPE OF CAT
 		//----------------------------------------------------------
@@ -259,20 +253,34 @@ app.post('/questionnaire_result',function(req,res,next){
 		var sql = "SELECT * FROM `productdb`";
 		var list = [];
 		var innerHTML = "";
-		function AddObjToList(i,name,original,price,kcal,protein,fat,ash,MeatLevel_total,DRY_protein,DRY_fat,DRY_carbohydrate){
+		function AddObjToList(i,productCode,name_zh,brand_zh,brand_en,original,price,kcal,protein,fat,ash,carbohydrate,MeatLevel_total,DRY_protein,DRY_fat,DRY_carbohydrate,goodMeat,potentialAlergent,dailyNeedkcal,ingredient){
 			var obj = {};
 			obj.index = i;
-			obj.name = name;
+			obj.productCode = productCode;
+			obj.name_zh = name_zh;
+			obj.brand_zh = brand_zh;
+			obj.brand_en = brand_en;
 			obj.original = original;
 			obj.price = price;
 			obj.kcal = kcal;
 			obj.protein = protein;
 			obj.fat = fat;
 			obj.ash = ash;
+			obj.carbohydrate = carbohydrate;
 			obj.MeatLevel_total = MeatLevel_total;
 			obj.DRY_protein = DRY_protein;
 			obj.DRY_fat = DRY_fat;
 			obj.DRY_carbohydrate = DRY_carbohydrate;
+			obj.goodMeat = goodMeat;
+			obj.potentialAlergent = potentialAlergent;
+			//
+			obj.proteinLevel = null;
+			obj.fatLevel = null;
+			obj.carbohydrateLevel = null;
+			obj.dailyNeedWater = 65 - dailyNeedkcal/100*11 - dailyNeedkcal/kcal*100;
+			obj.dailyNeedkcal = dailyNeedkcal;
+			obj.dailyNeedGram = dailyNeedkcal/kcal*1000;
+			obj.ingredient = ingredient;
 			return obj;
 		}
 		function SliceListToFivePricePart_sorted(originalList,lowerLimit,upperLimit){
@@ -286,62 +294,76 @@ app.post('/questionnaire_result',function(req,res,next){
 			});
 			return newList;
 		}
+		//資料分析
+		var proteinAllList = [];
+		var fatAllList = [];
+		var carbohydrateAllList = [];
 		con.query(sql,function(err,result){
 			if(err) throw err;
 			else{			
 				for(i in result){				
 					proteinAllList.push(result[i].DRY_protein);
+					fatAllList.push(result[i].DRY_fat);
+					carbohydrateAllList.push(result[i].DRY_carbohydrate);
 					if(result[i].price>160 && result[i].kcal!=-1){ // DELETE DATA WHICH INFORMATION MISSED
 						if(catType == "成貓"){					
 							if(result[i].DRY_fat>10&&result[i].DRY_fat<30&&result[i].DRY_fiber<5&&result[i].DRY_protein>30&&result[i].DRY_protein<45&&result[i].DRY_carbohydrate<=35)
 							{
-								list.push(AddObjToList(i,result[i].productName,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate));
+								list.push(AddObjToList(i,result[i].productCode,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].carbohydrate,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients));
 							}
 						}else if(catType == "胖成貓"){
 							if(result[i].DRY_fat>9&&result[i].DRY_fat<20&&result[i].DRY_fiber>6&&result[i].DRY_fiber<15&&result[i].DRY_protein>30&&result[i].DRY_protein<45&&result[i].DRY_carbohydrate<=30)
 							{
-								list.push(AddObjToList(i,result[i].productName,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate));
-							}
+								list.push(AddObjToList(i,result[i].productCode,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].carbohydrate,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients));							}
 						}else if(catType == "幼貓"){
 							if(result[i].DRY_fat>18&&result[i].DRY_fat<35&&result[i].DRY_protein>35&&result[i].DRY_protein<50)
 							{
-								list.push(AddObjToList(i,result[i].productName,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate));
-							}
+								list.push(AddObjToList(i,result[i].productCode,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].carbohydrate,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients));							}
 						}else if(catType == "懷孕貓"){
 							if(result[i].DRY_fat>18&&result[i].DRY_fat<35&&result[i].DRY_protein>35&&result[i].DRY_protein<50)
 							{
-								list.push(AddObjToList(i,result[i].productName,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate));
-							}
+								list.push(AddObjToList(i,result[i].productCode,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].carbohydrate,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients));							}
 						}else if(catType == "泌乳貓"){
 							if(result[i].DRY_fat>18&&result[i].DRY_fat<35&&result[i].DRY_protein>35&&result[i].DRY_protein<50)
 							{
-								list.push(AddObjToList(i,result[i].productName,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate));
-							}
+								list.push(AddObjToList(i,result[i].productCode,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].carbohydrate,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients));							}
 						}else if(catType == "交配貓"){
 							if(result[i].DRY_fat>10&&result[i].DRY_fat<30&&result[i].DRY_protein>30&&result[i].DRY_protein<45)
 							{
-								list.push(AddObjToList(i,result[i].productName,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate));
-							}
+								list.push(AddObjToList(i,result[i].productCode,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].carbohydrate,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients));							}
 						}else if(catType == "老貓" || catType == "胖老貓"){
 							if(result[i].DRY_fat>18&&result[i].DRY_fat<25&&result[i].DRY_fiber<=5&&result[i].DRY_protein>30&&result[i].DRY_protein<45)
 							{
-								list.push(AddObjToList(i,result[i].productName,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate));
-							}
+								list.push(AddObjToList(i,result[i].productCode,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].carbohydrate,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients));							}
 						}else if(catType == "老老貓" || catType == "胖老老貓"){
 							if(result[i].DRY_fat>10&&result[i].DRY_fat<18&&result[i].DRY_fiber>6&&result[i].DRY_fiber<15&&result[i].DRY_protein>30&&result[i].DRY_protein<45)
 							{
-								list.push(AddObjToList(i,result[i].productName,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate));
-							}
+								list.push(AddObjToList(i,result[i].productCode,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].carbohydrate,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients));							}
 						}
 					}			
+				}
+			}
+			//protein, fat, carbohydrate analysis
+			function fillInAverageLevel(list,proteinAVG,fatAVG,carbohydrateAVG){
+				for(i=0;i<list.length;i++){
+					if(list[i].DRY_protein>=proteinAVG) list[i].proteinLevel = '※此商品之蛋白質含量高於市售所有飼料之蛋白質平均';
+					else list[i].proteinLevel = '※此商品之蛋白質含量低於市售所有飼料之蛋白質平均';
+					if(list[i].DRY_fat>=fatAVG) list[i].fatLevel = '※此商品之脂質含量高於市售所有飼料之脂質平均';
+					else list[i].fatLevel = '※此商品之脂質含量低於市售所有飼料之脂質平均';
+					if(list[i].DRY_carbohydrate>=carbohydrateAVG) list[i].carbohydrateLevel = '※此商品之碳水化合物含量高於市售所有飼料之碳水化合物平均';
+					else list[i].carbohydrateLevel = '※此商品之碳水化合物含量低於市售所有飼料之碳水化合物平均';
 				}
 			}
 			proteinAllList = proteinAllList.sort(function(a,b){
 				return a - b;
 			});
-			var protein_medium = (protein_high + protein_low) / 2;
-			var protein_medium_left = (protein_medium + protein_low) / 2;
-			var protein_medium_right = (protein_high + protein_medium) / 2;
+			fatAllList = fatAllList.sort(function(a,b){
+				return a - b;
+			});
+			carbohydrateAllList = carbohydrateAllList.sort(function(a,b){
+				return a - b;
+			});
+			fillInAverageLevel(list,proteinAllList[355],fatAllList[355],carbohydrateAllList[355]);
 			//---------------------------------------
 			// BASIC DATA SORT AND SLICE TO FIVE
 			//---------------------------------------
@@ -525,47 +547,14 @@ app.post('/questionnaire_result',function(req,res,next){
 			//---------------------------------------
 			// SEND INFORMATION TO FRONT END
 			//---------------------------------------
-			function InnerHTMLBuilderBasedOnList(list,lowerLimit,upperLimit){
-				var innerHTML = "";
-				innerHTML += "<div class='col-lg-12 col-md-12'>";
-				innerHTML += "<h3 style='color: red;'>範圍 : "+lowerLimit+"~"+upperLimit+"</h3>";
-				innerHTML += "</div>";
-				for(i=0;i<list.length;i++){
-					innerHTML += "<div class='col-lg-3 col-md-3'>";
-					innerHTML += "<h5 style='height: 60px;'>產品 ： "+list[i].name+"</h5>";
-					innerHTML += "<h5>價格 : "+list[i].price+"</h5>";
-					innerHTML += "<h5>肉等級 : "+list[i].MeatLevel_total+"</h5>";
-					innerHTML += "<h5>蛋白質 : "+list[i].protein+"</h5>";
-					innerHTML += "<hr>";
-					innerHTML += "</div>";
-				}
-				innerHTML += "<div class='col-lg-12 col-md-12'>";
-				innerHTML += "<h4 style='color: blue;'>此部分總數 : "+list.length+"</h4>";
-				innerHTML += "</div>";
-				return innerHTML;
-			}
-			innerHTML += "<h4>分類 ： "+catType+"</h4>";
-			innerHTML += "<h4>fat ： "+fat+"%</h4>";
-			innerHTML += "<h4>idealWeight ： "+idealWeight+"kg</h4>";
-			innerHTML += "<h4>RERCoefficient ： "+RERCoefficient+"%</h4>";
-			innerHTML += "<h4>RER ： "+RER+"</h4>";
-			if(catType == "胖成貓" || catType == "胖老貓" || catType == "胖老老貓"){
-				innerHTML += "<h4>推薦kcal : "+kcal_fat+"</h4>";
-				innerHTML += "<h4>最終kcal : "+kcal+"</h4>";
-			}else{
-				innerHTML += "<h4>kcal ： "+kcal+"</h4>";
-			}			
-			innerHTML += "<hr>";
-			innerHTML += InnerHTMLBuilderBasedOnList(listA,160,250);
-			innerHTML += InnerHTMLBuilderBasedOnList(listB,250,350);
-			innerHTML += InnerHTMLBuilderBasedOnList(listC,350,450);
-			innerHTML += InnerHTMLBuilderBasedOnList(listD,450,550);
-			innerHTML += InnerHTMLBuilderBasedOnList(listE,550,10000);
-			var listTotalLength = listA.length + listB.length + listC.length + listD.length + listE.length;
-			innerHTML += "<div class='col-lg-12 col-md-12'>";
-			innerHTML += "<h4 style='color: blue;'>總數 : "+listTotalLength+"</h4>";
-			innerHTML += "</div>";
-			res.send(innerHTML);
+			var listA_JSON = JSON.stringify(listA);
+			var listB_JSON = JSON.stringify(listB);
+			var listC_JSON = JSON.stringify(listC);
+			var listD_JSON = JSON.stringify(listD);
+			var listE_JSON = JSON.stringify(listE);
+			var listAllDataJSON = listA_JSON + '#' + listB_JSON + '#' + listC_JSON + '#' + listD_JSON + '#' + listE_JSON;
+			//console.log(listAllDataJSON);
+			res.send(listAllDataJSON);
 		});//con.query END	
 	}else{
 		console.log("oops! Seemes like you didn't fill the questionnaire first?")
