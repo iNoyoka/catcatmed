@@ -99,6 +99,7 @@ function createAWI(AWINumber){
 		for(i=0;i<6;i++){
 			innerHTML += '<div class="col-lg-2 col-md-2 col-sm-2 vol-xs-2" id="'+AWIList.pop()+'" onclick="addToList(this.id)"><div class="AIC_IMG"><img src="images/questionnaire/icon/black/'+AWINameList.pop()+'.png"></div></div>';
 		}
+		innerHTML += '<div class="col-lg-12 col-md-12"></div>';
 		for(i=0;i<6;i++){
 			innerHTML += '<div class="col-lg-2 col-md-2 col-sm-2 vol-xs-2" id="'+AWIList.pop()+'" onclick="addToList(this.id)"><div class="AIC_IMG"><img src="images/questionnaire/icon/black/'+AWINameList.pop()+'.png"></div></div>';
 		}

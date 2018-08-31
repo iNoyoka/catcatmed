@@ -3,93 +3,11 @@
 //--------------------------------------------
 var animationLock = 0;
 function trans_hello(){
-	var functionA = setInterval(myFunctionA,500);
-	var functionB = setInterval(myFunctionB,1000);
-	var functionC = setInterval(myFunctionC,1500);
-	var functionD = setInterval(myFunctionD,2000);
-	
-	var functionE = setInterval(myFunctionE,2050);
-	var functionF = setInterval(myFunctionF,2100);
-	var functionG = setInterval(myFunctionG,2150);
-	var functionH = setInterval(myFunctionH,2200);
-	var functionI = setInterval(myFunctionI,2250);
-	var functionJ = setInterval(myFunctionJ,2300);
-	var functionK = setInterval(myFunctionK,2350);
-	var functionL = setInterval(myFunctionL,2400);
-	var functionM = setInterval(myFunctionM,2450);
-	var functionN = setInterval(myFunctionN,2500);
-	var functionO = setInterval(myFunctionO,2550);
-	var functionP = setInterval(myFunctionP,2600);
-	var functionQ = setInterval(myFunctionQ,3000);
-	document.getElementById("BHELLO").innerHTML = '<img class="BHELLO-img" src="images/questionnaire/icons-08.png">';
+	var functionA = setInterval(myFunctionA,2500);
+	document.getElementById("BHELLO").innerHTML = '<img class="BHELLO-img" src="images/questionnaire/icons-01.gif">';
 	function myFunctionA(){
-		document.getElementById("BHELLO").innerHTML += '<img class="BHELLO-img" src="images/questionnaire/icons-01.png">';
-		clearInterval(functionA);
-	}
-	function myFunctionB(){
-		document.getElementById("BHELLO").innerHTML += '<img class="BHELLO-img" src="images/questionnaire/icons-02.png">';
-		clearInterval(functionB);
-	}
-	function myFunctionC(){
-		document.getElementById("BHELLO").innerHTML += '<img class="BHELLO-img" src="images/questionnaire/icons-03.png">';
-		clearInterval(functionC);
-	}
-	function myFunctionD(){
-		document.getElementById("BHELLO").innerHTML = '<img class="BHELLO-img" src="images/questionnaire/icons-08.png">';
-		clearInterval(functionD);
-	}
-	function myFunctionE(){
-		document.getElementById("BHELLO").innerHTML = '<img class="BHELLO-img" src="images/questionnaire/icons-04.png">';
-		clearInterval(functionE);
-	}
-	function myFunctionF(){
-		document.getElementById("BHELLO").innerHTML = '<img class="BHELLO-img" src="images/questionnaire/icons-05.png">';
-		clearInterval(functionF);
-	}
-	function myFunctionG(){
-		document.getElementById("BHELLO").innerHTML = '<img class="BHELLO-img" src="images/questionnaire/icons-04.png">';
-		clearInterval(functionG);
-	}
-	function myFunctionH(){
-		document.getElementById("BHELLO").innerHTML = '<img class="BHELLO-img" src="images/questionnaire/icons-08.png">';
-		clearInterval(functionH);
-	}
-	function myFunctionI(){
-		document.getElementById("BHELLO").innerHTML = '<img class="BHELLO-img" src="images/questionnaire/icons-06.png">';
-		clearInterval(functionI);
-	}
-	function myFunctionJ(){
-		document.getElementById("BHELLO").innerHTML = '<img class="BHELLO-img" src="images/questionnaire/icons-07.png">';
-		clearInterval(functionJ);
-	}
-	function myFunctionK(){
-		document.getElementById("BHELLO").innerHTML = '<img class="BHELLO-img" src="images/questionnaire/icons-06.png">';
-		clearInterval(functionK);
-	}
-	function myFunctionL(){
-		document.getElementById("BHELLO").innerHTML = '<img class="BHELLO-img" src="images/questionnaire/icons-08.png">';
-		clearInterval(functionL);
-	}
-	function myFunctionM(){
-		document.getElementById("BHELLO").innerHTML = '<img class="BHELLO-img" src="images/questionnaire/icons-04.png">';
-		clearInterval(functionM);
-	}
-	function myFunctionN(){
-		document.getElementById("BHELLO").innerHTML = '<img class="BHELLO-img" src="images/questionnaire/icons-05.png">';
-		clearInterval(functionN);
-	}
-	function myFunctionO(){
-		document.getElementById("BHELLO").innerHTML = '<img class="BHELLO-img" src="images/questionnaire/icons-04.png">';
-		clearInterval(functionO);
-	}
-	function myFunctionP(){
-		document.getElementById("BHELLO").innerHTML = '<img class="BHELLO-img" src="images/questionnaire/icons-08.png">';
-		document.getElementById("BHELLO").innerHTML += '<h3 class="BHELLO-img">HELLO</h3>';
-		clearInterval(functionP);
-	}
-	function myFunctionQ(){
 		transformPage("#BHELLO","#BKN");
-		clearInterval(functionQ);
+		clearInterval(functionA);
 	}	
 }
 function trans_welcomeBack(){

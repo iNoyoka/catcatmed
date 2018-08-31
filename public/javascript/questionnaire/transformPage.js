@@ -924,7 +924,7 @@ function specialAnimationControlerOut(originalPage,newPage){
 		showVanishProgressBar();
 	}
 	if(originalPage=="#BWELCOMEBACK"){
-		if(newPage!="#BKN")showVanishProgressBar();
+		if(newPage!="#BKN" && newPage!="#BHELLO")showVanishProgressBar();
 	}
 	if(originalPage=="#BNICEMEET"){
 		showVanishProgressBar();

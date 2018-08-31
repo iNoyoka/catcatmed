@@ -282,16 +282,16 @@ var questionInformation = [
 	},
 	{
 		id : "ILP",
-		type : "E",
+		type : "C",
 		catname : true,
 		question : "請問#脫毛的部位為：",
 		icon: true,
 		iconNumber: 2,
 		iconList: ["LOHAIR","SKIN"],
-		answerType: "A",
+		answerType: "B",
 		answerNumber : 3,
 		answer : ["前段","中段","後段"],
-		answerImg : ["","",""],
+		answerImg : ["images/questionnaire/icons-27.png","images/questionnaire/icons-28.png","images/questionnaire/icons-29.png"],
 		answerId : ["ILP_FRONT","ILP_MID","ILP_BACK"]
 	},
 	{
