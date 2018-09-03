@@ -560,493 +560,6 @@ app.post('/questionnaire_result',function(req,res,next){
 		console.log("oops! Seemes like you didn't fill the questionnaire first?")
 	}	
 });
-app.get('/testAlgo',function(req,res,next){
-	res.render('testAlgo');
-});
-app.post('/testAlgo',function(req,res,next){
-	var catage_year = parseInt(req.body.catage_year);
-	var catage_month = parseInt(req.body.catage_month);
-	var catWeight = parseInt(req.body.catwei_front) + parseInt(req.body.catwei_back)*0.1;
-	var catBCS = parseInt(req.body.catBCS);
-	var activity = req.body.activity;
-	var neutured = req.body.neutured;
-	var preg = req.body.preg;
-	var pregtime = req.body.pregtime;
-	var milkyCat = req.body.milkyCat;
-	var kittyAge = req.body.kittyAge;
-	var kittyNumber = parseInt(req.body.kittyNumber);
-	var sexCat = req.body.sexCat;
-	var dailyProteinSelector = req.body.dailyProteinSelector;
-	var metabolismSelector = req.body.metabolismSelector;
-	var meatLevelSelector = req.body.meatLevelSelector;
-	var priceSelector = req.body.priceSelector;
-	var meatLevel_priceSelector = req.body.meatLevel_priceSelector;
-	var meatLevelProtein_priceSelector = req.body.meatLevelProtein_priceSelector;
-	//
-	var fat = 0;
-	var idealWeight = 0;
-	var RERCoefficient = 0 ;
-	var ageRERCoefficient = 0;
-	var RER = 0;
-	var activityCoefficient;
-	var neuturedCoefficient;
-	var kcal = 1;
-	var kcal_fat;
-	var childCoefficient;
-	var milkyCatCoefficient;
-	var milkyCatPercentage;
-	var catType; //幼貓 懷孕貓 泌乳貓 交配貓 老貓 老老貓 成貓 胖成貓 
-	var count = 0;
-	//資料分析
-	var protein_low = 35;
-	var protein_high = 35;
-	var proteinAllList = [];
-	//----------------------------------------------------------
-	// DECIDE TYPE OF CAT
-	//----------------------------------------------------------
-	if(catage_year>=1 && catage_year<7){ //成貓
-		if(catBCS>=5){			//胖成貓
-			catType = "胖成貓";
-		}else{ 					//一般成貓
-			catType = "成貓";
-		}
-	}else if(catage_year>=7 && catage_year<12){ //老貓		
-		if(catBCS>=5){			//胖成貓
-			catType = "胖老貓";
-		}else{ 					//一般成貓
-			catType = "老貓";
-		}
-	}else if(catage_year>=12){
-		if(catBCS>=5){			//胖成貓
-			catType = "胖老老貓";
-		}else{ 					//一般成貓
-			catType = "老老貓";
-		}
-	}else if(catage_year<1){ //幼貓
-		catType = "幼貓";
-	}
-	if(preg=="是"){
-		catType = "懷孕貓";
-	}
-	if(milkyCat=="是"){
-		catType = "泌乳貓";
-	}
-	if(sexCat=="是"){
-		catType = "交配貓"
-	}
-	//----------------------------------------------------------
-	// CALCULATE COEFFICIENT
-	//----------------------------------------------------------
-	if(catType == "成貓" || catType == "胖成貓" || catType == "交配貓"){
-		if(catBCS==1) fat = 5;
-		if(catBCS==2) fat = 10;
-		if(catBCS==3) fat = 20;
-		if(catBCS==4) fat = 30;
-		if(catBCS==5) fat = 40;
-		if(catBCS==6) fat = 50;
-		if(catBCS==7) fat = 60;
-		idealWeight = catWeight*(100-fat)/100/0.8;
-		if(catBCS==1) RERCoefficient = 140;	
-		if(catBCS==2) RERCoefficient = 120;	
-		if(catBCS==3) RERCoefficient = 120;	
-		if(catBCS==4) RERCoefficient = 100;	
-		if(catBCS==5) RERCoefficient = 100;	
-		if(catBCS==6) RERCoefficient = 80;	
-		if(catBCS==7) RERCoefficient = 80;
-		RER = 70*(Math.pow(idealWeight,0.75));
-		if(activity=="高") activityCoefficient = 1.333333333;
-		if(activity=="中") activityCoefficient = 1.083333333;
-		if(activity=="低") activityCoefficient = 1;
-		if(neutured=="是") neuturedCoefficient = 1;
-		if(neutured=="否") neuturedCoefficient = 1.166666667;
-		if(catType == "胖成貓") kcal_fat = RER*activityCoefficient*neuturedCoefficient;
-		kcal = RERCoefficient/100*RER*activityCoefficient*neuturedCoefficient;
-	}
-	else if(catType == "幼貓"){
-		if(catage_month == 1) childCoefficient = 240;
-		else if(catage_month == 2) childCoefficient = 210;
-		else if(catage_month == 3) childCoefficient = 200;
-		else if(catage_month == 4) childCoefficient = 175;
-		else if(catage_month == 5) childCoefficient = 145;
-		else if(catage_month == 6) childCoefficient = 135;
-		else if(catage_month == 7) childCoefficient = 120;
-		else if(catage_month == 8) childCoefficient = 110;
-		else if(catage_month == 9) childCoefficient = 100;
-		else if(catage_month == 10) childCoefficient = 95;
-		else if(catage_month == 11) childCoefficient = 90;
-		kcal = catWeight*childCoefficient;
-	}
-	else if(catType == "懷孕貓"){
-		if(pregtime == "1_3") RERCoefficient = 1.6;
-		else if(pregtime == "4_6") RERCoefficient = 1.8;
-		else if(pregtime == "6up") RERCoefficient = 2;
-		RER = 70*(Math.pow(catWeight,0.75));
-		kcal = RERCoefficient * RER;
-	}
-	else if(catType == "泌乳貓"){
-		if(kittyAge == "1_2week"){
-			milkyCatCoefficient = 2.3;
-			milkyCatPercentage = 0.3;
-		}
-		if(kittyAge == "3week"){
-			milkyCatCoefficient = 2.5;
-			milkyCatPercentage = 0.45;
-		}
-		if(kittyAge == "4week"){
-			milkyCatCoefficient = 3;
-			milkyCatPercentage = 0.55;
-		}
-		if(kittyAge == "5week"){
-			milkyCatCoefficient = 3.5;
-			milkyCatPercentage = 0.65;
-		}
-		if(kittyAge == "6week"){
-			milkyCatCoefficient = 4;
-			milkyCatPercentage = 0.9;
-		}
-		RER = 70*(Math.pow(catWeight,0.75));
-		kcal = RER*milkyCatCoefficient + milkyCatPercentage*RER*kittyNumber;
-	}
-	else if(catType == "老貓" || catType == "胖老貓" || catType == "老老貓" || catType == "胖老老貓"){
-		if(catBCS==1) fat = 5;
-		if(catBCS==2) fat = 10;
-		if(catBCS==3) fat = 20;
-		if(catBCS==4) fat = 30;
-		if(catBCS==5) fat = 40;
-		if(catBCS==6) fat = 50;
-		if(catBCS==7) fat = 60;
-		idealWeight = catWeight*(100-fat)/100/0.8;
-		RER = 70*(Math.pow(idealWeight,0.75));
-		if(catBCS==1) RERCoefficient = 140;
-		if(catBCS==2) RERCoefficient = 120;
-		if(catBCS==3) RERCoefficient = 120;
-		if(catBCS==4) RERCoefficient = 100;
-		if(catBCS==5) RERCoefficient = 100;
-		if(catBCS==6) RERCoefficient = 80;
-		if(catBCS==7) RERCoefficient = 80;
-		if(catage_year==7) ageRERCoefficient = 110;
-		if(catage_year==8) ageRERCoefficient = 120;
-		if(catage_year==9 || catage_year==10) ageRERCoefficient = 130;
-		if(catage_year==11) ageRERCoefficient = 140;
-		if(catage_year==12) ageRERCoefficient = 150;
-		if(catage_year>=13) ageRERCoefficient = 160;
-		if(activity=="高") activityCoefficient = 1.222;
-		if(activity=="中") activityCoefficient = 1.111;
-		if(activity=="低") activityCoefficient = 1;
-		if(neutured=="是") neuturedCoefficient = 1;
-		if(neutured=="否") neuturedCoefficient = 1.166666667;
-		if(catType == "胖老貓" || catType == "胖老老貓") kcal_fat = RER*activityCoefficient*neuturedCoefficient*ageRERCoefficient/100;
-		kcal = RERCoefficient/100*RER*activityCoefficient*neuturedCoefficient*ageRERCoefficient/100;
-	}
-	//find data
-	var sql = "SELECT * FROM `productdb`";
-	var list = [];
-	var innerHTML = "";
-	function AddObjToList(i,name,original,price,kcal,protein,fat,ash,MeatLevel_total,DRY_protein,DRY_fat,DRY_carbohydrate){
-		var obj = {};
-		obj.index = i;
-		obj.name = name;
-		obj.original = original;
-		obj.price = price;
-		obj.kcal = kcal;
-		obj.protein = protein;
-		obj.fat = fat;
-		obj.ash = ash;
-		obj.MeatLevel_total = MeatLevel_total;
-		obj.DRY_protein = DRY_protein;
-		obj.DRY_fat = DRY_fat;
-		obj.DRY_carbohydrate = DRY_carbohydrate;
-		return obj;
-	}
-	function SliceListToFivePricePart_sorted(originalList,lowerLimit,upperLimit){
-		var newList = [];
-		for(i=0;i<originalList.length;i++){
-			if(originalList[i].price<=upperLimit && originalList[i].price>lowerLimit)
-				newList.push(originalList[i]);
-		}
-		newList = newList.sort(function(a,b){
-			return a.price > b.price ? -1 : 1;
-		});
-		return newList;
-	}
-	con.query(sql,function(err,result){
-		if(err) throw err;
-		else{			
-			for(i in result){				
-				proteinAllList.push(result[i].DRY_protein);
-				if(result[i].price>160 && result[i].kcal!=-1){ // DELETE DATA WHICH INFORMATION MISSED
-					if(catType == "成貓"){					
-						if(result[i].DRY_fat>10&&result[i].DRY_fat<30&&result[i].DRY_fiber<5&&result[i].DRY_protein>30&&result[i].DRY_protein<45&&result[i].DRY_carbohydrate<=35)
-						{
-							list.push(AddObjToList(i,result[i].productName,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate));
-						}
-					}else if(catType == "胖成貓"){
-						if(result[i].DRY_fat>9&&result[i].DRY_fat<20&&result[i].DRY_fiber>6&&result[i].DRY_fiber<15&&result[i].DRY_protein>30&&result[i].DRY_protein<45&&result[i].DRY_carbohydrate<=30)
-						{
-							list.push(AddObjToList(i,result[i].productName,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate));
-						}
-					}else if(catType == "幼貓"){
-						if(result[i].DRY_fat>18&&result[i].DRY_fat<35&&result[i].DRY_protein>35&&result[i].DRY_protein<50)
-						{
-							list.push(AddObjToList(i,result[i].productName,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate));
-						}
-					}else if(catType == "懷孕貓"){
-						if(result[i].DRY_fat>18&&result[i].DRY_fat<35&&result[i].DRY_protein>35&&result[i].DRY_protein<50)
-						{
-							list.push(AddObjToList(i,result[i].productName,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate));
-						}
-					}else if(catType == "泌乳貓"){
-						if(result[i].DRY_fat>18&&result[i].DRY_fat<35&&result[i].DRY_protein>35&&result[i].DRY_protein<50)
-						{
-							list.push(AddObjToList(i,result[i].productName,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate));
-						}
-					}else if(catType == "交配貓"){
-						if(result[i].DRY_fat>10&&result[i].DRY_fat<30&&result[i].DRY_protein>30&&result[i].DRY_protein<45)
-						{
-							list.push(AddObjToList(i,result[i].productName,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate));
-						}
-					}else if(catType == "老貓" || catType == "胖老貓"){
-						if(result[i].DRY_fat>18&&result[i].DRY_fat<25&&result[i].DRY_fiber<=5&&result[i].DRY_protein>30&&result[i].DRY_protein<45)
-						{
-							list.push(AddObjToList(i,result[i].productName,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate));
-						}
-					}else if(catType == "老老貓" || catType == "胖老老貓"){
-						if(result[i].DRY_fat>10&&result[i].DRY_fat<18&&result[i].DRY_fiber>6&&result[i].DRY_fiber<15&&result[i].DRY_protein>30&&result[i].DRY_protein<45)
-						{
-							list.push(AddObjToList(i,result[i].productName,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate));
-						}
-					}
-				}			
-			}
-		}
-		proteinAllList = proteinAllList.sort(function(a,b){
-			return a - b;
-		});
-		var protein_medium = (protein_high + protein_low) / 2;
-		var protein_medium_left = (protein_medium + protein_low) / 2;
-		var protein_medium_right = (protein_high + protein_medium) / 2;
-		//---------------------------------------
-		// BASIC DATA SORT AND SLICE TO FIVE
-		//---------------------------------------
-		var listA = SliceListToFivePricePart_sorted(list,160,250);
-		var listB = SliceListToFivePricePart_sorted(list,250,350);
-		var listC = SliceListToFivePricePart_sorted(list,350,450);
-		var listD = SliceListToFivePricePart_sorted(list,450,550);
-		var listE = SliceListToFivePricePart_sorted(list,550,1000000);
-		list = null;
-		//---------------------------------------
-		// ADVANCED RAX SELECTOR (進階篩選器)
-		//---------------------------------------
-		function DailyProteinSelector(list,catType,kcal,catWeight){
-			var newList = [];
-			for(i=0;i<list.length;i++){
-				var x  = kcal/list[i].kcal*10*list[i].DRY_protein;
-				if(catType == "成貓"){
-					if(5.5*catWeight<x && 11.5*catWeight>x)
-						newList.push(list[i]);
-				}else if(catType == "老貓"){
-					if(6*catWeight<x && 8.5*catWeight>x)
-						newList.push(list[i]);
-				}else{
-					newList.push(list[i]);
-				}
-			}
-			return newList;
-		}
-		if(dailyProteinSelector == "typeA"){
-			listA = DailyProteinSelector(listA,catType,kcal,catWeight);
-			listB = DailyProteinSelector(listB,catType,kcal,catWeight);
-			listC = DailyProteinSelector(listC,catType,kcal,catWeight);
-			listD = DailyProteinSelector(listD,catType,kcal,catWeight);
-			listE = DailyProteinSelector(listE,catType,kcal,catWeight);
-		}
-		function MetabolismSelectorTypeA(list,catType,kcal){
-			var newList = [];
-			for(i=0;i<list.length;i++){
-				var x = kcal/list[i].kcal*10*list[i].DRY_protein;
-				if(catType == "成貓"){
-					if(3.5*x/kcal >= 0.4)
-						newList.push(list[i])
-				}else{
-					newList.push(list[i]);
-				}
-			}
-			return newList;
-		}
-		function MetabolismSelectorTypeB(list,catType,kcal){
-			var newList = [];
-			for(i=0;i<list.length;i++){
-				var x_protein = kcal/list[i].kcal*10*list[i].DRY_protein;
-				var x_fat = kcal/list[i].kcal*10*list[i].DRY_fat;
-				var x_carbohydrate = kcal/list[i].kcal*10*list[i].DRY_carbohydrate;
-				var x = (x_protein*3.5+x_fat*8.5+x_carbohydrate*3.5)/(kcal/list[i].kcal*1000);
-				if(catType == "成貓" || catType == "交配貓" || catType == "懷孕貓" || catType == "泌乳貓"){
-					if(x>4 && x<5)
-						newList.push(list[i]);
-				}if(catType == "胖成貓"){
-					if(x>3.3 && x<3.8)
-						newList.push(list[i]);
-				}if(catType == "老貓" || catType == "老老貓"){
-					if(x>4 && x<4.5)
-						newList.push(list[i]);
-				}if(catType == "胖老貓" || catType == "胖老老貓"){
-					if(x>3.5 && x<4)
-						newList.push(list[i]);
-				}
-			}
-			return newList;
-		}
-		if(metabolismSelector == "typeA"){
-			listA = MetabolismSelectorTypeA(listA,catType,kcal);
-			listB = MetabolismSelectorTypeA(listB,catType,kcal);
-			listC = MetabolismSelectorTypeA(listC,catType,kcal);
-			listD = MetabolismSelectorTypeA(listD,catType,kcal);
-			listE = MetabolismSelectorTypeA(listE,catType,kcal);
-		}
-		if(metabolismSelector == "typeB"){
-			listA = MetabolismSelectorTypeB(listA,catType,kcal);
-			listB = MetabolismSelectorTypeB(listB,catType,kcal);
-			listC = MetabolismSelectorTypeB(listC,catType,kcal);
-			listD = MetabolismSelectorTypeB(listD,catType,kcal);
-			listE = MetabolismSelectorTypeB(listE,catType,kcal);
-		}
-		//---------------------------------------
-		// FINAL EDDIE SORTER (篩選後排序)
-		//---------------------------------------
-		if(meatLevelSelector == "open"){
-			listA = listA.sort(function(a,b){
-				return a.MeatLevel_total > b.MeatLevel_total ? -1 : 1; 
-			});
-			listB = listB.sort(function(a,b){
-				return a.MeatLevel_total > b.MeatLevel_total ? -1 : 1; 
-			});
-			listC = listC.sort(function(a,b){
-				return a.MeatLevel_total > b.MeatLevel_total ? -1 : 1; 
-			});
-			listD = listD.sort(function(a,b){
-				return a.MeatLevel_total > b.MeatLevel_total ? -1 : 1; 
-			});
-			listE = listE.sort(function(a,b){
-				return a.MeatLevel_total > b.MeatLevel_total ? -1 : 1; 
-			});
-		}
-		if(priceSelector == "open"){
-			listA = listA.sort(function(a,b){
-				return a.price > b.price ? -1 : 1;
-			});
-			listB = listB.sort(function(a,b){
-				return a.price > b.price ? -1 : 1;
-			});
-			listC = listC.sort(function(a,b){
-				return a.price > b.price ? -1 : 1;
-			});
-			listD = listD.sort(function(a,b){
-				return a.price > b.price ? -1 : 1;
-			});
-			listE = listE.sort(function(a,b){
-				return a.price > b.price ? -1 : 1;
-			});
-		}
-		if(meatLevel_priceSelector == "open"){
-			listA = listA.sort(function(a,b){
-				var x = a.MeatLevel_total / a.price;
-				var y = b.MeatLevel_total / b.price;
-				return x > y ? -1 : 1;
-			});
-			listB = listB.sort(function(a,b){
-				var x = a.MeatLevel_total / a.price;
-				var y = b.MeatLevel_total / b.price;
-				return x > y ? -1 : 1;
-			});
-			listC = listC.sort(function(a,b){
-				var x = a.MeatLevel_total / a.price;
-				var y = b.MeatLevel_total / b.price;
-				return x > y ? -1 : 1;
-			});
-			listD = listD.sort(function(a,b){
-				var x = a.MeatLevel_total / a.price;
-				var y = b.MeatLevel_total / b.price;
-				return x > y ? -1 : 1;
-			});
-			listE = listE.sort(function(a,b){
-				var x = a.MeatLevel_total / a.price;
-				var y = b.MeatLevel_total / b.price;
-				return x > y ? -1 : 1;
-			});
-		}
-		if(meatLevelProtein_priceSelector == "open"){
-			listA = listA.sort(function(a,b){
-				var x = a.MeatLevel_total * a.DRY_protein / a.price;
-				var y = b.MeatLevel_total * b.DRY_protein / b.price;
-				return x > y ? -1 : 1;
-			});
-			listB = listB.sort(function(a,b){
-				var x = a.MeatLevel_total * a.DRY_protein / a.price;
-				var y = b.MeatLevel_total * b.DRY_protein / b.price;
-				return x > y ? -1 : 1;
-			});
-			listC = listC.sort(function(a,b){
-				var x = a.MeatLevel_total * a.DRY_protein / a.price;
-				var y = b.MeatLevel_total * b.DRY_protein / b.price;
-				return x > y ? -1 : 1;
-			});
-			listD = listD.sort(function(a,b){
-				var x = a.MeatLevel_total * a.DRY_protein / a.price;
-				var y = b.MeatLevel_total * b.DRY_protein / b.price;
-				return x > y ? -1 : 1;
-			});
-			listE = listE.sort(function(a,b){
-				var x = a.MeatLevel_total * a.DRY_protein / a.price;
-				var y = b.MeatLevel_total * b.DRY_protein / b.price;
-				return x > y ? -1 : 1;
-			});
-		}
-		//---------------------------------------
-		// SEND INFORMATION TO FRONT END
-		//---------------------------------------
-		function InnerHTMLBuilderBasedOnList(list,lowerLimit,upperLimit){
-			var innerHTML = "";
-			innerHTML += "<div class='col-lg-12 col-md-12'>";
-			innerHTML += "<h3 style='color: red;'>範圍 : "+lowerLimit+"~"+upperLimit+"</h3>";
-			innerHTML += "</div>";
-			for(i=0;i<list.length;i++){
-				innerHTML += "<div class='col-lg-3 col-md-3'>";
-				innerHTML += "<h5 style='height: 60px;'>產品 ： "+list[i].name+"</h5>";
-				innerHTML += "<h5>價格 : "+list[i].price+"</h5>";
-				innerHTML += "<h5>肉等級 : "+list[i].MeatLevel_total+"</h5>";
-				innerHTML += "<h5>蛋白質 : "+list[i].protein+"</h5>";
-				innerHTML += "<hr>";
-				innerHTML += "</div>";
-			}
-			innerHTML += "<div class='col-lg-12 col-md-12'>";
-			innerHTML += "<h4 style='color: blue;'>此部分總數 : "+list.length+"</h4>";
-			innerHTML += "</div>";
-			return innerHTML;
-		}
-		innerHTML += "<h4>分類 ： "+catType+"</h4>";
-		innerHTML += "<h4>fat ： "+fat+"%</h4>";
-		innerHTML += "<h4>idealWeight ： "+idealWeight+"kg</h4>";
-		innerHTML += "<h4>RERCoefficient ： "+RERCoefficient+"%</h4>";
-		innerHTML += "<h4>RER ： "+RER+"</h4>";
-		if(catType == "胖成貓" || catType == "胖老貓" || catType == "胖老老貓"){
-			innerHTML += "<h4>推薦kcal : "+kcal_fat+"</h4>";
-			innerHTML += "<h4>最終kcal : "+kcal+"</h4>";
-		}else{
-			innerHTML += "<h4>kcal ： "+kcal+"</h4>";
-		}			
-		innerHTML += "<hr>";
-		innerHTML += InnerHTMLBuilderBasedOnList(listA,160,250);
-		innerHTML += InnerHTMLBuilderBasedOnList(listB,250,350);
-		innerHTML += InnerHTMLBuilderBasedOnList(listC,350,450);
-		innerHTML += InnerHTMLBuilderBasedOnList(listD,450,550);
-		innerHTML += InnerHTMLBuilderBasedOnList(listE,550,10000);
-		var listTotalLength = listA.length + listB.length + listC.length + listD.length + listE.length;
-		innerHTML += "<div class='col-lg-12 col-md-12'>";
-		innerHTML += "<h4 style='color: blue;'>總數 : "+listTotalLength+"</h4>";
-		innerHTML += "</div>";
-		res.send(innerHTML);
-	});//con.query END	
-});
 //------------------------------------------
 // Get Login Page
 //------------------------------------------
@@ -1089,7 +602,13 @@ app.post('/logincheck',function(req,res,next){
 						console.log("[SYS MSG] : "+ username +" login success!");
 						req.session.name = result[0].name;
 						req.session.username = username;
-						res.redirect('/');
+						if(req.session.recordWebPage==null){
+							res.redirect('/');
+						}else{
+							var page = req.session.recordWebPage;
+							req.session.recordWebPage = null;
+							res.redirect('/'+page);
+						}					
 						//確認是否正在被登入
 						//暫時不實作
 					}else{
@@ -1164,7 +683,13 @@ app.post('/signupcheck',function(req,res,next){
 							console.log("[SYS MSG] : " + username + " build account success!");
 							req.session.name = name;
 							req.session.username = username;
-							res.redirect('/');
+							if(req.session.recordWebPage==null){
+								res.redirect('/');
+							}else{
+								var page = req.session.recordWebPage;
+								req.session.recordWebPage = null;
+								res.redirect('/'+page);
+							}
 						}
 					});
 				}
@@ -1186,51 +711,6 @@ app.get('/product',function(req,res,next){
 	if(req.session.cart==null) req.session.cart = [];
 	res.render('product',{username: req.session.name,productLength:req.session.cart.length});	
 });
-//get product information
-app.post('/clientAskForProduct',function(req,res,next){
-	var sql = "SELECT * FROM `product`";
-	var product_data = "[";
-	//console.log("post");
-	con.query(sql,function(err,result){
-		if(err) throw err;
-		else{
-			//console.log(result);
-			if(result[0]==null) console.log("No data!");
-			else{
-				for(i in result){
-					var lastCharofJSON = product_data.substr(product_data.length-1);
-					if(lastCharofJSON!='[' && lastCharofJSON!=',') product_data += ",";
-					if(result[i].alreadyToSell==1){
-						product_data += "{";
-						product_data += "'p_id':'" + result[i].p_id + "',";
-						product_data += "'p_name':'" + result[i].p_name + "',";
-						product_data += "'basic_info':'" + result[i].basic_info + "',";
-						product_data += "'advanced_info':'" + result[i].advanced_info + "',";
-						product_data += "'picture':'" + result[i].picture + "',";
-						product_data += "'price':" + result[i].price + ",";
-						product_data += "'flavor_tag':'" + result[i].flavor_tag + "',";
-						product_data += "'cereal_tag':" + result[i].cereal_tag + ",";
-						product_data += "'brand_tag':'" + result[i].brand_tag + "'}";
-					}									
-				}
-				product_data += "]";
-				var product_dataJSON = JSON.stringify(product_data);
-				res.send(product_dataJSON);
-				//console.log(product_dataJSON);
-			}
-		}
-	});		
-});
-app.post('/addProductToCart',function(req,res,next){
-	//already has this product
-	if(req.session.cart.indexOf(req.body.product) > -1){
-		console.log("duplicate select item!");
-	}else{
-		req.session.cart.push(req.body.product);
-		res.send("" + req.session.cart.length);
-	}		
-});
-
 //------------------------------------------
 // Get Cart Page
 //------------------------------------------
@@ -1238,62 +718,9 @@ app.get('/cart',function(req,res,next){
 	if(req.session.cart==null) req.session.cart = [];
 	res.render('cart',{username: req.session.name,productLength:req.session.cart.length});	
 });
-//get cart information
-app.post('/clientAskForCart',function(req,res,next){
-	var cart_data = "[";	
-	
-	var sql = "SELECT * FROM `product`";
-	con.query(sql,function(err,result){
-		if(err) throw err;
-		else{
-			//console.log(result);
-			for(i in req.session.cart){
-				for(j in result){
-					if(req.session.cart[i]==result[j].p_id){
-						var lastCharofJSON = cart_data.substr(cart_data.length-1);
-						if(lastCharofJSON!="[" && lastCharofJSON!=",") cart_data+=",";
-						cart_data += "{";
-						cart_data += "'p_id':'" + result[j].p_id + "',";
-						cart_data += "'p_name':'" + result[j].p_name + "',";
-						cart_data += "'price':" + result[j].price + "}";
-						break;
-					}
-				}
-			}
-			cart_data += "]";
-			//console.log(cart_data);
-			var cart_dataJSON = JSON.stringify(cart_data);
-			res.send(cart_dataJSON);
-		}
-	});
-});
-app.post('/deleteProductFromCart',function(req,res,next){
-	if(req.session.cart.indexOf(req.body.deleteTarget) > -1){
-		var count = 0;
-		var tempArray = [];
-		var tempSessionCount = 0;
-		for(i in req.session.cart) tempSessionCount++;
-		for(i=tempSessionCount-1;i>=0;i--){
-			if(req.session.cart[i]==req.body.deleteTarget)
-			{
-				req.session.cart.pop();
-				break;
-			}else{
-				tempArray.push(req.session.cart.pop());
-				count++;
-			}
-		}
-		for(i=0;i<count;i++){
-			req.session.cart.push(tempArray.pop());
-		}
-		res.send("done");
-	}else{
-		console.log("user tried to delete something not in cart!");
-		res.send("err");
-	}
-});
-
-/* Questionnaire Part */
+//------------------------------------------
+// Questionnaire Part
+//------------------------------------------
 app.get('/questionnaire',function(req,res,next){
 	res.render('questionnaire');
 });
@@ -1361,10 +788,84 @@ app.post('/questionnaireAskArray',function(req,res,next){
 	}
 });
 //------------------------------------------
-// SHOW ALGORITHM RESULT
+// Questionnaire Result Page
 //------------------------------------------
-app.get('/algorithmResult',function(req,res,next){
-	res.render('algorithmResult');
+app.post('/saveQuestionnaire_result',function(req,res,next){
+	req.session.currentProduct = req.body.currentProduct;
+	console.log(req.session.currentProduct);
+	res.redirect('/purchase_confirm')
+});
+app.get('/purchase_confirm',function(req,res,next){
+	res.render('purchase_confirm');
+});
+app.post('/clientAskForPurchaseItem',function(req,res,next){
+	var sql = 'SELECT * FROM `productdb` WHERE productCode = "'+req.session.currentProduct+'"';
+	function AddObjToList(productCode,productName_ZH,productCompany_ZH,productCompany_EN,price){
+		var obj = {};
+		obj.productCode = productCode;
+		obj.productName_ZH = productName_ZH;
+		obj.productCompany = productCompany_ZH + '  ' + productCompany_EN;
+		obj.price = price;
+		return obj;
+	}
+	con.query(sql,function(err,result){
+		if(err) throw err;
+		else{
+			var obj = AddObjToList(result[0].productCode,result[0].productName_ZH,result[0].productCompany_ZH,result[0].productCompany_EN,result[0].price);
+			res.send(JSON.stringify(obj));	
+		}
+	});
+});
+app.post('/clientSendOrder',function(req,res,next){
+	var logistics = req.body.logistics;
+	var username = req.body.username;
+	var useraddress = req.body.useraddress;
+	var userphone = req.body.userphone;
+	var productCode = req.body.productCode;
+	var productName_ZH = req.body.productName_ZH;
+	var dt = datetime.create();
+	var formatted = dt.format('Y-m-d H:M:S');
+	//先判斷輸入的值是否正確
+	//再判斷是否已登入
+
+	if(req.session.username==null){
+		req.session.recordWebPage = 'purchase_confirm';
+		res.send('/login');
+	}else{
+		if(logistics=='logisticsA'){
+			var id = req.session.username;
+			var name = req.session.name;
+			var sql = 'INSERT INTO `ordersystem` (userid, username, userphone, userhomeaddress, productCode, productName_ZH, buildTime, orderstate) VALUES?';
+			var values = [
+				[id,username,userphone,useraddress,productCode,productName_ZH,formatted,1]
+			];
+			con.query(sql,[values],function(err,result){
+				if(err){
+					console.log('[SYS ERR] : INSERT TO ORDER ERROR OCCUR!');
+					throw err;
+				}else{
+					console.log('[SYS MSG] : ORDER BUILD SUCCESS!');
+					// clear part session
+					req.session.recordQuestionnaire = null;
+					req.session.basicInformation = null;
+					req.session.advancedInformation = null;
+					req.session.iconInformation = null;
+					req.session.extraInformation = null;
+					req.session.iconTravelList = null;
+					req.session.iconTraveledList = null;
+					req.session.recordTravelList = null;
+					req.session.currentPage = null;
+					req.session.icon = null;
+					req.session.ingredients = null;
+					req.session.allergy = null;
+					req.session.stress = null;
+					res.send('/');
+				}
+			});
+		}else{
+
+		}	
+	}
 });
 //------------------------------------------
 // Get User Center Page

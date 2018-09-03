@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html"; charset="utf-8"/>
+
+	<title>catcatmed| Purchase_confirm</title>
+
+	<link rel="stylesheet" type="text/css" href="stylesheets/header.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap-3.3.7/css/bootstrap.min.css">
+    <script src="javascript/jquery/jquery_v-3-3-1.js"></script>
+    <script src="bootstrap-3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<!-- HEADER -->
+	<div>
+		<nav class="nav navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<ul class="nav navbar-nav navLogo">
+						<li><a href="/" class="navbar-brand">卡卡貓LOGO</a></li>
+					</ul>
+				</div>
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav">					
+					</ul>
+					<ul class="nav navbar-nav navbar-right">	
+						<li><a href="/">回首頁</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav> 	
+	</div>
+	<!-- BODY -->
+	<div class="body"></div>
+	<div class="container">
+		<div style="padding: 20px;" class="row">
+			<h3>確認訂單</h3>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>產品名稱</th>
+						<th>品牌</th>
+						<th>套餐種類</th>
+						<th>數量</th>
+						<th>預售價格</th>
+						<th>小計</th>
+						<th>可買量</th>
+						<th>    </th>
+					</tr>
+				</thead>
+				<tbody id="showProductItem">
+					<tr>
+						<th>產品A</th>
+						<th>托斯卡tosca</th>
+						<th>免費試用一個月方案</th>
+						<th>一份</th>
+						<th>NTD XXX</th>
+						<th>免費</th>
+						<th>可購買</th>
+						<th><a href="/questionnaire_result">重新選擇商品</a></th>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div style="background-color:bisque; border-radius: 10px; padding: 20px;" class="row">
+			<h3>配送方式</h3>
+			<form onchange="ChangeLofistic();">
+				<label class="radio-inline">
+					<input type="radio" id="logisticsA" name="optradio" checked>宅配到府
+				</label>
+				<label class="radio-inline">
+					<input type="radio" id="logisticsB" name="optradio">7-11超商取貨
+				</label>
+			</form>
+		</div>
+		<div style="background-color: cadetblue; border-radius: 10px; padding: 20px;" class="row">
+			<div id="logisticBlock" class="col-lg-6 col-md-6">	
+				
+			</div>
+			<div class="col-lg-6 col-md-6 text-center">
+				<button onclick="SendOrder();">確認結帳</button>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+<script>
+	$(document).ready(function(){
+		ChangeLofistic();
+		CallProduct();
+	});
+	function ChangeLofistic(){
+		var innerHTML = '';
+		if($('#logisticsA').is(':checked')){
+			innerHTML += '<form><span>收件人</span><input type="text" id="username"><br><span>收件地址</span><input type="text" id="userhomeaddress"><br><span>收件人電話</span><input type="text" id="userphone"></form>';
+			document.getElementById('logisticBlock').innerHTML = innerHTML;
+		}
+		if($('#logisticsB').is(':checked')){
+			innerHTML += '<form><span>門市名稱</span><input type="text"></form>';
+			document.getElementById('logisticBlock').innerHTML = innerHTML;
+		}
+	}
+	var purchaseItem = [];
+	function CallProduct(){
+		$.ajax({
+			method : 'POST',
+			url : '/clientAskForPurchaseItem'
+		}).done(function(data){			
+			purchaseItem = JSON.parse(data);
+			var innerHTML = '<tr><th>'+purchaseItem.productName_ZH+'</th><th>'+purchaseItem.productCompany+'</th><th>免費試用一個月方案</th><th>一份</th><th>NTD '+purchaseItem.price+'/KG </th><th>免費</th><th>可購買</th><th><a href="/questionnaire_result">重新選擇商品</a></th></tr>';
+			document.getElementById('showProductItem').innerHTML = innerHTML;
+		});
+	}
+	function SendOrder(){
+		$.ajax({
+			method : 'POST',
+			url : '/clientSendOrder',
+			data : {
+				username : $('#username').val(),
+				useraddress : $('#userhomeaddress').val(),
+				userphone : $('#userphone').val(),
+				logistics : 'logisticsA',
+				productCode : purchaseItem.productCode,
+				productName_ZH : purchaseItem.productName_ZH
+			}
+		}).done(function(data){
+			if(data=='/login'){
+				alert("您尚未登入會員喔");
+			}
+			window.location.href = data;
+		});
+	}
+</script>

@@ -34,19 +34,19 @@ var basicInformation = {
 	name:"無資料",
 	catName:"無資料",
 	sex:"無資料",
-	catSex:"無資料",
+	catSex:"女",
 	age:"無資料",
-	catAgeYear:"無資料",
-	catAgeMonth:"無資料",
+	catAgeYear:"2",
+	catAgeMonth:"6",
 	species:"無資料",
-	ligation:"無資料",
+	ligation:"是",
 	pregnancy:"無資料",
 	pregnancyTime:"無資料",
-	catWeightKilo:"無資料",
-	catWeightGram:"無資料",
-	catExerciseFreq:"無資料",
+	catWeightKilo:"3",
+	catWeightGram:"0",
+	catExerciseFreq:"中",
 	catSide:"無資料",
-	catSize:"無資料"
+	catSize:"適中"
 }
 var customAdvancedEnum = {
 	ARC_SPE:"特定需求",

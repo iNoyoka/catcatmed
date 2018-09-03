@@ -1,3 +1,7 @@
+@import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
+{
+	font-family: 'Noto Sans TC';
+}
 h1{font-family: monospace, 'Noto Sans TC' !important;}
 h2{font-family: monospace, 'Noto Sans TC' !important;}
 h3{font-family: monospace, 'Noto Sans TC' !important;}
@@ -5,6 +9,8 @@ h4{font-family: monospace, 'Noto Sans TC' !important;}
 h5{font-family: monospace, 'Noto Sans TC' !important;}
 span{font-family: monospace, 'Noto Sans TC' !important;}
 p{font-family: monospace, 'Noto Sans TC' !important;}
+a{font-family: monospace, 'Noto Sans TC' !important;}
+button{font-family: monospace, 'Noto Sans TC' !important;}
 /* scroll bar */
 /* width */
 ::-webkit-scrollbar {
