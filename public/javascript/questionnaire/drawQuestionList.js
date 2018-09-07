@@ -636,7 +636,7 @@ var questionInformation = [
 		answerType: "B",
 		answerNumber : 3,
 		answer : ["馬上吃光光","慢慢吃<br>過兩三小時<br>才會吃完","吃一整天<br>都吃不完"],
-		answerImg : ["","",""],
+		answerImg : ["images/questionnaire/61-eat-speed-1-min.gif","images/questionnaire/61-eat-speed-2-min.gif","images/questionnaire/61-eat-speed-3-min.gif"],
 		answerId : ["EES_SOON","EES_SLOW","EES_NEVER"]
 	},
 	{

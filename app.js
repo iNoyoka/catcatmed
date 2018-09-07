@@ -1,8 +1,11 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+//7-11
+const request = require('request');
+const cheerio = require('cheerio');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -314,35 +317,43 @@ app.post('/questionnaire_result',function(req,res,next){
 						}else if(catType == "胖成貓"){
 							if(result[i].DRY_fat>9&&result[i].DRY_fat<20&&result[i].DRY_fiber>6&&result[i].DRY_fiber<15&&result[i].DRY_protein>30&&result[i].DRY_protein<45&&result[i].DRY_carbohydrate<=30)
 							{
-								list.push(AddObjToList(i,result[i].productCode,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].carbohydrate,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients));							}
+								list.push(AddObjToList(i,result[i].productCode,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].carbohydrate,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients));							
+							}
 						}else if(catType == "幼貓"){
 							if(result[i].DRY_fat>18&&result[i].DRY_fat<35&&result[i].DRY_protein>35&&result[i].DRY_protein<50)
 							{
-								list.push(AddObjToList(i,result[i].productCode,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].carbohydrate,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients));							}
+								list.push(AddObjToList(i,result[i].productCode,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].carbohydrate,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients));							
+							}
 						}else if(catType == "懷孕貓"){
 							if(result[i].DRY_fat>18&&result[i].DRY_fat<35&&result[i].DRY_protein>35&&result[i].DRY_protein<50)
 							{
-								list.push(AddObjToList(i,result[i].productCode,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].carbohydrate,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients));							}
+								list.push(AddObjToList(i,result[i].productCode,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].carbohydrate,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients));							
+							}
 						}else if(catType == "泌乳貓"){
 							if(result[i].DRY_fat>18&&result[i].DRY_fat<35&&result[i].DRY_protein>35&&result[i].DRY_protein<50)
 							{
-								list.push(AddObjToList(i,result[i].productCode,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].carbohydrate,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients));							}
+								list.push(AddObjToList(i,result[i].productCode,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].carbohydrate,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients));							
+							}
 						}else if(catType == "交配貓"){
 							if(result[i].DRY_fat>10&&result[i].DRY_fat<30&&result[i].DRY_protein>30&&result[i].DRY_protein<45)
 							{
-								list.push(AddObjToList(i,result[i].productCode,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].carbohydrate,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients));							}
+								list.push(AddObjToList(i,result[i].productCode,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].carbohydrate,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients));							
+							}
 						}else if(catType == "老貓" || catType == "胖老貓"){
 							if(result[i].DRY_fat>18&&result[i].DRY_fat<25&&result[i].DRY_fiber<=5&&result[i].DRY_protein>30&&result[i].DRY_protein<45)
 							{
-								list.push(AddObjToList(i,result[i].productCode,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].carbohydrate,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients));							}
+								list.push(AddObjToList(i,result[i].productCode,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].carbohydrate,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients));							
+							}
 						}else if(catType == "老老貓" || catType == "胖老老貓"){
 							if(result[i].DRY_fat>10&&result[i].DRY_fat<18&&result[i].DRY_fiber>6&&result[i].DRY_fiber<15&&result[i].DRY_protein>30&&result[i].DRY_protein<45)
 							{
-								list.push(AddObjToList(i,result[i].productCode,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].carbohydrate,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients));							}
+								list.push(AddObjToList(i,result[i].productCode,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].price,result[i].kcal,result[i].protein,result[i].fat,result[i].ash,result[i].carbohydrate,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients));							
+							}
 						}
 					}			
 				}
 			}
+			
 			//protein, fat, carbohydrate analysis
 			function fillInAverageLevel(list,proteinAVG,fatAVG,carbohydrateAVG){
 				for(i=0;i<list.length;i++){
@@ -816,6 +827,73 @@ app.post('/clientAskForPurchaseItem',function(req,res,next){
 		}
 	});
 });
+// 7-11 crawler
+const getStoreData = (url, cityName, townName) => {
+	let storeArray = [];
+    let storeID = [];
+    let storeName = [];
+    let storeTele = [];
+    let storeFax = [];
+    let storeAddress = [];
+    let storeValues = "";
+    return new Promise((resolve, reject) => {
+        request.post({
+            url: url,
+            form: {
+                commandid: "SearchStore",
+                city: cityName,
+                town: townName
+            }
+        }, function (err, res, body) {
+            const $ = cheerio.load(body);
+            // 店家ID
+            $('POIID').each(function (index, element) {
+ 　　　　　　     //去空白
+                storeID.push($(this).text().replace(/\s/g, ''));
+                storeValues = index; // 該區所有店家的個數
+            })
+            // 店家名稱
+            $('POIName').each(function (index, element) {
+                storeName.push($(this).text());
+            })
+            // 店家電話
+            $('Telno').each(function (index, element) {
+                //去空白
+                storeTele.push($(this).text().replace(/\s/g, ''));
+            })
+            // 店家傳真
+            $('FaxNo').each(function (index, element) {
+                //去空白
+                storeFax.push($(this).text().replace(/\s/g, '')); 
+            })
+            // 店家地址
+            $('Address').each(function (index, element) {
+                storeAddress.push($(this).text());
+            })
+            for (let i = 0; i <= storeValues; i += 1) {
+                storeArray.push({
+                    storeCity: cityName,
+                    storeTown: townName,
+                    storeID: storeID[i],
+                    storeName: storeName[i],
+                    storeTele: storeTele[i],
+                    storeFax: storeFax[i],
+                    storeAddress: storeAddress[i]
+                });
+            }
+            resolve(storeArray);
+        })
+    })
+}
+app.post('/clientAskFor711',function(req,res,next){
+	let cityName = req.body.cityName;
+	let townName = req.body.townName;
+	getStoreData('http://emap.pcsc.com.tw/EMapSDK.aspx', cityName, townName).then((result) => {
+		const data = JSON.stringify(result);
+		//console.log(result);
+		res.send(data);
+	});	
+});
 app.post('/clientSendOrder',function(req,res,next){
 	var logistics = req.body.logistics;
 	var username = req.body.username;
@@ -863,7 +941,35 @@ app.post('/clientSendOrder',function(req,res,next){
 				}
 			});
 		}else{
-
+			var id = req.session.username;
+			var name = req.session.name;
+			var sql = 'INSERT INTO `ordersystem` (userid, username, userphone, user711address, productCode, productName_ZH, buildTime, orderstate) VALUES?';
+			var values = [
+				[id,username,userphone,useraddress,productCode,productName_ZH,formatted,1]
+			];
+			con.query(sql,[values],function(err,result){
+				if(err){
+					console.log('[SYS ERR] : INSERT TO ORDER ERROR OCCUR!');
+					throw err;
+				}else{
+					console.log('[SYS MSG] : ORDER BUILD SUCCESS!');
+					// clear part session
+					req.session.recordQuestionnaire = null;
+					req.session.basicInformation = null;
+					req.session.advancedInformation = null;
+					req.session.iconInformation = null;
+					req.session.extraInformation = null;
+					req.session.iconTravelList = null;
+					req.session.iconTraveledList = null;
+					req.session.recordTravelList = null;
+					req.session.currentPage = null;
+					req.session.icon = null;
+					req.session.ingredients = null;
+					req.session.allergy = null;
+					req.session.stress = null;
+					res.send('/');
+				}
+			});
 		}	
 	}
 });
@@ -893,6 +999,76 @@ app.post('/clientAskForChangePassword',function(req,res,next){
 app.get('/library',function(req,res,next){
 	if(req.session.cart==null) req.session.cart = [];
 	res.render('library',{username: req.session.name,productLength:req.session.cart.length});
+});
+//------------------------------------------
+// BACKEND CONTROL PANEL
+//------------------------------------------
+app.get('/backendControlPanel',function(req,res,next){
+
+	res.render('backendControlPanel');
+});
+app.post('/adminLogin',function(req,res,next){
+	if(req.body.id!='123' || req.body.pwd!='123'){
+		res.send('input error!');
+	}else{
+		req.session.ccmatminlogin = true;
+		//send data to admin
+		const sql = 'SELECT * FROM `ordersystem`';
+		let list = [];
+		function addToList(id,uid,un,up,uha,u7a,pc,pnz,os,bt,ct,ot,dt){
+			var obj = {};
+			obj.id = id;
+			obj.uid = uid;
+			obj.un = un;
+			obj.up = up;
+			obj.uha = uha;
+			obj.u7a = u7a;
+			obj.pc = pc;
+			obj.pnz = pnz;
+			obj.os = os;
+			obj.bt = bt;
+			obj.ct = ct;
+			obj.ot = ot;
+			obj.dt = dt;
+			return obj;
+		}
+		con.query(sql,function(err,result){
+			if(err) throw err;
+			else{
+				for(i in result){
+					list.push(addToList(result[i].id,result[i].userid,result[i].username,result[i].userphone,result[i].userhomeaddress,result[i].user711address,result[i].productCode,result[i].productName_ZH,result[i].orderstate,result[i].buildTime,result[i].checkTime,result[i].outgoingTime,result[i].deliveryTime));
+				}
+			}
+			let listJSON = JSON.stringify(list);
+			res.send(listJSON);
+		});
+	}
+});
+app.post('/adminLogout',function(req,res,next){
+	if(req.session.ccmatminlogin==true){
+		req.session.ccmatminlogin= null;
+		res.send('done');
+	}
+});
+app.post('/sendnewos',function(req,res,next){
+	var dt = datetime.create();
+	var formatted = dt.format('Y-m-d H:M:S');
+	let sql;
+	if(req.body.newos==2){
+		sql = 'UPDATE `ordersystem` SET orderstate = '+req.body.newos+', checkTime = "'+formatted+'" WHERE id = '+req.body.id+'';
+	}else if(req.body.newos==3){
+		sql = 'UPDATE `ordersystem` SET orderstate = '+req.body.newos+', outgoingTime = "'+formatted+'" WHERE id = '+req.body.id+'';
+	}else if(req.body.newos==4){
+		sql = 'UPDATE `ordersystem` SET orderstate = '+req.body.newos+', deliveryTime = "'+formatted+'" WHERE id = '+req.body.id+'';
+	}else if(req.body.newos==1){
+		sql = 'UPDATE `ordersystem` SET orderstate = '+req.body.newos+', buildTime = "'+formatted+'" WHERE id = '+req.body.id+'';
+	}else{
+		res.send('error');
+	}
+	con.query(sql,function(err,result){
+		if(err) throw err;
+		else res.send('done');
+	});
 });
 //------------------------------------------
 // SEND MAIL
