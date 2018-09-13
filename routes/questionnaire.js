@@ -125,7 +125,7 @@ router.post('/BPT',function(req,res,next){
 //
 router.get('/BFN',function(req,res,next){
     req.session.qnrecord = 'BFN';
-    res.render('questionnaire/BFN');
+    res.render('questionnaire/BFN',{name:req.session.BCN});
 });
 router.post('/BFN',function(req,res,next){
     req.session.BFN = req.body.name;
@@ -139,10 +139,11 @@ router.post('/BFN',function(req,res,next){
 //
 router.get('/BFA',function(req,res,next){
     req.session.qnrecord = 'BFA';
-    res.render('questionnaire/BFA');
+    res.render('questionnaire/BFA',{name:req.session.BCN});
 });
 router.post('/BFA',function(req,res,next){
-    req.session.BFA = req.body.name;
+    req.session.BFA_kittyNum = req.body.kittyNum;
+    req.session.BFA_week = req.body.week;
     req.session.qnrecordList.push('BFA');
     res.send('BCW');
 });
