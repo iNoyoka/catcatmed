@@ -1,0 +1,110 @@
+.qnbody{
+    background-color: white;
+    overflow-x: hidden;
+}
+.indexButton{
+	font-size: 1em;
+	color: #D0D2D3;
+    background-color: #FFFFFF;
+    border: none;
+    padding: 20px;
+    outline: none;
+}
+.padding{
+    height: 50px;
+}
+.nextButton{
+    font-size: 1.2em;
+    outline: none;
+    padding: 10px 30px;
+    margin: 20px;
+    background-color: white;
+    border: #3D5BA8 solid 3px;
+    border-radius: 30px;
+    color: #3D5BA8;
+}
+.nextButton:hover{
+    background-color: #3D5BA8;
+    color: white;
+    transition: 500ms;
+}
+.nextButtonLock{
+	border: #D0D2D3 solid 3px !important;
+	background-color: white !important;
+    color: #D0D2D3 !important;
+}
+.backButton{
+	font-size: 1em;
+	color: #D0D2D3;
+	background-color: #FFFFFF;
+	border: none;
+	padding: 20px;
+	outline: none;
+}
+.btn{
+	margin: 10px 0 !important;
+}
+/**/
+input[type=text]{
+	width: 100%;
+	outline-color: #3D5BA8;
+	padding: 10px;
+	background-color: #F1F1F2;
+	text-align: center;
+    font-family: 'Noto Sans TC',Microsoft JhengHei;
+    font-size: 1.3em;
+    color: #3D5BA8;
+	display: inline-block;
+	border: 0px;
+	margin: 10px 0;
+}
+input:-webkit-autofill {
+    background-color: #F1F1F2 !important;
+    background-image: none !important;
+    color: #3D5BA8 !important;
+}
+.answer {
+	width: 100%;
+	transition: 200ms;
+	overflow: hidden;
+	background-color: #F1F1F2;
+	color: #3D5BA8 !important;
+	border: none;
+	border-radius: 999em;
+	cursor: pointer;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	position: relative;
+}
+.answer:after{
+	content:"";
+	margin-top: 100%;
+	display: block;
+}
+.answer:hover{
+	background-color: #3D5BA8;
+	color: white !important;
+	transition: 200ms;
+}
+.answer .options{
+    position: absolute;
+    font-size: 1.3em;
+	width: 100%;
+	text-align: center;
+	right: 0;
+	top:50%;
+    transform:translateY(-50%);
+}
+.answer .options img{
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	right: 0;
+	top:50%;
+    transform:translateY(-50%);
+	font-size: 1.1em !important;
+}
+.selected{
+    background-color: #3D5BA8 !important;
+	color: white !important;
+}

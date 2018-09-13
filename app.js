@@ -8,7 +8,7 @@ const request = require('request');
 const cheerio = require('cheerio');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var questionnaireRouter = require('./routes/questionnaire');
 
 var app = express();
 
@@ -21,10 +21,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser('catcatmed secret jay paul rax edward'));
 app.use(express.static(path.join(__dirname, 'public')));
-
-//app.use('/', indexRouter);
-//app.use('/users', usersRouter);
-
 
 //------------------------------------------
 // Additional adding
@@ -63,6 +59,13 @@ function connect(){
 var con;
 connect();
 var datetime = require('node-datetime');
+
+app.use('/', indexRouter);
+//app.use('/users', usersRouter);
+app.use('/questionnaire',questionnaireRouter);
+
+
+
 //------------------------------------------
 // For Account setting
 //------------------------------------------
@@ -73,10 +76,12 @@ var datetime = require('node-datetime');
 //------------------------------------------
 // Get Home Page
 //------------------------------------------
+/*
 app.get('/', function(req, res, next) {
 	if(req.session.cart==null) req.session.cart = [];	
 	res.render('index', { username: req.session.name,productLength:req.session.cart.length});
 });
+*/
 /*testalgo*/
 app.get('/questionnaire_result',function(req,res,next){
 	res.render('questionnaire_result');
@@ -732,9 +737,13 @@ app.get('/cart',function(req,res,next){
 //------------------------------------------
 // Questionnaire Part
 //------------------------------------------
-app.get('/questionnaire',function(req,res,next){
-	res.render('questionnaire');
+app.get('/questionnaire_hello',function(req,res,next){
+	res.render('questionnaire/bhello');
 });
+
+//------------------------------------------
+// Questionnaire Save Part
+//------------------------------------------
 app.post('/questionnaireSaveandQuit',function(req,res,next){
 	req.session.recordQuestionnaire = true;
 	//
