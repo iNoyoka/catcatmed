@@ -93,7 +93,6 @@ router.post('/BNU',function(req,res,next){
     }else{
         res.send('BCW');
     }
-    res.send('Complete');
 });
 //
 router.get('/BPR',function(req,res,next){
