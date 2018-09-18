@@ -64,7 +64,9 @@ app.use('/', indexRouter);
 //app.use('/users', usersRouter);
 app.use('/questionnaire',questionnaireRouter);
 
-
+app.get('/index_mobile',function(req,res,next){
+	res.render('index_mobile', { username: req.session.name});
+});
 
 //------------------------------------------
 // For Account setting
@@ -82,7 +84,7 @@ app.get('/', function(req, res, next) {
 	res.render('index', { username: req.session.name,productLength:req.session.cart.length});
 });
 */
-/*testalgo*/
+/*testalgo*/ 
 app.get('/questionnaire_result',function(req,res,next){
 	res.render('questionnaire_result');
 });

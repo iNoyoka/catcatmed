@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">    
+
+	<title>catcatmed| questionnaire</title>
+
+    <link rel="shortcut icon" type="image/png" href="../images/favicon.png"/>
+    <link rel="stylesheet" href="../bootstrap-3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../stylesheets/header.css">
+    <link rel="stylesheet" href="../stylesheets/qn.css">
+    <script src="../javascript/jquery/jquery_v-3-3-1.js"></script>
+    <script src="../bootstrap-3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body onselectstart="return false" class="qnbody" id="body" style="display:none">
+    <div class="row">
+        <div class="col-lg-2 col-lg-offset-10 col-md-3 col-md-offset-9 col-sm-3 col-sm-offset-9 col-xs-5 col-xs-offset-7">
+            <button class="indexButton" onclick="window.location.href='/'">回首頁</button>
+        </div>
+    </div>
+    <div class="row hidden-xs padding"></div>
+    <div class="row hidden-xs padding"></div>
+    <div class="row padding"></div>
+    <div class="row">
+        <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 text-center">
+            <% if(name){ %>
+                <h3><%= name %>有沒有以下現象?</h3>
+            <% }else{ %>
+                <h3>貓孩有沒有以下現象?</h3>
+            <% } %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 text-center">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4"><div class="answer" id="A" onclick="Age(this.id)"><span class="options">18以下</span></div></div>
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4"><div class="answer" id="B" onclick="Age(this.id)"><span class="options">18-25</span></div></div>
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4"><div class="answer" id="C" onclick="Age(this.id)"><span class="options">26-35</span></div></div>
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4"><div class="answer" id="D" onclick="Age(this.id)"><span class="options">36-45</span></div></div>
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4"><div class="answer" id="E" onclick="Age(this.id)"><span class="options">46-65</span></div></div>
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4"><div class="answer" id="F" onclick="Age(this.id)"><span class="options">65以上</span></div></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <button class="nextButton" onclick="Send()">下一題</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-lg-offset-1">
+            <button class="backButton" onclick="Back()">Back</button>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    $(document).ready(function(){
+        $('#body').fadeIn(500);
+    });
+    let sex = 0; //1 boy 2 girl
+    let age = 0; //1 18- 2 18-25 ...
+    let ageIDrecord = 'Z';
+    function Back(){
+        $.ajax({
+            method : "POST",
+            url : 'back'
+        }).done(function(data){
+            window.location.href = '' + data;
+        });
+    }
+    function Send(){
+        if($('#name').val()!='' && sex!=0 && age!=0){
+            $.ajax({  
+                method : "POST",
+                url: 'BKN',
+                data: {
+                    BKN_name : $('#name').val(),
+                    BKN_sex : sex,
+                    BKN_age : age
+                }
+            }).done(function(data){                
+                window.location.href = '' + data;
+            });
+        }else{
+            alert('您還有資料沒有填寫喔！');
+        }
+    }
+    function Sex(id){
+        if(id=='male'){
+            if(sex==1){//do nothing
+            }else if(sex==2){
+                sex = 1;
+                $('#male').toggleClass('selected');
+                $('#female').toggleClass('selected');
+            }else{
+                sex = 1;
+                $('#male').toggleClass('selected');
+            }
+        }
+        if(id=='female'){
+            if(sex==2){//do nothing
+            }else if(sex==1){
+                sex = 2;
+                $('#male').toggleClass('selected');
+                $('#female').toggleClass('selected');
+            }else{
+                sex = 2;
+                $('#female').toggleClass('selected');
+            }
+        }
+    }
+    function Age(id){
+        if(ageIDrecord=='Z'){
+            ageIDrecord = id;
+            $('#'+id).toggleClass('selected');
+        }else{
+            $('#'+ageIDrecord).toggleClass('selected');
+            ageIDrecord = id;
+            $('#'+id).toggleClass('selected');
+        }
+        if(id=='A' || id=='G') age = 1;
+        else if(id=='B' || id=='H') age = 2;
+        else if(id=='C' || id=='I') age = 3;
+        else if(id=='D' || id=='J') age = 4;
+        else if(id=='E' || id=='K') age = 5;
+        else age = 6;
+    }
+</script>

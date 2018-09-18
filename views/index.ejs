@@ -5,8 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <title> catcatmed| index</title>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
@@ -15,13 +14,18 @@
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous">
     </script>
-
+    <script type="text/javascript">
+         testExp = new RegExp('Android|webOS|iPhone|iPad|' +
+                         'BlackBerry|Windows Phone|'  +
+                         'Opera Mini|IEMobile|Mobile' , 
+                        'i');
+        
+        if (testExp.test(navigator.userAgent))
+            window.location.href="/index_mobile";
+    </script>
     <style>
         @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
-        {
-            font-family: 'Noto Sans TC';
-        }
-        h4{
+        h3{
             font-family: 'Noto Sans TC';
             font-weight: bold;
         }
@@ -36,16 +40,24 @@
         a:hover{text-decoration: none;}
 
         #nav_top{
-            height: 100px;
+            height: 15vh;
+            /* height: 15%; */
+            max-height: 100px;
             width: 100%;
             z-index: 1000;
             position: fixed;
             background: #F1F1F2;
             opacity: 0.9;
+            font-size:18px;
         }
-           
+           .nav_text{
+               color: black !important;
+               font-style: bold;
+           }
         #nav_top_block{
-            height: 100px;
+            /* height: 15%; */
+            max-height: 100px;
+            height: 15vh;
             width: 100%;
             background: #F1F1F2;
         }
@@ -93,15 +105,28 @@
                 background-color: transparent;
             }
         #gif_block{
-            height: 500px;
+            height: 85vh;
+            max-height: 700px;  
+            margin: auto;
         }
-            .gif_bar{
+        #gif_bar_block{
+            height: 50%;
+            /* position: relative; */
+        }
+        #gif_bar{
+            height: 100%;
+        }
+            .gif_col{
+                /* position: absolute; */
+                height: 80%;
                 margin: 0px;
+                /* bottom: 0px; */
+                /* display: block; */
             }
             .gif_img{
                 /* height: 110px; */
                 width: 50%;
-
+                cursor: pointer;
             }
 
         #start_block{
@@ -187,6 +212,7 @@
                 -webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.7));
                 filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.7))
             }
+           
             #cancel_button_red{
                 position: absolute;
                 bottom: 50%;
@@ -418,9 +444,12 @@
                 /* color: white; */
                 /* margin: auto auto; */
             }
-            
+        #expression_block{
+            height: 85vh;
+        }
         #why_block{
-            height: 1000px;
+            height: 85vh;
+            margin: auto;
         }
             
             .img_button_selected{
@@ -500,47 +529,64 @@
                 cursor: pointer;
                 outline: none;
             }
+            #why_expression_block{
+                height: 30vh;
+            }
             #why_expression{
+                border-radius: 20px;
+                height: 80%;
                 background-color: #E7E7E8;
             }
 
-        #promise_button_block{
-            position: relative;
-            height: 200px;
+        #why_expression_img{
+            border: 2px;
+            /* border-style: solid;
+            border-color: #3C5B9E; */
+            border-radius: 50%;
         }
-            #promise_button_bar{
-                width: 100% ;
-                position: absolute;
-                bottom: 0;
-            }
-                .promise_button{
-                    height: 50px;
-                    border-top-left-radius: 5px;
-                    border-top-right-radius: 5px;
-                    cursor: pointer;
-                    outline: none !important;
-                    border: none;
-                    background-color: #F1F1F2;
-                    color: rgb(129, 129, 143);
-                }
-                .promise_button_selected{
-                    background-color:#F1F1F2;
-                    color: #3C5B9E;
-                    font-weight: bold;
-                }
         #promise_block{
-            background-color: #F1F1F2;
-            height: 350px;
+            /* background-color: #F1F1F2; */
+            height: 70vh;
         }
+            #promise_header{
+                height: 20%;
+            }
+            #promise_button_block{
+                position: relative;
+                height: 10%;
+            }
+                #promise_button_bar{
+                    width: 100% ;
+                    position: absolute;
+                    bottom: 0;
+                }
+                    .promise_button{
+                        height: 50px;
+                        border-top-left-radius: 5px;
+                        border-top-right-radius: 5px;
+                        cursor: pointer;
+                        outline: none !important;
+                        border: none;
+                        background-color: #F1F1F2;
+                        color: rgb(129, 129, 143);
+                    }
+                    .promise_button_selected{
+                        background-color:#F1F1F2;
+                        color: #3C5B9E;
+                        font-weight: bold;
+                    }
             #promise_block_container{
-                height: 100%;
+                min-height: 350px;
+                border-radius: 20px;
+                background-color: #F1F1F2;
+                height: 70%;
             }
                 #promise_block_row{
                     height: 100%;
                 }
                     
         #experience_block{
-            height: 500px;
+            height: 0;
             /* padding-bottom: 300px; */
         }
             .experience_img{
@@ -549,14 +595,18 @@
             .experience_img_space{
                 width: 80px;
             }
+        #white_block{
+            position: relative;
+            height: 50vh;
+        }
         #footer{
-            height: 250px;
+            height: 30vh;
             background-color: #F1F1F2;
             color: #808080;
         }
             #bottom_logo{
                 width: 120px;
-                height: 70px;
+                height: 70  px;
             }
             .bottom_link{
                 color: #808080;
@@ -617,12 +667,127 @@
             transition: 300ms;
         }
         
+        /* ------------------------ */
         
-        /* #experienec_container{
-            height: 600px;
-        } */
 
-        
+        .card-container {
+                position: absolute;
+                margin: auto;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                max-width: 500px;
+                height: 500px;
+            }
+            .card-container .card {
+                position: absolute;
+                margin: auto;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                width: 300px;
+                height: 200px;
+                padding: 20px;
+                overflow: hidden;
+                background: #252525;
+                border-radius: 10px;
+                box-shadow: -2px 2px 0px 0px #202020, -10px 10px 40px 0px rgba(0, 0, 0, 0.3);
+                transform: translate(0px, 0px) rotateX(30deg) rotateZ(-20deg);
+                z-index: 2;
+                transition: all 1s;
+            }
+            .card-container .card:hover {
+                transform: translate(0px, -20px) rotateX(10deg) rotateZ(-20deg);
+                box-shadow: -2px 1px 0px 0px #202020, -40px 40px 40px 0 rgba(0, 0, 0, 0.2);
+                cursor: pointer;
+            }
+            .card-container .card h1 {
+                color: white;
+                font-size: 20px;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                margin-bottom: 20px;
+            }
+            .card-container .card h1:nth-of-type(2) {
+                font-size: 16px;
+                font-weight: 400;
+                text-align: center;
+            }
+            .card-container .card h3 {
+                color: white;
+                font-size: 14px;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }
+            .card-container .card h3:nth-of-type(2) {
+                font-size: 14px;
+                font-weight: 400;
+            }
+            .card-container .card i {
+                margin-right: 5px;
+                color: white;
+            }
+            .card-container .card .circle {
+                position: absolute;
+                margin: auto;
+                top: 10%;
+                bottom: 0;
+                right: -50%;
+                width: 300px;
+                height: 300px;
+                border-radius: 50%;
+                background: #202020;
+                z-index: -2;
+            }
+            .card-container .card .circle:nth-of-type(2) {
+                width: 100px;
+                height: 100px;
+                top: 90%;
+                right: -20%;
+                z-index: -1;
+                background: white;
+            }
+
+            @media only screen and (max-width: 780px) {
+                    .card-container .card {
+                        width: 250px;
+                        height: 150px;
+                        animation: hvr 5s infinite ease-in-out;
+                        transition: none;
+                }
+                .card-container .card h1 {
+                    font-size: 18px;
+                }
+                .card-container .card h1:nth-of-type(2) {
+                    font-size: 14px;
+                }
+                .card-container .card h3 {
+                    font-size: 12px;
+                }
+                .card-container .card h3:nth-of-type(2) {
+                    font-size: 10px;
+                }
+                .card-container .card .circle {
+                    right: -70%;
+                }
+
+                @keyframes hvr {
+                    0% {
+                    box-shadow: -2px 2px 0px 0px #202020, -10px 10px 40px 0px rgba(0, 0, 0, 0.3);
+                    transform: translate(0px, 0px) rotateX(30deg) rotateZ(-20deg);
+                    }
+                    50% {
+                    transform: translate(0px, -20px) rotateX(30deg) rotateZ(-20deg);
+                    box-shadow: -2px 1px 0px 0px #202020, -40px 40px 40px 0 rgba(0, 0, 0, 0.2);
+                    }
+                    100% {
+                    box-shadow: -2px 2px 0px 0px #202020, -10px 10px 40px 0px rgba(0, 0, 0, 0.3);
+                    transform: translate(0px, 0px) rotateX(30deg) rotateZ(-20deg);
+                    }
+                }
+            }
         
         
        
@@ -638,13 +803,13 @@
             <div class="col-md-5 text-center flex-row navbar-nav align-items-center" id="nav_left" >    
                     <div class="col-md-2"></div>
                     <div class="col-md-10 flex-row navbar-nav">
-                            <a class="nav-item nav-link col-md-3"  href="/questionnaire">開始懂牠</a>
-                            <!-- <a class="nav-item nav-link active "></a> -->
-                            <a class="nav-item nav-link col-md-3"  href="/library">營養知識</a>
-                            <!-- <a class="nav-item nav-link ac2tive "></a> -->
-                            <a class="nav-item nav-link col-md-3"  href="#">關於我們</a>
-                            <!-- <a class="nav-item nav-link active "></a> -->
-                            <a class="nav-item nav-link col-md-3"  href="#">購物商場</a>
+                        <a class="nav_text nav-item nav-link col-md-3"  href="#">開始懂牠</a>
+                        <!-- <a class="nav-item nav-link active "></a> -->
+                        <a class="nav_text nav-item nav-link col-md-3"  href="#">營養知識</a>
+                        <!-- <a class="nav-item nav-link ac2tive "></a> -->
+                        <a class="nav_text nav-item nav-link col-md-3"  href="#">關於我們</a>
+                        <!-- <a class="nav-item nav-link active "></a> -->
+                        <a class="nav_text nav-item nav-link col-md-3"  href="#">購物商場</a>
                     </div>
                 
                     
@@ -655,9 +820,9 @@
             </div>
             <div class="col-md-5 text-center flex-row navbar-nav align-items-center" id="nav_right">
                     <div class="col-md-4"></div>
-                    <a class="nav-item nav-link col-md-2"  href="/login">登入</a>
+                    <a class="nav_text nav-item nav-link col-md-2"  href="#">登入</a>
                     <!-- <a class="nav-item nav-link active "></a> -->
-                    <a class="nav-item nav-link col-md-2"  href="/signup">註冊</a>
+                    <a class="nav_text nav-item nav-link col-md-2"  href="#">註冊</a>
                     <!-- <a class="nav-item nav-link col-md-2"  herf="#">購物車</a> -->
                     <div class="col-md-2 justify-content-center">
                         <img src="./images/index/car.png" alt="car">
@@ -682,7 +847,7 @@
                         <br>
                         <div class="d-flex flex-row">
                             <div class="col-md-6"></div>
-                            <button href="/questionnaire" id="slide_button1" type="button" class="slide_button">開始瞭解 >></button>
+                            <button href="#" id="slide_button1" type="button" class="slide_button">開始瞭解 >></button>
                         </div>
                     </div>
                 </div>
@@ -704,49 +869,46 @@
         </div>
     </div>
     
-    <div class="text-center" id="gif_block">
+    <div class="text-center container" id="gif_block">
         <br>
         <br>
         <br>
         <div>
-            <h4>
+            <h3>
                 簡易明瞭的飲食習慣
-            </h4>
+            </h3>
         </div>
         <br>
         <br>
         <br>
-        <div class="col-md-12 d-flex flex-row justify-content-center">
+        <div id="gif_bar_block" class="col-md-12 d-flex flex-row justify-content-center">
             <!-- <div class="col-md-1"></div> -->
-            <div class="col-md-11 d-flex flex-row" id="gif_bar">
-                <div class="col-md-3 gif_bar">
+            <div class="col-md-11 d-flex flex-row align-items-end" id="gif_bar">
+                <!-- <div class="col-md-12" style="height: 20%;"></div> -->
+                <div class="col-md-3 gif_col">
                     <br>
-                    <br>
-                    <img class="gif_img" src="./images/index/gif1_1.gif" alt="gif tmp">
+                    <a href="#"><img class="gif_img" src="./images/index/gif1_1.gif" alt="gif tmp"></a>
                     <br>
                     <br>
                     <p>建立完整身體資料</p>
                 </div>
-                <div class="col-md-3 gif_bar">
+                <div class="col-md-3 gif_col">
                     <br>
-                    <br>
-                    <img class="gif_img" src="./images/index/gif2_2.gif" alt="gif tmp">
+                    <a href="#"><img class="gif_img" src="./images/index/gif2_2.gif" alt="gif tmp"></a>
                     <br>
                     <br>
                     <p>選購推薦清單之資料</p>
                 </div>
-                <div class="col-md-3 gif_bar">
+                <div class="col-md-3 gif_col">
                     <br>
-                    <br>
-                    <img class="gif_img" src="./images/index/gif3_3.gif" alt="gif tmp">
+                    <a href="#"><img class="gif_img" src="./images/index/gif3_3.gif" alt="gif tmp"></a>
                     <br>
                     <br>
                     <p>寄送月費型卡吃卡吃桶</p>
                 </div>
-                <div class="col-md-3 gif_bar"> 
+                <div class="col-md-3 gif_col"> 
                     <br>
-                    <br>
-                    <img class="gif_img" src="./images/index/gif4_4.gif" alt="gif tmp">
+                    <a href="#"><img class="gif_img" src="./images/index/gif4_4.gif" alt="gif tmp"></a>
                     <br>
                     <br>
                     <p>填寫飲食狀態回饋</p>
@@ -754,16 +916,15 @@
             </div>
             <!-- <div class="col-md-1"></div> -->
         </div>
-         
     </div>
     <div class="text-center" id="start_block">
         <div>
             <div class="top_header">
-                <h4 id="top_header_text">開始瞭解</h4>
+                <h3 id="top_header_text">開始瞭解</h3>
             </div>
             <img id="start_img1" class="w-100" src="./images/index/start1.jpg" alt="start tmp">
             <img id="start_img2" class="w-100" src="./images/index/start_red.jpg">
-            <img id="start_img3" class="w-100" src="./images/index/start_blue.jpg">            
+            <img id="start_img3" class="w-100" src="./images/index/start_blue.jpg">
             <button id="start_left_button" type="button" class="left_button start_button">營養與器官</button>
             <button id="start_right_button" type="button" class="right_button start_button">照顧冷知識</button>
             <!-- ------------red-------------- -->
@@ -780,7 +941,7 @@
                 <div class="col-md-3"></div>
                 <p id="leftDownExp_text_red"class="displayNone exp_text col-md-9">leftDown</p>
             </div>
-            <div id="rightTopExp_red" class="displayNone d-flex flex-rowow align-items-center justify-content-center">
+            <div id="rightTopExp_red" class="displayNone d-flex flex-row align-items-center justify-content-center">
                 <p id="rightTopExp_text_red"class="displayNone exp_text col-md-9">rightTop</p>
                 <div class="col-md-3"></div>
             </div>
@@ -803,11 +964,11 @@
                 <div class="col-md-3"></div>
                 <p id="leftDownExp_text_blue"class="displayNone exp_text col-md-9">leftDown</p>
             </div>
-            <div id="rightTopExp_blue" class="displayNone d-flex flex-rowow align-items-center justify-content-center">
+            <div id="rightTopExp_blue" class="displayNone d-flex flex-row align-items-center justify-content-center">
                 <p id="rightTopExp_text_blue"class="displayNone exp_text col-md-9">rightTop</p>
                 <div class="col-md-3"></div>
             </div>
-            <div id="rightMidExp_blue" class="displayNone d-flex flex-rowow align-items-center justify-content-center">
+            <div id="rightMidExp_blue" class="displayNone d-flex flex-row align-items-center justify-content-center">
                 <p id="rightMidExp_text_blue"class="displayNone exp_text col-md-9">rightTop</p>
                 <div class="col-md-3"></div>
             </div>
@@ -819,26 +980,28 @@
     </div>
     
     <!-- ------------------------- -->
-
-    
-    <div id="why_block" class="text-center">
+    <div id="expression_block" class="text-center container">
         <br>
         <div>
-            <h4>「一本初心 顆顆把關」</h4>
+            <h3>「一本初心 顆顆把關」</h3>
         </div>    
         <br>
-        <div class="container">
+        <div>
             <div>
-                <img width="80%" src="./images/index/food1.jpg" alt="gif tmp">
+                <img width="100%" src="./images/index/food1.jpg" alt="gif tmp">
             </div>
             <br>
             <br>
         </div>
+    </div>
+
+    <hr>
+    
+    <div id="why_block" class="text-center container justify-content-around d-flex flex-column">
         <div>
-            <h4>「為什麼要選擇卡卡貓？」</h4>
+            <h3>「為什麼要選擇卡卡貓？」</h3>
         </div>
-        <br>
-        <br>
+        
         
         <div class="d-flex flex-row justify-content-center">
             <div class="col-md-2 justify-content-center">
@@ -846,83 +1009,83 @@
                 <button type="button" id="img_button_1" class="img_button_selected"></button>
                 <br>
                 <br>
-                <p>精準醫療</p>
+                <p>預防醫學</p>
             </div>
             <div class="col-md-2 justify-content-center">
                 <input type="button" class="img_button" id="img_button_2">
                 <br>
                 <br>
-                <p>貓咪精神照護</p>
+                <p>貓咪心理照護</p>
             </div>
             <div class="col-md-2 justify-content-center">
                 <input type="button" class="img_button" id="img_button_3">
                 <br>
                 <br>
-                <p>清楚營養記錄</p>
+                <p>清楚營養記錄<br/>最適健康調整</p>
             </div>
             <div class="col-md-2 justify-content-center"> 
                 <input type="button" class="img_button" id="img_button_4">
                 <br>
                 <br>
-                <p>一鍵更換</p>
+                <p>一建更換<br/>不用擔心吃不慣</p>
             </div>
             <div class="col-md-2 justify-content-center"> 
                 <input type="button" class="img_button" id="img_button_5">
                 <br>
                 <br>
-                <p>智慧線上營養照護系統</p>
+                <p>線上營養照護系統</p>
             </div>
         </div>
-        <br>
-        <br>
+        
         <div id="why_expression_block" class="navbar navbar-expand-lg navbar-light d-flex flex-row text-center">
-            <div class="col-md-1"></div>
-            <div class="col-md-10 d-flex flex-row" id="why_expression">
-                <div class="col-md-2"></div>
-                <div class="col-md-2">
+            <!-- <div class="col-md-1"></div> -->
+            <div class="col-md-12 d-flex flex-row" id="why_expression">
+                <!-- <div class="col-md-2"></div> -->
+                <div class="col-md-3 d-flex flex-row justify-content-center align-items-center">
                     <img id="why_expression_img" src="./images/index/why1.png">
                 </div>
-                <div  class="col-md-6 d-flex flex-column justify-content-center">
+                <div  class="col-md-9 d-flex flex-column justify-content-center">
                     <div>
-                        <p id="why_expression_text">獸醫院專屬飲食營養推薦以及居家照護建議，讓您不用出門就可以讓您的貓接受專業診療。</p>
+                        <p id="why_expression_text">依照貓咪的品種、年齡，和身體需求，給予最合適的營養需求及照護建議，從危機預防到尋找徵兆，從早期發現到早期治療，居家搭建完整防護網。
+                        </p>
                     </div>
                 </div>
-                <div class="col-md-2"></div>
+                <!-- <div class="col-md-2"></div> -->
             </div>
-            <div class="col-md-1"></div>
+            <!-- <div class="col-md-1"></div> -->
         </div>
     </div>
     
-    <div class="container" id="promise_button_block">
-        <br>
-        <br>
-        <br>
-        <div class="text-center">
-            <h4>我們一諾千金</h4>
+    <hr>
+    
+    <div id="promise_block" class="container">
+        <div id="promise_header" class="text-center">
+                <br>
+                <h3>我們一諾千金</h3>
         </div>
-        <div id="promise_button_bar" class="d-flex flex-row justify-content-around">
-            <div></div>
-            <div class="col-lg-2 col-md-2">
-                <button id="promise_button_1" class="promise_button promise_button_selected" style="width:100%;">誠實建議</button>
+        <div id="promise_button_block">
+            <div id="promise_button_bar" class="d-flex flex-row justify-content-around">
+                <div></div>
+                <div class="col-lg-2 col-md-2">
+                    <button id="promise_button_1" class="promise_button promise_button_selected" style="width:100%;">誠實建議</button>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <button id="promise_button_2" class="promise_button bg-light" style="width:100%;">論文研究</button>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <button id="promise_button_3" class="promise_button bg-light" style="width:100%;">寵物行為師</button>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <button id="promise_button_4" class="promise_button bg-light" style="width:100%;">獸醫把關</button>
+                </div>
+                <div></div>
             </div>
-            <div class="col-lg-2 col-md-2">
-                <button id="promise_button_2" class="promise_button bg-light" style="width:100%;">論文研究</button>
-            </div>
-            <div class="col-lg-2 col-md-2">
-                <button id="promise_button_3" class="promise_button bg-light" style="width:100%;">寵物行為師</button>
-            </div>
-            <div class="col-lg-2 col-md-2">
-                <button id="promise_button_4" class="promise_button bg-light" style="width:100%;">獸醫把關</button>
-            </div>
-            <div></div>
         </div>
-    </div>
-    <div id="promise_block">
-        <div id="promise_block_container" class="container">
+        <div id="promise_block_container">
             <div class="row justify-content-center" id="promise_block_row" width="80%" >
                 <div class="d-flex flex-column col-lg-6 col-md-6 justify-content-between align-items-end">
                     <div></div>
-                    <img id="promise_img" src="./images/index/promise3.jpg" width="80%" alt="promise img1">
+                    <img id="promise_img" src="./images/index/promise1.jpg" width="80%" alt="promise img1">
                     <div></div>
                 </div>
                 <div class="d-flex flex-column col-lg-6 col-md-6 justify-content-between">
@@ -930,7 +1093,7 @@
                     <div class="flex-row justify-content-between">
                         <div></div>
                         <div class="col-md-10">
-                            <p id="promise_text">誠實建議</p>
+                            <p id="promise_text">沒有業績銷售壓力，完全針對每隻毛孩的身體狀況，以最誠實、無偏見的方式呈現出最合適的飼料。</p>
                         </div>
                         <div></div>
                     </div>
@@ -940,11 +1103,11 @@
         </div>
     </div>
         
-    <div id="experience_block" class="container">
+    <!-- <div id="experience_block" class="container">
         <br>
         <br>
         <div class="text-center">
-            <h4>會員使用經驗</h4>
+            <h3>會員使用經驗</h3>
         </div>
         <br>
         <br>
@@ -971,15 +1134,26 @@
             <div></div>
         </div>
     </div>
-    
+     -->
 
     <!-- ======================= -->
-
+    <div id="white_block">
+            <div class="card-container">
+                    <div class="card">
+                      <h1>我們是卡卡貓</h1>
+                      <h1>6666666666</h1>
+                      <h3>快聯絡我們</h3>
+                      <h3>讓你的貓貓爽歪歪</h3>
+                      <div class="circle"></div>
+                      <div class="circle"></div>
+                    </div>
+            </div>
+    </div>
     <nav id="footer" class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <div class="d-flex flex-row justify-content-around col-md-12">
                 <div class="d-flex flex-column col-md-2">
-                    <img id="bottom_logo" src="./images/index/logo.png" alt="logo">
+                    <a href="#"><img id="bottom_logo" src="./images/index/logo.png" alt="logo"></a>
                 </div>
                 <div class="d-flex flex-column col-md-4 text-center">
                     <div class="bottom_header row-md-2">
@@ -1036,4 +1210,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script src="javascript/index.js"></script>
+<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
 </html>
