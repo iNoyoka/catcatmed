@@ -19,7 +19,13 @@ router.get('/', function(req, res, next) {
 });
 // 返回上一題
 router.post('/back',function(req,res,next){
-    res.send(req.session.qnrecordList.pop());
+    if(req.session.qnrecordList==null){
+        req.session.qnrecord = null;
+        res.send('/questionnaire');
+    }
+    else{
+        res.send(req.session.qnrecordList.pop());
+    }    
 });
 //
 router.get('/BKN',function(req,res,next){
@@ -148,15 +154,53 @@ router.post('/BFA',function(req,res,next){
 });
 //
 router.get('/BCW',function(req,res,next){
-    res.render('questionnaire/BCW');
+    req.session.qnrecord = 'BCW';
+    res.render('questionnaire/BCW',{name:req.session.BCN});
 });
+router.post('/BCW',function(req,res,next){
+    req.session.BCW_kilo = req.body.kilo;
+    req.session.BCW_gram = req.body.gram;
+    req.session.qnrecordList.push('BCW');
+    res.send('BEF');
+})
+//
 router.get('/BEF',function(req,res,next){
-    res.render('questionnaire/BEF');
+    req.session.qnrecord = 'BEF';
+    res.render('questionnaire/BEF',{name:req.session.BCN});
 });
+router.post('/BEF',function(req,res,next){
+    req.session.BEF = req.body.name;
+    req.session.qnrecordList.push('BEF');
+    if(req.session.BEF=='A'){
+        res.send('BSI');
+    }else if(req.session.BEF!='A' && req.session.BPR=='yes'){
+        res.send('iconpart')
+    }else{
+        res.send('BBC');
+    }
+});
+//
 router.get('/BSI',function(req,res,next){
-    res.render('questionnaire/BSI');
+    req.session.qnrecord = 'BSI';
+    res.render('questionnaire/BSI',{name:req.session.BCN});
 });
+router.post('/BSI',function(req,res,next){
+    req.session.BSI = req.body.name;
+    req.session.qnrecordList.push('BSI');
+    if(req.session.BPR=='yes'){
+        res.send('iconpart');
+    }else{
+        res.send('BBC');
+    }
+});
+//
 router.get('/BBC',function(req,res,next){
-    res.render('questionnaire/BBC');
+    req.session.qnrecord = 'BBC';
+    res.render('questionnaire/BBC',{name:req.session.BCN});
+});
+router.post('/BBC',function(req,res,next){
+    req.session.BBC = req.body.name;
+    req.session.qnrecordList.push('BBC');
+    console.log("?");
 });
 module.exports = router;

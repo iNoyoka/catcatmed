@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">    
+
+	<title>catcatmed| questionnaire</title>
+
+    <link rel="shortcut icon" type="image/png" href="../images/favicon.png"/>
+    <link rel="stylesheet" href="../bootstrap-3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../stylesheets/header.css">
+    <link rel="stylesheet" href="../stylesheets/qn.css">
+    <script src="../javascript/jquery/jquery_v-3-3-1.js"></script>
+    <script src="../bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .BEFanswer{
+            background-color:  #F1F1F2;
+            color: #3D5BA8 !important;
+            padding: 8px;
+            border-radius: 5px;
+            margin: 6px 0;
+        }
+        .BEFanswer:hover{
+            background-color: #3D5BA8 !important;
+            color: white !important;            
+        }
+        .BEFanswer .BEFoptions{            
+            font-size: 1.3em;
+            width: 100%;
+            text-align: center;
+            right: 0;
+            top:50%;
+            transform:translateY(-50%);
+        }
+    </style>
+</head>
+<body onselectstart="return false" class="qnbody" id="body" style="display:none">
+    <div class="row">
+        <div class="col-lg-2 col-lg-offset-10 col-md-3 col-md-offset-9 col-sm-3 col-sm-offset-9 col-xs-5 col-xs-offset-7">
+            <button class="indexButton" onclick="window.location.href='/'">回首頁</button>
+        </div>
+    </div>
+    <div class="row hidden-xs padding"></div>
+    <div class="row hidden-xs padding"></div>
+    <div class="row padding"></div>
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 text-center">
+            <% if(name){ %>
+                <h3>玩樂對於貓咪而言就是一個運動的方式，請問<%= name %>:</h3>
+            <% }else{ %>
+                <h3>玩樂對於貓咪而言就是一個運動的方式，請問貓孩:</h3>
+            <% } %>            
+            <div class="row hidden-md hidden-sm hidden-xs">
+                <div class="col-lg-2 col-lg-offset-3 col-md-2 col-md-offset-3 col-sm-2 col-sm-offset-3 col-xs-4"><div class="answer" id="A" onclick="Send(this.id)"><span class="options">很愛玩<br>一整天都<br>跑來跑去</span></div></div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4"><div class="answer" id="B" onclick="Send(this.id)"><span class="options">會跟我玩<br>但也很愛睡</span></div></div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4"><div class="answer" id="C" onclick="Send(this.id)"><span class="options">都不動<br>整天都在睡覺</span></div></div>
+            </div>
+            <div class="row hidden-lg">
+                <div class="col-xs-12"><div class="BEFanswer" id="D" onclick="Send(this.id)"><span class="BEFoptions">很愛玩，一整天都跑來跑去</span></div></div>
+            </div>
+            <div class="row hidden-lg">
+                <div class="col-xs-12"><div class="BEFanswer" id="E" onclick="Send(this.id)"><span class="BEFoptions">會跟我玩，但也很愛睡</span></div></div>
+            </div>
+            <div class="row hidden-lg">
+                <div class="col-xs-12"><div class="BEFanswer" id="F" onclick="Send(this.id)"><span class="BEFoptions">都不動，整天都在睡覺</span></div></div>
+            </div>
+        </div>
+    </div>
+    <div class="row hidden-xs padding"></div>
+    <div class="row hidden-xs padding"></div>
+    <div class="row hidden-xs padding"></div> 
+    <div class="row hidden-xs padding"></div>    
+    <div class="row hidden-xs padding"></div>
+    <div class="row hidden-xs padding"></div>
+    <div class="row padding"></div>
+    <div class="row">
+        <div class="col-lg-3 col-lg-offset-1">
+            <button class="backButton" onclick="Back()">Back</button>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+     $(document).ready(function(){
+        $('#body').fadeIn(500);
+    });
+    function Back(){
+        $.ajax({
+            method : "POST",
+            url : 'back'
+        }).done(function(data){
+            window.location.href = '' + data;
+        });
+    }
+    function Send(id){
+        if(id=='D'){
+            TrueSend('A');
+        }else if(id=='E'){
+            TrueSend('B');
+        }else if(id=='F'){
+            TrueSend('C')
+        }else{
+            TrueSend(id);
+        }              
+    }
+    function TrueSend(id){
+        $.ajax({  
+            method : "POST",
+            url: 'BEF',
+            data: {
+                name: id
+            }
+        }).done(function(data){       
+            window.location.href = '' + data;
+        });  
+    }
+</script>
