@@ -453,21 +453,21 @@ app.post('/questionnaire_result',function(req,res,next){
 				}
 				return newList;
 			}
-			/*
-			if(metabolismSelector == "typeA"){
+			
+			//if(metabolismSelector == "typeA"){
 				listA = MetabolismSelectorTypeA(listA,catType,kcal);
 				listB = MetabolismSelectorTypeA(listB,catType,kcal);
 				listC = MetabolismSelectorTypeA(listC,catType,kcal);
 				listD = MetabolismSelectorTypeA(listD,catType,kcal);
 				listE = MetabolismSelectorTypeA(listE,catType,kcal);
-			}
-			*/
+			//}
+			
 			//if(metabolismSelector == "typeB"){
-				listA = MetabolismSelectorTypeB(listA,catType,kcal);
-				listB = MetabolismSelectorTypeB(listB,catType,kcal);
-				listC = MetabolismSelectorTypeB(listC,catType,kcal);
-				listD = MetabolismSelectorTypeB(listD,catType,kcal);
-				listE = MetabolismSelectorTypeB(listE,catType,kcal);
+			//	listA = MetabolismSelectorTypeB(listA,catType,kcal);
+			//	listB = MetabolismSelectorTypeB(listB,catType,kcal);
+			//	listC = MetabolismSelectorTypeB(listC,catType,kcal);
+			//	listD = MetabolismSelectorTypeB(listD,catType,kcal);
+			//	listE = MetabolismSelectorTypeB(listE,catType,kcal);
 			//}
 			//---------------------------------------
 			// FINAL EDDIE SORTER (篩選後排序)

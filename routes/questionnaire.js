@@ -12,9 +12,9 @@ router.get('/', function(req, res, next) {
     }else if(req.session.qnrecord=='BKN'){
         req.session.qnrecordList = [];
         req.session.qnrecordList.push('/questionnaire');
-        res.render('questionnaire/BHELLO');
+        res.render('questionnaire');
     }else{
-        res.render('questionnaire/BHELLO');
+        res.render('questionnaire');
     }    
 });
 // 返回上一題
