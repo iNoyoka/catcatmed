@@ -1,0 +1,122 @@
+#nav_bar {
+    /* height: 10vh; */
+    width: 100%;
+    z-index: 1000;
+    position: fixed;
+    background-color: #F1F1F2;
+    opacity: 0.9;
+}
+#nav_top_block{
+    /* height: 15%; */
+    /* max-height: 100px; */
+    height: 66px;
+    width: 100%;
+    background: white;
+}
+#top_logo{
+    height: 40px;
+}
+#navbarSupportedContent{
+    font-size: 13px;
+    color: black !important;
+}
+#image_slide_block{
+    /* height: 500px; */
+    width: 100%;
+    margin: 0px;
+}
+    #carouselExampleIndicators{
+        padding: 0px !important;
+    }
+    .image_slide{
+        position: relative;
+    }
+#gif_block{
+    /* height: 50vh; */
+    font-size: 9px;
+}
+#gif_bar_block{
+    height: 100%;
+}
+.gif_img{
+    width: 30% !important;
+}
+#why_block{
+    width: 80%;
+    margin: auto;
+}
+.why_topic{
+    /* color: black !important; */
+}
+.why_expression_img{
+    height: 40px;
+}
+#promise_card_block{
+    width: 80%;
+    margin: auto;
+}
+#footer{
+    /* height: 80vh; */
+    background-color: #F1F1F2;
+    font-size: 9px;
+    height: 150px;
+}
+#footer_block{
+    height: 10px;
+}
+#bottom_logo{
+    height: 30px;
+}
+#line_button{
+    background-image: url("../images/index/line_icon.png");
+    border-radius: 50%;
+    background-size: cover;
+    height: 20px;
+    width: 20px;
+    padding: 0;
+    margin: 0;
+    border: 2px;
+    border-style: solid;
+    border-color: white;
+    cursor: pointer;
+}
+#instagram_button{
+    background-image: url("../images/index/instagram_icon.png");
+    border-radius: 50%;
+    background-size: cover;
+    height: 20px;
+    width: 20px;
+    padding: 0;
+    margin: 0;
+    border: 2px;
+    border-style: solid;
+    border-color: white;
+    cursor: pointer;
+}
+#fb_button{
+    background-image: url("../images/index/fb_icon.png");
+    border-radius: 50%;
+    background-size: cover;
+    height: 20px;
+    width: 20px;
+    padding: 0;
+    margin: 0;
+    border: 2px;
+    border-style: solid;
+    border-color: white;
+    cursor: pointer;
+}
+.bottom_link{
+    color: #808080;
+    /* font-size: 14px; */
+}
+.bottom_header{
+    color: #808080;
+    font-size: 15px !important;
+    margin: 0;
+    font-style: bold;
+} 
+#white_block{
+    position: relative;
+    height: 20vh;
+}
