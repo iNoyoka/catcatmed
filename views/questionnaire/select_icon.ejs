@@ -24,9 +24,13 @@
         </div>
     </div>
     <div class="row hidden-xs padding"></div>
-    <div class="row hidden-xs padding"></div>
     <div class="row hidden-xs">
         <div class="col-lg-8 col-lg-offset-2 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                    <h3>這次想特別注重/探索的項目為何呢？</h3>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-1 col-md-1 col-sm-1"></div>
                 <div class="col-lg-2 col-md-2 col-sm-2">
@@ -84,16 +88,17 @@
     $(document).ready(function () {
         $('#body').fadeIn(500);
     });
-    let A = -1;
-    let B = -1;
-    let C = -1;
-    let D = -1;
-    let E = -1;
-    let F = -1;
-    let G = -1;
-    let H = -1;
-    let I = -1;
-    let J = -1;
+    let A = 0;
+    let B = 0;
+    let C = 0;
+    let D = 0;
+    let E = 0;
+    let F = 0;
+    let G = 0;
+    let H = 0;
+    let I = 0;
+    let J = 0;
+    let count = 0;
     let last_select = '#';
     function Back() {
         $.ajax({
@@ -105,19 +110,84 @@
     }
     function Send() {
         let sum = A + B + C + D + E + F + G + H + I + J;
-        if (sum == -10) {
+        if (sum == 0) {
             alert('請至少選擇一個需要關心的項目喔！');
-        } else if (sum > -4) {
-            alert('最多只能選擇三個要關心的項目喔！');
-            window.location.href = 'select_icon';
-        } else {
+        }else {
             //send data
+            let s = [];
+            if(A==1) s.push('A');
+            if(B==1) s.push('B');
+            if(C==1) s.push('C');
+            if(D==1) s.push('D');
+            if(E==1) s.push('E');
+            if(F==1) s.push('F');
+            if(G==1) s.push('G');
+            if(H==1) s.push('H');
+            if(I==1) s.push('I');
+            if(J==1) s.push('J');
+            $.ajax({
+                method : "POST",
+                url : 'select_icon',
+                data : {
+                    name : JSON.stringify(s)
+                }
+            }).done(function(data){
+                window.location.href = '' + data;
+            });
         }
     }
     function Icon(id) {
-
+        if(count!=3){
+            if(FindValueOfid(id)==0){
+                //change and add count
+                count += 1;
+                last_select = id;
+                ChangeValueOfid(id);
+            }else{
+                //change and minus count
+                count -= 1;
+                last_select = '#';
+                ChangeValueOfid(id);
+            }
+        }else{
+            if(FindValueOfid(id)==0){
+                //already has 3 and plus 1
+                //remove last_select and add new one
+                count = 3;
+                ChangeValueOfid(last_select);
+                ChangeValueOfid(id);
+                last_select = id;
+            }else{
+                //3 minus 1
+                //minus count and change
+                count -= 1;
+                last_select = '#';
+                ChangeValueOfid(id);
+            }
+        }
     }
-    function IconChange(id) {
-
+    function FindValueOfid(id){
+        if(id=='A') return A;
+        if(id=='B') return B;
+        if(id=='C') return C;
+        if(id=='D') return D;
+        if(id=='E') return E;
+        if(id=='F') return F;
+        if(id=='G') return G;
+        if(id=='H') return H;
+        if(id=='I') return I;
+        if(id=='J') return J;
+    }
+    function ChangeValueOfid(id){
+        if(id=='A') {if(A==0)A=1;else A=0;$('#'+id).toggleClass('selected');}
+        if(id=='B') {if(B==0)B=1;else B=0;$('#'+id).toggleClass('selected');}
+        if(id=='C') {if(C==0)C=1;else C=0;$('#'+id).toggleClass('selected');}
+        if(id=='D') {if(D==0)D=1;else D=0;$('#'+id).toggleClass('selected');}
+        if(id=='E') {if(E==0)E=1;else E=0;$('#'+id).toggleClass('selected');}
+        if(id=='F') {if(F==0)F=1;else F=0;$('#'+id).toggleClass('selected');}
+        if(id=='G') {if(G==0)G=1;else G=0;$('#'+id).toggleClass('selected');}
+        if(id=='H') {if(H==0)H=1;else H=0;$('#'+id).toggleClass('selected');}
+        if(id=='I') {if(I==0)I=1;else I=0;$('#'+id).toggleClass('selected');}
+        if(id=='J') {if(J==0)J=1;else J=0;$('#'+id).toggleClass('selected');}
     }
 </script>

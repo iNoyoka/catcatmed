@@ -226,7 +226,7 @@ router.get('/select_icon',function(req,res,next){
     req.session.qnrecord = 'select_icon';
     res.render('questionnaire/select_icon');
 });
-router.get('/select_icon',function(req,res,next){
+router.post('/select_icon',function(req,res,next){
     req.session.select_icon = JSON.parse(req.body.name);
     req.session.qnrecordList.push(req.session.qnrecord);
     res.send('iconlist_redirect');
@@ -262,30 +262,30 @@ router.get('/iconlist_redirect',function(req,res,next){
         if(id=='J') return 'stress_now';
     }
     if(req.session.qnrecord=='select_icon'){
-        res.redirect('/'+match(findList('start',req.session.select_icon)));
+        res.redirect('/questionnaire/'+match(findList('start',req.session.select_icon)));
     }else{
         if(req.session.qnrecord=='joint_daily'){
-            res.redirect('/'+match(findList('A',req.session.select_icon)));
+            res.redirect('/questionnaire/'+match(findList('A',req.session.select_icon)));
         }else if(req.session.qnrecord=='heart_avgtemp'){
-            res.redirect('/'+match(findList('B',req.session.select_icon)));
+            res.redirect('/questionnaire/'+match(findList('B',req.session.select_icon)));
         }else if(req.session.qnrecord=='mouth_brush'){
-            res.redirect('/'+match(findList('C',req.session.select_icon)));
+            res.redirect('/questionnaire/'+match(findList('C',req.session.select_icon)));
         }else if(req.session.qnrecord=='fur_behave' || req.sessin.qnrecord=='fur_tie'){
-            res.redirect('/'+match(findList('D',req.session.select_icon)));
+            res.redirect('/questionnaire/'+match(findList('D',req.session.select_icon)));
         }else if(req.session.qnrecord=='immu_med'){
-            res.redirect('/'+match(findList('E',req.session.select_icon)));
+            res.redirect('/questionnaire/'+match(findList('E',req.session.select_icon)));
         }else if(req.session.qnrecord=='kidney_urine' || req.session.qnrecord=='kidney_health'){
-            res.redirect('/'+match(findList('F',req.session.select_icon)));
+            res.redirect('/questionnaire/'+match(findList('F',req.session.select_icon)));
         }else if(req.session.qnrecord=='urinary_water'){
-            res.redirect('/'+match(findList('G',req.session.select_icon)));
+            res.redirect('/questionnaire/'+match(findList('G',req.session.select_icon)));
         }else if(req.session.qnrecord=='stoma_problem' || req.session.qnrecord=='stoma_bathroom' || req.session.qnrecord=='stoma_strange'){
-            res.redirect('/'+match(findList('H',req.session.select_icon)));
+            res.redirect('/questionnaire/'+match(findList('H',req.session.select_icon)));
         }else if(req.session.qnrecord=='melt_freq'){
-            res.redirect('/'+match(findList('I',req.session.select_icon)));
+            res.redirect('/questionnaire/'+match(findList('I',req.session.select_icon)));
         }else if(req.session.qnrecord=='stress_lifestyle'){
-            res.redirect('/'+match(findList('J',req.session.select_icon)));
+            res.redirect('/questionnaire/'+match(findList('J',req.session.select_icon)));
         }else{
-            res.redirect('/'+match(findList('error',req.session.select_icon)));
+            res.redirect('quesionnaire/'+match(findList('error',req.session.select_icon)));
         }
     }
 });
@@ -309,9 +309,9 @@ router.post('/joint_med',function(req,res,next){
     req.session.joint_med = req.body.name;
     req.session.qnrecordList.push('joint_med');
     if(req.session.joint_med=='yes'){
-        res.send('questionnaire/joint_jump');
+        res.send('joint_jump');
     }else{
-        res.send('questionnaire/joint_below');
+        res.send('joint_below');
     }
 });
 //
@@ -322,12 +322,12 @@ router.get('/joint_below',function(req,res,next){
 router.post('/joint_below',function(req,res,next){
     req.session.joint_below = JSON.parse(req.body.name);
     req.session.qnrecordList.push('joint_below');
-    res.send('questionnaire/joint_jump');
+    res.send('joint_jump');
 });
 //
 router.get('/joint_jump',function(req,res,next){
     req.session.qnrecord = 'joint_jump';
-    res.render('questionnaire/jump');
+    res.render('questionnaire/joint_jump',{name:req.session.BCN});
 });
 router.post('/joint_jump',function(req,res,next){
     req.session.joint_jump = req.body.name;
@@ -337,7 +337,7 @@ router.post('/joint_jump',function(req,res,next){
 //
 router.get('/joint_daily',function(req,res,next){
     req.session.qnrecord = 'joint_daily';
-    res.render('questionnaire/joint_daily');
+    res.render('questionnaire/joint_daily',{name:req.session.BCN});
 });
 router.post('/joint_daily',function(req,res,next){
     req.session.joint_daily = JSON.parse(req.body.name);
