@@ -108,3 +108,7 @@ input:-webkit-autofill {
     background-color: #3D5BA8 !important;
 	color: white !important;
 }
+.selected:hover{
+	background-color: #3D5BA8 !important;
+	color: white !important;
+}

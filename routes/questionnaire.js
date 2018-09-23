@@ -249,7 +249,7 @@ router.get('/iconlist_redirect',function(req,res,next){
     }
     function match(id){
         if(id=='end') return 'extra_eatinghabit';
-        if(id=='err') return 'errorpage';
+        if(id=='err') return 'err';
         if(id=='A') return 'joint_now';
         if(id=='B') return 'heart_now';
         if(id=='C') return 'mouth_now';
@@ -289,6 +289,10 @@ router.get('/iconlist_redirect',function(req,res,next){
         }
     }
 });
+// err
+router.get('/err',function(req,res,next){
+    res.render('questionnaire/error');
+});
 // ICON PART
 router.get('/joint_now',function(req,res,next){
     req.session.qnrecord = 'joint_now';
@@ -321,6 +325,10 @@ router.get('/joint_below',function(req,res,next){
 });
 router.post('/joint_below',function(req,res,next){
     req.session.joint_below = JSON.parse(req.body.name);
+    if(req.body.unsure=='yes'){
+        req.session.joint_below = [];
+        req.session.joint_below.push('unsure');
+    }
     req.session.qnrecordList.push('joint_below');
     res.send('joint_jump');
 });
@@ -340,7 +348,7 @@ router.get('/joint_daily',function(req,res,next){
     res.render('questionnaire/joint_daily',{name:req.session.BCN});
 });
 router.post('/joint_daily',function(req,res,next){
-    req.session.joint_daily = JSON.parse(req.body.name);
+    req.session.joint_daily = req.body.name;
     req.session.qnrecordList.push('joint_daily');
     res.send('iconlist_redirect');
 });
@@ -366,13 +374,17 @@ router.get('/heart_behave',function(req,res,next){
 });
 router.post('/heart_behave',function(req,res,next){
     req.session.heart_behave = JSON.parse(req.body.name);
+    if(req.body.unsure=='yes'){
+        req.session.heart_behave = [];
+        req.session.heart_behave.push('unsure');
+    }
     req.session.qnrecordList.push('heart_behave');
-    res.send('/heart_avgtemp');
+    res.send('heart_avgtemp');
 });
 //
 router.get('/heart_avgtemp',function(req,res,next){
     req.session.qnrecord = 'heart_avgtemp';
-    res.render('questionnaire/heart_avgtemp');
+    res.render('questionnaire/heart_avgtemp',{name:req.session.BCN});
 });
 router.post('/heart_avgtemp',function(req,res,next){
     req.session.heart_avgtemp = req.body.name;

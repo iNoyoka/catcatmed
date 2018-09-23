@@ -16,15 +16,15 @@
     <style>
         .BEFanswer{
             background-color:  #F1F1F2;
-            color: #3D5BA8 !important;
+            color: #3D5BA8;
             padding: 8px;
             border-radius: 5px;
             margin: 6px 0;
             cursor: pointer;
         }
         .BEFanswer:hover{
-            background-color: #3D5BA8 !important;
-            color: white !important;            
+            background-color: #3D5BA8;
+            color: white;            
         }
         .BEFanswer .BEFoptions{            
             font-size: 1.3em;
@@ -48,23 +48,24 @@
     <div class="row">
         <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 text-center">
             <% if(name){ %>
-                <h3>玩樂對於貓咪而言就是一個運動的方式，請問<%= name %>:</h3>
+                <h3><%= name %>平時最常在哪種地面上活動呢？（擇一）</h3>
             <% }else{ %>
-                <h3>玩樂對於貓咪而言就是一個運動的方式，請問貓孩:</h3>
+                <h3>貓孩平時最常在哪種地面上活動呢？（擇一）</h3>
             <% } %>            
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="D" onclick="Send(this.id)"><span class="BEFoptions">很愛玩，一整天都跑來跑去</span></div></div>
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="A" onclick="Send(this.id)"><span class="BEFoptions">地毯或軟墊</span></div></div>
             </div>
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="E" onclick="Send(this.id)"><span class="BEFoptions">會跟我玩，但也很愛睡</span></div></div>
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="B" onclick="Send(this.id)"><span class="BEFoptions">較粗糙磨石地板、粗糙陶磚</span></div></div>
             </div>
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="F" onclick="Send(this.id)"><span class="BEFoptions">都不動，整天都在睡覺</span></div></div>
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="C" onclick="Send(this.id)"><span class="BEFoptions">貼皮地板、木頭地板</span></div></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="D" onclick="Send(this.id)"><span class="BEFoptions">光滑磁磚</span></div></div>
             </div>
         </div>
     </div>
-    <div class="row hidden-xs padding"></div>
-    <div class="row hidden-xs padding"></div>
     <div class="row hidden-xs padding"></div> 
     <div class="row padding"></div>
     <div class="row">
@@ -87,25 +88,14 @@
         });
     }
     function Send(id){
-        if(id=='D'){
-            TrueSend('A');
-        }else if(id=='E'){
-            TrueSend('B');
-        }else if(id=='F'){
-            TrueSend('C')
-        }else{
-            TrueSend(id);
-        }              
-    }
-    function TrueSend(id){
         $.ajax({  
             method : "POST",
-            url: 'BEF',
+            url: 'joint_daily',
             data: {
                 name: id
             }
         }).done(function(data){       
             window.location.href = '' + data;
-        });  
+        });               
     }
 </script>

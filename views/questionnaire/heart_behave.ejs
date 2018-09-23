@@ -51,22 +51,19 @@
                 <h3>貓孩有沒有以下現象?（可複選）</h3>
             <% } %>
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="A" onclick="Icon(this.id)"><span class="BEFoptions">活動力下降</span></div></div>
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="A" onclick="Icon(this.id)"><span class="BEFoptions">走路易喘</span></div></div>
             </div>
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="B" onclick="Icon(this.id)"><span class="BEFoptions">跳躍力變差</span></div></div>
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="B" onclick="Icon(this.id)"><span class="BEFoptions">興奮後咳嗽</span></div></div>
             </div>
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="C" onclick="Icon(this.id)"><span class="BEFoptions">毛糾結在一塊</span></div></div>
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="C" onclick="Icon(this.id)"><span class="BEFoptions">行走易軟腳</span></div></div>
             </div>
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="D" onclick="Icon(this.id)"><span class="BEFoptions">碰到身體特定部位，會變得暴躁</span></div></div>
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="D" onclick="Icon(this.id)"><span class="BEFoptions">運動後喘氣恢復久</span></div></div>
             </div>
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="E" onclick="Icon(this.id)"><span class="BEFoptions">曾經創傷過</span></div></div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="F" onclick="Icon(this.id)"><span class="BEFoptions">時常會維持同一姿勢</span></div></div>
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="E" onclick="Icon(this.id)"><span class="BEFoptions">舌頭或腳掌發紫</span></div></div>
             </div>
         </div>
     </div>
@@ -94,7 +91,6 @@
     let C = 0;
     let D = 0;
     let E = 0;
-    let F = 0;
     function Back(){
         $.ajax({
             method : "POST",
@@ -104,7 +100,7 @@
         });
     }
     function Send(){
-        if((A+B+C+D+E+F)==0){
+        if((A+B+C+D+E)==0){
             alert('若沒有上述的情形的話，請選擇“沒有/不確定”之選項喔！');
         }else{
             let s = [];
@@ -113,10 +109,9 @@
             if(C==1) s.push('C');
             if(D==1) s.push('D');
             if(E==1) s.push('E');
-            if(F==1) s.push('F');
             $.ajax({
                 method: 'POST',
-                url: 'joint_below',
+                url: 'heart_behave',
                 data: {
                     name : JSON.stringify(s),
                     unsure : 'no'
@@ -129,7 +124,7 @@
     function Unsure(){
         $.ajax({
             method: 'POST',
-            url: 'joint_below',
+            url: 'heart_behave',
             data: {
                 name : JSON.stringify('?'),
                 unsure : 'yes'
@@ -145,6 +140,5 @@
         if(id=='C') {if(C==0)C=1; else C=0;}
         if(id=='D') {if(D==0)D=1; else D=0;}
         if(id=='E') {if(E==0)E=1; else E=0;}
-        if(id=='F') {if(F==0)F=1; else F=0;}
     }
 </script>
