@@ -12,9 +12,9 @@ router.get('/', function(req, res, next) {
     }else if(req.session.qnrecord=='BKN'){
         req.session.qnrecordList = [];
         req.session.qnrecordList.push('/questionnaire');
-        res.render('questionnaire/BHELLO');
+        res.render('questionnaire');
     }else{
-        res.render('questionnaire/BHELLO');
+        res.render('questionnaire');
     }    
 });
 // 返回上一題
@@ -241,8 +241,6 @@ router.get('/iconlist_redirect',function(req,res,next){
                 if(list[i]==id){
                     if(list[i+1]!=null) return list[i+1];
                     else return 'end';
-                }else{
-                    return 'err';
                 }
             }
         }
@@ -270,7 +268,9 @@ router.get('/iconlist_redirect',function(req,res,next){
             res.redirect('/questionnaire/'+match(findList('B',req.session.select_icon)));
         }else if(req.session.qnrecord=='mouth_brush'){
             res.redirect('/questionnaire/'+match(findList('C',req.session.select_icon)));
-        }else if(req.session.qnrecord=='fur_behave' || req.sessin.qnrecord=='fur_tie'){
+        }else if(req.session.qnrecord=='fur_behave'){
+            res.redirect('/questionnaire/'+match(findList('D',req.session.select_icon)));
+        }else if(req.session.qnrecord=='fur_tie'){
             res.redirect('/questionnaire/'+match(findList('D',req.session.select_icon)));
         }else if(req.session.qnrecord=='immu_med'){
             res.redirect('/questionnaire/'+match(findList('E',req.session.select_icon)));
@@ -393,7 +393,7 @@ router.post('/heart_avgtemp',function(req,res,next){
 });
 //
 router.get('/mouth_now',function(req,res,next){
-    req.session.qnrecord = '/mouth_now';
+    req.session.qnrecord = 'mouth_now';
     res.render('questionnaire/mouth_now',{name:req.session.BCN});
 });
 router.post('/mouth_now',function(req,res,next){
@@ -418,7 +418,7 @@ router.post('/mouth_behave',function(req,res,next){
 //
 router.get('/mouth_brush',function(req,res,next){
     req.session.qnrecord = 'mouth_brush';
-    res.render('questionnaire/mouth_brush');
+    res.render('questionnaire/mouth_brush',{name:req.session.BCN});
 });
 router.post('/mouth_brush',function(req,res,next){
     req.session.mouth_brush = req.body.name;
@@ -485,7 +485,7 @@ router.post('/immu_behave',function(req,res,next){
 });
 //
 router.get('/immu_behave_before',function(req,res,next){
-    if(false){
+    if(true){
         //六個月以下
         req.session.qnrecord = 'immu_behave_before';
         res.render('questionnaire/immu_behave_before',{name:req.session.BCN});
@@ -536,7 +536,7 @@ router.get('/kidney_urine',function(req,res,next){
 router.post('/kidney_urine',function(req,res,next){
     req.session.kidney_urine = req.body.name;
     req.session.qnrecordList.push('kidney_urine');
-    if(false){ //貓咪五歲以上
+    if(true){ //貓咪五歲以上
         res.send('kidney_health');
     }else{
         res.send('iconlist_redirect');
@@ -579,7 +579,7 @@ router.post('/urinary_behave',function(req,res,next){
 //
 router.get('/urinary_together',function(req,res,next){
     req.session.qnrecord = 'urinary_together';
-    res.render('questionnarie/urinary_together',{name:req.body.BCN});
+    res.render('questionnaire/urinary_together',{name:req.session.BCN});
 });
 router.post('/urinary_together',function(req,res,next){
     req.session.urinary_together = req.body.name;
@@ -604,11 +604,11 @@ router.get('/stoma_problem',function(req,res,next){
 router.post('/stoma_problem',function(req,res,next){
     req.session.stoma_problem = JSON.parse(req.body.name);
     req.session.qnrecordList.push('stoma_problem');
-    if(req.session.stoma_problem.includes('B') && !req.session.stoma_problem.includes('F')){
+    if(req.session.stoma_problem.includes('A') && !req.session.stoma_problem.includes('E')){
         res.send('stomexcepA');
-    }else if(!req.session.stoma_problem.includes('B') && req.session.stoma_problem.includes('F')){
+    }else if(!req.session.stoma_problem.includes('A') && req.session.stoma_problem.includes('E')){
         res.send('stoma_strange');
-    }else if(req.session.stoma_problem.includes('B') && req.session.stoma_problem.includes('F')){
+    }else if(req.session.stoma_problem.includes('A') && req.session.stoma_problem.includes('E')){
         res.send('stomexcepB')
     }else{
         res.send('iconlist_redirect');
@@ -730,7 +730,7 @@ router.post('/extra_weekcan',function(req,res,next){
 //
 router.get('/extra_freshflesh',function(req,res,next){
     req.session.qnrecord = 'extra_freshflesh';
-    req.render('questionnaire/extra_freshflesh',{name:req.session.BCN});
+    res.render('questionnaire/extra_freshflesh',{name:req.session.BCN});
 });
 router.post('/extra_freshflesh',function(req,res,next){
     req.session.extra_freshflesh = req.body.name;
@@ -790,7 +790,7 @@ router.post('/extra_drinking',function(req,res,next){
 //
 router.get('/extra_cooking',function(req,res,next){
     req.session.qnrecord = 'extra_cooking';
-    res.render('questionnaire/extra_cooking');
+    res.render('questionnaire/extra_cooking',{name:req.session.BCN});
 });
 router.post('/extra_cooking',function(req,res,next){
     req.session.extra_cooking = req.body.name;
@@ -800,7 +800,7 @@ router.post('/extra_cooking',function(req,res,next){
 //
 router.get('/extra_strangehabit',function(req,res,next){
     req.session.qnrecord = 'extra_strangehabit';
-    res.render('questionnaire/extra_strangehabit');
+    res.render('questionnaire/extra_strangehabit',{name:req.session.BCN});
 });
 router.post('/extra_strangehabit',function(req,res,next){
     req.session.extra_strangehabit = req.body.name;
@@ -810,7 +810,7 @@ router.post('/extra_strangehabit',function(req,res,next){
 //
 router.get('/extra_place',function(req,res,next){
     req.session.qnrecord = 'extra_place';
-    res.render('questionnaire/extra_place');
+    res.render('questionnaire/extra_place',{name:req.session.BCN});
 });
 router.post('/extra_place',function(req,res,next){
     req.session.extra_place = req.body.name;
@@ -820,7 +820,7 @@ router.post('/extra_place',function(req,res,next){
 //
 router.get('/extra_knowhow',function(req,res,next){
     req.session.qnrecord = 'extra_knowhow';
-    res.render('questionnaire/extra_knowhow');
+    res.render('questionnaire/extra_knowhow',{name:req.session.BCN});
 });
 router.post('/extra_knowhow',function(req,res,next){
     req.session.extra_knowhow = req.body.name;

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">    
+
+	<title>catcatmed| questionnaire</title>
+
+    <link rel="shortcut icon" type="image/png" href="../images/favicon.png"/>
+    <link rel="stylesheet" href="../bootstrap-3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../stylesheets/header.css">
+    <link rel="stylesheet" href="../stylesheets/qn.css">
+    <script src="../javascript/jquery/jquery_v-3-3-1.js"></script>
+    <script src="../bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .BEFanswer{
+            background-color:  #F1F1F2;
+            color: #3D5BA8;
+            padding: 8px;
+            border-radius: 5px;
+            margin: 6px 0;
+            cursor: pointer;
+        }
+        .BEFanswer:hover{
+            background-color: #3D5BA8;
+            color: white;            
+        }
+        .BEFanswer .BEFoptions{            
+            font-size: 1.3em;
+            width: 100%;
+            text-align: center;
+            right: 0;
+            top:50%;
+            transform:translateY(-50%);
+        }
+    </style>
+</head>
+<body onselectstart="return false" class="qnbody" id="body" style="display:none">
+    <div class="row">
+        <div class="col-lg-2 col-lg-offset-10 col-md-3 col-md-offset-9 col-sm-3 col-sm-offset-9 col-xs-5 col-xs-offset-7">
+            <button class="indexButton" onclick="window.location.href='/'">回首頁</button>
+        </div>
+    </div>
+    <div class="row hidden-xs padding"></div>
+    <div class="row hidden-xs padding"></div>
+    <div class="row padding"></div>
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 text-center">
+            <% if(name){ %>
+                <h3><%= name %>的喝水狀況為何呢？</h3>
+            <% }else{ %>
+                <h3>貓孩的喝水狀況為何呢？</h3>
+            <% } %>            
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="A" onclick="Send(this.id)"><span class="BEFoptions">喝不停</span></div></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="B" onclick="Send(this.id)"><span class="BEFoptions">很常喝</span></div></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="C" onclick="Send(this.id)"><span class="BEFoptions">喝水頻率少</span></div></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="D" onclick="Send(this.id)"><span class="BEFoptions">幾乎不喝</span></div></div>
+            </div>
+        </div>
+    </div>
+    <div class="row hidden-xs padding"></div> 
+    <div class="row padding"></div>
+    <div class="row">
+        <div class="col-lg-3 col-lg-offset-1">
+            <button class="backButton" onclick="Back()">Back</button>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+     $(document).ready(function(){
+        $('#body').fadeIn(500);
+    });
+    function Back(){
+        $.ajax({
+            method : "POST",
+            url : 'back'
+        }).done(function(data){
+            window.location.href = '' + data;
+        });
+    }
+    function Send(id){
+        $.ajax({  
+            method : "POST",
+            url: 'extra_drinking',
+            data: {
+                name: id
+            }
+        }).done(function(data){       
+            window.location.href = '' + data;
+        });               
+    }
+</script>
