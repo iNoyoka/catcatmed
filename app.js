@@ -265,7 +265,7 @@ app.post('/questionnaire_result',function(req,res,next){
 			kcal = RERCoefficient/100*RER*activityCoefficient*neuturedCoefficient*ageRERCoefficient/100;
 		}
 		//find data
-		var sql = "SELECT * FROM `productdb`";
+		var sql = "SELECT * FROM `productDB`";
 		var list = [];
 		var innerHTML = "";
 		function AddObjToList(i,productCode,name_zh,brand_zh,brand_en,original,price,kcal,protein,fat,ash,carbohydrate,MeatLevel_total,DRY_protein,DRY_fat,DRY_carbohydrate,goodMeat,potentialAlergent,dailyNeedkcal,ingredient){
@@ -826,7 +826,7 @@ app.get('/purchase_confirm',function(req,res,next){
 	res.render('purchase_confirm');
 });
 app.post('/clientAskForPurchaseItem',function(req,res,next){
-	var sql = 'SELECT * FROM `productdb` WHERE productCode = "'+req.session.currentProduct+'"';
+	var sql = 'SELECT * FROM `productDB` WHERE productCode = "'+req.session.currentProduct+'"';
 	function AddObjToList(productCode,productName_ZH,productCompany_ZH,productCompany_EN,price){
 		var obj = {};
 		obj.productCode = productCode;
