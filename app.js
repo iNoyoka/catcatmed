@@ -89,24 +89,29 @@ app.get('/questionnaire_result',function(req,res,next){
 	res.render('questionnaire_result');
 });
 app.post('/questionnaire_result',function(req,res,next){
-	if(req.session.basicInformation!=null){
+	if(req.session.extra_knowhow!=null){ // if(req.session.basicInformation!=null)
+		/*
 		var basicInformation = JSON.parse(req.session.basicInformation);
 		var catage_year = parseInt(basicInformation.catAgeYear);
 		var catage_month = parseInt(basicInformation.catAgeMonth);
 		var catWeight = parseInt(basicInformation.catWeightKilo) + parseInt(basicInformation.catWeightGram)*0.001;
+		*/
+		var catage_year = parseInt(req.session.BSA_ageYear);
+		var catage_month = parseInt(req.session.BSA_ageMonth);
+		var catWeight = parseInt(req.session.BCW_kilo) + parseInt(req.session.BCW_gram)*0.1;
 		var catBCS;
-		if(basicInformation.catSize=='過瘦') catBCS = 1;
-		else if(basicInformation.catSize=='稍瘦') catBCS = 2;
-		else if(basicInformation.catSize=='適中') catBCS = 3;
-		else if(basicInformation.catSize=='稍胖') catBCS = 5;
-		else if(basicInformation.catSize=='過胖') catBCS = 7;
+		if(req.session.BBC=='A') catBCS = 1;
+		else if(req.session.BBC=='B') catBCS = 2;
+		else if(req.session.BBC=='C') catBCS = 3;
+		else if(req.session.BBC=='D') catBCS = 4;
+		else if(req.session.BBC=='E') catBCS = 5;
 		else{}
-		var activity = basicInformation.catExerciseFreq;
-		var neutured = basicInformation.ligation;
-		var preg = basicInformation.pregnancy;
-		var pregtime = basicInformation.pregnancyTime;
-		if(basicInformation.pregnancyTime=='不確定')
-			pregtime = '4_6';
+		var activity = req.session.BEF;
+		var neutured = req.session.BNU;
+		var preg = req.session.BPR;
+		var pregtime = req.session.BPT;
+		if(pregtime=='C')
+			pregtime = 'B';
 		//
 		var fat = 0;
 		var idealWeight = 0;
@@ -364,12 +369,12 @@ app.post('/questionnaire_result',function(req,res,next){
 			//protein, fat, carbohydrate analysis
 			function fillInAverageLevel(list,proteinAVG,fatAVG,carbohydrateAVG){
 				for(i=0;i<list.length;i++){
-					if(list[i].DRY_protein>=proteinAVG) list[i].proteinLevel = '※此商品之蛋白質含量高於市售所有飼料之蛋白質平均';
-					else list[i].proteinLevel = '※此商品之蛋白質含量低於市售所有飼料之蛋白質平均';
-					if(list[i].DRY_fat>=fatAVG) list[i].fatLevel = '※此商品之脂質含量高於市售所有飼料之脂質平均';
-					else list[i].fatLevel = '※此商品之脂質含量低於市售所有飼料之脂質平均';
-					if(list[i].DRY_carbohydrate>=carbohydrateAVG) list[i].carbohydrateLevel = '※此商品之碳水化合物含量高於市售所有飼料之碳水化合物平均';
-					else list[i].carbohydrateLevel = '※此商品之碳水化合物含量低於市售所有飼料之碳水化合物平均';
+					if(list[i].DRY_protein>=proteinAVG) list[i].proteinLevel = '高於';
+					else list[i].proteinLevel = '低於';
+					if(list[i].DRY_fat>=fatAVG) list[i].fatLevel = '高於';
+					else list[i].fatLevel = '低於';
+					if(list[i].DRY_carbohydrate>=carbohydrateAVG) list[i].carbohydrateLevel = '高於';
+					else list[i].carbohydrateLevel = '低於';
 				}
 			}
 			proteinAllList = proteinAllList.sort(function(a,b){

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">    
+
+	<title>catcatmed| questionnaire</title>
+
+    <link rel="shortcut icon" type="image/png" href="../images/favicon.png"/>
+    <link rel="stylesheet" href="../bootstrap-3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../stylesheets/header.css">
+    <link rel="stylesheet" href="../stylesheets/qn.css">
+    <script src="../javascript/jquery/jquery_v-3-3-1.js"></script>
+    <script src="../bootstrap-3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body onselectstart="return false" class="qnbody" id="body" style="display:none">
+    <div class="row">
+        <div class="col-lg-2 col-lg-offset-10 col-md-3 col-md-offset-9 col-sm-3 col-sm-offset-9 col-xs-5 col-xs-offset-7">
+            <button class="indexButton" onclick="window.location.href='/'">回首頁</button>
+        </div>
+    </div>
+    <div class="row hidden-xs padding"></div>
+    <div class="row hidden-xs padding"></div>
+    <div class="row padding"></div>
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 text-center">
+            <% if (name){ %>
+                <h3>天氣也是卡卡貓重要的審視資訊之一，請問<%= name %>居住的地方為：</h3>
+            <% }else {%>
+                <h3>天氣也是卡卡貓重要的審視資訊之一，請問貓孩居住的地方為：</h3>
+            <% } %>
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-10 col-xs-offset-1">
+                    <select class="form-control" id="name">
+                        <option value="null">請選擇</option>
+                        <option value="台北市">台北市</option>
+                        <option value="基隆市">基隆市</option>
+                        <option value="新北市">新北市</option>
+                        <option value="桃園市">桃園市</option>
+                        <option value="新竹市">新竹市</option>
+                        <option value="新竹縣">新竹縣</option>
+                        <option value="苗栗縣">苗栗縣</option>
+                        <option value="彰化縣">彰化縣</option>
+                        <option value="台中市">台中市</option> 
+                        <option value="南投縣">南投縣</option>
+                        <option value="雲林縣">雲林縣</option>
+                        <option value="嘉義市">嘉義市</option>
+                        <option value="嘉義縣">嘉義縣</option>
+                        <option value="台南市">台南市</option>
+                        <option value="高雄市">高雄市</option>
+                        <option value="屏東縣">屏東縣</option>
+                        <option value="宜蘭縣">宜蘭縣</option>
+                        <option value="花蓮縣">花蓮縣</option>
+                        <option value="台東縣">台東縣</option>
+                        <option value="澎湖縣">澎湖縣</option>
+                        <option value="金門縣">金門縣</option>
+                        <option value="連江縣">連江縣</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row hidden-md hidden-sm hidden-xs padding"></div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <button class="nextButton" onclick="Send()">下 一 題</button>
+        </div>
+    </div>
+    <div class="row hidden-xs padding"></div>
+    <div class="row hidden-xs padding"></div>
+    <div class="row hidden-xs padding"></div>
+    <div class="row hidden-xs padding"></div>
+    <div class="row padding"></div>
+    <div class="row padding"></div>
+    <div class="row">
+        <div class="col-lg-3 col-lg-offset-1">
+            <button class="backButton" onclick="Back()">Back</button>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    $(document).ready(function(){
+        $('#body').fadeIn(500);
+    });
+    function Back(){
+        $.ajax({
+            method : "POST",
+            url : 'back'
+        }).done(function(data){
+            window.location.href = '' + data;
+        });
+    }
+    function Send(){
+        if($('#name').val()!='null'){
+            $.ajax({  
+                method : "POST",
+                url: 'extra_place',
+                data: {
+                    name: $('#name').val()
+                }
+            }).done(function(data){       
+                window.location.href = '' + data;
+            });
+        }else{
+            alert('請選擇所在縣市！');
+        }
+    }
+</script>

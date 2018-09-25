@@ -12,9 +12,9 @@ router.get('/', function(req, res, next) {
     }else if(req.session.qnrecord=='BKN'){
         req.session.qnrecordList = [];
         req.session.qnrecordList.push('/questionnaire');
-        res.render('questionnaire');
+        res.render('questionnaire/HELLO');
     }else{
-        res.render('questionnaire');
+        res.render('questionnaire/HELLO');
     }    
 });
 // 返回上一題
@@ -285,7 +285,7 @@ router.get('/iconlist_redirect',function(req,res,next){
         }else if(req.session.qnrecord=='stress_lifestyle'){
             res.redirect('/questionnaire/'+match(findList('J',req.session.select_icon)));
         }else{
-            res.redirect('quesionnaire/'+match(findList('error',req.session.select_icon)));
+            res.redirect('/quesionnaire/'+match(findList('error',req.session.select_icon)));
         }
     }
 });
@@ -825,7 +825,7 @@ router.get('/extra_knowhow',function(req,res,next){
 router.post('/extra_knowhow',function(req,res,next){
     req.session.extra_knowhow = req.body.name;
     req.session.qnrecordList.push(req.session.qnrecord);
-    res.send('final');
+    res.send('/questionnaire_result');
 });
 
 module.exports = router;
