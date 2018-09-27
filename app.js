@@ -838,7 +838,7 @@ app.post('/questionnaireAskArray',function(req,res,next){
 //------------------------------------------
 app.post('/saveQuestionnaire_result',function(req,res,next){
 	req.session.currentProduct = req.body.currentProduct;
-	//console.log(req.session.currentProduct);
+	console.log(req.session.currentProduct);
 	res.redirect('/purchase_confirm')
 });
 app.get('/purchase_confirm',function(req,res,next){
