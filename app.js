@@ -117,10 +117,10 @@ app.post('/questionnaire_result',function(req,res,next){
 		else{}
 		var activity = req.session.BEF;
 		var neutured = req.session.BNU;
-		var preg = req.session.BPR;
-		var pregtime = req.session.BPT;
-		if(pregtime=='C')
-			pregtime = 'B';
+		var preg;
+		var pregtime;
+		if(req.session.BPR!=null) preg = req.session.BPR;
+		if(req.session.BPT!=null) pregtime = req.session.BPT;
 		//
 		var fat = 0;
 		var idealWeight = 0;
@@ -158,7 +158,7 @@ app.post('/questionnaire_result',function(req,res,next){
 		}else if(catage_year<1){ //幼貓
 			catType = "幼貓";
 		}
-		if(preg=="是"){
+		if(preg=="yes"){
 			catType = "懷孕貓";
 		}
 		/*
@@ -212,9 +212,9 @@ app.post('/questionnaire_result',function(req,res,next){
 			kcal = catWeight*childCoefficient;
 		}
 		else if(catType == "懷孕貓"){
-			if(pregtime == "1_3") RERCoefficient = 1.6;
-			else if(pregtime == "4_6") RERCoefficient = 1.8;
-			else if(pregtime == "6up") RERCoefficient = 2;
+			if(pregtime == "A") RERCoefficient = 1.6;
+			else if(pregtime == "B") RERCoefficient = 1.8;
+			else if(pregtime == "C") RERCoefficient = 2;
 			RER = 70*(Math.pow(catWeight,0.75));
 			kcal = RERCoefficient * RER;
 		}
@@ -273,6 +273,9 @@ app.post('/questionnaire_result',function(req,res,next){
 			if(catType == "胖老貓" || catType == "胖老老貓") kcal_fat = RER*activityCoefficient*neuturedCoefficient*ageRERCoefficient/100;
 			kcal = RERCoefficient/100*RER*activityCoefficient*neuturedCoefficient*ageRERCoefficient/100;
 		}
+		//test
+		console.log('cattype:'+catType);
+		console.log('kcal:'+kcal);
 		//find data
 		var sql = "SELECT * FROM `productDB`";
 		var list = [];
@@ -325,7 +328,8 @@ app.post('/questionnaire_result',function(req,res,next){
 		con.query(sql,function(err,result){
 			if(err) throw err;
 			else{			
-				for(i in result){				
+				for(i in result){
+					//console.log(result);			
 					proteinAllList.push(result[i].DRY_protein);
 					fatAllList.push(result[i].DRY_fat);
 					carbohydrateAllList.push(result[i].DRY_carbohydrate);
@@ -399,6 +403,7 @@ app.post('/questionnaire_result',function(req,res,next){
 			//---------------------------------------
 			// BASIC DATA SORT AND SLICE TO FIVE
 			//---------------------------------------
+			console.log(list);
 			var listA = SliceListToFivePricePart_sorted(list,160,250);
 			var listB = SliceListToFivePricePart_sorted(list,250,350);
 			var listC = SliceListToFivePricePart_sorted(list,350,450);
@@ -828,29 +833,33 @@ app.post('/questionnaireAskArray',function(req,res,next){
 //------------------------------------------
 app.post('/saveQuestionnaire_result',function(req,res,next){
 	req.session.currentProduct = req.body.currentProduct;
-	console.log(req.session.currentProduct);
+	//console.log(req.session.currentProduct);
 	res.redirect('/purchase_confirm')
 });
 app.get('/purchase_confirm',function(req,res,next){
 	res.render('purchase_confirm');
 });
 app.post('/clientAskForPurchaseItem',function(req,res,next){
-	var sql = 'SELECT * FROM `productDB` WHERE productCode = "'+req.session.currentProduct+'"';
-	function AddObjToList(productCode,productName_ZH,productCompany_ZH,productCompany_EN,price){
-		var obj = {};
-		obj.productCode = productCode;
-		obj.productName_ZH = productName_ZH;
-		obj.productCompany = productCompany_ZH + '  ' + productCompany_EN;
-		obj.price = price;
-		return obj;
-	}
-	con.query(sql,function(err,result){
-		if(err) throw err;
-		else{
-			var obj = AddObjToList(result[0].productCode,result[0].productName_ZH,result[0].productCompany_ZH,result[0].productCompany_EN,result[0].price);
-			res.send(JSON.stringify(obj));	
+	if(req.session.currentProduct==null){
+		res.send('error');
+	}else{
+		var sql = 'SELECT * FROM `productDB` WHERE productCode = "'+req.session.currentProduct+'"';
+		function AddObjToList(productCode,productName_ZH,productCompany_ZH,productCompany_EN,price){
+			var obj = {};
+			obj.productCode = productCode;
+			obj.productName_ZH = productName_ZH;
+			obj.productCompany = productCompany_ZH + '  ' + productCompany_EN;
+			obj.price = price;
+			return obj;
 		}
-	});
+		con.query(sql,function(err,result){
+			if(err) throw err;
+			else{
+				var obj = AddObjToList(result[0].productCode,result[0].productName_ZH,result[0].productCompany_ZH,result[0].productCompany_EN,result[0].price);
+				res.send(JSON.stringify(obj));	
+			}
+		});
+	}
 });
 // 7-11 crawler
 const getStoreData = (url, cityName, townName) => {
