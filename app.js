@@ -96,6 +96,15 @@ app.post('/questionnaire_result',function(req,res,next){
 		var catage_month = parseInt(basicInformation.catAgeMonth);
 		var catWeight = parseInt(basicInformation.catWeightKilo) + parseInt(basicInformation.catWeightGram)*0.001;
 		*/
+		console.log(req.session.BSA_ageYear+'年');
+		console.log(req.session.BSA_ageMonth+'月');
+		console.log(req.session.BCW_kilo+'公斤');
+		console.log(req.session.BCW_gram+'公克');
+		console.log('BCS'+req.session.BBC);
+		console.log('activity'+req.session.BEF);
+		console.log('neu'+req.session.BNU);
+		console.log('preg'+req.session.BPR);
+		console.log('pregtime'+req.session.BPT);
 		var catage_year = parseInt(req.session.BSA_ageYear);
 		var catage_month = parseInt(req.session.BSA_ageMonth);
 		var catWeight = parseInt(req.session.BCW_kilo) + parseInt(req.session.BCW_gram)*0.1;
