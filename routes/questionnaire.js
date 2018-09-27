@@ -65,12 +65,8 @@ router.get('/BCA',function(req,res,next){
     res.render('questionnaire/BCA',{name:req.session.BCN});
 });
 router.post('/BCA',function(req,res,next){
-    req.session.BSA = req.body.BSA;
     req.session.BSA_ageYear = req.body.ageYear;
     req.session.BSA_ageMonth = req.body.ageMonth;
-    req.session.BSA_year = req.body.year;
-    req.session.BSA_month = req.body.month;
-    req.session.BSA_day = req.body.day;
     req.session.qnrecordList.push('BCA')
     res.send('BSP');
 });
@@ -466,7 +462,7 @@ router.get('/immu_now',function(req,res,next){
 });
 router.post('/immu_now',function(req,res,next){
     req.session.immu_now = req.body.name;
-    req.session.qnrecordList = JSON.parse('immu_now');
+    req.session.qnrecordList.push('immu_now');
     if(req.session.immu_now=='yes'){
         res.send('immu_behave_before')
     }else{
@@ -685,7 +681,7 @@ router.post('/stress_enviornment_out',function(req,res,next){
 //
 router.get('/stress_lifestyle',function(req,res,next){
     req.session.qnrecord = 'stress_lifestyle';
-    res.render('/questionnaire/stress_lifestyle',{name:req.session.BCN});
+    res.render('questionnaire/stress_lifestyle',{name:req.session.BCN});
 });
 router.post('/stress_lifestyle',function(req,res,next){
     req.session.stress_lifestyle = JSON.parse(req.body.name);

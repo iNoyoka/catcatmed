@@ -13,7 +13,28 @@
     <link rel="stylesheet" href="../stylesheets/qn.css">
     <script src="../javascript/jquery/jquery_v-3-3-1.js"></script>
     <script src="../bootstrap-3.3.7/js/bootstrap.min.js"></script>
-
+    <style>
+        .BEFanswer{
+            background-color:  #F1F1F2;
+            color: #3D5BA8 !important;
+            padding: 8px;
+            border-radius: 5px;
+            margin: 6px 0;
+            cursor: pointer;
+        }
+        .BEFanswer:hover{
+            background-color: #3D5BA8 !important;
+            color: white !important;            
+        }
+        .BEFanswer .BEFoptions{            
+            font-size: 1.3em;
+            width: 100%;
+            text-align: center;
+            right: 0;
+            top:50%;
+            transform:translateY(-50%);
+        }
+    </style>
 </head>
 <body onselectstart="return false" class="qnbody" id="body" style="display:none">
     <div class="row">
@@ -30,11 +51,15 @@
                 <h3>請問<%= name %>通常都待在?</h3>
             <% }else{ %>
                 <h3>請問貓孩通常都待在?</h3>
-            <% } %>            
-            <div class="row"">
-                <div class="col-lg-2 col-lg-offset-3 col-md-2 col-md-offset-3 col-sm-2 col-sm-offset-3 col-xs-4"><div class="answer" id="A" onclick="Send(this.id)"><span class="options">室內</span></div></div>
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4"><div class="answer" id="B" onclick="Send(this.id)"><span class="options">室外</span></div></div>
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4"><div class="answer" id="C" onclick="Send(this.id)"><span class="options">一半一半</span></div></div>
+            <% } %>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="A" onclick="Send(this.id)"><span class="BEFoptions">室內</span></div></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="B" onclick="Send(this.id)"><span class="BEFoptions">室外</span></div></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="C" onclick="Send(this.id)"><span class="BEFoptions">一半一半</span></div></div>
             </div>
         </div>
     </div>

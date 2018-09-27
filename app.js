@@ -369,12 +369,12 @@ app.post('/questionnaire_result',function(req,res,next){
 			//protein, fat, carbohydrate analysis
 			function fillInAverageLevel(list,proteinAVG,fatAVG,carbohydrateAVG){
 				for(i=0;i<list.length;i++){
-					if(list[i].DRY_protein>=proteinAVG) list[i].proteinLevel = '高於';
-					else list[i].proteinLevel = '低於';
-					if(list[i].DRY_fat>=fatAVG) list[i].fatLevel = '高於';
-					else list[i].fatLevel = '低於';
-					if(list[i].DRY_carbohydrate>=carbohydrateAVG) list[i].carbohydrateLevel = '高於';
-					else list[i].carbohydrateLevel = '低於';
+					if(list[i].DRY_protein>=proteinAVG) list[i].proteinLevel = 'protein高於';
+					else list[i].proteinLevel = 'protein低於';
+					if(list[i].DRY_fat>=fatAVG) list[i].fatLevel = 'fat高於';
+					else list[i].fatLevel = 'fat低於';
+					if(list[i].DRY_carbohydrate>=carbohydrateAVG) list[i].carbohydrateLevel = 'c高於';
+					else list[i].carbohydrateLevel = 'c低於';
 				}
 			}
 			proteinAllList = proteinAllList.sort(function(a,b){

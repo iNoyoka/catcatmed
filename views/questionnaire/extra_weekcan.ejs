@@ -90,19 +90,15 @@
     function Send(){
         let kilo = $('#kilo').val();
         let gram = $('#gram').val();
-        if(kilo=='never' || gram=='never'){
-            alert('請填寫貓咪的飲食狀況喔喔！');
-        }else{
-            $.ajax({
-                method : 'POST',
-                url : 'extra_weekcan',
-                data: {
-                    major : kilo,
-                    minor : gram
-                }
-            }).done(function(data){
-                window.location.href = '' + data;
-            });
-        }
+        $.ajax({
+            method : 'POST',
+            url : 'extra_weekcan',
+            data: {
+                major : kilo,
+                minor : gram
+            }
+        }).done(function(data){
+            window.location.href = '' + data;
+        });
     }
 </script>
