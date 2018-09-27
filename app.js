@@ -189,11 +189,11 @@ app.post('/questionnaire_result',function(req,res,next){
 			if(catBCS==6) RERCoefficient = 80;	
 			if(catBCS==7) RERCoefficient = 80;
 			RER = 70*(Math.pow(idealWeight,0.75));
-			if(activity=="高") activityCoefficient = 1.333333333;
-			if(activity=="中") activityCoefficient = 1.083333333;
-			if(activity=="低") activityCoefficient = 1;
-			if(neutured=="是") neuturedCoefficient = 1;
-			if(neutured=="否") neuturedCoefficient = 1.166666667;
+			if(activity=="A") activityCoefficient = 1.333333333;
+			if(activity=="B") activityCoefficient = 1.083333333;
+			if(activity=="C") activityCoefficient = 1;
+			if(neutured=="yes") neuturedCoefficient = 1;
+			if(neutured=="no") neuturedCoefficient = 1.166666667;
 			if(catType == "胖成貓") kcal_fat = RER*activityCoefficient*neuturedCoefficient;
 			kcal = RERCoefficient/100*RER*activityCoefficient*neuturedCoefficient;
 		}
@@ -265,11 +265,11 @@ app.post('/questionnaire_result',function(req,res,next){
 			if(catage_year==11) ageRERCoefficient = 140;
 			if(catage_year==12) ageRERCoefficient = 150;
 			if(catage_year>=13) ageRERCoefficient = 160;
-			if(activity=="高") activityCoefficient = 1.222;
-			if(activity=="中") activityCoefficient = 1.111;
-			if(activity=="低") activityCoefficient = 1;
-			if(neutured=="是") neuturedCoefficient = 1;
-			if(neutured=="否") neuturedCoefficient = 1.166666667;
+			if(activity=="A") activityCoefficient = 1.222;
+			if(activity=="B") activityCoefficient = 1.111;
+			if(activity=="C") activityCoefficient = 1;
+			if(neutured=="yes") neuturedCoefficient = 1;
+			if(neutured=="no") neuturedCoefficient = 1.166666667;
 			if(catType == "胖老貓" || catType == "胖老老貓") kcal_fat = RER*activityCoefficient*neuturedCoefficient*ageRERCoefficient/100;
 			kcal = RERCoefficient/100*RER*activityCoefficient*neuturedCoefficient*ageRERCoefficient/100;
 		}
@@ -408,7 +408,7 @@ app.post('/questionnaire_result',function(req,res,next){
 			//---------------------------------------
 			// BASIC DATA SORT AND SLICE TO FIVE
 			//---------------------------------------
-			console.log(list);
+			//console.log(list);
 			var listA = SliceListToFivePricePart_sorted(list,160,250);
 			var listB = SliceListToFivePricePart_sorted(list,250,350);
 			var listC = SliceListToFivePricePart_sorted(list,350,450);
