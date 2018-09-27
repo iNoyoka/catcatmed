@@ -276,6 +276,11 @@ app.post('/questionnaire_result',function(req,res,next){
 		//test
 		console.log('cattype:'+catType);
 		console.log('kcal:'+kcal);
+		console.log('BCS'+catBCS);
+		console.log('idealWeight:'+idealWeight);
+		console.log('catWeight:'+catWeight);
+		console.log('RER:'+RER);
+		console.log('RERCoefficient:'+RERCoefficient);
 		//find data
 		var sql = "SELECT * FROM `productDB`";
 		var list = [];
