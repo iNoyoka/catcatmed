@@ -1,14 +1,20 @@
-2018/09/28  09:45 CATCATMED LOG FILE
+2018/09/28 xx:xx CATCATMED LOG FILE
 author: iNoyoka
 
 ----------------------------------
 New:
 1. Database link every 5 second to avoid lost connect of mysql.
-
+2. login page add link & lock unfunctional link. (Including index_mobile)
 
 ----------------------------------
 Update:
-1. Milkycat add to the algorithm.
-2. Multiple select of questionnaire update (if select 'unsure', then change req.session.xxx = ['unsure'])
-3. Reset the value of req.session.xxx while client ask to visit '/questionnaire/xxx', which can avoid incorrect data record.
-4. Comment out TEST CODE of last time.
+1. questionnaire_result redesign.
+
+----------------------------------
+Fix:
+1. mysql connect error: 'connection' to 'con'. (variable error)
+
+----------------------------------
+TODO:
+1. Start to know -> redesign.
+2. Top banner -> redesign.

@@ -42,17 +42,17 @@ var config = {
 	password: '3Hptp3s5vpKPiy97',
 	database: 'catcatmed'
 };
-var connection;
+var con;
 //database disconnect handler
 function handleDisconnect(){
-	connection = mysql.createConnection(config);
-	connection.connect(function(err){
+	con = mysql.createConnection(config);
+	con.connect(function(err){
 		if(err){
 			console.log('error occur when connect to db:',err);
 			setTimeout(handleDisconnect,2000);
 		}
 	});
-	connection.on('error',function(err){
+	con.on('error',function(err){
 		console.log('db error',err);
 		if(err.code === 'PROTOCAL_CONNECTION_LOST'){
 			handleDisconnect();
@@ -64,7 +64,7 @@ function handleDisconnect(){
 handleDisconnect();
 //trigger database every 5 sec
 setInterval(function(){				
-	connection.query('SELECT 1');
+	con.query('SELECT 1');
 },5000);
 
 var datetime = require('node-datetime');
@@ -290,7 +290,7 @@ app.post('/questionnaire_result',function(req,res,next){
 			if(catType == "胖老貓" || catType == "胖老老貓") kcal_fat = RER*activityCoefficient*neuturedCoefficient*ageRERCoefficient/100;
 			kcal = RERCoefficient/100*RER*activityCoefficient*neuturedCoefficient*ageRERCoefficient/100;
 		}
-		/*
+		
 		console.log('cattype:'+catType);
 		console.log('kcal:'+kcal);
 		console.log('BCS'+catBCS);
@@ -298,7 +298,7 @@ app.post('/questionnaire_result',function(req,res,next){
 		console.log('catWeight:'+catWeight);
 		console.log('RER:'+RER);
 		console.log('RERCoefficient:'+RERCoefficient);
-		*/
+		
 		//find data
 		var sql = "SELECT * FROM `productDB`";
 		var list = [];
@@ -426,7 +426,7 @@ app.post('/questionnaire_result',function(req,res,next){
 			//---------------------------------------
 			// BASIC DATA SORT AND SLICE TO FIVE
 			//---------------------------------------
-			//console.log(list);
+			console.log(list);
 			var listA = SliceListToFivePricePart_sorted(list,160,250);
 			var listB = SliceListToFivePricePart_sorted(list,250,350);
 			var listC = SliceListToFivePricePart_sorted(list,350,450);
