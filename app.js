@@ -42,22 +42,31 @@ var config = {
 	password: '3Hptp3s5vpKPiy97',
 	database: 'catcatmed'
 };
-function handleError(err){
-	if(err){
-		if(err.code === 'PROTOCAL_CONNECTION_LOST'){
-			connect();		
-		}else{
-			console.error(err.stack || err);
+var connection;
+//database disconnect handler
+function handleDisconnect(){
+	connection = mysql.createConnection(config);
+	connection.connect(function(err){
+		if(err){
+			console.log('error occur when connect to db:',err);
+			setTimeout(handleDisconnect,2000);
 		}
-	}
+	});
+	connection.on('error',function(err){
+		console.log('db error',err);
+		if(err.code === 'PROTOCAL_CONNECTION_LOST'){
+			handleDisconnect();
+		}else{
+			throw err;
+		}
+	});
 }
-function connect(){
-	con = mysql.createConnection(config);
-	con.connect(handleError);
-	con.on('error',handleError);
-}
-var con;
-connect();
+handleDisconnect();
+//trigger database every 5 sec
+setInterval(function(){				
+	connection.query('SELECT 1');
+},5000);
+
 var datetime = require('node-datetime');
 
 app.use('/', indexRouter);
@@ -90,12 +99,13 @@ app.get('/questionnaire_result',function(req,res,next){
 });
 app.post('/questionnaire_result',function(req,res,next){
 	if(req.session.extra_knowhow!=null){ // if(req.session.basicInformation!=null)
-		/*
+		/*test
 		var basicInformation = JSON.parse(req.session.basicInformation);
 		var catage_year = parseInt(basicInformation.catAgeYear);
 		var catage_month = parseInt(basicInformation.catAgeMonth);
 		var catWeight = parseInt(basicInformation.catWeightKilo) + parseInt(basicInformation.catWeightGram)*0.001;
 		*/
+		/*test
 		console.log(req.session.BSA_ageYear+'年');
 		console.log(req.session.BSA_ageMonth+'月');
 		console.log(req.session.BCW_kilo+'公斤');
@@ -105,8 +115,9 @@ app.post('/questionnaire_result',function(req,res,next){
 		console.log('neu'+req.session.BNU);
 		console.log('preg'+req.session.BPR);
 		console.log('pregtime'+req.session.BPT);
-		var catage_year = parseInt(req.session.BSA_ageYear);
-		var catage_month = parseInt(req.session.BSA_ageMonth);
+		*/
+		var catage_year = parseInt(req.session.BCA_ageYear);
+		var catage_month = parseInt(req.session.BCA_ageMonth);
 		var catWeight = parseInt(req.session.BCW_kilo) + parseInt(req.session.BCW_gram)*0.1;
 		var catBCS;
 		if(req.session.BBC=='A') catBCS = 1;
@@ -119,8 +130,14 @@ app.post('/questionnaire_result',function(req,res,next){
 		var neutured = req.session.BNU;
 		var preg;
 		var pregtime;
+		var milkyCat;
+		var kittyAge;
+		var kittyNumber;
 		if(req.session.BPR!=null) preg = req.session.BPR;
 		if(req.session.BPT!=null) pregtime = req.session.BPT;
+		if(req.session.BFN!=null) milkyCat = req.session.BFN;
+		if(req.session.BFA_week!=null) kittyAge = req.session.BFA_week;
+		if(req.session.BFA_kittyNum!=null) kittyNumber = parseInt(req.session.BFA_kittyNum);
 		//
 		var fat = 0;
 		var idealWeight = 0;
@@ -160,11 +177,11 @@ app.post('/questionnaire_result',function(req,res,next){
 		}
 		if(preg=="yes"){
 			catType = "懷孕貓";
-		}
-		/*
-		if(milkyCat=="是"){
+		}		
+		if(milkyCat=="yes"){
 			catType = "泌乳貓";
 		}
+		/*
 		if(sexCat=="是"){
 			catType = "交配貓"
 		}
@@ -219,23 +236,23 @@ app.post('/questionnaire_result',function(req,res,next){
 			kcal = RERCoefficient * RER;
 		}
 		else if(catType == "泌乳貓"){
-			if(kittyAge == "1_2week"){
+			if(kittyAge == "1" || kittyAge == "2"){
 				milkyCatCoefficient = 2.3;
 				milkyCatPercentage = 0.3;
 			}
-			if(kittyAge == "3week"){
+			if(kittyAge == "3"){
 				milkyCatCoefficient = 2.5;
 				milkyCatPercentage = 0.45;
 			}
-			if(kittyAge == "4week"){
+			if(kittyAge == "4"){
 				milkyCatCoefficient = 3;
 				milkyCatPercentage = 0.55;
 			}
-			if(kittyAge == "5week"){
+			if(kittyAge == "5"){
 				milkyCatCoefficient = 3.5;
 				milkyCatPercentage = 0.65;
 			}
-			if(kittyAge == "6week"){
+			if(kittyAge == "6"){
 				milkyCatCoefficient = 4;
 				milkyCatPercentage = 0.9;
 			}
@@ -273,7 +290,7 @@ app.post('/questionnaire_result',function(req,res,next){
 			if(catType == "胖老貓" || catType == "胖老老貓") kcal_fat = RER*activityCoefficient*neuturedCoefficient*ageRERCoefficient/100;
 			kcal = RERCoefficient/100*RER*activityCoefficient*neuturedCoefficient*ageRERCoefficient/100;
 		}
-		//test
+		/*
 		console.log('cattype:'+catType);
 		console.log('kcal:'+kcal);
 		console.log('BCS'+catBCS);
@@ -281,6 +298,7 @@ app.post('/questionnaire_result',function(req,res,next){
 		console.log('catWeight:'+catWeight);
 		console.log('RER:'+RER);
 		console.log('RERCoefficient:'+RERCoefficient);
+		*/
 		//find data
 		var sql = "SELECT * FROM `productDB`";
 		var list = [];
@@ -418,6 +436,7 @@ app.post('/questionnaire_result',function(req,res,next){
 			//---------------------------------------
 			// ADVANCED RAX SELECTOR (進階篩選器)
 			//---------------------------------------
+			// 蛋白質
 			function DailyProteinSelector(list,catType,kcal,catWeight){
 				var newList = [];
 				for(i=0;i<list.length;i++){
@@ -441,6 +460,7 @@ app.post('/questionnaire_result',function(req,res,next){
 				listD = DailyProteinSelector(listD,catType,kcal,catWeight);
 				listE = DailyProteinSelector(listE,catType,kcal,catWeight);
 			//}
+			//代謝能
 			function MetabolismSelectorTypeA(list,catType,kcal){
 				var newList = [];
 				for(i=0;i<list.length;i++){
