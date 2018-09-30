@@ -1,0 +1,105 @@
+.qrBlock{
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  border-radius: 8px;
+  background-color: #F1F1F2;
+  height: 75vh;
+  border: #F1F1F2 solid 12px;
+}
+.productBlock{
+  background-color: #F1F1F2;
+  height: 100%;
+  overflow: auto;
+  overflow-x: hidden;
+}
+.productInformation{
+  background-color: white;
+  height: 100%;
+  overflow: auto;
+  overflow-x: hidden;
+}
+.product{
+  height: 15vh;
+  background-color: #D0D2D3;
+  border-radius: 5px;
+  margin: 10px 4px;
+  cursor: pointer;
+  transition: 500ms;
+}
+.product:hover{
+  background-color: #C1CEE1;
+  padding-left: 20px;
+  transition: 500ms;
+}
+.product h5{
+  line-height: 10vh;
+  margin-left: 10px;
+  margin-bottom: 0;
+}
+.product p{
+  margin-left: 10px !important;
+  margin-bottom: 10px !important;
+}
+.product_select{
+  background-color: #87A7D6 !important;
+  padding-left: 20px !important;
+}
+.product_select .comment{
+  color: black !important;
+}
+.comment{
+  color: #D0D2D3;
+  padding-left: 10px;
+  transition: 500ms;
+}
+.product:hover .comment{
+  color: black;
+  transition: 500ms;
+}
+/* ProductInformationInner */
+.productInformationInner{
+  padding: 15px 20px;
+}
+p{
+  margin-bottom: 0
+}
+.productInformationInner-title{
+  min-height: 25vh;
+}
+.productInformationInner-content{
+  padding-left: 20px;
+}
+.hide-content{
+  color: white;
+  transition: 500ms;
+}
+.productInformationInner-content:hover .hide-content{
+  color: gray;
+  transition: 500ms;
+}
+.productInformationInner-content:hover img{
+  
+  transition: 500ms;
+}
+.qii-c-block{
+  border-radius: 5px;
+  padding: 10px 10px;
+  margin: 10px 0;
+}
+/* Progress Circle */
+.circle {
+	width: 50%;
+    margin: 0;
+    position: relative;
+    text-align: center;
+	vertical-align: top;
+	strong {
+		position: absolute;
+		top: 70px;
+		left: 0;
+		width: 100%;
+		text-align: center;
+		line-height: 45px;
+		font-size: 43px;
+	}
+}
