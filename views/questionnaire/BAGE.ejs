@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">    
+
+	<title>catcatmed| questionnaire</title>
+
+    <link rel="shortcut icon" type="image/png" href="../images/favicon.png"/>
+    <link rel="stylesheet" href="../bootstrap-3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../stylesheets/header.css">
+    <link rel="stylesheet" href="../stylesheets/qn.css">
+    <script src="../javascript/jquery/jquery_v-3-3-1.js"></script>
+    <script src="../bootstrap-3.3.7/js/bootstrap.min.js"></script>	
+</head>
+<body onselectstart="return false" class="qnbody" id="body" style="display: none">
+    <div style="height: 25vh"></div>
+    <div style="height: 50vh; position: relative;" class="text-center" id="qnInner">
+        <% if(year==0){ %>
+        <%     if(month==1 || month==2){ %>
+                    <img src="../images/questionnaire/icons-10.png">
+                    <h3>※貓咪一年大約等於人類的七年，<%=name%>已經 3 歲了！</h3><h3>您的貓正處於需要多加關照的年紀喔！</h3>
+        <%     }else if(month==3 || month==4){ %>
+                    <img src="../images/questionnaire/icons-10.png">
+                    <h3>※貓咪一年大約等於人類的七年，<%=name%>已經 6 歲了！</h3><h3>您的貓正處於需要多加關照的年紀喔！</h3>
+        <%     }else if(month==5 || month==6){ %>
+                    <img src="../images/questionnaire/icons-10.png">    
+                    <h3>※貓咪一年大約等於人類的七年，<%=name%>已經 9 歲了！</h3><h3>您的貓正處於需要多加關照的年紀喔！</h3>
+        <%     }else if(month==7 || month==8){ %>
+                    <img src="../images/questionnaire/icons-10.png">
+                    <h3>※貓咪一年大約等於人類的七年，<%=name%>已經 11 歲了！</h3><h3>您的貓正處於需要多加關照的年紀喔！</h3>
+        <%     }else if(month==9 || month==10 || month==11){ %>
+                    <img src="../images/questionnaire/icons-10.png">
+                    <h3>※貓咪一年大約等於人類的七年，<%=name%>已經 13 歲了！</h3><h3>您的貓正處於需要多加關照的年紀喔！</h3>
+        <%     }%>
+        <% }else if(year==1){ %>
+                    <img src="../images/questionnaire/icons-11.png">
+                    <h3>※貓咪一年大約等於人類的七年，<%=name%>已經 15 歲了！</h3><h3>您的貓還年輕有活力喔！</h3>       
+        <% }else if(year==2){ %>
+                    <img src="../images/questionnaire/icons-11.png">
+                    <h3>※貓咪一年大約等於人類的七年，<%=name%>已經 25 歲了！</h3><h3>您的貓還年輕有活力喔！</h3>  
+        <% }else if(year>=3 && year < 7){ %>
+                    <img src="../images/questionnaire/icons-11.png">
+                    <h3>※貓咪一年大約等於人類的七年，<%=name%>已經 <%=calyear%> 歲了！</h3><h3>您的貓還年輕有活力喔！</h3>  
+        <% }else if(year>=7 && year < 12){  %>
+        <%     if(sex=='girl'){ %>
+                    <img src="../images/questionnaire/icons-12.png">
+                    <h3>※貓咪一年大約等於人類的七年，<%=name%>已經 <%=calyear%> 歲了！</h3><h3>您的貓要更年期囉！</h3>
+        <%     }else{ %>
+                    <img src="../images/questionnaire/icons-13.png">
+                    <h3>※貓咪一年大約等於人類的七年，<%=name%>已經 <%=calyear%> 歲了！</h3><h3>您的貓要更年期囉！</h3>
+        <%     }    %>
+        <% }else{ %>
+        <%     if(sex=='girl'){ %>
+                    <img src="../images/questionnaire/icons-14.png">
+                    <h3>※貓咪一年大約等於人類的七年，<%=name%>已經 <%=calyear%> 歲了！</h3><h3>您有一隻奶奶貓喔！</h3>
+        <%     }else{ %>
+                    <img src="../images/questionnaire/icons-15.png">
+                    <h3>※貓咪一年大約等於人類的七年，<%=name%>已經 <%=calyear%> 歲了！</h3><h3>您有一隻爺爺貓喔！</h3>
+        <%     } %>
+        <% } %>
+    </div>
+    <div style="height: 20vh"></div>
+</body>
+</html>
+<script>
+    $(document).ready(function(){
+        $('#body').fadeIn(500);  
+        var functionA = setInterval(myFunctionA,3000);
+        
+        function myFunctionA(){
+            $('#qnInner').fadeOut(500,function(){
+                window.location.href = 'BSP'
+            });
+        }
+        
+    });
+</script>

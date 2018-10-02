@@ -74,7 +74,12 @@ router.post('/BCA',function(req,res,next){
     req.session.BCA_ageYear = req.body.ageYear;
     req.session.BCA_ageMonth = req.body.ageMonth;
     req.session.qnrecordList.push('BCA')
-    res.send('BSP');
+    res.send('BAGE');
+});
+//
+router.get('/BAGE',function(req,res,next){
+    var transYear = (req.session.BCA_ageYear - 3 + 1) * 4 + 25;
+    res.render('questionnaire/BAGE',{year:req.session.BCA_ageYear,month:req.session.BCA_ageMonth,sex:req.session.BCS,name:req.session.BCN,calyear:transYear});
 });
 //
 router.get('/BSP',function(req,res,next){
@@ -535,8 +540,8 @@ router.post('/immu_behave',function(req,res,next){
 //
 router.get('/immu_behave_before',function(req,res,next){
     req.session.immu_behave_before = null;
-    var year = parseInt(BCA_ageYear);
-    var month = parseInt(BCA_ageMonth);
+    var year = parseInt(req.session.BCA_ageYear);
+    var month = parseInt(req.session.BCA_ageMonth);
     if(year==0 && month<=6){
         //六個月以下
         req.session.qnrecord = 'immu_behave_before';
