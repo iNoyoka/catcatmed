@@ -22,7 +22,6 @@
         </div>
     </div>
     <div class="row hidden-xs padding"></div>
-    <div class="row hidden-xs padding"></div>
     <div class="row padding"></div>
     <div class="row">
         <div class="col-lg-2 col-lg-offset-5 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 text-center">
@@ -31,6 +30,7 @@
         </div>
     </div>
     <div class="row hidden-md hidden-sm hidden-xs padding"></div>
+    <div class="row  text-center"><span class="warningSpan" id="warningSpan"></span></div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
             <button class="nextButton" onclick="Send()">下 一 題</button>
@@ -73,7 +73,7 @@
                 window.location.href = '' + data;
             });
         }else{
-            alert('您還有資料沒有填寫喔！');
+            document.getElementById('warningSpan').innerHTML = '請幫你的貓貓填寫好他的名字喔～';
         }
     }
 </script>

@@ -197,6 +197,7 @@
     -->
     <div class="row hidden-xs padding"></div>
     <div class="row hidden-xs padding"></div>
+    <div class="row  text-center"><span class="warningSpan" id="warningSpan"></span></div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
             <button class="nextButton" onclick="Send()">下 一 題</button>
@@ -228,7 +229,13 @@
         let ageYear = $('#ageYear');
         let ageMonth = $('#ageMonth');
         const today = new Date();
-        if(ageYear.val()!='null' && ageMonth.val()!='null'){
+        if(ageYear.val()=='null' || ageMonth.val()=='null'){
+            document.getElementById('warningSpan').innerHTML = '請確認兩個格子都有輸入正確的值喔！';
+        }else if(ageYear.val()==0 && ageMonth.val()==0){
+            document.getElementById('warningSpan').innerHTML = '卡卡貓沒辦法幫還沒出生的貓咪做飲食控管喔！';
+        }else if(ageYear.val()==0 && (ageMonth.val()==1 || ageMonth.val()==2)){
+            document.getElementById('warningSpan').innerHTML = '卡卡貓不建議兩個月以下的幼貓食用乾飼料喔～';
+        }else{
             $.ajax({
                 method : 'POST',
                 url : 'BCA',
@@ -239,8 +246,6 @@
             }).done(function(data){
                 window.location.href = '' + data;
             });
-        }else{
-            alert('請確認兩個格子都有輸入正確的值喔！');
         }
     }
 </script>

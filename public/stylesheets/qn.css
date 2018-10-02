@@ -1,11 +1,12 @@
 .qnbody{
-    background-color: white;
-    overflow-x: hidden;
+    background-color: #F6E3D6;
+	overflow-x: hidden;
+	height: 100vh;
 }
 .indexButton{
 	font-size: 1em;
-	color: #D0D2D3;
-    background-color: #FFFFFF;
+	color: gray;
+    background-color: #F6E3D6;
     border: none;
     padding: 20px;
     outline: none;
@@ -29,14 +30,17 @@
     transition: 500ms;
 }
 .nextButtonLock{
-	border: #D0D2D3 solid 3px !important;
+	border: gray solid 3px !important;
 	background-color: white !important;
-    color: #D0D2D3 !important;
+    color: gray !important;
 }
 .backButton{
 	font-size: 1em;
-	color: #D0D2D3;
-	background-color: #FFFFFF;
+	color: gray;
+	background-color: #F6E3D6;
+	position: fixed;
+	bottom: 20px;
+	left: 20px;
 	border: none;
 	padding: 20px;
 	outline: none;
@@ -111,4 +115,7 @@ input:-webkit-autofill {
 .selected:hover{
 	background-color: #3D5BA8 !important;
 	color: white !important;
+}
+.warningSpan{
+	color: red;
 }

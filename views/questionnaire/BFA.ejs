@@ -63,6 +63,7 @@
         </div>
     </div>
     <div class="row hidden-xs padding"></div>
+    <div class="row  text-center"><span class="warningSpan" id="warningSpan"></span></div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <button class="nextButton" onclick="Send()">下一題</button>
@@ -98,7 +99,7 @@
         let kittyNum = $('#kittyNum').val();
         let week = $('#week').val();
         if(kittyNum=='null' || week=='null'){
-            alert('請確定小貓咪的數量、多大都填寫了喔！');
+            document.getElementById('warningSpan').innerHTML = '請確定小貓咪的數量、多大都填寫了喔！';
         }else{
             $.ajax({  
                 method : "POST",

@@ -57,13 +57,14 @@
                 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="B" onclick="Icon(this.id)"><span class="BEFoptions">洗澡後未吹乾</span></div></div>
             </div>
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="C" onclick="Icon(this.id)"><span class="BEFoptions">疏於整理或是不正確的整理方式*</span></div></div>
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="C" onclick="Icon(this.id)"><span class="BEFoptions">疏於整理或是不正確的整理方式</span></div></div>
             </div>
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="D" onclick="Icon(this.id)"><span class="BEFoptions">給貓咪穿衣服</span></div></div>
             </div>
         </div>
     </div>
+    <div class="row  text-center"><span class="warningSpan" id="warningSpan"></span></div>
     <div class="row">
         <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 text-center">
             <div class="row">
@@ -97,7 +98,7 @@
     }
     function Send(){
         if((A+B+C+D)==0){
-            alert('若沒有上述的情形的話，請選擇“沒有/不確定”之選項喔！');
+            document.getElementById('warningSpan').innerHTML = '若沒有上述的情形的話，請選擇“沒有/不確定”之選項喔！';
         }else{
             let s = [];
             if(A==1) s.push('A');

@@ -63,6 +63,7 @@
         </div>
     </div>
     <div class="row hidden-md hidden-sm hidden-xs padding"></div>
+    <div class="row  text-center"><span class="warningSpan" id="warningSpan"></span></div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
             <button class="nextButton" onclick="Send()">下 一 題</button>
@@ -105,7 +106,7 @@
                 window.location.href = '' + data;
             });
         }else{
-            alert('請選擇所在縣市！');
+            document.getElementById('warningSpan').innerHTML = '請選擇所在縣市！';
         }
     }
 </script>

@@ -547,7 +547,7 @@ router.get('/immu_behave_before',function(req,res,next){
         req.session.qnrecord = 'immu_behave_before';
         res.render('questionnaire/immu_behave_before',{name:req.session.BCN});
     }else{
-        res.redirect('/immu_spirit');
+        res.redirect('/questionnaire/immu_spirit');
     }
 });
 router.post('/immu_behave_before',function(req,res,next){
@@ -947,7 +947,11 @@ router.get('/extra_knowhow',function(req,res,next){
 router.post('/extra_knowhow',function(req,res,next){
     req.session.extra_knowhow = req.body.name;
     req.session.qnrecordList.push(req.session.qnrecord);
-    res.send('/questionnaire_result');
+    res.send('final');
 });
+//
+router.get('/final',function(req,res,next){
+    res.render('questionnaire/final',{name:req.session.BCN});
+})
 
 module.exports = router;

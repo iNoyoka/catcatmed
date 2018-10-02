@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">    
+
+	<title>catcatmed| questionnaire</title>
+
+    <link rel="shortcut icon" type="image/png" href="../images/favicon.png"/>
+    <link rel="stylesheet" href="../bootstrap-3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../stylesheets/header.css">
+    <link rel="stylesheet" href="../stylesheets/qn.css">
+    <script src="../javascript/jquery/jquery_v-3-3-1.js"></script>
+    <script src="../bootstrap-3.3.7/js/bootstrap.min.js"></script>	
+</head>
+<body onselectstart="return false" class="qnbody" id="body" style="display: none">
+    <div style="height: 25vh"></div>
+    <div style="height: 50vh; position: relative;" class="text-center" id="qnInner">
+        <h3>感謝您填寫完了卡卡貓的客製化問卷！</h3>
+        <br>
+        <br>
+        <br>
+        <h5>請按下下方的「開始分析」按鈕，以獲得卡卡貓為<%=name%>所準備的飼料配方！</h5>
+        <br>
+        <button class="nextButton" onclick="Send()">開始分析</button>
+    </div>
+    <div style="height: 20vh"></div>
+</body>
+</html>
+<script>
+    $(document).ready(function(){
+        $('#body').fadeIn(500);  
+        var functionA = setInterval(myFunctionA,3000);
+    });
+    function Send(){
+        window.location.href = '/questionnaire_result';
+    }
+</script>
