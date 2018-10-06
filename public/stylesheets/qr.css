@@ -1,3 +1,8 @@
+.qrbody{
+  background-color: #F6E3D6;
+overflow-x: hidden;
+height: 100vh;
+}
 .qrBlock{
   margin-top: 5vh;
   margin-bottom: 5vh;
@@ -20,7 +25,7 @@
 }
 .product{
   height: 15vh;
-  background-color: #D0D2D3;
+  background-color: #C1CEE1;
   border-radius: 5px;
   margin: 10px 4px;
   cursor: pointer;
@@ -32,11 +37,13 @@
   transition: 500ms;
 }
 .product h5{
+  color: #3D5BA8;
   line-height: 10vh;
   margin-left: 10px;
   margin-bottom: 0;
 }
 .product p{
+  color: #3D5BA8;
   margin-left: 10px !important;
   margin-bottom: 10px !important;
 }
@@ -44,16 +51,22 @@
   background-color: #87A7D6 !important;
   padding-left: 20px !important;
 }
+.product_select h5{
+  color: black !important;
+}
+.product_select p{
+  color: black !important;
+}
 .product_select .comment{
   color: black !important;
 }
 .comment{
-  color: #D0D2D3;
+  color: #3D5BA8;
   padding-left: 10px;
   transition: 500ms;
 }
 .product:hover .comment{
-  color: black;
+  color: #3D5BA8;
   transition: 500ms;
 }
 /* ProductInformationInner */
@@ -65,6 +78,9 @@ p{
 }
 .productInformationInner-title{
   min-height: 25vh;
+}
+.productInformationInner-title h5{
+  margin-bottom: 0 !important;
 }
 .productInformationInner-content{
   padding-left: 20px;
@@ -81,10 +97,21 @@ p{
   
   transition: 500ms;
 }
+.tinyArrow{
+  width: 5%;
+  height: 100%;
+  top: -13px;
+  position: absolute;
+}
+.qii-b-block{
+  border-radius: 5px;
+  margin: 4px 0;
+}
 .qii-c-block{
   border-radius: 5px;
   padding: 10px 10px;
   margin: 10px 0;
+  width: 100%;
 }
 .purchaseButton{
   font-size: 1em;
@@ -105,18 +132,20 @@ p{
 }
 /* Progress Circle */
 .circle {
-	width: 50%;
-    margin: 0;
-    position: relative;
-    text-align: center;
-	vertical-align: top;
-	strong {
-		position: absolute;
-		top: 70px;
-		left: 0;
-		width: 100%;
-		text-align: center;
-		line-height: 45px;
-		font-size: 43px;
-	}
+	position: absolute;
+}
+.myProgress {
+  width: 100%;
+  background-color: #F1F1F2;
+  border-radius: 8px;
+}
+.myBar {
+  width: 0;
+  height: 15px;
+  text-align: center; /* To center it horizontally (if you want) */
+  line-height: 15px; /* To center it vertically */
+  font-size: 0.5em;
+  color: white; 
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
 }

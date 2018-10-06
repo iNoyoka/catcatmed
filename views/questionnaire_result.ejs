@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="stylesheets/qr.css">
 </head>
 
-<body>
+<body class="qrbody">
     <nav id="nav_top" class="navbar navbar-expand-lg navbar-light">
         <div class="d-flex flex-row col-md-12">
             <div class="col-md-5 text-center flex-row navbar-nav align-items-center" id="nav_left" ></div>
@@ -39,17 +39,24 @@
 			<div class="col-lg-4 col-md-4">
 				<div id="productBlock" class="productBlock">
                     <div class="product product_select" id="A" onclick="ChangeProduct(this.id)"><h5>資料讀取中...<span class="comment"> dataloading</span></h5><p>dataloading</p></div>
-                    <div class="product" id="B" onclick="ChangeProduct(this.id)"><h5>資料讀取中...<span class="comment"> dataloading</span></h5></div>
+                    <div class="product" id="B" onclick="ChangeProduct(this.id)"><h5>資料讀取中...<span class="comment"> dataloading</span></h5><p>dataloading</p></div>
+                    <div class="product" id="C" onclick="ChangeProduct(this.id)"><h5>資料讀取中...<span class="comment"> dataloading</span></h5><p>dataloading</p></div>
+                    <div class="product" id="D" onclick="ChangeProduct(this.id)"><h5>資料讀取中...<span class="comment"> dataloading</span></h5><p>dataloading</p></div>
+                    <div class="product" id="E" onclick="ChangeProduct(this.id)"><h5>資料讀取中...<span class="comment"> dataloading</span></h5><p>dataloading</p></div>
+                    <div class="product" id="F" onclick="ChangeProduct(this.id)"><h5>資料讀取中...<span class="comment"> dataloading</span></h5><p>dataloading</p></div>
                 </div>
 			</div>
 			<div class="col-lg-8 col-md-8 text-center">
 				<div id="productInformation" class="productInformation">
                     <div id="productInformationInner" class="productInformationInner">
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                 <img>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left">
+                            <div class="col-lg-4 col-md-4">
+
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-left">
                                 <h4>產品名稱</h4>
                                 <h5>品牌中文<span> brand en</span></h5>
                                 <h5>原產地：澳洲</h5>
@@ -58,122 +65,105 @@
                         </div>
                         <hr>
                         <div class="row productInformationInner-title">
-                            <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 text-left">
-                                <h5>每日建議攝取量</h5>
-                                <br>
-                                <div class="row productInformationInner-content">
-                                    <div class="col-lg-4 col-md-4 text-center">
-                                        <img src="images/questionnaire/icons-50.png" style="width:50%">
-                                        <p>飼料 60g</p>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 text-center">
-                                        <img src="images/questionnaire/icons-63.png" style="width:50%">
-                                        <p>水分 240ml</p>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 text-center">
-                                        <img src="images/questionnaire/icons-37.png" style="width:50%">
-                                        <p>熱量 210kcal</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row productInformationInner-title">
-                            <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 text-left">
-                                <h5>營養分析</h5>
-                                <br>
-                                <div class="row productInformationInner-content">
-                                    <div class="col-lg-4 col-md-4 text-left"><p>蛋白質</p></div>
-                                    <div class="col-lg-8 col-md-8 text-right hide-content"><p>您的貓所需的蛋白質比例在zz-xx之間</p></div>
-                                    <div class="col-lg-12 col-md-12">
-                                        <div class="progress">
-                                            <div class="progress-bar bg-info" role="progressbar"  style="width: 38%">
-                                                38%
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row productInformationInner-content">
-                                    <div class="col-lg-4 col-md-4 text-left"><p>脂質</p></div>
-                                    <div class="col-lg-8 col-md-8 text-right hide-content"><p>您的貓所需的脂質質比例在zz-xx之間</p></div>
-                                    <div class="col-lg-12 col-md-12">
-                                        <div class="progress">
-                                            <div class="progress-bar bg-warning" role="progressbar"  style="width: 5%">
-                                                5%
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row productInformationInner-content">
-                                    <div class="col-lg-4 col-md-4 text-left"><p>碳水化合物</p></div>
-                                    <div class="col-lg-8 col-md-8 text-right hide-content"><p>您的貓所需的碳水化化合物比例在zz-xx之間</p></div>
-                                    <div class="col-lg-12 col-md-12">
-                                        <div class="progress">
-                                            <div class="progress-bar bg-success" role="progressbar"  style="width: 43%">
-                                                43%
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row  productInformationInner-title">
-                            <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 text-left">
-                                <h5>總體比較</h5>
-                                <br>
-                                <div class="row productInformationInner-content">
-                                    <div class="col-lg-4 col-md-4 text-center wow">
-                                        <div id="circleA"></div>
-                                        <p style="position: relative; top: -55px;">46th</p>
-                                        <p>蛋白質</p>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 text-center wow">
-                                        <div id="circleB"></div>
-                                        <p style="position: relative; top: -55px;">46th</p>
-                                        <p>脂質</p>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 text-center wow">
-                                        <div id="circleC"></div>
-                                        <p style="position: relative; top: -55px;">46th</p>
-                                        <p>碳水化合物</p>
-                                    </div>
-                                </div>
-                                <br>
-                                <p>※ 蛋白質含量<span style="color:red">高於</span>市售飼料平均</p>
-                                <p>※ 脂質含量<span style="color:blue">低於</span>市售飼料平均</p>
-                                <p>※ 碳水化合物含量<span style="color:blue">低於</span>市售飼料平均</p>
-                                <p style="color:#D0D2D3;">※ 此為此款飼料與市面上所有飼料之成分比例含量排名，僅供參考。</p>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row productInformationInner-title">
-                            <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 text-left">
-                                <h5>此款飼料可能有助於</h5>
+                            <div class="col-lg-12 col-md-12 text-left">
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-3 text-center"><img src="images/questionnaire/icon/black/HEART.png" style="width:80%"></div>
-                                    <div class="col-lg-3 col-md-3 text-center"><img src="images/questionnaire/icon/black/JOINT.png" style="width:80%"></div>
-                                    <div class="col-lg-3 col-md-3 text-center"><img src="images/questionnaire/icon/black/MEHAIR.png" style="width:80%"></div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <h5>營養分析</h5>
+                                        <br>
+                                        <div class="row productInformationInner-content">
+                                            <div class="col-lg-4 col-md-4 text-left"><p>蛋白質</p></div>
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="myProgress" id="myBarA">
+                                                    <div class="myBar" style="background-color:#EF5981"></div>
+                                                </div>
+                                                <img class="tinyArrow" style="left:35%" src="images/questionnaire/icons-65.png">
+                                                <img class="tinyArrow" style="left:55%" src="images/questionnaire/icons-65.png">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row productInformationInner-content">
+                                            <div class="col-lg-4 col-md-4 text-left"><p>脂質</p></div>
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="myProgress" id="myBarB">
+                                                    <div class="myBar" style="background-color:#87A7D6"></div>
+                                                </div>
+                                                <img class="tinyArrow" style="left:25%" src="images/questionnaire/icons-66.png">
+                                                <img class="tinyArrow" style="left:36%" src="images/questionnaire/icons-66.png">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row productInformationInner-content">
+                                            <div class="col-lg-6 col-md-6 text-left"><p>纖維質</p></div>
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="myProgress" id="myBarC">
+                                                    <div class="myBar" style="background-color:#3D5BA8"></div>
+                                                </div>
+                                                <img class="tinyArrow" style="left:35%" src="images/questionnaire/icons-64.png">
+                                                <img class="tinyArrow" style="left:55%" src="images/questionnaire/icons-64.png">
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <h5>每日建議攝取量</h5>
+                                        <br>
+                                        <div class="row productInformationInner-content qii-b-block" style="background-color:#F1F1F2">
+                                            <div class="col-lg-4 col-md-4 text-right"><img src="images/questionnaire/icons-63.png" style="width:100%"></div>
+                                            <div class="col-lg-8 col-md-8 text-left"><p style="margin-top: 15%;">水分 240ml</p></div>
+                                        </div>
+                                        <div class="row productInformationInner-content qii-b-block" style="background-color:#F1F1F2">
+                                            <div class="col-lg-4 col-md-4 text-right"><img src="images/questionnaire/icons-51.png" style="width:100%"></div>
+                                            <div class="col-lg-8 col-md-8 text-left"><p style="margin-top: 15%;">熱量 210kcal</p></div>
+                                        </div>
+                                        <div class="row productInformationInner-content">
+                                            <p style="color:gray;font-size:0.8em;margin-top: 5%;">※水分與熱量的計算方式請在「會員中心」中查看</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <hr>
-                        <div class="row productInformationInner-title">
-                            <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 text-left">
-                                <h5>您需要留意的成分</h5>
-                                <br>
-                                <div class="row productInformationInner-content">
-                                    <div class="col-lg-12 col-md-12 qii-c-block" style="border: green solid 1px; background-color: rgba(153, 340, 77, 0.5)">
-                                        <span>優良成分：</span>
-                                        <br>
-                                        <span>雞肉絨、脫水家禽蛋白</span>
+                        <div class="row">
+                                <div class="col-lg-12 col-md-12 text-left">
+                                    <div class="row">
+                                        <div class="col-lg-7 col-md-7">
+                                            <h5>成分比較</h5>
+                                        </div>
+                                        <div class="col-lg-5 col-md-5">
+                                            <h5>您需要留意的成分</h5>
+                                        </div>
                                     </div>
-                                    <div class="col-lg-12 col-md-12 qii-c-block" style="border: orange solid 1px; background-color: rgba(255, 255, 153, 0.5)">
-                                        <span>可能的過敏原：</span>
+                                </div>
+                            </div>
+                        <div class="row  productInformationInner-title">
+                            <div class="col-lg-12 col-md-12 text-left">
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-2">
+                                        <div class="circle" id="circleA" style="top:45px;left:30px;"></div>
+                                        <div class="circle" id="circleB" style="top:37px;left:22px"></div>
+                                        <div class="circle" id="circleC" style="top:29px;left:14px;"></div>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5">
                                         <br>
-                                        <span>小麥、玉米、大豆</span>
+                                        <p style="color:#EF5981;font-size:0.9em">※蛋白質高於<span style="color:black;font-size:1em;">80%</span>的市售飼料</p>
+                                        <br>
+                                        <p style="color:#87A7D6;font-size:0.9em">※脂質高於<span style="color:black;font-size:1em;">65%</span>的市售飼料</p>
+                                        <br>
+                                        <p style="color:#3D5BA8;font-size:0.9em">※碳水化合物低於<span style="color:black;font-size:1em;">20%</span>的市售飼料</p>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5">
+                                        
+                                        <div class="col-lg-12 col-md-12 qii-c-block" style="border: #87A7D6 solid 1px; background-color: rgba(135, 167, 214, 0.5)">
+                                            <span>優良成分：</span>
+                                            <br>
+                                            <span>雞肉絨、脫水家禽蛋白</span>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 qii-c-block" style="border: #EF5981 solid 1px; background-color: rgba(239, 89, 129, 0.5)">
+                                            <span>可能的過敏原：</span>
+                                            <br>
+                                            <span>小麥、玉米、大豆</span>
+                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -263,6 +253,40 @@
     var list;
     let currentid = 'A';    //while load in page, change currentid;
     $(document).ready(function(){
+        move(40,$('#myBarA'));
+        move(35,$('#myBarB'));
+        move(50,$('#myBarC'));
+        $('.circle').circleProgress({
+            emptyFill: 'white'
+        });
+        $('#circleA').circleProgress({
+            value: 0.5,
+            size: 80,
+            thickness: 8,
+            startAngle: Math.PI / 2,
+            fill: {
+            gradient: ["#EF5981", "#EF5981"]
+            }
+        });
+        $('#circleB').circleProgress({
+            value: 0.7,
+            size: 96,
+            thickness: 8,
+            startAngle: Math.PI / 2,
+            fill: {
+            gradient: ["#87A7D6", "#87A7D6"]
+            }
+        });
+        $('#circleC').circleProgress({
+            value: 0.55,
+            size: 112,
+            thickness: 8,
+            startAngle: Math.PI / 2,
+            fill: {
+            gradient: ["#3D5BA8", "#3D5BA8"]
+            }
+        });   
+        /*
         $.ajax({
             method: 'POST',
             url: 'questionnaire_result'
@@ -276,7 +300,12 @@
                 WriteProductInformation(list[0]);
             }
         });
+        */
     });
+    function move(percent, $element) {
+    var progressBarWidth = percent * $element.width() / 100;
+    $element.find('.myBar').animate({ width: progressBarWidth }, 500).html(percent + "% ");
+    }
     function WriteProductBlock(list){
         var innerHTML = '';        
         innerHTML += '<div class="product product_select" id="'+list[0].productCode+'" onclick="ChangeProduct(this.id)"><h5>'+list[0].brand_zh+'<span class="comment">';
@@ -345,7 +374,7 @@
             value: A,
             size: 80,
             fill: {
-            gradient: ["#3D5BA8", "#3D5BA8"]
+            gradient: ["#EF5981", "#EF5981"]
             }
         });
         $('#circleB').circleProgress({
@@ -373,16 +402,19 @@
     }
     function ChangeProduct(id){
         if(currentid!=id){
+            $("#productInformation").animate({scrollTop:0}, 400);   
             $('#'+currentid).toggleClass('product_select');
             currentid = id;
             $('#'+currentid).toggleClass('product_select');
             // change left
+            /*
             for(i=0;i<list.length;i++){
                 if(list[i].productCode==currentid){
                     WriteProductInformation(list[i]);
                     break;
                 }
             }
+            */
         }else{
             //do nothing
         }
