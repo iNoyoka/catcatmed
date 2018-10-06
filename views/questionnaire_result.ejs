@@ -35,6 +35,16 @@
 	<div id="nav_top_block"></div>
 	<!---->
 	<div class="container">
+        <div class="row" style="color:gray;margin-top: 5px;">
+            ※卡卡貓根據您的預算以及<%=name%>的需要，推薦給您「<span id="recommend_plan">900元 / 月</span>」的方案，或是您可以在下面自訂您新的價位區間。
+        </div>
+        <div class="row">
+            <button class="selectorButton" id="A_plan" onclick="ChangePlan(this.id);">600元 / 月</button>
+            <button class="selectorButton" id="B_plan" onclick="ChangePlan(this.id);">750元 / 月</button>
+            <button class="selectorButton" id="C_plan" onclick="ChangePlan(this.id);">900元 / 月</button>
+            <button class="selectorButton" id="D_plan" onclick="ChangePlan(this.id);">1050元 / 月</button>
+            <button class="selectorButton" id="E_plan" onclick="ChangePlan(this.id);">1200元 / 月</button>
+        </div>
 		<div class="row  qrBlock">
 			<div class="col-lg-4 col-md-4">
 				<div id="productBlock" class="productBlock">
@@ -54,7 +64,9 @@
                                 <img>
                             </div>
                             <div class="col-lg-4 col-md-4">
+                                <div class="row">
 
+                                </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-left">
                                 <h4>產品名稱</h4>
@@ -252,7 +264,14 @@
 <script>
     var list;
     let currentid = 'A';    //while load in page, change currentid;
+    let currentplan = 'C_plan';
+    var listA;
+    var listB;
+    var listC;
+    var listD;
+    var listE;
     $(document).ready(function(){
+        /*
         move(40,$('#myBarA'));
         move(35,$('#myBarB'));
         move(50,$('#myBarC'));
@@ -286,119 +305,125 @@
             gradient: ["#3D5BA8", "#3D5BA8"]
             }
         });   
-        /*
+        */
         $.ajax({
             method: 'POST',
             url: 'questionnaire_result'
         }).done(function(data){
             list = JSON.parse(data);
-            if(list[0]==null){
+            lss = list.split('#');
+            listA = lss[1];
+            listB = lss[2];
+            listC = lss[3];
+            listD = lss[4];
+            listE = lss[5];
+            if(lss[1]==null&&lss[2]==null&&lss[3]==null&&lss[4]==null&&lss[5]==null){
                 alert('很抱歉，經由卡卡貓的演算系統，發現沒有最符合您的飼料，若有疑惑請撥打客服專線，我們會盡快為您服務！');
             }else{
+                //set initial plan
+                $('#'+lss[0]+'_plan').toggleClass('select');
+                if(lss[0]=='A') document.getElementById('recommend_plan').innerHTML = '600元 / 月';
+                if(lss[0]=='B') document.getElementById('recommend_plan').innerHTML = '750元 / 月';
+                if(lss[0]=='C') document.getElementById('recommend_plan').innerHTML = '900元 / 月';
+                if(lss[0]=='D') document.getElementById('recommend_plan').innerHTML = '1050元 / 月';
+                if(lss[0]=='E') document.getElementById('recommend_plan').innerHTML = '1200元 / 月';
+                list = FindCorrectList(lss[0]);
                 currentid = list[0].productCode;
                 WriteProductBlock(list);
                 WriteProductInformation(list[0]);
             }
         });
-        */
+        
     });
     function move(percent, $element) {
-    var progressBarWidth = percent * $element.width() / 100;
-    $element.find('.myBar').animate({ width: progressBarWidth }, 500).html(percent + "% ");
+        var progressBarWidth = percent * $element.width() / 100;
+        $element.find('.myBar').animate({ width: progressBarWidth }, 500).html(percent + "% ");
+    }
+    function FindCorrectList(listIndex){
+        if(listIndex=='A') return listA;
+        if(listIndex=='B') return listB;
+        if(listIndex=='C') return listC;
+        if(listIndex=='D') return listD;
+        if(listIndex=='E') return listE;
     }
     function WriteProductBlock(list){
-        var innerHTML = '';        
+        var innerHTML = ''; 
         innerHTML += '<div class="product product_select" id="'+list[0].productCode+'" onclick="ChangeProduct(this.id)"><h5>'+list[0].brand_zh+'<span class="comment">';
         if(list[0].brand_en!='null') innerHTML += ''+list[0].brand_en+'</span></h5><p>'+list[0].name_zh+'</p></div>';
         else innerHTML += '</span></h5><p>'+list[0].productName_ZH+'</p></div>';        
         for(i=1;i<list.length;i++){
             innerHTML += '<div class="product" id="'+list[i].productCode+'" onclick="ChangeProduct(this.id)"><h5>'+list[i].brand_zh+'<span class="comment">';
-            if(list[0].brand_en!='null') innerHTML += ""+list[i].brand_en+'</span></h5><p>'+list[i].name_zh+'</p></div>';
+            if(list[i].brand_en!='null') innerHTML += ""+list[i].brand_en+'</span></h5><p>'+list[i].name_zh+'</p></div>';
             else innerHTML += '</span></h5><p>'+list[i].productName_ZH+'</p></div>';
         }
         document.getElementById('productBlock').innerHTML = innerHTML;
     }
     function WriteProductInformation(list){
         var innerHTML = '';
-        innerHTML += '<div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><img></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left">';
-        innerHTML += '<h4>'+list.name_zh+'</h4><h5>'+list.brand_zh+'<span>';
-        if(list.brand_en!='null') innerHTML += '  '+list.brand_en+'</span>';
-        else innerHTML += '</span>';
-        innerHTML += '</h5><h5>原產地：'+list.original+'</h5><button class="purchaseButton" onclick="Send()">確認選購</button></div></div><hr>';
+        innerHTML += '<div class="row"><div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><img></div>';
+        innerHTML += '<div class="col-lg-4 col-md-4"><div class="row">';
+        innerHTML += '</div></div>';
+        innerHTML += '<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-left"><h4>'+list.name_zh+'</h4><h5>'+list.brand_zh+'';
+        if(list.brand_en=='null')   innerHTML += '</h5>';
+        else innerHTML += '<span>'+list.brand_en+'</span></h5><h5>原產地：'+list.original+'</h5><button class="purchaseButton" onclick="Send()">確認選購</button></div></div><hr>';
         //
-        innerHTML += '<div class="row productInformationInner-title"><div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 text-left"><h5>每日建議攝取量</h5>';
-        innerHTML += '<br><div class="row productInformationInner-content"><div class="col-lg-4 col-md-4 text-center"><img src="images/questionnaire/icons-50.png" style="width:50%">';
-        innerHTML += '<p>飼料 '+Math.round(list.dailyNeedGram*10)/10+'g</p></div><div class="col-lg-4 col-md-4 text-center"><img src="images/questionnaire/icons-63.png" style="width:50%"><p>水分 '+Math.round(list.dailyNeedWater*10)/10+'ml</p></div>';
-        innerHTML += '<div class="col-lg-4 col-md-4 text-center"><img src="images/questionnaire/icons-37.png" style="width:50%"><p>熱量 '+Math.round(list.dailyNeedkcal*10)/10+'kcal</p></div></div></div></div><hr>';
+        innerHTML += '<div class="row productInformationInner-title"><div class="col-lg-12 col-md-12 text-left"><div class="row">';
+        innerHTML += '<div class="col-lg-6 col-md-6"><h5>營養分析</h5><br>';
+        innerHTML += '<div class="row productInformationInner-content"><div class="col-lg-4 col-md-4 text-left"><p>蛋白質</p></div><div class="col-lg-12 col-md-12">';
+        innerHTML += '<div class="myProgress" id="myBarA"><div class="myBar" style="background-color:#EF5981"></div></div>';
+        innerHTML += '<img class="tinyArrow" style="left:'+list.proteinUpperLimit+'%" src="images/questionnaire/icons-65.png">';
+        innerHTML += '<img class="tinyArrow" style="left:'+list.proteinLowerLimit+'%" src="images/questionnaire/icons-65.png"></div></div><br>';
+        innerHTML += '<div class="row productInformationInner-content"><div class="col-lg-4 col-md-4 text-left"><p>脂質</p></div><div class="col-lg-12 col-md-12">';
+        innerHTML += '<div class="myProgress" id="myBarB"><div class="myBar" style="background-color:#87A7D6"></div></div>';
+        innerHTML += '<img class="tinyArrow" style="left:'+list.fatUpperLimit+'%" src="images/questionnaire/icons-66.png">';
+        innerHTML += '<img class="tinyArrow" style="left:'+list.fatLowerLimit+'%" src="images/questionnaire/icons-66.png"></div></div><br>';
+        innerHTML += '<div class="row productInformationInner-content"><div class="col-lg-6 col-md-6 text-left"><p>纖維質</p></div><div class="col-lg-12 col-md-12">';
+        innerHTML += '<div class="myProgress" id="myBarC"><div class="myBar" style="background-color:#3D5BA8"></div></div>';
+        innerHTML += '<img class="tinyArrow" style="left:'+list.fiberUpperLimit+'%" src="images/questionnaire/icons-64.png">';
+        innerHTML += '<img class="tinyArrow" style="left:'+list.fiberlowerLimit+'%" src="images/questionnaire/icons-64.png"></div></div><br></div>';
         //
-        innerHTML += '<div class="row productInformationInner-title"><div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 text-left"><h5>營養分析</h5><br>';
-        innerHTML += '<div class="row productInformationInner-content"><div class="col-lg-4 col-md-4 text-left"><p>蛋白質</p></div><div class="col-lg-8 col-md-8 text-right hide-content"><p>您的貓所需的蛋白質比例在zz-xx之間</p></div>';
-        innerHTML += '<div class="col-lg-12 col-md-12"><div class="progress"><div class="progress-bar bg-info" role="progressbar"  style="width: '+list.DRY_protein+'%">'+list.DRY_protein+'%</div></div></div></div>';
-        innerHTML += '<div class="row productInformationInner-content"><div class="col-lg-4 col-md-4 text-left"><p>脂質</p></div><div class="col-lg-8 col-md-8 text-right hide-content"><p>您的貓所需的脂質比例在zz-xx之間</p></div>';
-        innerHTML += '<div class="col-lg-12 col-md-12"><div class="progress"><div class="progress-bar bg-warning" role="progressbar"  style="width: '+list.DRY_fat+'%">'+list.DRY_fat+'%</div></div></div></div>';                                
-        innerHTML += '<div class="row productInformationInner-content"><div class="col-lg-4 col-md-4 text-left"><p>碳水化合物</p></div><div class="col-lg-8 col-md-8 text-right hide-content"><p>您的貓所需的碳水化合物比例在zz-xx之間</p></div>';
-        innerHTML += '<div class="col-lg-12 col-md-12"><div class="progress"><div class="progress-bar bg-success" role="progressbar"  style="width: '+list.DRY_carbohydrate+'%">'+list.DRY_protein+'%</div></div></div></div></div></div><hr>';
+        innerHTML += '<div class="col-lg-6 col-md-6"><h5>每日建議攝取量</h5><br>';
+        innerHTML += '<div class="row productInformationInner-content qii-b-block" style="background-color:#F1F1F2"><div class="col-lg-4 col-md-4 text-right"><img src="images/questionnaire/icons-63.png" style="width:100%"></div>';
+        innerHTML += '<div class="col-lg-8 col-md-8 text-left"><p style="margin-top: 15%;">水分 '+list.dailyNeedWater+'ml</p></div></div>';
+        innerHTML += '<div class="row productInformationInner-content qii-b-block" style="background-color:#F1F1F2"><div class="col-lg-4 col-md-4 text-right"><img src="images/questionnaire/icons-51.png" style="width:100%"></div>';
+        innerHTML += '<div class="col-lg-8 col-md-8 text-left"><p style="margin-top: 15%;">熱量 '+list.dailyNeedkcal+'kcal</p></div></div>';
+        innerHTML += '<div class="row productInformationInner-content"><p style="color:gray;font-size:0.8em;margin-top: 5%;">※水分與熱量的計算方式請在「會員中心」中查看</p></div></div></div></div></div><hr>';
         //
-        innerHTML += '<div class="row  productInformationInner-title"><div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 text-left"><h5>總體比較</h5><br>';
-        innerHTML += '<div class="row productInformationInner-content">';
-        innerHTML += '<div class="col-lg-4 col-md-4 text-center wow"><div id="circleA"></div><p style="position: relative; top: -55px;">'+list.proteinLevel+' th</p><p>蛋白質</p></div>';
-        innerHTML += '<div class="col-lg-4 col-md-4 text-center wow"><div id="circleB"></div><p style="position: relative; top: -55px;">'+list.fatLevel+' th</p><p>脂質</p></div>';
-        innerHTML += '<div class="col-lg-4 col-md-4 text-center wow"><div id="circleC"></div><p style="position: relative; top: -55px;">'+list.carbohydrateLevel+' th</p><p>碳水化合物</p></div>';
-        innerHTML += '</div><br>';
-        innerHTML += '<p>※ 蛋白質含量'+CalAvg(list.proteinLevel)+'市售飼料平均</p>';
-        innerHTML += '<p>※ 脂質含量'+CalAvg(list.fatLevel)+'市售飼料平均</p>';
-        innerHTML += '<p>※ 碳水化合物含量'+CalAvg(list.carbohydrateLevel)+'市售飼料平均</p>';
-        innerHTML += '<p style="color:#D0D2D3;">※ 此為此款飼料與市面上所有飼料之成分比例含量排名，僅供參考。</p></div></div><hr>';
+        innerHTML += '<div class="row"><div class="col-lg-12 col-md-12 text-left"><div class="row"><div class="col-lg-7 col-md-7"><h5>成分比較</h5></div>';
+        innerHTML += '<div class="col-lg-5 col-md-5"><h5>您需要留意的成分</h5></div></div></div></div>';
+        innerHTML += '<div class="row  productInformationInner-title"><div class="col-lg-12 col-md-12 text-left"><div class="row"><div class="col-lg-2 col-md-2">';
+        innerHTML += '<div class="circle" id="circleA" style="top:45px;left:30px;"></div><div class="circle" id="circleB" style="top:37px;left:22px"></div><div class="circle" id="circleC" style="top:29px;left:14px;"></div></div>';
+        innerHTML += '<div class="col-lg-5 col-md-5"><br>';
+        innerHTML += '<p style="color:#EF5981;font-size:0.9em">※蛋白質高於<span style="color:black;font-size:1em;">'+list.proteinLevel+'%</span>的市售飼料</p><br>';
+        innerHTML += '<p style="color:#87A7D6;font-size:0.9em">※脂質高於<span style="color:black;font-size:1em;">'+list.fatLevel+'%</span>的市售飼料</p><br>';
+        innerHTML += '<p style="color:#3D5BA8;font-size:0.9em">※碳水化合物低於<span style="color:black;font-size:1em;">'+list.carbohydrateLevel+'%</span>的市售飼料</p></div>';
         //
-        innerHTML += '<div class="row productInformationInner-title"><div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 text-left"><h5>此款飼料可能有助於</h5><div class="row">';
-        if(list.immu==1) innerHTML += '<div class="col-lg-3 col-md-3 text-center"><img src="images/questionnaire/icon/black/IMMU.png" style="width:80%"></div>';
-        if(list.heart==1) innerHTML += '<div class="col-lg-3 col-md-3 text-center"><img src="images/questionnaire/icon/black/HEART.png" style="width:80%"></div>';
-        if(list.hair==1) innerHTML += '<div class="col-lg-3 col-md-3 text-center"><img src="images/questionnaire/icon/black/LIHAIR.png" style="width:80%"></div>';
-        if(list.mehair==1) innerHTML += '<div class="col-lg-3 col-md-3 text-center"><img src="images/questionnaire/icon/black/MEHAIR.png" style="width:80%"></div>';
-        if(list.joint==1) innerHTML += '<div class="col-lg-3 col-md-3 text-center"><img src="images/questionnaire/icon/black/JOINT.png" style="width:80%"></div>';
-        if(list.stoma==1) innerHTML += '<div class="col-lg-3 col-md-3 text-center"><img src="images/questionnaire/icon/black/STOMA.png" style="width:80%"></div>';
-        if(list.urinary==1) innerHTML += '<div class="col-lg-3 col-md-3 text-center"><img src="images/questionnaire/icon/black/URINARY.png" style="width:80%"></div>';
-        if(list.mouth==1) innerHTML += '<div class="col-lg-3 col-md-3 text-center"><img src="images/questionnaire/icon/black/MOUTH.png" style="width:80%"></div>';
-        innerHTML += '</div></div></div><hr>';
+        innerHTML += '<div class="col-lg-5 col-md-5"><div class="col-lg-12 col-md-12 qii-c-block" style="border: #87A7D6 solid 1px; background-color: rgba(135, 167, 214, 0.5)">';
+        innerHTML += '<span>優良成分：</span><br><span>'+list.goodMeat+'</span></div>';
+        innerHTML += '<div class="col-lg-12 col-md-12 qii-c-block" style="border: #EF5981 solid 1px; background-color: rgba(239, 89, 129, 0.5)">';
+        innerHTML += '<span>可能的過敏原：</span><br><span>'+list.potentialAlergent+'</span></div></div></div></div></div><hr>';
         //
-        innerHTML += '<div class="row productInformationInner-title"><div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 text-left"><h5>您需要留意的成分</h5><br>';
-        innerHTML += '<div class="row productInformationInner-content"><div class="col-lg-12 col-md-12 qii-c-block" style="border: green solid 1px; background-color: rgba(153, 340, 77, 0.5)"><span>優良成分：</span><br><span>'+list.goodMeat+'</span></div>';
-        innerHTML += '<div class="col-lg-12 col-md-12 qii-c-block" style="border: orange solid 1px; background-color: rgba(255, 255, 153, 0.5)"><span>可能的過敏原：</span><br><span>'+list.potentialAlergent+'</span></div></div></div></div><hr>';
-        //
-        innerHTML += '<div class="row productInformationInner-title"><div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 text-left"><h5>詳細成份</h5><br><div class="row productInformationInner-content"><span>'+list.ingredient+'</span></div></div></div>';
-        document.getElementById('productInformationInner').innerHTML = innerHTML;
-        let A = (640-list.proteinLevel)/640;
-        let B = (640-list.fatLevel)/640;
-        let C = (640-list.carbohydrateLevel)/640;
-        $('#circleA').circleProgress({
-            value: A,
-            size: 80,
-            fill: {
-            gradient: ["#EF5981", "#EF5981"]
-            }
-        });
-        $('#circleB').circleProgress({
-            value: B,
-            size: 80,
-            fill: {
-            gradient: ["#3D5BA8", "#3D5BA8"]
-            }
-        });
-        $('#circleC').circleProgress({
-            value: C,
-            size: 80,
-            fill: {
-            gradient: ["#3D5BA8", "#3D5BA8"]
-            }
-        });       
-    }
-    function CalAvg(rank){
-        if(rank<320) return '<span style="color:red">高於</span>';
-        else if(rank==320) return '<span style="color:green">等於</span>';
-        else return '<span style="color:blue">低於</span>';
-    }    
+        innerHTML += '<div class="row productInformationInner-title"><div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 text-left">';
+        innerHTML += '<h5>詳細成份</h5><br><div class="row productInformationInner-content"><span>'+list.ingredient+'</span></div></div></div>';
+    } 
     function UnfunctionalPart(){
         alert('這部分功能尚未開放，敬請期待！');
+    }
+    function ChangePlan(id){
+        if(currentplan!=id){
+            $('#'+currentplan).toggleClass('select');
+            currentplan = id;
+            $('#'+currentplan).toggleClass('select');
+            //change left
+            //splice id to A,B...
+            var id_splice = id.splice(0,1);
+            list = FindCorrectList(id_splice);
+            currentid = list[0].productCode;
+            WriteProductBlock(list);
+            WriteProductInformation(list[0]);
+        }else{
+            //do nothing
+        }
     }
     function ChangeProduct(id){
         if(currentid!=id){
@@ -406,15 +431,14 @@
             $('#'+currentid).toggleClass('product_select');
             currentid = id;
             $('#'+currentid).toggleClass('product_select');
-            // change left
-            /*
+            //change right
             for(i=0;i<list.length;i++){
                 if(list[i].productCode==currentid){
                     WriteProductInformation(list[i]);
                     break;
                 }
             }
-            */
+            
         }else{
             //do nothing
         }
