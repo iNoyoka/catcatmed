@@ -406,21 +406,21 @@ app.post('/questionnaire_result',function(req,res,next){
 				return false;
 			}else if(alergss.includes('蛋') && req.session.extra_alergent.includes('D')){
 				return false;
-			}else if(alergss.includes('豬肉') && req.session.extra_alergent.includes('E')){
+			}else if(alergss.includes('豬') && req.session.extra_alergent.includes('E')){
 				return false;
-			}else if(alergss.includes('牛肉') && req.session.extra_alergent.includes('F')){
+			}else if(alergss.includes('牛') && req.session.extra_alergent.includes('F')){
 				return false;
-			}else if(alergss.includes('羊肉') && req.session.extra_alergent.includes('G')){
+			}else if(alergss.includes('羊') && req.session.extra_alergent.includes('G')){
 				return false;
-			}else if(alergss.includes('雞肉') && req.session.extra_alergent.includes('H')){
+			}else if(alergss.includes('雞') && req.session.extra_alergent.includes('H')){
 				return false;
-			}else if(alergss.includes('火雞肉') && req.session.extra_alergent.includes('I')){
+			}else if(alergss.includes('火雞') && req.session.extra_alergent.includes('I')){
 				return false;
-			}else if(alergss.includes('鹿肉') && req.session.extra_alergent.includes('J')){
+			}else if(alergss.includes('鹿') && req.session.extra_alergent.includes('J')){
 				return false;
-			}else if(alergss.includes('魚肉') && req.session.extra_alergent.includes('K')){
+			}else if(alergss.includes('魚') && req.session.extra_alergent.includes('K')){
 				return false;
-			}else if(alergss.includes('鴨肉') && req.session.extra_alergent.includes('L')){
+			}else if(alergss.includes('鴨') && req.session.extra_alergent.includes('L')){
 				return false;
 			}else{
 				return true;
