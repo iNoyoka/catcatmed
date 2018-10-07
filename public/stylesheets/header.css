@@ -11,6 +11,9 @@ span{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-
 p{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
 a{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
 button{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+th{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+input{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+select{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
 /* scroll bar */
 /* width */
 ::-webkit-scrollbar {

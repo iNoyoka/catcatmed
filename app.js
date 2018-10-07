@@ -340,9 +340,9 @@ app.post('/questionnaire_result',function(req,res,next){
 			obj.fatLowerLimit = fatLowerLimit;
 			obj.fiberUpperLimit = fiberUpperLimit;
 			obj.fiberLowerLimit = fiberLowerLimit;
-			obj.dailyNeedWater = 65*catWeight - dailyNeedkcal/100*11 - dailyNeedkcal/kcal*100;
-			obj.dailyNeedkcal = dailyNeedkcal;
-			obj.dailyNeedGram = dailyNeedkcal/kcal*1000;
+			obj.dailyNeedWater = Math.round(65*catWeight - dailyNeedkcal/100*11 - dailyNeedkcal/kcal*100);
+			obj.dailyNeedkcal = Math.round(dailyNeedkcal);
+			obj.dailyNeedGram = Math.round(dailyNeedkcal/kcal*1000);
 			obj.ingredient = ingredient;
 			return obj;
 		}
@@ -438,7 +438,7 @@ app.post('/questionnaire_result',function(req,res,next){
 					proteinAllList.push(result[i].DRY_protein);
 					fatAllList.push(result[i].DRY_fat);
 					carbohydrateAllList.push(result[i].DRY_carbohydrate);
-					if(result[i].price>160 && result[i].kcal!=-1 && result[i].onMarket!=0 && SelectorOfIcon(result[i])){ // DELETE DATA WHICH INFORMATION MISSED
+					if(result[i].price>160 && result[i].kcal!=-1 && result[i].onMarket!=0 && SelectorOfIcon(result[i]) && SelectorOfAlergent(result[i])){ // DELETE DATA WHICH INFORMATION MISSED
 						if(catType == "成貓"){					
 							if(result[i].DRY_fat>10&&result[i].DRY_fat<30&&result[i].DRY_fiber<5&&result[i].DRY_protein>30&&result[i].DRY_protein<45&&result[i].DRY_carbohydrate<=35)
 							{
@@ -498,19 +498,19 @@ app.post('/questionnaire_result',function(req,res,next){
 					//SET RANK OF PERCENTAGE
 					for(j=1;j<proteinAllList.length+1;j++){
 						if(list[i].DRY_protein==proteinAllList[j-1]){
-							list[i].proteinLevel = (320 - j)/320;
+							list[i].proteinLevel = Math.round((j-1)/640*100);
 							break;
 						}
 					}
 					for(j=1;j<fatAllList.length+1;j++){
 						if(list[i].DRY_fat==fatAllList[j-1]){
-							list[i].fatLevel = (320 - j)/320;
+							list[i].fatLevel = Math.round((j-1)/640*100);
 							break;
 						}
 					}
 					for(j=1;j<carbohydrateAllList.length+1;j++){
 						if(list[i].DRY_carbohydrate==carbohydrateAllList[j-1]){
-							list[i].carbohydrateLevel = (j-1)/320;
+							list[i].carbohydrateLevel = Math.round((640-j)/640*100);
 							break;
 						}
 					}
@@ -521,11 +521,11 @@ app.post('/questionnaire_result',function(req,res,next){
 			// BASIC DATA SORT AND SLICE TO FIVE
 			//---------------------------------------
 			//console.log(list);
-			var listA = SliceListToFivePricePart_sorted(list,600,700);
-			var listB = SliceListToFivePricePart_sorted(list,800,950);
-			var listC = SliceListToFivePricePart_sorted(list,1000,1100);
-			var listD = SliceListToFivePricePart_sorted(list,1150,1300);
-			var listE = SliceListToFivePricePart_sorted(list,1400,1000000);
+			var listA = SliceListToFivePricePart_sorted(list,550,650);
+			var listB = SliceListToFivePricePart_sorted(list,700,800);
+			var listC = SliceListToFivePricePart_sorted(list,850,950);
+			var listD = SliceListToFivePricePart_sorted(list,1000,1100);
+			var listE = SliceListToFivePricePart_sorted(list,1150,1000000);
 			list = null;
 			//---------------------------------------
 			// ADVANCED RAX SELECTOR (進階篩選器)
@@ -707,7 +707,7 @@ app.post('/questionnaire_result',function(req,res,next){
 			//---------------------------------------
 			// SEND INFORMATION TO FRONT END
 			//---------------------------------------
-			var listAllDataJSON;
+			var listAllDataJSON = '';
 			if(req.session.catfood_select!=null){
 				listAllDataJSON += req.session.catfood_select + '#' + JSON.stringify(listA) + '#' + JSON.stringify(listB) + '#' + JSON.stringify(listC) + '#' + JSON.stringify(listD) + '#' + JSON.stringify(listE);
 			}
@@ -1077,7 +1077,7 @@ app.post('/clientSendOrder',function(req,res,next){
 	//再判斷是否已登入
 
 	if(req.session.username==null){
-		req.session.recordWebPage = 'purchase_confirm';
+		req.session.recordWebPage = 'purchase';
 		res.send('/login');
 	}else{
 		if(logistics=='logisticsA'){
