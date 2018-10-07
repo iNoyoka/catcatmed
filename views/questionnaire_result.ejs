@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <title> catcatmed| index</title>
+    <title> catcatmed| Set</title>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
     <script
         src="https://code.jquery.com/jquery-3.3.1.js"
@@ -35,15 +35,12 @@
 	<div id="nav_top_block"></div>
 	<!---->
 	<div class="container">
-        <div class="row" style="color:gray;margin-top: 5px;">
-            ※卡卡貓根據您的預算以及<%=name%>的需要，推薦給您「<span id="recommend_plan">900元 / 月</span>」的方案，或是您可以在下面自訂您新的價位區間。
-        </div>
         <div class="row">
-            <button class="selectorButton" id="A_plan" onclick="ChangePlan(this.id);">600元 / 月</button>
-            <button class="selectorButton" id="B_plan" onclick="ChangePlan(this.id);">750元 / 月</button>
-            <button class="selectorButton" id="C_plan" onclick="ChangePlan(this.id);">900元 / 月</button>
-            <button class="selectorButton" id="D_plan" onclick="ChangePlan(this.id);">1050元 / 月</button>
-            <button class="selectorButton" id="E_plan" onclick="ChangePlan(this.id);">1200元 / 月</button>
+            <button class="selectorButton" id="A_plan" onclick="ChangePlan(this.id);">600元/月</button>
+            <button class="selectorButton" id="B_plan" onclick="ChangePlan(this.id);">750元/月</button>
+            <button class="selectorButton select" id="C_plan" onclick="ChangePlan(this.id);">900元/月</button>
+            <button class="selectorButton" id="D_plan" onclick="ChangePlan(this.id);">1050元/月</button>
+            <button class="selectorButton" id="E_plan" onclick="ChangePlan(this.id);">1200元/月</button>
         </div>
 		<div class="row  qrBlock">
 			<div class="col-lg-4 col-md-4">
@@ -72,7 +69,7 @@
                                 <h4>產品名稱</h4>
                                 <h5>品牌中文<span> brand en</span></h5>
                                 <h5>原產地：澳洲</h5>
-                                <button class="purchaseButton">確認選購</button>
+                                <button class="purchaseButton" onclick="Send()">確認選購</button>
                             </div>
                         </div>
                         <hr>
@@ -271,41 +268,6 @@
     var listD;
     var listE;
     $(document).ready(function(){
-        /*
-        move(40,$('#myBarA'));
-        move(35,$('#myBarB'));
-        move(50,$('#myBarC'));
-        $('.circle').circleProgress({
-            emptyFill: 'white'
-        });
-        $('#circleA').circleProgress({
-            value: 0.5,
-            size: 80,
-            thickness: 8,
-            startAngle: Math.PI / 2,
-            fill: {
-            gradient: ["#EF5981", "#EF5981"]
-            }
-        });
-        $('#circleB').circleProgress({
-            value: 0.7,
-            size: 96,
-            thickness: 8,
-            startAngle: Math.PI / 2,
-            fill: {
-            gradient: ["#87A7D6", "#87A7D6"]
-            }
-        });
-        $('#circleC').circleProgress({
-            value: 0.55,
-            size: 112,
-            thickness: 8,
-            startAngle: Math.PI / 2,
-            fill: {
-            gradient: ["#3D5BA8", "#3D5BA8"]
-            }
-        });   
-        */
         $.ajax({
             method: 'POST',
             url: 'questionnaire_result'
@@ -322,11 +284,6 @@
             }else{
                 //set initial plan
                 $('#'+lss[0]+'_plan').toggleClass('select');
-                if(lss[0]=='A') document.getElementById('recommend_plan').innerHTML = '600元 / 月';
-                if(lss[0]=='B') document.getElementById('recommend_plan').innerHTML = '750元 / 月';
-                if(lss[0]=='C') document.getElementById('recommend_plan').innerHTML = '900元 / 月';
-                if(lss[0]=='D') document.getElementById('recommend_plan').innerHTML = '1050元 / 月';
-                if(lss[0]=='E') document.getElementById('recommend_plan').innerHTML = '1200元 / 月';
                 list = FindCorrectList(lss[0]);
                 currentid = list[0].productCode;
                 WriteProductBlock(list);
@@ -371,16 +328,16 @@
         innerHTML += '<div class="col-lg-6 col-md-6"><h5>營養分析</h5><br>';
         innerHTML += '<div class="row productInformationInner-content"><div class="col-lg-4 col-md-4 text-left"><p>蛋白質</p></div><div class="col-lg-12 col-md-12">';
         innerHTML += '<div class="myProgress" id="myBarA"><div class="myBar" style="background-color:#EF5981"></div></div>';
-        innerHTML += '<img class="tinyArrow" style="left:'+list.proteinUpperLimit+'%" src="images/questionnaire/icons-65.png">';
-        innerHTML += '<img class="tinyArrow" style="left:'+list.proteinLowerLimit+'%" src="images/questionnaire/icons-65.png"></div></div><br>';
+        innerHTML += '<img class="tinyArrow" style="left:'+list.proteinUpperLimit*2+'%" src="images/questionnaire/icons-65.png">';
+        innerHTML += '<img class="tinyArrow" style="left:'+list.proteinLowerLimit*2+'%" src="images/questionnaire/icons-65.png"></div></div><br>';
         innerHTML += '<div class="row productInformationInner-content"><div class="col-lg-4 col-md-4 text-left"><p>脂質</p></div><div class="col-lg-12 col-md-12">';
         innerHTML += '<div class="myProgress" id="myBarB"><div class="myBar" style="background-color:#87A7D6"></div></div>';
-        innerHTML += '<img class="tinyArrow" style="left:'+list.fatUpperLimit+'%" src="images/questionnaire/icons-66.png">';
-        innerHTML += '<img class="tinyArrow" style="left:'+list.fatLowerLimit+'%" src="images/questionnaire/icons-66.png"></div></div><br>';
+        innerHTML += '<img class="tinyArrow" style="left:'+list.fatUpperLimit*3+'%" src="images/questionnaire/icons-66.png">';
+        innerHTML += '<img class="tinyArrow" style="left:'+list.fatLowerLimit*3+'%" src="images/questionnaire/icons-66.png"></div></div><br>';
         innerHTML += '<div class="row productInformationInner-content"><div class="col-lg-6 col-md-6 text-left"><p>纖維質</p></div><div class="col-lg-12 col-md-12">';
         innerHTML += '<div class="myProgress" id="myBarC"><div class="myBar" style="background-color:#3D5BA8"></div></div>';
-        innerHTML += '<img class="tinyArrow" style="left:'+list.fiberUpperLimit+'%" src="images/questionnaire/icons-64.png">';
-        innerHTML += '<img class="tinyArrow" style="left:'+list.fiberlowerLimit+'%" src="images/questionnaire/icons-64.png"></div></div><br></div>';
+        innerHTML += '<img class="tinyArrow" style="left:'+list.fiberUpperLimit*4+'%" src="images/questionnaire/icons-64.png">';
+        innerHTML += '<img class="tinyArrow" style="left:'+list.fiberlowerLimit*4+'%" src="images/questionnaire/icons-64.png"></div></div><br></div>';
         //
         innerHTML += '<div class="col-lg-6 col-md-6"><h5>每日建議攝取量</h5><br>';
         innerHTML += '<div class="row productInformationInner-content qii-b-block" style="background-color:#F1F1F2"><div class="col-lg-4 col-md-4 text-right"><img src="images/questionnaire/icons-63.png" style="width:100%"></div>';
@@ -405,6 +362,43 @@
         //
         innerHTML += '<div class="row productInformationInner-title"><div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 text-left">';
         innerHTML += '<h5>詳細成份</h5><br><div class="row productInformationInner-content"><span>'+list.ingredient+'</span></div></div></div>';
+        document.getElementById('productInformationInner').innerHTML = innerHTML;
+        
+        move(list.protein*2,$('#myBarA'));
+        move(list.fat*3,$('#myBarB'));
+        move(list.fiber*4,$('#myBarC'));
+        $('.circle').circleProgress({
+            emptyFill: 'white'
+        });
+        $('#circleA').circleProgress({
+            value: list.DRY_carbohydrate,
+            size: 80,
+            thickness: 8,
+            startAngle: Math.PI / 2,
+            fill: {
+            gradient: ["#3D5BA8", "#3D5BA8"]
+            }
+        });
+        $('#circleB').circleProgress({
+            value: list.DRY_fat,
+            size: 96,
+            thickness: 8,
+            startAngle: Math.PI / 2,
+            fill: {
+            gradient: ["#87A7D6", "#87A7D6"]
+            }
+        });
+        $('#circleC').circleProgress({
+            value: list.DRY_protein,
+            size: 112,
+            thickness: 8,
+            startAngle: Math.PI / 2,
+            fill: {
+            gradient: ["#EF5981", "#EF5981"]
+            }
+        });   
+        
+
     } 
     function UnfunctionalPart(){
         alert('這部分功能尚未開放，敬請期待！');
@@ -451,7 +445,7 @@
                 currentProduct: currentid
             }
         }).done(function(){
-            window.location.href = 'purchase_confirm';
+            window.location.href = 'purchase';
         });
     }
 </script>

@@ -970,10 +970,10 @@ app.post('/questionnaireAskArray',function(req,res,next){
 app.post('/saveQuestionnaire_result',function(req,res,next){
 	req.session.currentProduct = req.body.currentProduct;
 	console.log(req.session.currentProduct);
-	res.redirect('/purchase_confirm')
+	res.redirect('/purchase')
 });
-app.get('/purchase_confirm',function(req,res,next){
-	res.render('purchase_confirm');
+app.get('/purchase',function(req,res,next){
+	res.render('purchase');
 });
 app.post('/clientAskForPurchaseItem',function(req,res,next){
 	if(req.session.currentProduct==null){
