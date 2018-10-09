@@ -4,7 +4,7 @@
 	height: 100vh;
 }
 .indexButton{
-	font-size: 1em;
+	font-size: 1.6em;
 	color: gray;
     background-color: #F6E3D6;
     border: none;
@@ -30,12 +30,12 @@
     transition: 500ms;
 }
 .nextButtonLock{
-	border: gray solid 3px !important;
+	border: #444444 solid 3px !important;
 	background-color: white !important;
-    color: gray !important;
+    color: #444444 !important;
 }
 .backButton{
-	font-size: 1em;
+	font-size: 1.6em;
 	color: gray;
 	background-color: #F6E3D6;
 	position: fixed;
@@ -44,6 +44,11 @@
 	border: none;
 	padding: 20px;
 	outline: none;
+	transition: 300ms;
+}
+.backButton:hover{
+	padding-left: 15px;
+	transition: 300ms;
 }
 .btn{
 	margin: 10px 0 !important;

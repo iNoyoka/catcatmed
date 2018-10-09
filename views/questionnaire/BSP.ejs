@@ -26,9 +26,9 @@
     <div class="row">
         <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 text-center">
             <% if(name){ %>
-                <h3><%= name %>的品種是<span id="sp">?</span></h3>
+                <h3><%= name %>是<span id="sp">什麼品種呢?</span></h3>
             <% }else{ %>
-                <h3>貓孩的品種是<span id="sp">?</span></h3>
+                <h3>貓孩是<span id="sp">什麼品種呢?</span></h3>
             <% } %>
             <div class="row">
                 <div class="col-lg-2 col-lg-offset-3 col-md-2 col-md-offset-3 col-sm-4 col-xs-4"><div class="answer" data-toggle="modal" data-target="#A" id="sp_A"><span class="options"><img src="../images/questionnaire/icons-18.png"></span></div></div>
@@ -57,6 +57,7 @@
                             <h4 class="modal-title" id="myModalLabel">短毛貓品種選擇</h4>
                         </div>
                         <div class="modal-body">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="SP('B','米克斯')">米克斯</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal" onclick="SP('B','美國短毛貓')">美國短毛貓</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal" onclick="SP('B','英國短毛貓')">英國短毛貓</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal" onclick="SP('B','異國短毛貓')">異國短毛貓</button>
@@ -84,6 +85,7 @@
                             <h4 class="modal-title" id="myModalLabel">長毛貓品種選擇</h4>
                         </div>
                         <div class="modal-body">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="SP('C','米克斯')">米克斯</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal" onclick="SP('C','波斯貓')">波斯貓</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal" onclick="SP('C','布偶貓')">布偶貓</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal" onclick="SP('C','伯曼貓')">伯曼貓</button>

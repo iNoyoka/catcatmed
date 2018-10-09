@@ -103,8 +103,6 @@ router.post('/BNU',function(req,res,next){
     req.session.qnrecordList.push('BNU');
     if(req.session.BNU=='no' && req.session.BCS=='female'){
         res.send('BPR');
-    }else if(req.session.BNU=='yes' && req.session.BCS=='female'){
-        res.send('BFN');
     }else{
         res.send('BCW');
     }
@@ -234,8 +232,9 @@ router.post('/weight_control',function(req,res,next){
 //
 router.get('/catfood_select',function(req,res,next){
     req.session.catfood_select = null;
-    req.session.qnrecord = 'catfood_select';
-    res.render('questionnaire/catfood_select',{name:req.session.BCN});
+    res.redirect('/questionnaire/select_icon')
+    //req.session.qnrecord = 'catfood_select';
+    //res.render('questionnaire/catfood_select',{name:req.session.BCN});
 });
 router.post('/catfood_select',function(req,res,next){
     req.session.catfood_select = req.body.name;
@@ -914,7 +913,12 @@ router.get('/extra_cooking',function(req,res,next){
 router.post('/extra_cooking',function(req,res,next){
     req.session.extra_cooking = req.body.name;
     req.session.qnrecordList.push(req.session.qnrecord);
-    res.send('extra_strangehabit');
+    var year = parseInt(req.session.BCA_ageYear);
+    if(year>=12){ //貓咪五歲以上
+        res.send('extra_strangehabit');
+    }else{
+        res.send('extra_place');
+    }
 });
 //
 router.get('/extra_strangehabit',function(req,res,next){

@@ -98,7 +98,7 @@ p{
   margin-bottom: 0
 }
 .productInformationInner-title{
-  min-height: 25vh;
+  min-height: 20vh;
 }
 .productInformationInner-title h5{
   margin-bottom: 0 !important;
@@ -139,15 +139,16 @@ p{
   font-weight: bold;
   outline: none;
   padding: 3px 20px;
-  margin: 3px 0;
+  margin: 3px auto;
   cursor: pointer;
   background-color: white;
-  border: #3D5BA8 solid 3px;
+  border: #EF5981 solid 3px;
   border-radius: 30px;
-  color: #3D5BA8;
+  color: #EF5981;
+  text-align: center;
 }
 .purchaseButton:hover{
-  background-color: #3D5BA8;
+  background-color: #EF5981;
   color: white;
   transition: 500ms;
 }
@@ -171,6 +172,6 @@ p{
   border-top-left-radius: 8px;
 }
 .productIMG{
-  max-height: 30vh;
+  max-height: 20vh;
   max-width: 100%;
 }
