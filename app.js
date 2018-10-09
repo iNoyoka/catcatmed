@@ -402,7 +402,7 @@ app.post('/questionnaire_result',function(req,res,next){
 					proteinAllList.push(result[i].DRY_protein);
 					fatAllList.push(result[i].DRY_fat);
 					carbohydrateAllList.push(result[i].DRY_carbohydrate);
-					if(result[i].price>160 && result[i].kcal!=-1 && result[i].onMarket!=0 && SelectorOfIcon(result[i]) && SelectorOfAlergent(result[i]) && !(catType=='幼貓'&&!result[i].productName_ZH.includes('幼貓'))){ // DELETE DATA WHICH INFORMATION MISSED
+					if(result[i].price>160 && result[i].kcal!=-1 && result[i].onMarket!=0 && SelectorOfIcon(result[i]) && SelectorOfAlergent(result[i]) && !(catType=='幼貓'&&!result[i].productName_ZH.includes('幼'))){ // DELETE DATA WHICH INFORMATION MISSED
 						if(catType == "成貓" && !req.session.select_icon.includes('I')){					
 							if(result[i].DRY_fat>10&&result[i].DRY_fat<30&&result[i].DRY_fiber<5.7&&result[i].DRY_protein>30&&result[i].DRY_protein<45&&result[i].DRY_carbohydrate<=40)
 							{
