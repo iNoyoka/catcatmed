@@ -1,0 +1,13 @@
+.qrbody{
+  background-color: #F6E3D6;
+  overflow-x: hidden;
+  height: 100vh;
+}
+.qrBlock{
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  border-radius: 8px;
+  background-color: #F1F1F2;
+  height: 75vh;
+  border: #F1F1F2 solid 12px;
+}

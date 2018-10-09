@@ -300,14 +300,14 @@ router.get('/iconlist_redirect',function(req,res,next){
             res.redirect('/questionnaire/'+match(findList('F',req.session.select_icon)));
         }else if(req.session.qnrecord=='urinary_water'){
             res.redirect('/questionnaire/'+match(findList('G',req.session.select_icon)));
-        }else if(req.session.qnrecord=='stoma_problem' || req.session.qnrecord=='stoma_bathroom' || req.session.qnrecord=='stoma_strange'){
+        }else if(req.session.qnrecord=='stoma_problem' || req.session.qnrecord=='stoma_bathroom' || req.session.qnrecord=='stoma_strange' || req.session.qnrecord=='stomexcepA'){
             res.redirect('/questionnaire/'+match(findList('H',req.session.select_icon)));
         }else if(req.session.qnrecord=='melt_freq'){
             res.redirect('/questionnaire/'+match(findList('I',req.session.select_icon)));
         }else if(req.session.qnrecord=='stress_lifestyle'){
             res.redirect('/questionnaire/'+match(findList('J',req.session.select_icon)));
         }else{
-            res.redirect('/quesionnaire/'+match(findList('error',req.session.select_icon)));
+            res.redirect('/questionnaire/'+match(findList('error',req.session.select_icon)));
         }
     }
 });
@@ -946,7 +946,7 @@ router.get('/extra_knowhow',function(req,res,next){
 });
 router.post('/extra_knowhow',function(req,res,next){
     req.session.extra_knowhow = req.body.name;
-    req.session.qnrecordList.push(req.session.qnrecord);
+    //req.session.qnrecordList.push(req.session.qnrecord);
     res.send('final');
 });
 //

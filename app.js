@@ -68,7 +68,9 @@ setInterval(function(){
 },5000);
 
 var datetime = require('node-datetime');
-
+//--------------------------------
+// GLOBAL SETTING COMPLETE
+//--------------------------------
 app.use('/', indexRouter);
 //app.use('/users', usersRouter);
 app.use('/questionnaire',questionnaireRouter);
@@ -77,45 +79,14 @@ app.get('/index_mobile',function(req,res,next){
 	res.render('index_mobile', { username: req.session.name});
 });
 
-//------------------------------------------
-// For Account setting
-//------------------------------------------
-
-//------------------------------------------
-// Each page design
-//------------------------------------------
-//------------------------------------------
-// Get Home Page
-//------------------------------------------
-/*
-app.get('/', function(req, res, next) {
-	if(req.session.cart==null) req.session.cart = [];	
-	res.render('index', { username: req.session.name,productLength:req.session.cart.length});
-});
-*/
-/*testalgo*/ 
 app.get('/questionnaire_result',function(req,res,next){
+	//release qnrecord
+	req.session.qnrecord = null;
+	req.session.qnrecordList = null;
 	res.render('questionnaire_result',{name:req.session.BCN});
 });
 app.post('/questionnaire_result',function(req,res,next){
-	if(req.session.extra_knowhow!=null){ // if(req.session.basicInformation!=null)
-		/*test
-		var basicInformation = JSON.parse(req.session.basicInformation);
-		var catage_year = parseInt(basicInformation.catAgeYear);
-		var catage_month = parseInt(basicInformation.catAgeMonth);
-		var catWeight = parseInt(basicInformation.catWeightKilo) + parseInt(basicInformation.catWeightGram)*0.001;
-		*/
-		/*test
-		console.log(req.session.BSA_ageYear+'年');
-		console.log(req.session.BSA_ageMonth+'月');
-		console.log(req.session.BCW_kilo+'公斤');
-		console.log(req.session.BCW_gram+'公克');
-		console.log('BCS'+req.session.BBC);
-		console.log('activity'+req.session.BEF);
-		console.log('neu'+req.session.BNU);
-		console.log('preg'+req.session.BPR);
-		console.log('pregtime'+req.session.BPT);
-		*/
+	if(req.session.extra_knowhow!=null && req.session.select_icon!=null){ // need to insure that each req.session.xxx in function exist
 		var catage_year = parseInt(req.session.BCA_ageYear);
 		var catage_month = parseInt(req.session.BCA_ageMonth);
 		var catWeight = parseInt(req.session.BCW_kilo) + parseInt(req.session.BCW_gram)*0.1;
@@ -206,8 +177,8 @@ app.post('/questionnaire_result',function(req,res,next){
 			if(catBCS==6) RERCoefficient = 80;	
 			if(catBCS==7) RERCoefficient = 80;
 			RER = 70*(Math.pow(idealWeight,0.75));
-			if(activity=="A") activityCoefficient = 1.333333333;
-			if(activity=="B") activityCoefficient = 1.083333333;
+			if(activity=="A") activityCoefficient = 1.083333333; //1.333333333
+			if(activity=="B") activityCoefficient = 1;
 			if(activity=="C") activityCoefficient = 1;
 			if(neutured=="yes") neuturedCoefficient = 1;
 			if(neutured=="no") neuturedCoefficient = 1.166666667;
@@ -282,8 +253,8 @@ app.post('/questionnaire_result',function(req,res,next){
 			if(catage_year==11) ageRERCoefficient = 140;
 			if(catage_year==12) ageRERCoefficient = 150;
 			if(catage_year>=13) ageRERCoefficient = 160;
-			if(activity=="A") activityCoefficient = 1.222;
-			if(activity=="B") activityCoefficient = 1.111;
+			if(activity=="A") activityCoefficient = 1.111; //1.222
+			if(activity=="B") activityCoefficient = 1;
 			if(activity=="C") activityCoefficient = 1;
 			if(neutured=="yes") neuturedCoefficient = 1;
 			if(neutured=="no") neuturedCoefficient = 1.166666667;
@@ -875,95 +846,6 @@ app.post('/signupcheck',function(req,res,next){
 		});
 	}	
 });
-
-
-//------------------------------------------
-// Get Product Page
-//------------------------------------------
-app.get('/product',function(req,res,next){
-	if(req.session.cart==null) req.session.cart = [];
-	res.render('product',{username: req.session.name,productLength:req.session.cart.length});	
-});
-//------------------------------------------
-// Get Cart Page
-//------------------------------------------
-app.get('/cart',function(req,res,next){
-	if(req.session.cart==null) req.session.cart = [];
-	res.render('cart',{username: req.session.name,productLength:req.session.cart.length});	
-});
-//------------------------------------------
-// Questionnaire Part
-//------------------------------------------
-app.get('/questionnaire_hello',function(req,res,next){
-	res.render('questionnaire/bhello');
-});
-
-//------------------------------------------
-// Questionnaire Save Part
-//------------------------------------------
-app.post('/questionnaireSaveandQuit',function(req,res,next){
-	req.session.recordQuestionnaire = true;
-	//
-	req.session.basicInformation = req.body.basicInformation;
-	req.session.advancedInformation = req.body.advancedInformation;
-	req.session.iconInformation = req.body.iconInformation;
-	req.session.extraInformation = req.body.extraInformation;	
-	req.session.iconTravelList = req.body.iconTravelList;	
-	req.session.iconTraveledList = req.body.iconTraveledList;	
-	req.session.recordTravelList = req.body.recordTravelList;
-	req.session.currentPage = req.body.currentPage;	
-	req.session.icon = req.body.icon;	
-	req.session.ingredients = req.body.ingredients;	
-	req.session.allergy = req.body.allergy;	
-	req.session.stress = req.body.stress;
-	res.redirect('/');
-	//test
-	//console.log("[SYS MSG] : SAVE COMPLETE!");
-});
-app.post('/questionnaireRequest',function(req,res,next){
-	if(req.session.recordQuestionnaire==null){
-		res.send("lackOfHistory");
-	}else{
-		res.send("historyExist");
-	}
-});
-app.post('/questionnaireAskRecordData',function(req,res,next){
-	if(req.body.request=="basicInformation")
-		res.send(req.session.basicInformation);
-	else if(req.body.request=="advancedInformation")
-		res.send(req.session.advancedInformation);
-	else if(req.body.request=="iconInformation")
-		res.send(req.session.iconInformation);
-	else if(req.body.request=="extraInformation")
-		res.send(req.session.extraInformation);
-	else console.log("[SYS ERR] : REQUEST FAILURE!");
-});
-app.post('/questionnaireAskArray',function(req,res,next){
-	if(req.body.request=="currentPage"){
-		res.send(req.session.currentPage);
-	}
-	else if(req.body.request=="iconTravelList"){
-		res.send(req.session.iconTravelList);
-	}
-	else if(req.body.request=="iconTraveledList"){
-		res.send(req.session.iconTraveledList);
-	}
-	else if(req.body.request=="recordTravelList"){
-		res.send(req.session.recordTravelList);
-	}
-	else if(req.body.request=="icon"){
-		res.send(req.session.icon);
-	}
-	else if(req.body.request=="ingredients"){
-		res.send(req.session.ingredients);
-	}
-	else if(req.body.request=="allergy"){
-		res.send(req.session.allergy);
-	}
-	else if(req.body.request=="stress"){
-		res.send(req.session.stress);
-	}
-});
 //------------------------------------------
 // Questionnaire Result Page
 //------------------------------------------
@@ -1147,11 +1029,13 @@ app.post('/clientSendOrder',function(req,res,next){
 // Get User Center Page
 //------------------------------------------
 app.get('/usercenter',function(req,res,next){
+	/*
 	if(req.session.username==null) res.redirect('/login');
 	else{
-		if(req.session.cart==null) req.session.cart = [];
-		res.render('usercenter',{username: req.session.name,productLength:req.session.cart.length});
-	}	
+		res.render('usercenter',{name: req.session.name});
+	}
+	*/
+	res.render('usercenter',{name: req.session.name});
 });
 app.post('/clientAskForChangePassword',function(req,res,next){
 	var sql = "SELECT * FROM `useraccount` WHERE username = '"+ req.session.username +"'";
@@ -1240,35 +1124,7 @@ app.post('/sendnewos',function(req,res,next){
 		else res.send('done');
 	});
 });
-//------------------------------------------
-// SEND MAIL
-//------------------------------------------
-var nodemailer = require('nodemailer');
-var transporter = nodemailer.createTransport({
-	host: 'smtp.catcatmed.com',
-    port: 25,
-    secure: false,
-    requireTLS: true,
-	auth: {
-		user: "catcatmedITadmin@catcatmed.com",
-		pass: "asdofijdmauasdhf87632"
-	}
-});
-var options = {
-		from: "catcatmedITadmin@catcatmed.com",
-		to: "as1232161@gmail.com",
-		subject: "這是來自卡卡貓的測試郵件",
-		text: "裡面應該會放系統通知"
-	}
-app.post('/sendmail',function(req,res,next){	
-	transporter.sendMail(options,function(error, info){
-		if(error){
-			console.log("[SYS ERR] : "+error);
-		}else{
-			console.log("[SYS MSG] : 訊息發送" + info.response);
-		}
-	});
-});
+
 //------------------------------------------
 // ERROR Handler
 //------------------------------------------
