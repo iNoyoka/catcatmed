@@ -239,7 +239,7 @@
 			if(id=='delivery_A'){
 				innerHTML += '<p>收件地址</p><input type="text" id="userhomeaddress"><br><br><br><p style="color:gray;font-size: 0.9em">請確認收件人姓名、電話、地址皆正確填寫</p><p style="color:gray;font-size: 0.9em">卡卡貓將為您提供最好、最迅速的服務！</p>';
 			}else{
-				innerHTML += '<p>門市<span id="currentStore"></span></p><div class="row">';
+				innerHTML += '<p>門市<span id="currentStore" style="color:#EF5981"></span></p><div class="row">';
 				innerHTML += '<div class="col-lg-4 col-md-4 text-center"><select id="cityName" onchange="CallTown()"><option>縣、市</option></select></div>';
 				innerHTML += '<div class="col-lg-4 col-md-4 text-center"><select id="townName"><option>區、鎮、鄉</option></select></div>';
 				innerHTML += '<div class="col-lg-4 col-md-4 text-center"><button class="storeButton" onclick="FindStore()">查詢門市</button></div></div>';

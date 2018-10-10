@@ -836,48 +836,49 @@ app.post('/logincheck',function(req,res,next){
 	var pattern_password = /^\w+$/;
 	var check_username = username.match(pattern_username);
 	var check_password = password.match(pattern_password);
-	
+	/*
 	if(!check_username || !check_password){
 		console.log("[SYS ERR] : detect illegal data input!");
 		req.session.errMsgLogin = "errInput";
 		res.redirect('/login');
 	}else{
 		//check if database has this email address
-		var sql_check = "SELECT * FROM `useraccount` WHERE username = '"+ username +"'";
-		con.query(sql_check,function(err,result){
-			if(err) throw err;
-			else
-			{
-				if(result[0]==null){
-					console.log("[SYS ERR] : useraccount didn't exist!");
-					req.session.errMsgLogin = "errAccountIsntExist";
-					res.redirect('/login');
-				}else{
-					if(result[0].username==username && result[0].password==password){
-						//帳戶確認存在
-						console.log("[SYS MSG] : "+ username +" login request confirm!");
-						console.log("[SYS MSG] : "+ username +" login success!");
-						req.session.name = result[0].name;
-						req.session.username = username;
-						if(req.session.recordWebPage==null){
-							res.redirect('/');
-						}else{
-							var page = req.session.recordWebPage;
-							req.session.recordWebPage = null;
-							res.redirect('/'+page);
-						}					
-						//確認是否正在被登入
-						//暫時不實作
+		
+	}
+	*/
+	var sql_check = "SELECT * FROM `useraccount` WHERE username = '"+ username +"'";
+	con.query(sql_check,function(err,result){
+		if(err) throw err;
+		else
+		{
+			if(result[0]==null){
+				console.log("[SYS ERR] : useraccount didn't exist!");
+				req.session.errMsgLogin = "errAccountIsntExist";
+				res.redirect('/login');
+			}else{
+				if(result[0].username==username && result[0].password==password){
+					//帳戶確認存在
+					console.log("[SYS MSG] : "+ username +" login request confirm!");
+					console.log("[SYS MSG] : "+ username +" login success!");
+					req.session.name = result[0].name;
+					req.session.username = username;
+					if(req.session.recordWebPage==null){
+						res.redirect('/');
 					}else{
-						console.log("[SYS ERR] : "+ username +" login failed cause of wrong password");
-						req.session.errMsgLogin = "errWrongPassword";
-						res.redirect('/login');
-					}
+						var page = req.session.recordWebPage;
+						req.session.recordWebPage = null;
+						res.redirect('/'+page);
+					}					
+					//確認是否正在被登入
+					//暫時不實作
+				}else{
+					console.log("[SYS ERR] : "+ username +" login failed cause of wrong password");
+					req.session.errMsgLogin = "errWrongPassword";
+					res.redirect('/login');
 				}
 			}
-		});
-	}
-	
+		}
+	});
 	
 });
 
