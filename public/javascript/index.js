@@ -504,7 +504,7 @@ $(document).ready(function(){
         $("#img_button_5").removeClass("img_button_selected").addClass("img_button");
          // change expression img
         $("#why_expression_img").attr("src", "images/index/why2.png");
-        $("#why_expression_text").text("貓咪情感細膩，對身邊的人和事非常敏感，也容易緊張、有壓力。貓咪的壓力可大可小，但心理會影響生理，嚴重更會致病，提供完整貓咪的心理照護資訊，不只照顧貓咪的身體，更能讓貓咪更開心。");
+        $("#why_expression_text").text("貓咪情感細膩，對身邊的人和事非常敏感，也容易緊張、有壓力。貓咪的壓力可大可小，但心理會影響生理，嚴重更會致病。卡卡貓提供貓咪的行為照護資訊分析，不只照顧貓咪的身體營養，還能讓飼主更了解貓咪生理需求。");
     });
     $("#img_button_3").hover(function(){
         $("#img_button_3").addClass("img_button_selected").removeClass("img_button");
@@ -524,7 +524,7 @@ $(document).ready(function(){
         $("#img_button_5").removeClass("img_button_selected").addClass("img_button");
         // change expression img
         $("#why_expression_img").attr("src", "images/index/why4.png");
-        $("#why_expression_text").text("月費式的消費模式能夠讓飼主馬上更換相同價位區間的飼料，讓毛孩能補充多樣微量元素，自由的選擇品牌搭配，給毛孩更多的選擇，且獸醫也建議貓咪至少每2~3個月需要更換一次飼料。");
+        $("#why_expression_text").text("獸醫建議貓咪至少每2~3個月更換一次飼料。月費式的客制化飼料，能夠讓飼主可以在線上迅速更換相同價位區間的飼料，讓毛孩能補充多樣微量元素，自由的選擇品牌搭配，給毛孩更多的選擇。");
     });
     $("#img_button_5").hover(function(){
         $("#img_button_5").addClass("img_button_selected").removeClass("img_button");
