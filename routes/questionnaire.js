@@ -246,7 +246,7 @@ router.post('/catfood_select',function(req,res,next){
 router.get('/select_icon',function(req,res,next){
     req.session.select_icon = null;
     req.session.qnrecord = 'select_icon';
-    res.render('questionnaire/select_icon');
+    res.render('questionnaire/select_icon',{name:req.session.BCN});
 });
 router.post('/select_icon',function(req,res,next){
     req.session.select_icon = JSON.parse(req.body.name);
