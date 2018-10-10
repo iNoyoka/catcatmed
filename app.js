@@ -80,9 +80,6 @@ app.get('/index_mobile',function(req,res,next){
 });
 
 app.get('/questionnaire_result',function(req,res,next){
-	//release qnrecord
-	req.session.qnrecord = null;
-	req.session.qnrecordList = null;
 	res.render('questionnaire_result',{name:req.session.BCN});
 });
 app.post('/questionnaire_result',function(req,res,next){
@@ -746,6 +743,9 @@ app.post('/questionnaire_result',function(req,res,next){
 			res.send(listAllDataJSON);
 		});//con.query END	
 	}else{
+		//release qnrecord
+		req.session.qnrecord = null;
+		req.session.qnrecordList = null;
 		req.session.BKN_name = null;
 		req.session.BKN_age = null;
 		req.session.BKN_sex = null;
@@ -1116,6 +1116,9 @@ app.post('/clientSendOrder',function(req,res,next){
 							console.log('[SYS MSG] : LIST SAVE SUCCESS!');
 						}
 					});
+					//release qnrecord
+					req.session.qnrecord = null;
+					req.session.qnrecordList = null;
 					req.session.BKN_name = null;
 					req.session.BKN_age = null;
 					req.session.BKN_sex = null;
@@ -1227,6 +1230,9 @@ app.post('/clientSendOrder',function(req,res,next){
 							console.log('[SYS MSG] : LIST SAVE SUCCESS!');
 						}
 					});
+					//release qnrecord
+					req.session.qnrecord = null;
+					req.session.qnrecordList = null;
 					req.session.BKN_name = null;
 					req.session.BKN_age = null;
 					req.session.BKN_sex = null;
