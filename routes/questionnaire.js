@@ -66,7 +66,8 @@ router.post('/BCS',function(req,res,next){
 });
 //
 router.get('/BCA',function(req,res,next){
-    req.session.BCA = null;
+    req.session.BCA_ageYear = null;
+    req.session.BCA_ageMonth = null;
     req.session.qnrecord = 'BCA';
     res.render('questionnaire/BCA',{name:req.session.BCN});
 });
@@ -493,7 +494,7 @@ router.post('/fur_behave',function(req,res,next){
 });
 //
 router.get('/fur_tie',function(req,res,next){
-    req.session.fur_behave = null;
+    req.session.fur_tie = null;
     req.session.qnrecord = 'fur_tie';
     res.render('questionnaire/fur_tie',{name:req.session.BCN});
 });

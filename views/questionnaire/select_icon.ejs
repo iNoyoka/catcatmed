@@ -51,7 +51,11 @@
         <div class="col-lg-8 col-lg-offset-2 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                    <h3>將啪嘰的需求告訴卡卡貓吧！請問這次想注重/探索的項目為?</h3>
+                    <% if(name){ %>
+                        <h3>將<%=name%>的需求告訴卡卡貓吧！請問這次想注重/探索的項目為?</h3>
+                    <% }else{ %>
+                        <h3>將貓孩的需求告訴卡卡貓吧！請問這次想注重/探索的項目為?</h3>
+                    <% } %>    
                 </div>
             </div>
             <div class="row">

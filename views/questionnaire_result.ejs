@@ -222,9 +222,9 @@
                 <div class="d-flex flex-column col-md-3 text-center">
                     <div class="bottom_header"><h5>聯絡我們</h5></div>
                     <div class="flex-column col-md-12">
-                        <a class="bottom_link nav-item nav-link">04-12345678</a>
+                        <a class="bottom_link nav-item nav-link">0973284093</a>
                         <!-- <a class="nav-item nav-link">test@gmail.com</a> -->
-                        <a class="bottom_link nav-item nav-link" href="mailto:test@gmail.com">test@gmail.com</a>
+                        <a class="bottom_link nav-item nav-link" href="mailto:jjrptaiwan@gmail.com">jjrptaiwan@gmail.com</a>
                     </div>
                 </div>
                 <div class="d-flex flex-column col-md-3 text-center">
@@ -275,6 +275,9 @@
             method: 'POST',
             url: 'questionnaire_result'
         }).done(function(data){
+            if(data=='/questionnaire'){
+                window.location.href = '/questionnaire';
+            }
             lss = data.split('#');
             listA = JSON.parse(lss[1]);
             listB = JSON.parse(lss[2]);
@@ -315,11 +318,14 @@
         else return 'err';
     }
     function WriteProductBlock(list){
+        var num;
+        if(list.length<=7) num = list.length;
+        else num = 7;
         var innerHTML = ''; 
         innerHTML += '<div class="product product_select" id="'+list[0].productCode+'" onclick="ChangeProduct(this.id)"><h5>'+list[0].brand_zh+'<span class="comment">';
         if(list[0].brand_en!='null' && list[0].brand_en!='Natural Ultramix') innerHTML += ''+list[0].brand_en+'</span></h5><p>'+list[0].name_zh+'</p></div>';
         else innerHTML += '</span></h5><p>'+list[0].name_zh+'</p></div>';        
-        for(i=1;i<list.length;i++){
+        for(i=1;i<num;i++){
             innerHTML += '<div class="product" id="'+list[i].productCode+'" onclick="ChangeProduct(this.id)"><h5>'+list[i].brand_zh+'<span class="comment">';
             if(list[i].brand_en!='null' && list[i].brand_en!='Natural Ultramix') innerHTML += ""+list[i].brand_en+'</span></h5><p>'+list[i].name_zh+'</p></div>';
             else innerHTML += '</span></h5><p>'+list[i].name_zh+'</p></div>';
