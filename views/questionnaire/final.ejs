@@ -17,11 +17,15 @@
 <body onselectstart="return false" class="qnbody" id="body" style="display: none">
     <div style="height: 25vh"></div>
     <div style="height: 50vh; position: relative;" class="text-center" id="qnInner">
-        <h3>感謝您填寫完了卡卡貓的客製化問卷！</h3>
+        <% if(sex){ %>
+            <h3>大功告成！資料建構完畢，辛苦你了<%=name%>！</h3>
+        <%}else{ %>
+            <h3>大功告成！資料建構完畢，辛苦妳了<%=name%>！</h3>
+        <% } %>
         <br>
         <br>
         <br>
-        <h5>請按下下方的「開始分析」按鈕，以獲得卡卡貓為<%=name%>所準備的飼料配方！</h5>
+        <h5>按下「開始分析」鈕，剩下就交給卡卡貓囉！</h5>
         <br>
         <button class="nextButton" onclick="Send()">開始分析</button>
     </div>

@@ -786,14 +786,13 @@ app.get('/logout',function(req,res,next){
 //------------------------------------------
 // Get Sign Up Page
 //------------------------------------------
-/* 30 people test locking
+/*
 app.get('/signup',function(req,res,next){
 	var errMsg = req.session.errMsgSign;
 	req.session.errMsgSign = null;
 	res.render('signup',{errMsg: errMsg});
 	
 });
-
 //signup check
 app.post('/signupcheck',function(req,res,next){
 	var name = req.body.name;

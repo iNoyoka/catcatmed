@@ -51,11 +51,7 @@ CREATE TABLE IF NOT EXISTS `ordersystem` (
 --
 
 INSERT INTO `ordersystem` (`id`, `userid`, `username`, `userphone`, `userhomeaddress`, `user711address`, `productCode`, `productName_ZH`, `orderstate`, `buildTime`, `checkTime`, `outgoingTime`, `deliveryTime`) VALUES
-(1, 'as1232161@gmail.com', '謝易達', '我是小可愛', '一二三', NULL, 'CCM0203', '特級幼貓成長配方 雞肉+糙米', 1, '2018-09-03 15:27:13', NULL, NULL, NULL),
-(2, 'as1232161@gmail.com', '123', '123', '123', NULL, 'CCM0203', '特級幼貓成長配方 雞肉+糙米', 1, '2018-09-03 16:56:53', NULL, NULL, NULL),
-(3, 'as1232161@gmail.com', '234', '22222', '234', NULL, 'CCM0124', '鴨肉無穀全貓配方', 1, '2018-09-03 17:07:02', NULL, NULL, NULL),
-(4, 'as1232161@gmail.com', '123333', '1234445', '12334123', NULL, 'CCM0203', '特級幼貓成長配方 雞肉+糙米', 1, '2018-09-03 17:12:05', NULL, NULL, NULL),
-(5, 'as123@gma.com', 'asdf', 'asdfasdf', 'dadsgasdgadsgds', NULL, 'CCM0458', 'Science Diet寵物食品 成貓 頂級照護', 1, '2018-09-03 17:14:08', NULL, NULL, NULL);
+(1, 'AS1232161@gmail.com', '謝易達', '我是小可愛', '一二三', NULL, 'CCM0203', '特級幼貓成長配方 雞肉+糙米', 1, '2018-09-03 15:27:13', NULL, NULL, NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

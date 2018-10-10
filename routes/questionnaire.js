@@ -955,7 +955,11 @@ router.post('/extra_knowhow',function(req,res,next){
 });
 //
 router.get('/final',function(req,res,next){
-    res.render('questionnaire/final',{name:req.session.BCN});
-})
+    if(req.session.BKN_sex==1){
+        res.render('questionnaire/final',{name:req.session.BKN_name,sex:req.session.BKN_sex});
+    }else{
+        res.render('questionnaire/final',{name:req.session.BKN_name,sex:null});
+    }
+});
 
 module.exports = router;
