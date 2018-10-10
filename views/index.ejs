@@ -21,7 +21,7 @@
                         'i');
         
         if (testExp.test(navigator.userAgent))
-            window.location.href="/index_mobile";
+            //window.location.href="/index_mobile";
     </script>
     <link rel="stylesheet" href="stylesheets/header.css">
 </head>
@@ -51,13 +51,13 @@
                     <% if(name){ %>
                         <div class="col-md-2"></div>
                         <a class="nav_text nav-item nav-link col-md-2"  href="#">歡迎，<%= name %>!</a>
-                        <a class="nav_text nav-item nav-link col-md-2"  href="usercenter">會員中心</a>
+                        <a class="nav_text nav-item nav-link col-md-2"  href="#" onclick="UnfunctionalPart()">會員中心</a>
                         <a class="nav_text nav-item nav-link col-md-2"  href="logout">登出</a>
                     <% }else{ %>
                         <div class="col-md-4"></div>
                         <a class="nav_text nav-item nav-link col-md-2"  href="login">登入</a>
                         <!-- <a class="nav-item nav-link active "></a> -->
-                        <a class="nav_text nav-item nav-link col-md-2"  href="signup">註冊</a>
+                        <a class="nav_text nav-item nav-link col-md-2"  href="#" onclick="UnfunctionalPart()">註冊</a>
                     <% } %>
                     
                     <!-- <a class="nav-item nav-link col-md-2"  herf="#">購物車</a> -->
@@ -178,9 +178,10 @@
             <img id="start_img1" class="w-100" src="./images/index/start1.jpg" alt="start tmp">
             <img id="start_img2" class="w-100" src="./images/index/start_red.jpg">
             <img id="start_img3" class="w-100" src="./images/index/start_blue.jpg">
-            <button id="start_left_button" type="button" class="left_button start_button">營養與器官</button>
-            <button id="start_right_button" type="button" class="right_button start_button">照顧冷知識</button>
-            <!-- ------------red-------------- -->
+            <button  type="button" class="left_button start_button">營養與器官</button>
+            <button  type="button" class="right_button start_button">照顧冷知識</button>
+            <!--
+            
             <button id="cancel_button_red" type="button" class="red_button"></button>
             <button id="leftTop_button_red" type="button" class="red_button"></button>
             <button id="leftDown_button_red" type="button" class="red_button"></button>
@@ -202,7 +203,6 @@
                 <p id="rightDownExp_text_red"class="displayNone exp_text col-md-9">rightDown</p>
                 <div class="col-md-3"></div>
             </div>
-            <!-- -----------blue------------- -->
             <button id="cancel_button_blue" type="button" class="blue_button"></button>
             <button id="leftTop_button_blue" type="button" class="blue_button"></button>
             <button id="leftDown_button_blue" type="button" class="blue_button"></button>
@@ -229,6 +229,7 @@
                 <p id="rightDownExp_text_blue"class="displayNone exp_text col-md-9">rightDown</p>
                 <div class="col-md-3"></div>
             </div>
+            -->
         </div>
     </div>
     
@@ -355,7 +356,11 @@
             </div>
         </div>
     </div>
-        
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div style="margin:5px 0;"></div>
+        </div>
+    </div>
     <!-- <div id="experience_block" class="container">
         <br>
         <br>

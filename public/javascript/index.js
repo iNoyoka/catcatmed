@@ -493,7 +493,7 @@ $(document).ready(function(){
         $("#img_button_5").removeClass("img_button_selected").addClass("img_button");
         
         // change expression img
-        $("#why_expression_img").attr("src", "./images/index/why1.png");
+        $("#why_expression_img").attr("src", "images/index/why1.png");
         $("#why_expression_text").text("依照貓咪的品種、年齡，和身體需求，給予最合適的營養需求及照護建議，從危機預防到尋找徵兆，從早期發現到早期治療，居家搭建完整防護網。");
     });
     $("#img_button_2").hover(function(){
@@ -503,7 +503,7 @@ $(document).ready(function(){
         $("#img_button_4").removeClass("img_button_selected").addClass("img_button");
         $("#img_button_5").removeClass("img_button_selected").addClass("img_button");
          // change expression img
-        $("#why_expression_img").attr("src", "./images/index/why2.png");
+        $("#why_expression_img").attr("src", "images/index/why2.png");
         $("#why_expression_text").text("貓咪情感細膩，對身邊的人和事非常敏感，也容易緊張、有壓力。貓咪的壓力可大可小，但心理會影響生理，嚴重更會致病，提供完整貓咪的心理照護資訊，不只照顧貓咪的身體，更能讓貓咪更開心。");
     });
     $("#img_button_3").hover(function(){
@@ -513,7 +513,7 @@ $(document).ready(function(){
         $("#img_button_4").removeClass("img_button_selected").addClass("img_button");
         $("#img_button_5").removeClass("img_button_selected").addClass("img_button");
         // change expression img
-        $("#why_expression_img").attr("src", "./images/index/why3.png");
+        $("#why_expression_img").attr("src", "images/index/why3.png");
         $("#why_expression_text").text("依照貓咪的身體變化及飼主的回饋，隨時進行飲食菜單的調整，不僅是飲食的更換，更能針對貓咪及飼主的互動進行餵養方式的調整，讓每位毛爸毛媽放心，更能讓每位毛孩吃得健康。");
     });
     $("#img_button_4").hover(function(){
@@ -523,7 +523,7 @@ $(document).ready(function(){
         $("#img_button_1").removeClass("img_button_selected").addClass("img_button");
         $("#img_button_5").removeClass("img_button_selected").addClass("img_button");
         // change expression img
-        $("#why_expression_img").attr("src", "./images/index/why4.png");
+        $("#why_expression_img").attr("src", "images/index/why4.png");
         $("#why_expression_text").text("月費式的消費模式能夠讓飼主馬上更換相同價位區間的飼料，讓毛孩能補充多樣微量元素，自由的選擇品牌搭配，給毛孩更多的選擇，且獸醫也建議貓咪至少每2~3個月需要更換一次飼料。");
     });
     $("#img_button_5").hover(function(){
@@ -533,7 +533,7 @@ $(document).ready(function(){
         $("#img_button_4").removeClass("img_button_selected").addClass("img_button");
         $("#img_button_1").removeClass("img_button_selected").addClass("img_button");
         // change expression img
-        $("#why_expression_img").attr("src", "./images/index/why5.png");
+        $("#why_expression_img").attr("src", "images/index/why5.png");
         $("#why_expression_text").text("網上的健檢諮詢就能獲得醫師所需的身理資訊，不需將寶貝毛孩帶出門奔波就能獲得飲食營養推薦及居家照護建議，省去飼主麻煩，減少貓咪外出壓力。");
     });
     // -------------------------------------------
@@ -546,7 +546,7 @@ $(document).ready(function(){
         $("#promise_button_2").removeClass("promise_button_selected").addClass("bg-light");
         $("#promise_button_3").removeClass("promise_button_selected").addClass("bg-light");
         $("#promise_button_4").removeClass("promise_button_selected").addClass("bg-light");
-        $("#promise_img").attr("src", "./images/index/promise1.jpg");
+        $("#promise_img").attr("src", "images/index/promise1.jpg");
         $("#promise_text").text("沒有業績銷售壓力，完全針對每隻毛孩的身體狀況，以最誠實、無偏見的方式呈現出最合適的飼料。");
     });
 
@@ -555,7 +555,7 @@ $(document).ready(function(){
         $("#promise_button_1").removeClass("promise_button_selected").addClass("bg-light");
         $("#promise_button_3").removeClass("promise_button_selected").addClass("bg-light");
         $("#promise_button_4").removeClass("promise_button_selected").addClass("bg-light");
-        $("#promise_img").attr("src", "./images/index/promise2.jpg");
+        $("#promise_img").attr("src", "images/index/promise2.jpg");
         $("#promise_text").text("整合國內外學界、研究單位及業界最新的寵物資訊，打造最正確、完善的健康飲食菜單。");
     });
 
@@ -564,7 +564,7 @@ $(document).ready(function(){
         $("#promise_button_2").removeClass("promise_button_selected").addClass("bg-light");
         $("#promise_button_1").removeClass("promise_button_selected").addClass("bg-light");
         $("#promise_button_4").removeClass("promise_button_selected").addClass("bg-light");
-        $("#promise_img").attr("src", "./images/index/promise3.jpg");
+        $("#promise_img").attr("src", "images/index/promise3.jpg");
         $("#promise_text").text("不僅是身理，卡卡貓也注重毛孩的心理健康，針對毛孩的特殊狀況都有可能是心理所引起的反應。");
     });
 
@@ -573,7 +573,7 @@ $(document).ready(function(){
         $("#promise_button_2").removeClass("promise_button_selected").addClass("bg-light");
         $("#promise_button_3").removeClass("promise_button_selected").addClass("bg-light");
         $("#promise_button_1").removeClass("promise_button_selected").addClass("bg-light");
-        $("#promise_img").attr("src", "./images/index/promise4.jpg");
+        $("#promise_img").attr("src", "images/index/promise4.jpg");
         $("#promise_text").text("透過專業的獸醫團隊及營養師團隊定期更新醫療界知識，確保每隻毛孩都能吃到最安心的選擇。");
     });
     // -------------------------------------------

@@ -13,7 +13,26 @@
     <link rel="stylesheet" href="../stylesheets/qn.css">
     <script src="../javascript/jquery/jquery_v-3-3-1.js"></script>
     <script src="../bootstrap-3.3.7/js/bootstrap.min.js"></script>
-
+    <style>
+        .answerIMG{
+            margin-top: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            text-align: center;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .answerIMG:hover{
+            transition: 300ms;
+            background-color: #D0D2D3;
+        }
+        .selectedIMG{
+            background-color: #A6A8AB !important;
+        }
+        .IMGoptions{
+            width: 100% !important;
+        }
+    </style>
 </head>
 <body onselectstart="return false" class="qnbody" id="body" style="display:none">
     <div class="row">
@@ -33,11 +52,11 @@
             <% } %>            
             <div class="row hidden-xs">
                 <div class="col-lg-1 col-md-1 col-sm-1"></div>
-                <div class="col-lg-2 col-md-2 col-sm-2"><div class="answer" id="A" onclick="Send(this.id)"><span class="options"><img src="../images/questionnaire/icons-22.png"></span></div></div>
-                <div class="col-lg-2 col-md-2 col-sm-2"><div class="answer" id="B" onclick="Send(this.id)"><span class="options"><img src="../images/questionnaire/icons-23.png"></span></div></div>
-                <div class="col-lg-2 col-md-2 col-sm-2"><div class="answer" id="C" onclick="Send(this.id)"><span class="options"><img src="../images/questionnaire/icons-24.png"></span></div></div>
-                <div class="col-lg-2 col-md-2 col-sm-2"><div class="answer" id="D" onclick="Send(this.id)"><span class="options"><img src="../images/questionnaire/icons-25.png"></span></div></div>
-                <div class="col-lg-2 col-md-2 col-sm-2"><div class="answer" id="E" onclick="Send(this.id)"><span class="options"><img src="../images/questionnaire/icons-26.png"></span></div></div>
+                <div class="col-lg-2 col-md-2 col-sm-2"><div class="answerIMG" id="A" onclick="Send(this.id)"><span><img class="IMGoptions" src="../images/questionnaire/bcs/bcs 1.png"></span></div></div>
+                <div class="col-lg-2 col-md-2 col-sm-2"><div class="answerIMG" id="B" onclick="Send(this.id)"><span><img class="IMGoptions" src="../images/questionnaire/bcs/bcs 2.png"></span></div></div>
+                <div class="col-lg-2 col-md-2 col-sm-2"><div class="answerIMG" id="C" onclick="Send(this.id)"><span><img class="IMGoptions" src="../images/questionnaire/bcs/bcs 3.png"></span></div></div>
+                <div class="col-lg-2 col-md-2 col-sm-2"><div class="answerIMG" id="D" onclick="Send(this.id)"><span><img class="IMGoptions" src="../images/questionnaire/bcs/bcs 4.png"></span></div></div>
+                <div class="col-lg-2 col-md-2 col-sm-2"><div class="answerIMG" id="E" onclick="Send(this.id)"><span><img class="IMGoptions" src="../images/questionnaire/bcs/bcs 5.png"></span></div></div>
             </div>
             <div class="row hidden-xs">
                 <div class="col-lg-1 col-md-1 col-sm-1"></div>
