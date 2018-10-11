@@ -80,7 +80,7 @@
 							<tr>
 								<th>產品A</th>
 								<th>托斯卡tosca</th>
-								<th>免費試用一個月方案</th>
+								<th>免費試用兩星期方案</th>
 								<th>一份</th>
 								<th>NTD XXX</th>
 								<th>0</th>
@@ -226,7 +226,7 @@
 			url : '/clientAskForPurchaseItem'
 		}).done(function(data){			
 			purchaseItem = JSON.parse(data);
-			var innerHTML = '<tr><th>'+purchaseItem.productName_ZH+'</th><th>'+purchaseItem.productCompany+'</th><th>免費試用一個月方案</th><th>一份</th><th>NTD '+purchaseItem.price+'/月 </th><th>0</th><th>可購買</th><th><a href="/questionnaire_result">重新選擇商品</a></th></tr>';
+			var innerHTML = '<tr><th>'+purchaseItem.productName_ZH+'</th><th>'+purchaseItem.productCompany+'</th><th>免費試用兩星期方案</th><th>一份</th><th>NTD '+purchaseItem.price+'/月 </th><th>0</th><th>可購買</th><th><a href="/questionnaire_result">重新選擇商品</a></th></tr>';
 			document.getElementById('showProductItem').innerHTML = innerHTML;
 		});
 	}

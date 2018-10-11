@@ -1407,7 +1407,101 @@ app.post('/sendnewos',function(req,res,next){
 		else res.send('done');
 	});
 });
-
+app.get('/backendQNList',function(req,res,next){
+	res.render('backendQNList');
+});
+app.post('/backendQNList',function(req,res,next){
+	if(req.body.id!='123' || req.body.pwd!='123'){
+		res.send('input error!');
+	}else{
+		var sql = 'SELECT * FROM `userqnrecord`';
+		var list = [];
+		function addToList(result){
+			var obj = {};
+			obj.name = result.name;
+			obj.username = result.username;
+			obj.BKN_name = result.BKN_name;
+			obj.BKN_age = result.BKN_age;
+			obj.BKN_sex = result.BKN_sex;
+			obj.BCN = result.BCN;
+			obj.BCS = result.BCS;
+			obj.BCA_ageYear = result.BCA_ageYear;
+			obj.BCA_ageMonth = result.BCA_ageMonth;
+			obj.BSP = result.BSP;
+			obj.BNU = result.BNU;
+			obj.BPR = result.BPR;
+			obj.BPT = result.BPT;
+			obj.BFN = result.BFN;
+			obj.BFA_kittyNum = result.BFA_kittyNum;
+			obj.BFA_week = result.BFA_week;
+			obj.BCW_kilo = result.BCW_kilo;
+			obj.BCW_gram = result.BCW_gram;
+			obj.BEF = result.BEF;
+			obj.BSI = result.BSI;
+			obj.BBC = result.BBC;
+			obj.weight_control = result.weight_control;
+			obj.select_icon = result.select_icon;
+			obj.joint_now = result.joint_now;
+			obj.joint_med = result.joint_med;
+			obj.joint_below = result.joint_below
+			obj.joint_jump = result.joint_jump;
+			obj.joint_daily = result.joint_daily;
+			obj.heart_now = result.heart_now;
+			obj.heart_behave = result.heart_behave;
+			obj.heart_avgtemp = result.heart_avgtemp;
+			obj.mouth_now = result.mouth_now;
+			obj.mouth_behave = result.mouth_behave;
+			obj.mouth_brush = result.mouth_brush;
+			obj.fur_freq = result.fur_freq;
+			obj.fur_behave = result.fur_behave;
+			obj.fur_tie = result.fur_tie;
+			obj.immu_now = result.immu_now;
+			obj.immu_behave = result.immu_behave;
+			obj.immu_behave_before = result.immu_behave_before;
+			obj.immu_spirit = result.immu_spirit;
+			obj.immu_med = result.immu_med;
+			obj.kidney_now = result.kidney_now;
+			obj.kidney_urine = result.kidney_urine;
+			obj.kidney_health = result.kidney_health;
+			obj.urinary_now = result.urinary_now;
+			obj.urinary_behave = result.urinary_behave;
+			obj.urinary_together = result.urinary_together;
+			obj.urinary_water = result.urinary_water;
+			obj.stoma_problem = result.stoma_problem;
+			obj.stoma_bathroom = result.stoma_bathroom;
+			obj.stoma_strange = result.stoma_strange;
+			obj.melt_freq = result.melt_freq;
+			obj.stress_now = result.stress_now;
+			obj.stress_enviornment = result.stress_enviornment;
+			obj.stress_enviornment_out = result.stress_enviornment_out;
+			obj.stress_lifestyle = result.stress_lifestyle;
+			obj.extra_eatinghabit = result.extra_eatinghabit;
+			obj.extra_eatingfreq = result.extra_eatingfreq;
+			obj.extra_weekcan = result.extra_weekcan;
+			obj.extra_freshflesh = result.extra_freshflesh;
+			obj.extra_minifish = result.extra_minifish;
+			obj.extra_killbugs = result.extra_killbugs;
+			obj.extra_vacci = result.extra_vacci;
+			obj.extra_alergent = result.extra_alergent;
+			obj.extra_drinking = result.extra_drinking;
+			obj.extra_cooking = result.extra_cooking;
+			obj.extra_strangehabit = result.extra_strangehabit;
+			obj.extra_place = result.extra_place;
+			obj.extra_knowhow = result.extra_knowhow;
+			return obj;
+		}
+		con.query(sql,function(err,result){
+			if(err) throw err;
+			else{
+				for(i in result){
+					list.push(addToList(result));
+				}
+			}
+			let listJSON = JSON.stringify(list);
+			res.send(listJSON);
+		});
+	}
+});
 //------------------------------------------
 // ERROR Handler
 //------------------------------------------
