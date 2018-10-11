@@ -1494,7 +1494,7 @@ app.post('/backendQNList',function(req,res,next){
 			if(err) throw err;
 			else{
 				for(i in result){
-					list.push(addToList(result));
+					list.push(addToList(result[i]));
 				}
 			}
 			let listJSON = JSON.stringify(list);
