@@ -24,7 +24,7 @@
             <div class="col-md-5 text-center flex-row navbar-nav align-items-center" id="nav_left" >    
 				<div class="col-md-2"></div>
 				<div class="col-md-10 flex-row navbar-nav">
-					<a class="nav_text nav-item nav-link col-md-3"  href="questionnaire">開始懂牠</a>
+					<a class="nav_text nav-item nav-link col-md-3"  href="questionnaire">開始了解</a>
 					<!-- <a class="nav-item nav-link active "></a> -->
 					<a class="nav_text nav-item nav-link col-md-3"  href="#" onclick="UnfunctionalPart()">營養知識</a>
 					<!-- <a class="nav-item nav-link ac2tive "></a> -->
@@ -65,29 +65,29 @@
 			<div class="col-lg-3 col-md-3 text-center">
 				<div class="row">
 					<div class="col-lg-12 col-md-12" style="margin-top: 5vh">
-						<h3>A CUTE CAT IMG HERE</h3>
+						<img src="images/questionnaire/icons-09.png" style="width:100%;">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-12 col-md-12">
-						<h4>SALLY</h4>
+						<h4><%=name%></h4>
 					</div>
                 </div>
                 <br>
                 <br>
 				<div class="row">
 					<div class="col-lg-12 col-md-12">
-						<h5>DAY 33</h5>
+						<h5 id="day">DAY 33</h5>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-12 col-md-12">
-						<h5>每日飲食量 60 克</h5>
+						<h5 id="dailygram">每日飲食量 60 克</h5>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-12 col-md-12">
-						<h5>每日飲水量 240 毫升</h5>
+						<h5 id="dailydrink">每日飲水量 240 毫升</h5>
 					</div>
                 </div>
                 <br>
@@ -99,12 +99,12 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-12 col-md-12">
-						<button class="generalButton" id="layerA_B" onclick="ChangeLayer(this.id)">更改會員資料</button>
+						<button class="generalButton" id="layerA_B" onclick="UnfunctionalPart()">更改會員資料</button>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-12 col-md-12">
-						<button class="generalButton" id="layerA_C" onclick="ChangeLayer(this.id)">查看訂單</button>
+						<button class="generalButton" id="layerA_C" onclick="UnfunctionalPart()">查看訂單</button>
 					</div>
 				</div>
 				<div class="row">
@@ -116,21 +116,363 @@
 			<div class="col-lg-9 col-md-9" id="layerA_Ainner">
                 <div class="informationInner">
                     <div class="row">
-                        <button class="selectorButton selectorButton_select" id="layerA_AtagA" onclick="ChangeTag(this.id)">營養成份分析</button>
-                        <button class="selectorButton" id="layerA_AtagB" onclick="ChangeTag(this.id)">貼心照護</button>
-                        <button class="selectorButton" id="layerA_AtagC" onclick="ChangeTag(this.id)">高手區</button>
+                        <button class="selectorButton selectorButton_select" id="layerA_AtagA" onclick="ChangeTag(this.id)"><img style="width: 30%" src="images/usercenter/nutrition.png">營養成份分析</button>
+                        <button class="selectorButton" id="layerA_AtagB" onclick="ChangeTag(this.id)"><img style="width: 30%" src="images/usercenter/home.png">貼心照護</button>
+                        <button class="selectorButton" id="layerA_AtagC" onclick="ChangeTag(this.id)"><img style="width: 30%" src="images/usercenter/search.png">高手區</button>
                     </div>
                     <div class="row informationInner_block" id="layerA_A_A">
                         <div class="col-lg-12 col-md-12">
-
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <br>
+                                    <h4>您為<%=name%>所選擇的飼料</h4>
+                                    <br>
+                                    <h5>品名: <span id="layerA_A_A_productname">CCM1000</span></h5>
+                                    <h5>品牌: <span id="layerA_A_A_productbrand">GO</span></h5>
+                                    <h5>原產地: <span id="layerA_A_A_original">Australia</span></h5>
+                                </div>
+                                <div class="col-lg-6 col-md-6" id="layerA_A_A_productimg">
+                                    <img src="images/questionnaire/product/0010.png">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="row productInformationInner-content">
+                                        <div class="col-lg-12 col-md-12">
+                                            <p style="color:gray">依照您所提供的詳細身體資訊，卡卡貓推薦<%=name%>攝取以下游標營養區間</p>
+                                        </div> 
+                                    </div>
+                                    <div class="row productInformationInner-content">
+                                        <div class="col-lg-4 col-md-4 text-left"><p>蛋白質</p></div>
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="myProgress" id="myBarA">
+                                                <div class="myBar" style="background-color:#EF5981"></div>
+                                            </div>
+                                            <img id="proA" class="tinyArrow" style="left:35%" src="images/questionnaire/icons-65.png">
+                                            <img id="proB" class="tinyArrow" style="left:55%" src="images/questionnaire/icons-65.png">
+                                        </div>
+                                    </div>
+                                    <div class="row productInformationInner-content">
+                                        <div class="col-lg-4 col-md-4 text-left"><p>脂質</p></div>
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="myProgress" id="myBarB">
+                                                <div class="myBar" style="background-color:#87A7D6"></div>
+                                            </div>
+                                            <img id="fatA" class="tinyArrow" style="left:25%" src="images/questionnaire/icons-66.png">
+                                            <img id="fatB" class="tinyArrow" style="left:36%" src="images/questionnaire/icons-66.png">
+                                        </div>
+                                    </div>
+                                    <div class="row productInformationInner-content">
+                                        <div class="col-lg-6 col-md-6 text-left"><p>纖維質</p></div>
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="myProgress" id="myBarC">
+                                                <div class="myBar" style="background-color:#3D5BA8"></div>
+                                            </div>
+                                            <img id="fibA" class="tinyArrow" style="left:35%" src="images/questionnaire/icons-64.png">
+                                            <img id="fibB" class="tinyArrow" style="left:55%" src="images/questionnaire/icons-64.png">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="row productInformationInner-content">
+                                        <div class="col-lg-12 col-md-12 text-center">
+                                            <p style="color:gray">此款飼料與市面上其他飼料之比較</p>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row productInformationInner-content">
+                                        <div class="col-lg-4 col-md-4 text-center">
+                                            <div class="circle" id="circleA" style="top:45px;left:30px;"></div>
+                                            <div class="circle" id="circleB" style="top:37px;left:22px"></div>
+                                            <div class="circle" id="circleC" style="top:29px;left:14px;"></div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 text-left">
+                                            <br>
+                                            <p style="color:#EF5981;font-size:0.9em">※蛋白質高於<span style="color:black;font-size:1em;" id="circleInner_protein">80%</span>的市售飼料</p>
+                                            <br>
+                                            <p style="color:#87A7D6;font-size:0.9em">※脂質高於<span style="color:black;font-size:1em;" id="circleInner_fat">65%</span>的市售飼料</p>
+                                            <br>
+                                            <p style="color:#3D5BA8;font-size:0.9em">※碳水化合物低於<span style="color:black;font-size:1em;" id="circleInner_carboh">20%</span>的市售飼料</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 text-left">
+                                    <div style="border: #87A7D6 solid 1px; background-color: rgba(135, 167, 214, 0.5);border-radius: 5px;padding: 10px 10px;margin: 10px 0;width: 100%;">
+                                        <span>優良成分：</span>
+                                        <br>
+                                        <span id="goodmeat">雞肉絨、脫水家禽蛋白</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 text-left">
+                                    <div style="border: #EF5981 solid 1px; background-color: rgba(239, 89, 129, 0.5);border-radius: 5px;padding: 10px 10px;margin: 10px 0;width: 100%;">
+                                        <span>可能的過敏原：</span>
+                                        <br>
+                                        <span id="poteintialAlergent">雞肉絨、脫水家禽蛋白</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12">
+                                    <h5>詳細成份</h5>
+                                    <br>
+                                    <span id="ingredient">成分........</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row informationInner_block" id="layerA_A_B" style="display:none;margin-top:5vh"></div>
-                    <div class="row informationInner_block" id="layerA_A_C" style="display:none;margin-top:5vh"></div>
+                    <div class="row informationInner_block" id="layerA_A_B" style="display:none">
+                        <div class="col-lg-12 col-md-12">
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12">
+                                    <h4>根據您的需求，卡卡貓可以提供您以下的照護資訊</h4>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row" id="layerA_A_B_selectorimg">
+                                <div class="col-lg-2 col-md-2">
+                                    <img class="select_img select_img_select" src="images/questionnaire/icon/qn/stoma.png" id="layerA_A_B_imgA" onclick="ChangeCare(this.id)" title="stoma">
+                                </div>
+                                <div class="col-lg-2 col-md-2">
+                                    <img class="select_img" src="images/questionnaire/icon/qn/immu.png" id="layerA_A_B_imgB" onclick="ChangeCare(this.id)" title="immu pro">
+                                </div>
+                                <div class="col-lg-2 col-md-2">
+                                    <img class="select_img" src="images/questionnaire/icon/qn/joint.png" id="layerA_A_B_imgC" onclick="ChangeCare(this.id)" title="joint pro">
+                                </div>
+                                <div class="col-lg-2 col-md-2">
+                                    <img class="select_img" src="images/usercenter/extra.png" id="layerA_A_B_imgD" onclick="ChangeCare(this.id)" title="extra pro">
+                                </div>
+                            </div>
+                            <div class="row" id="layerA_A_B_selectorname">
+                            </div>
+                            <br>
+                            <hr>
+                            <div class="row" id="tempA">
+                                <div class="col-lg-12 col-md-12">
+
+                                </div>
+                            </div>
+                            <div class="row" id="tempB">
+                                <div class="col-lg-12 col-md-12">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row informationInner_block" id="layerA_A_C" style="display:none">
+                        <div class="col-lg-12 col-md-12">
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12">
+                                    <h4>卡卡貓讓您更懂得照顧您的貓咪</h4>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-2 col-md-2 text-center">
+                                    <img class="select_img select_img_select" src="images/usercenter/tie.png" id="layerA_A_C_imgA" onclick="ChngeSearch(this.id)" title="comb pro">
+                                </div>
+                                <div class="col-lg-2 col-md-2 text-center">
+                                    <img class="select_img" src="images/usercenter/stress.png" id="layerA_A_C_imgB" onclick="ChngeSearch(this.id)" title="stress pro">
+                                </div>
+                                <div class="col-lg-2 col-md-2 text-center">
+                                    <img class="select_img" src="images/usercenter/water.png" id="layerA_A_C_imgC" onclick="ChngeSearch(this.id)" title="drink pro">
+                                </div>
+                                <div class="col-lg-2 col-md-2 text-center">
+                                    <img class="select_img" src="images/usercenter/brush.png" id="layerA_A_C_imgD" onclick="ChngeSearch(this.id)" title="brush pro">
+                                </div>
+                                <div class="col-lg-2 col-md-2 text-center">
+                                    <img class="select_img" src="images/usercenter/comb.png" id="layerA_A_C_imgE" onclick="ChngeSearch(this.id)" title="change pro">
+                                </div>
+                                <div class="col-lg-2 col-md-2 text-center">
+                                    <img class="select_img" src="images/usercenter/change.png" id="layerA_A_C_imgF" onclick="ChngeSearch(this.id)" title="tie pro">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-2 col-md-2 text-center">
+                                    <p style="margin-top: 3px">毛髮打結</p>
+                                </div>
+                                <div class="col-lg-2 col-md-2 text-center">
+                                    <p style="margin-top: 3px">壓力問題</p>
+                                </div>
+                                <div class="col-lg-2 col-md-2 text-center">
+                                    <p style="margin-top: 3px">飲水問題</p>
+                                </div>
+                                <div class="col-lg-2 col-md-2 text-center">
+                                    <p style="margin-top: 3px">刷牙方法</p>
+                                </div>
+                                <div class="col-lg-2 col-md-2 text-center">
+                                    <p style="margin-top: 3px">梳毛高手</p>
+                                </div>
+                                <div class="col-lg-2 col-md-2 text-center">
+                                    <p style="margin-top: 3px">調節飲食</p>
+                                </div>
+                            </div>
+                            <br>
+                            <hr>
+                            <div class="row" id="tie">
+                                <div class="col-lg-12 col-md-12">
+                                    <h4 style="color:#3D5BA8">處理打結貓高手</h4>
+                                    <br>
+                                    <h5 class="tab">1.耐心將糾結的毛團撕開，把大毛團分成小毛團</h5>
+                                    <h5 class="tab">2.從「針梳」到「排梳」</h5>
+                                    <p class="doubletab">先用「針梳」梳散毛髮，接著用「排梳」先從末端分次慢慢梳開，逐步移至毛髪根部完全梳開，也可適時噴灑順毛噴霧。</p>
+                                    <h5 class="tab">3.避免疼痛</h5>
+                                    <p class="doubletab">一手按住毛髪根部，減少梳理時拉扯所產生的疼痛。</p>
+                                    <h5 class="tab">4.避免沾濕</h5>
+                                    <p class="doubletab">結團的毛髮弄濕後再恢復乾燥就會像羊毛般縮水，所以洗澡前要先梳順毛髪在下水洗澡也是同樣道理。</p>
+                                    <h5 class="tab">5.剪開毛團</h5>
+                                    <p class="doubletab">若毛團糾結緊密或緊貼皮膚，可從糾結最嚴重部分剪開，有助於後續梳開。</p>
+                                    <p class="doubletab" style="color:#EF5981">(此步驟容易使貓咪受傷，建議交由專業美容師進行處理)</p>
+                                    <h5 class="tab">6.尋求專業</h5>
+                                    <p class="doubletab">如果過於嚴重，比如全身多處都明顯打結，建議直接尋求專業寵物美容業者處理，避免過度梳理誤傷毛孩肌膚，必要時需要全身剃毛。</p>
+                                    <h5 class="tab">7.觀察皮膚狀況</h5>
+                                    <p class="doubletab">如果梳開毛髮，發現毛孩皮膚上有紅疹、寄生蟲等皮膚問題，請儘早帶至獸醫院請醫師檢查。</p>
+                                </div>
+                            </div>
+                            <div class="row" style="display:none" id="stress">
+                                <div class="col-lg-12 col-md-12">
+                                    <h4 style="color:#3D5BA8">舒緩壓力高手</h4>
+                                    <br>
+                                    <h5 class="tab" style="color:#EF5981">貓咪有壓力的症狀</h5>
+                                    <h5 class="tab">貓咪會在一些方面顯現出來它們正處於焦慮的狀態，例如：</h5>
+                                    <p class="doubletab">(1)過度地舔自己的身體或完全不舔。(禿毛)</p>
+                                    <p class="doubletab">(2)拒絕進食。</p>
+                                    <p class="doubletab">(3)具攻擊行為。</p>
+                                    <p class="doubletab">(4)咀嚼像布等一些不能吃的東西。(異食癖)</p>
+                                    <p class="doubletab">(5)不使用貓砂盆。(隨地大小便)</p>
+                                    <br>
+                                    <h4 style="color:#3D5BA8">什麼因素會給貓咪帶來壓力</h4>
+                                    <br>
+                                    <h5 class="tab" style="color:#EF5981">環境的變化</h5>
+                                    <p class="doubletab">(1)搬至新家。</p>
+                                    <p class="doubletab">(2)家內有太多的動物。</p>
+                                    <p class="doubletab">(3)過度幽閉或限制其行動。(沒有對外窗)</p>
+                                    <p class="doubletab">(4)缺乏新鮮空氣和陽光，尤其是當貓咪在以前是習慣常到外面行動的。</p>
+                                    <p class="doubletab">(5)改變貓咪的生活習慣。</p>
+                                    <img>
+                                    <h5 class="tab" style="color:#EF5981">身體的變化</h5>
+                                    <p class="doubletab">(1)肥胖、疾病或手術</p>
+                                    <p class="doubletab">(2)身體上的改變。(剪指甲、洗澡或剃毛等貓咪原本不喜歡的活動)</p>
+                                    <p class="doubletab">(3)跳蚤等體外寄生蟲及體內寄生蟲。</p>
+                                    <h5 class="tab" style="color:#EF5981">情緒的壓力</h5>
+                                    <p class="doubletab">(1)無聊或孤單。(狩獵慾望未被滿足)</p>
+                                    <p class="doubletab">(2)家中的成員包括人或動物有改變。</p>
+                                    <p class="doubletab">(3)競爭、嫉妒或恐懼。</p>
+                                    <br>
+                                    <h4 style="color:#3D5BA8">如何幫貓咪解除壓力</h4>
+                                    <br>
+                                    <h5 class="tab">第一步</h5>
+                                    <p class="doubletab">先找出讓貓咪憂慮的原因，盡可能幫貓咪排除這個讓它憂慮的原因。</p>
+                                    <h5 class="tab">第二步 - 帶貓咪去看醫生</h5>
+                                    <p class="doubletab">確定它有沒有身體上的疾病，如果貓咪處於極度壓力的狀況下，可請醫師開一些藥物幫助牠減輕壓力。</p>
+                                    <h5 class="tab" style="color:#EF5981">其他個別狀況的處理方法</h5>
+                                    <p class="doubletab">(1)如果您的貓咪會嫉妒或和別的寵物爭寵，先暫時將它們分開飼養，利用不同的時間餵食和陪伴它們，花點的時間讓它們漸進式地熟悉彼此。</p>
+                                    <p class="doubletab">(2)不使用貓砂盆是貓咪在壓力下所表現的其中一個行為時，在家中多放一個貓砂盆，並試試看使用其他種類的貓砂。</p>
+                                    <p class="doubletab">(3)如果只飼養一隻貓，要有足夠的玩具讓它不會無聊，當然也必須付出足夠的愛心和時間陪它玩，當外出時，可以考慮把收音機或電視機開著。</p>
+                                    <p class="doubletab">(4)不論有養多少隻貓咪，請讓貓咪有可以看到外界動靜的地方，即使只是讓它睡在能被陽光照射的到的地方都好。</p>
+                                </div>
+                            </div>
+                            <div class="row" style="display:none" id="water">
+                                <div class="col-lg-12 col-md-12">
+                                    <h4 style="color:#3D5BA8">喝水高手</h4>
+                                    <br>
+                                    <h5 class="tab" style="color:#EF5981">如何引誘貓咪多喝水</h5>
+                                    <p class="doubletab">(1)四處擺放多碗水，讓貓咪走到哪裡就能喝到哪裡。</p>
+                                    <p class="doubletab">(2)假裝水很好喝，引誘貓咪前來試喝。</p>
+                                    <p class="doubletab">(3)把水點在貓咪鼻子上，強迫喝水，<span style="color:#EF5981">一天重覆100次</span>。</p>
+                                    <p class="doubletab">(4)活水裝置。</p>
+                                    <p class="doubletab">(5)特製新鮮貓草水，加入貓薄荷或貓草皆可(貓茶包)。</p>
+                                    <p class="doubletab">(6)洗手做羹湯，用雞胸肉或吻仔魚熬湯餵食，不加調味。</p>
+                                    <p class="doubletab">(7)罐頭要加入大量的水(讓他們再怎麼努力都吃不到肉)。</p>
+                                    <p class="doubletab">(8)極力稱讚有乖乖喝水的貓咪。</p>
+                                    <p class="doubletab">(9)要時常更新飲水容器，滿足貓咪喜新厭舊心理。</p>
+                                    <p class="doubletab">(10)夏天可以將貓草撕碎放入置冰器做成貓草冰塊，消暑兼喝水。</p>
+                                    <p class="doubletab">(11)飲水容器要盡量的色彩鮮豔，貓咪喜歡鮮豔的顏色。</p>
+                                    <p class="doubletab">(12)添購小魚缸，放入幾尾假魚假水草，引誘貓咪獵捕。</p>
+                                    <p class="doubletab">(13)常常換水，貓咪對水質很挑剔，建議天天換，1天最好可以換3次以上。</p>
+                                    <p class="doubletab">(14)貓咪的飲水器要常清洗，建議用稍微燙手的熱水清洗，因為這個溫度能溶解飼料或食物油脂。</p>
+                                    <p class="doubletab">(15)改變容器(器皿口徑大於貓頭即可，讓貓咪因為好奇而去喝水)。</p>
+                                    <p class="doubletab">(16)冬天時的飲水溫度約27-29度。</p>
+                                </div>
+                            </div>
+                            <div class="row" style="display:none" id="brush">
+                                <div class="col-lg-12 col-md-12">
+                                    <h4 style="color:#3D5BA8">刷牙高手</h4>
+                                    <p style="font-weight: normal;">道具：貓專用刷牙指套、潔牙膏、生理食鹽水、紗布</p>
+                                    <p style="font-weight: normal;">頻率：定期刷牙，每天一次，至少一周2~3次</p>
+                                    <br>
+                                    <h5 class="tab" style="color:#EF5981">刷牙步驟</h5>
+                                    <h5 class="tab">1.紗布沾濕</h5>
+                                    <p class="doubletab">先將貓咪放在高度適中的桌上，並用紗布沾取適量生理食鹽水。</p>
+                                    <h5 class="tab">2.擦拭牙齒</h5>
+                                    <p class="doubletab">慢慢將貓嘴掰開，到牠露出前排小牙齒，用溼紗布輕輕擦拭牙齒。</p>
+                                    <h5 class="tab">3.用專用刷牙指套沾取潔牙膏</h5>
+                                    <p class="doubletab">有些貓咪吃到牙膏會有吐白沫的反應，所以量不要太多。</p>
+                                    <h5 class="tab">4.刷牙</h5>
+                                    <p class="doubletab">用一般刷牙的模式輕輕摩擦牙齒，力道不用大，否則會使牠牙齦受傷。</p>
+                                    <p class="doubletab"><span style="color:#EF5981">牙刷盡量呈45度角</span>，在牙齦和牙齒交會處利用划小圈的方式一次刷幾顆牙，最後以垂直方式刷凈牙齒和牙齒間縫隙里的牙斑。</p>
+                                    <p class="doubletab">重複以上這些步驟，直到頰內面的牙齒全部刷凈為止貓咪如配合度高可朝後排牙齒邁進，記得左右都要刷到。</p>
+                                </div>
+                            </div>
+                            <div class="row" style="display:none" id="comb">
+                                <div class="col-lg-12 col-md-12">
+                                    <h4 style="color:#3D5BA8">梳毛高手</h4>
+                                    <br>
+                                    <h5 class="tab">1.頭頸</h5>
+                                    <p class="doubletab">是梳理貓毛的起點，由頭到頸順着毛髮梳理。注意貓咪的反應，若牠抗拒扭動，要小心梳子誤傷牠的眼睛。</p>
+                                    <h5 class="tab">2.前腳</h5>
+                                    <p class="doubletab">用一隻手將前腳抬起，然後由肘部往腳掌方向梳。</p>
+                                    <h5 class="tab">3.後腳</h5>
+                                    <p class="doubletab">由大腿開始，再往腳跟部梳理。梳理大腿毛時可以讓貓咪側躺着，一隻手扶着貓咪的腳來進行。</p>
+                                    <h5 class="tab">4.腹部</h5>
+                                    <p class="doubletab">梳肚子上的毛，可將貓咪放在腿上，肚子朝上，由胸部向腹部的方向梳。肚子是貓咪比較敏感的部位，千萬不要強迫。</p>
+                                    <h5 class="tab">5.腋下</h5>
+                                    <p class="doubletab">用排梳來梳理，先讓貓咪側躺着，並用一隻手抓住貓咪的前腳，方向由腋下往胸部方向梳。</p>
+                                    <h5 class="tab">6.大腿內側</h5>
+                                    <p class="doubletab">讓貓咪側躺並抓住貓咪的一隻後腳，方向由腿向肚子方向梳。</p>
+                                    <h5 class="tab">7.尾巴</h5>
+                                    <p class="doubletab">尾巴的毛不常梳理也容易打結，尾巴會分泌大量皮脂，容易引發皮膚炎症，因此要經常梳理。梳理時不要硬拉扯，防止受傷。</p>
+                                </div>
+                            </div>
+                            <div class="row" style="display:none" id="change">
+                                <div class="col-lg-12 col-md-12">
+                                    <h4 style="color:#3D5BA8">訓練定食定量的方法</h4>
+                                    <br>
+                                    <h5 class="tab" style="color:#EF5981">三個重點</h5>
+                                    <p class="doubletab" style="font-weight: bold;">(1)要狠下心不理會他吵鬧或者撒嬌討食。</p>
+                                    <p class="doubletab" style="font-weight: bold;">(2)在養成習慣前儘量都要準時。</p>
+                                    <p class="doubletab" style="font-weight: bold;">(3)明白讓他知道現在不吃，在下個用餐時間前都沒得吃。</p>
+                                    <br>
+                                    <h5 class="tab" style="color:#EF5981">起床放飯</h5>
+                                    <p class="doubletab">白天可以在出門上班（上學）之前三十分鐘倒定量的飼料給貓咪，出門之前收起來，讓貓咪過幾天自己明白三十分鐘內沒吃完的話，到您回家之前都沒有東西可以吃。</p>
+                                    <p class="doubletab">過幾天之後，您可以觀察看看您的貓咪是否會在正確的早餐時間進食，若食量不錯可以視情況稍微增加飼料量，切記不要太多，卡卡貓建議您的貓咪每天攝取適合他的卡路里。</p>
+                                    <p class="doubletab" style="font-weight: bold;color:#3D5BA8">貓咪吃不完收起來的飼料，可以選擇留到下一餐再次食用，但是不建議放超過24小時。卡卡貓提醒您，飼料暴露在空氣中放置太久時間，可能會導致飼料不夠新鮮。</p>
+                                    <br>
+                                    <h5 class="tab" style="color:#EF5981">晚上放飯</h5>                                    
+                                    <p class="doubletab">下班回家或者洗澡後倒定量的飼料給貓咪（也可以自行選一個適當的時間），很多貓咪活躍性在晚上提升，飼料可以選擇不用收起來，不過切記量一定要固定，若貓咪食量不錯，一樣可以視情況增加。</p>
+                                    <br>
+                                    <h5 class="tab" style="color:#EF5981">增加用餐次數</h5>
+                                    <p class="doubletab">如果您一天分兩餐餵食進展順利，您可以嘗試看看將原本一天食用的飼料量分成三餐來給你的貓咪食用，分少量多餐的好處是可以讓貓咪一次不會吃太大的量（避免食用過快過多導致的嘔吐現象），也可以讓飼料不會暴露在空氣中太久以維持新鮮度。</p>
+                                    <p class="doubletab" style="color:#3D5BA8">對於一般的飼主來說，建議分配的用餐次數以及時間推薦如下：</p>
+                                    <p class="tripletab">(1)兩餐 - 早上七點與晚上七點，間隔十二個小時。</p>
+                                    <p class="tripletab">(2)三餐 - 早上七點、一下班回到家以及睡前一小時，晚上兩餐間隔三到四小時。</p>
+                                    <p class="doubletab" style="color:#3D5BA8">對於工作或學業比較彈性的飼主來說，建議分配的用餐次數以及時間推薦如下：</p>
+                                    <p class="tripletab">(2)三餐 - 早上七點、一下班回到家以及睡前一小時，晚上兩餐間隔三到四小時。</p>
+                                    <p class="tripletab">(2)四餐 - 早上六點、中午十二點、晚上六點、午夜十二點，每餐間隔六小時。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-9 col-md-9" id="layerA_Binner"></div>
-            <div class="col-lg-9 col-md-9" id="layerA_Cinner"></div>
+            <div class="col-lg-9 col-md-9" id="layerA_Binner" style="display:none"></div>
+            <div class="col-lg-9 col-md-9" id="layerA_Cinner" style="display:none"></div>
+            <div class="col-lg-9 col-md-9" id="layerA_Dinner" style="display:none"></div>
 		</div>
 	</div>
 	<!---->
@@ -195,7 +537,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script src="javascript/index.js"></script>
-<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="javascript/jquery-circle-progress/dist/circle-progress.js"></script>
+<script src="javascript/wowjs/dist/wow.js"></script>
 </html>
 <script>
     function UnfunctionalPart(){
@@ -203,6 +547,8 @@
     }
     var layerA = 'layerA_A';
     var layerA_Atag = 'layerA_AtagA';
+    var layerA_A_B_img = 'layerA_A_B_imgA';
+    var layerA_A_C_img = 'layerA_A_C_imgA';
     function ChangeLayer(id){
         if(id!=layerA){
             $('#'+layerA).toggleClass('generalButton_select');
@@ -213,8 +559,6 @@
             $('#'+record+'inner').fadeOut(200,function(){
                 $('#'+layerA+'inner').fadeIn(200);
             })
-        }else{
-            // do nothing
         }
     }
     function ChangeTag(id){
@@ -224,9 +568,102 @@
             layerA_Atag = id;
             $('#'+layerA_Atag).toggleClass('selectorButton_select');
             //fadein fadeout
-            
-        }else{
-            // do nothing
+            id = id.replace('tag','_');
+            record = record.replace('tag','_');
+            $('#'+record).fadeOut(200,function(){
+                $('#'+id).fadeIn(200);
+            });         
         }
+    }
+    function ChangeCare(id){
+        if(id!=layerA_A_B_img){
+            $('#'+layerA_A_B_img).toggleClass('select_img_select');
+            var record = layerA_A_B_img;
+            layerA_A_B_img = id;
+            $('#'+layerA_A_B_img).toggleClass('select_img_select');
+            //fadein fadeout
+        }
+    }
+    function ChangeCareImg(id,original){
+
+    }
+    function ChngeSearch(id){
+        if(id!=layerA_A_C_img){
+            $('#'+layerA_A_C_img).toggleClass('select_img_select');
+            var record = layerA_A_C_img;
+            layerA_A_C_img = id;
+            $('#'+layerA_A_C_img).toggleClass('select_img_select');
+            //fadein fadeout
+            var originalpage;
+            var newpage;
+            if(record=='layerA_A_C_imgA'){
+                originalpage = 'tie';
+            }else if(record=='layerA_A_C_imgB'){
+                originalpage = 'stress';
+            }else if(record=='layerA_A_C_imgC'){
+                originalpage = 'water';
+            }else if(record=='layerA_A_C_imgD'){
+                originalpage = 'brush';
+            }else if(record=='layerA_A_C_imgE'){
+                originalpage = 'comb';
+            }else if(record=='layerA_A_C_imgF'){
+                originalpage = 'change';
+            }
+            if(layerA_A_C_img=='layerA_A_C_imgA'){
+                newpage = 'tie';
+            }else if(layerA_A_C_img=='layerA_A_C_imgB'){
+                newpage = 'stress';
+            }else if(layerA_A_C_img=='layerA_A_C_imgC'){
+                newpage = 'water';
+            }else if(layerA_A_C_img=='layerA_A_C_imgD'){
+                newpage = 'brush';
+            }else if(layerA_A_C_img=='layerA_A_C_imgE'){
+                newpage = 'comb';
+            }else if(layerA_A_C_img=='layerA_A_C_imgF'){
+                newpage = 'change';
+            }
+            $('#'+originalpage).fadeOut(200,function(){
+                $('#'+newpage).fadeIn(200);
+            });
+        }
+    }
+    $(document).ready(function(){
+        $('.circle').circleProgress({
+            emptyFill: 'white'
+        });
+        $('#circleA').circleProgress({
+            value: 0.20,
+            size: 80,
+            thickness: 8,
+            startAngle: Math.PI / 2,
+            fill: {
+            gradient: ["#3D5BA8", "#3D5BA8"]
+            }
+        });
+        $('#circleB').circleProgress({
+            value: 0.30,
+            size: 96,
+            thickness: 8,
+            startAngle: Math.PI / 2,
+            fill: {
+            gradient: ["#87A7D6", "#87A7D6"]
+            }
+        });
+        $('#circleC').circleProgress({
+            value: 0.45,
+            size: 112,
+            thickness: 8,
+            startAngle: Math.PI / 2,
+            fill: {
+            gradient: ["#EF5981", "#EF5981"]
+            }
+        });  
+        move(45,$('#myBarA'),2);
+        move(35,$('#myBarB'),2);
+        move(10,$('#myBarC'),4);
+    });
+    function move(percent, $element,coe) {
+        var progressBarWidth = percent * $element.width() / 100 * coe;
+        $element.find('.myBar').animate({ width: progressBarWidth }, 500).html(percent + "% ");
     }
 </script>

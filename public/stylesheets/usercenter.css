@@ -10,12 +10,11 @@
   padding-bottom: 5vh;
   border-radius: 8px;
   background-color: #F1F1F2;
-  height: 75vh;
   border: #F1F1F2 solid 12px;
 }
 .selectorButton{
-  height: 5vh;
   margin-right: 1px;
+  max-width: 25%;
   background-color: #D0D2D3;
   padding: 0 12px;
   color: white;
@@ -40,8 +39,8 @@
   transition: 300ms;
 }
 .informationInner_block{
-  height: 55vh;
-  width: 95%;
+  width: 100%;
+  padding: 10px;
   background-color: white;
   border: 5px solid #87A7D6;
   border-radius: 5px;
@@ -69,4 +68,59 @@
   background-color: white !important;
   border: #EF5981 solid 3px !important;
   color: #EF5981 !important;
+}
+/* Progress Circle */
+.circle {
+  position: absolute;
+}
+.myProgress{
+  width: 100%;
+  background-color: #F1F1F2;
+  border-radius: 8px;
+}
+.myBar{
+  width: 0;
+  height: 15px;
+  text-align: center; /* To center it horizontally (if you want) */
+  line-height: 15px; /* To center it vertically */
+  font-size: 0.5em;
+  color: white; 
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
+}
+.productInformationInner-content{
+
+}
+.tinyArrow{
+  width: 4%;
+  height: 100%;
+  top: -13px;
+  position: absolute;
+}
+.select_img{
+  width: 70%;
+  cursor: pointer;
+  border: #D0D2D3 solid 3px;
+  border-radius: 12px;
+  transition: 300ms;
+}
+.select_img:hover{
+  border: gray solid 3px;
+  transition: 300ms;
+}
+.select_img_select{
+  border: #EF5981 solid 3px !important;
+  background-color: rgba(239, 89, 129, 0.3);
+  transition: 300ms;
+}
+.tab{
+  padding-left: 20px;
+}
+.doubletab{
+  padding-left: 40px;
+  font-weight: normal;
+}
+.tripletab{
+  padding-left: 60px;
+  font-weight: bold;
 }
