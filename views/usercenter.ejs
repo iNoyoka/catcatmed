@@ -578,7 +578,7 @@
             record = record.replace('tag','_');
             $('#'+record).fadeOut(200,function(){
                 $('#'+id).fadeIn(200,function(){
-                    DrawLayerA_A_B();
+                    if(id=='layerA_A_B')    DrawLayerA_A_B();
                 });
             });         
         }
@@ -991,8 +991,10 @@
             innerhtml += '<h4 style="color:#3D5BA8">保護口腔</h4>';
             innerhtml += '<br>';
             innerhtml += '<p class="tab" style="color:#EF5981">'+qnlist.BCN+'的口腔問題，可以透過少吃碳水化合物、多吃抗氧化食物增加抵抗力來減緩牙周的不適，而罹患齒齦炎的貓咪則須注重抵抗力的增加,以及定期就診檢查配合藥物控制的方式讓貓咪有更好的生活品質。</p>';
-            if(qnlist.fur_behave.includes('D')){
-                innerhtml += '<p class="doubletab"> - 口腔疾病所引起的疼痛可能會使的'+qnlist.BCN+'不愛理毛，要多幫'+qnlist.BCN+'理毛及口腔保健。</p>';
+            if(qnlist.fur_behave!=null){
+                if(qnlist.fur_behave.includes('D')){
+                    innerhtml += '<p class="doubletab"> - 口腔疾病所引起的疼痛可能會使的'+qnlist.BCN+'不愛理毛，要多幫'+qnlist.BCN+'理毛及口腔保健。</p>';
+                }
             }
             if(qnlist.mouth_brush=='A'){
                 innerhtml += '<p class="doubletab"> - 建議能開始幫'+qnlist.BCN+'養成刷牙的習慣，才能繼續開心吃東西，若已經無法重新培養刷牙習慣的貓咪，可透過減少吃過量的碳水化合物，以及各式的口腔清潔用品，如:口腔噴劑、口腔清潔凝膠、潔齒零食等來維持口腔健康。</p>';
