@@ -40,7 +40,7 @@
             <div class="col-md-5 text-center flex-row navbar-nav align-items-center" id="nav_right">
                     <% if(name){ %>
                         <div class="col-md-2"></div>
-                        <a class="nav_text nav-item nav-link col-md-2"  href="#">歡迎，<%= name %>!</a>
+                        <a class="nav_text nav-item nav-link col-md-2"  href="#">歡迎回來!</a>
                         <a class="nav_text nav-item nav-link col-md-2"  href="usercenter">會員中心</a>
                         <a class="nav_text nav-item nav-link col-md-2"  href="logout">登出</a>
                     <% }else{ %>
@@ -628,6 +628,13 @@
         }
     }
     $(document).ready(function(){
+        $.ajax({
+            method: 'POST',
+            url: '/usercenter_requestData'
+        }).done(function(data){
+            alert("?");
+            alert(data);
+        });
         $('.circle').circleProgress({
             emptyFill: 'white'
         });
