@@ -124,3 +124,6 @@
   padding-left: 60px;
   font-weight: bold;
 }
+#layerA_A_A_productimg img{
+  max-height: 250px;
+}

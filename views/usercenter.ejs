@@ -71,7 +71,7 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-12 col-md-12">
-						<h4><span id="catname"></span></h4>
+						<h4><span id="catnameA"></span></h4>
 					</div>
                 </div>
                 <br>
@@ -126,13 +126,13 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
                                     <br>
-                                    <h4>您為<span id="catname"></span>所選擇的飼料</h4>
+                                    <h4>您為<span id="catnameB"></span>所選擇的飼料</h4>
                                     <br>
                                     <h5>品名: <span id="layerA_A_A_productname">CCM1000</span></h5>
                                     <h5>品牌: <span id="layerA_A_A_productbrand">GO</span></h5>
                                     <h5>原產地: <span id="layerA_A_A_original">Australia</span></h5>
                                 </div>
-                                <div class="col-lg-6 col-md-6" id="layerA_A_A_productimg">
+                                <div class="col-lg-6 col-md-6 text-center" id="layerA_A_A_productimg">
                                     <img src="images/questionnaire/product/0010.png">
                                 </div>
                             </div>
@@ -141,7 +141,7 @@
                                 <div class="col-lg-6 col-md-6">
                                     <div class="row productInformationInner-content">
                                         <div class="col-lg-12 col-md-12">
-                                            <p style="color:gray">依照您所提供的詳細身體資訊，卡卡貓推薦<span id="catname"></span>攝取以下游標營養區間</p>
+                                            <p style="color:gray">依照您所提供的詳細身體資訊，卡卡貓推薦<span id="catnameC"></span>攝取以下游標營養區間</p>
                                         </div> 
                                     </div>
                                     <div class="row productInformationInner-content">
@@ -212,7 +212,7 @@
                                     <div style="border: #EF5981 solid 1px; background-color: rgba(239, 89, 129, 0.5);border-radius: 5px;padding: 10px 10px;margin: 10px 0;width: 100%;">
                                         <span>可能的過敏原：</span>
                                         <br>
-                                        <span id="poteintialalergent">雞肉絨、脫水家禽蛋白</span>
+                                        <span id="potentialalergent">雞肉絨、脫水家禽蛋白</span>
                                     </div>
                                 </div>
                             </div>
@@ -550,6 +550,11 @@
     var layerA_A_B_img = 'layerA_A_B_imgA';
     var layerA_A_C_img = 'layerA_A_C_imgA';
     var temp = '#';
+    var datasplit;
+    var buildTime;
+    var productdetailinfo;
+    var correctqnlist;
+    var innerhtml = '';
     function ChangeLayer(id){
         if(id!=layerA){
             $('#'+layerA).toggleClass('generalButton_select');
@@ -572,7 +577,9 @@
             id = id.replace('tag','_');
             record = record.replace('tag','_');
             $('#'+record).fadeOut(200,function(){
-                $('#'+id).fadeIn(200);
+                $('#'+id).fadeIn(200,function(){
+                    DrawLayerA_A_B();
+                });
             });         
         }
     }
@@ -599,9 +606,10 @@
                 innerhtml = '';
                 temp = 'tempB';
                 innerhtml = GenerateCare(tempid,correctqnlist);
-                document.getElementById('tempB').innerHTML = innerhtml;
                 $('#tempA').fadeOut(200,function(){
-                    $('#tempB').fadeIn(200);
+                    $('#tempB').fadeIn(200,function(){
+                        document.getElementById('tempB').innerHTML = innerhtml;
+                    });
                 });
             }
             else{
@@ -660,11 +668,11 @@
             method: 'POST',
             url: '/usercenter_requestData'
         }).done(function(data){
-            var datasplit = data.split('#');
-            var buildTime = JSON.parse(datasplit[0]);
-            var productdetailinfo = JSON.parse(datasplit[1]);
-            var correctqnlist = JSON.parse(datasplit[2]);
-            var innerhtml = '';
+            datasplit = data.split('#');
+            buildTime = JSON.parse(datasplit[0]);
+            productdetailinfo = JSON.parse(datasplit[1]);
+            correctqnlist = JSON.parse(datasplit[2]);
+            innerhtml = '';
             correctqnlist.select_icon = JSON.parse(correctqnlist.select_icon);
             correctqnlist.joint_below = JSON.parse(correctqnlist.joint_below);
             correctqnlist.heart_behave = JSON.parse(correctqnlist.heart_behave);
@@ -681,7 +689,9 @@
             correctqnlist.stress_lifestyle = JSON.parse(correctqnlist.stress_lifestyle);
             correctqnlist.extra_alergent = JSON.parse(correctqnlist.extra_alergent);
             // left part
-            document.getElementById('catname').innerHTML = correctqnlist.BCN;
+            document.getElementById('catnameA').innerHTML = correctqnlist.BCN;
+            document.getElementById('catnameB').innerHTML = correctqnlist.BCN;
+            document.getElementById('catnameC').innerHTML = correctqnlist.BCN;
             document.getElementById('dailygram').innerHTML = productdetailinfo.dailyNeedGram;
             document.getElementById('dailydrink').innerHTML = productdetailinfo.dailyNeedWater;
             //layerA_A_A 1st banner
@@ -691,12 +701,12 @@
             document.getElementById('layerA_A_A_original').innerHTML = productdetailinfo.original;
             document.getElementById('layerA_A_A_productimg').innerHTML = '<img src="images/questionnaire/product/'+imgdes+'.png">';
             //layerA_A_A progressbar
-            $('#proA').css('left',productdetailinfo.proteinUpperLimit*2+'%');
-            $('#proB').css('left',productdetailinfo.proteinLowerLimit*2+'%');
-            $('#fatA').css('left',productdetailinfo.fatUpperLimit*2+'%');
-            $('#fatB').css('left',productdetailinfo.fatLowerLimit*2+'%');
-            $('#fibA').css('left',productdetailinfo.fiberUpperLimit*4+'%');
-            $('#fibB').css('left',productdetailinfo.fiberLowerLimit*4+'%');
+            $('#proA').css('left',productdetailinfo.proteinUpperLimit*2+2+'%');
+            $('#proB').css('left',productdetailinfo.proteinLowerLimit*2+2+'%');
+            $('#fatA').css('left',productdetailinfo.fatUpperLimit*2+5+'%');
+            $('#fatB').css('left',productdetailinfo.fatLowerLimit*2+2+'%');
+            $('#fibA').css('left',productdetailinfo.fiberUpperLimit*4+2+'%');
+            $('#fibB').css('left',productdetailinfo.fiberLowerLimit*4+2+'%');
             move(productdetailinfo.protein,$('#myBarA'),2);
             move(productdetailinfo.fat,$('#myBarB'),2);
             move(productdetailinfo.fiber,$('#myBarC'),4);
@@ -738,62 +748,64 @@
             document.getElementById('goodmeat').innerHTML = productdetailinfo.goodMeat;
             document.getElementById('potentialalergent').innerHTML = productdetailinfo.potentialAlergent;
             document.getElementById('ingredient').innerHTML = productdetailinfo.ingredient;
-            //layerA_A_B img
-            innerhtml = '';
-            for(i=0;i<correctqnlist.select_icon.length;i++){
-                //initial option
-                if(i==0){
-                    if(correctqnlist.select_icon[i]=='A') layerA_A_B_img = 'layerA_A_B_imgJOINT';
-                    if(correctqnlist.select_icon[i]=='B') layerA_A_B_img = 'layerA_A_B_imgHEART';
-                    if(correctqnlist.select_icon[i]=='C') layerA_A_B_img = 'layerA_A_B_imgMOUTH';
-                    if(correctqnlist.select_icon[i]=='D') layerA_A_B_img = 'layerA_A_B_imgLIHAIR';
-                    if(correctqnlist.select_icon[i]=='E') layerA_A_B_img = 'layerA_A_B_imgIMMU';
-                    if(correctqnlist.select_icon[i]=='F') layerA_A_B_img = 'layerA_A_B_imgKIDNEY';
-                    if(correctqnlist.select_icon[i]=='G') layerA_A_B_img = 'layerA_A_B_imgURINARY';
-                    if(correctqnlist.select_icon[i]=='H') layerA_A_B_img = 'layerA_A_B_imgSTOMA';
-                    if(correctqnlist.select_icon[i]=='I') layerA_A_B_img = 'layerA_A_B_imgMEHAIR';
-                    if(correctqnlist.select_icon[i]=='J') layerA_A_B_img = 'layerA_A_B_imgSTRESS';
-                }
-                innerhtml += GenerateOption(correctqnlist.select_icon[i]);
-            }
-            innerhtml += '<div class="col-lg-2 col-md-2"><img class="select_img" src="images/usercenter/extra.png" id="layerA_A_B_imgExtra" onclick="ChangeCare(this.id)" title="extra pro"></div>';
-            document.getElementById('layerA_A_B_selectorimg').innerHTML = innerhtml;
-            $('#'+layerA_A_B_img).toggleClass('select_img_select');
-            //layerA_A_B img name
-            innerhtml = '';
-            for(i=0;i<correctqnlist.select_icon.length;i++){
-                if(correctqnlist.select_icon[i]=='A') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">關節保養</p></div>';
-                if(correctqnlist.select_icon[i]=='B') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">心臟保健</p></div>';
-                if(correctqnlist.select_icon[i]=='C') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">保護口腔</p></div>';
-                if(correctqnlist.select_icon[i]=='D') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">亮毛護膚</p></div>';
-                if(correctqnlist.select_icon[i]=='E') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">增強免疫力</p></div>';
-                if(correctqnlist.select_icon[i]=='F') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">腎臟照護</p></div>';
-                if(correctqnlist.select_icon[i]=='G') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">泌尿道保健</p></div>';
-                if(correctqnlist.select_icon[i]=='H') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">腸胃保健</p></div>';
-                if(correctqnlist.select_icon[i]=='I') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">化毛</p></div>';
-                if(correctqnlist.select_icon[i]=='J') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">壓力照護</p></div>';
-            }
-            innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">其他</p></div>';
-            document.getElementById('layerA_A_B_selectorname').innerHTML = innerhtml;
-            //tempA and tempB
-            innerhtml = '';
-            temp = 'tempA';
-            innerhtml = GenerateCare(correctqnlist.select_icon[0],correctqnlist);
-            document.getElementById('tempA').innerHTML = innerhtml;
-            $('#tempA').fadeIn(200);
         });
     });
+    function DrawLayerA_A_B(){
+        //layerA_A_B img
+        var innerhtml = '';
+        for(i=0;i<correctqnlist.select_icon.length;i++){
+            //initial option
+            if(i==0){
+                if(correctqnlist.select_icon[i]=='A') layerA_A_B_img = 'layerA_A_B_imgJOINT';
+                if(correctqnlist.select_icon[i]=='B') layerA_A_B_img = 'layerA_A_B_imgHEART';
+                if(correctqnlist.select_icon[i]=='C') layerA_A_B_img = 'layerA_A_B_imgMOUTH';
+                if(correctqnlist.select_icon[i]=='D') layerA_A_B_img = 'layerA_A_B_imgLIHAIR';
+                if(correctqnlist.select_icon[i]=='E') layerA_A_B_img = 'layerA_A_B_imgIMMU';
+                if(correctqnlist.select_icon[i]=='F') layerA_A_B_img = 'layerA_A_B_imgKIDNEY';
+                if(correctqnlist.select_icon[i]=='G') layerA_A_B_img = 'layerA_A_B_imgURINARY';
+                if(correctqnlist.select_icon[i]=='H') layerA_A_B_img = 'layerA_A_B_imgSTOMA';
+                if(correctqnlist.select_icon[i]=='I') layerA_A_B_img = 'layerA_A_B_imgMEHAIR';
+                if(correctqnlist.select_icon[i]=='J') layerA_A_B_img = 'layerA_A_B_imgSTRESS';
+            }
+            innerhtml += GenerateOption(correctqnlist.select_icon[i]);
+        }
+        innerhtml += '<div class="col-lg-2 col-md-2 text-center"><img class="select_img" src="images/usercenter/extra.png" id="layerA_A_B_imgExtra" onclick="ChangeCare(this.id)" title="extra pro"></div>';
+        document.getElementById('layerA_A_B_selectorimg').innerHTML = innerhtml;
+        $('#'+layerA_A_B_img).toggleClass('select_img_select');
+        //layerA_A_B img name
+        innerhtml = '';
+        for(i=0;i<correctqnlist.select_icon.length;i++){
+            if(correctqnlist.select_icon[i]=='A') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">關節保養</p></div>';
+            if(correctqnlist.select_icon[i]=='B') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">心臟保健</p></div>';
+            if(correctqnlist.select_icon[i]=='C') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">保護口腔</p></div>';
+            if(correctqnlist.select_icon[i]=='D') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">亮毛護膚</p></div>';
+            if(correctqnlist.select_icon[i]=='E') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">增強免疫力</p></div>';
+            if(correctqnlist.select_icon[i]=='F') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">腎臟照護</p></div>';
+            if(correctqnlist.select_icon[i]=='G') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">泌尿道保健</p></div>';
+            if(correctqnlist.select_icon[i]=='H') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">腸胃保健</p></div>';
+            if(correctqnlist.select_icon[i]=='I') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">化毛</p></div>';
+            if(correctqnlist.select_icon[i]=='J') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">壓力照護</p></div>';
+        }
+        innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">其他</p></div>';
+        document.getElementById('layerA_A_B_selectorname').innerHTML = innerhtml;
+        //tempA and tempB
+        innerhtml = '';
+        temp = 'tempA';
+        innerhtml = GenerateCare(correctqnlist.select_icon[0],correctqnlist);
+        document.getElementById('tempA').innerHTML = innerhtml;
+        $('#tempA').fadeIn(200);
+    }
     function GenerateOption(icon){
-        if(icon=='A') return '<div class="col-lg-2 col-md-2"><img class="select_img" src="images/usercenter/JOINT.png" id="layerA_A_B_imgJOINT" onclick="ChangeCare(this.id)" title="joint pro"></div>';
-        if(icon=='B') return '<div class="col-lg-2 col-md-2"><img class="select_img" src="images/usercenter/HEART.png" id="layerA_A_B_imgHEART" onclick="ChangeCare(this.id)" title="heart pro"></div>';
-        if(icon=='C') return '<div class="col-lg-2 col-md-2"><img class="select_img" src="images/usercenter/MOUTH.png" id="layerA_A_B_imgMOUTH" onclick="ChangeCare(this.id)" title="mouth pro"></div>';
-        if(icon=='D') return '<div class="col-lg-2 col-md-2"><img class="select_img" src="images/usercenter/LIHAIR.png" id="layerA_A_B_imgLIHAIR" onclick="ChangeCare(this.id)" title="hair pro"></div>';
-        if(icon=='E') return '<div class="col-lg-2 col-md-2"><img class="select_img" src="images/usercenter/IMMU.png" id="layerA_A_B_imgIMMU" onclick="ChangeCare(this.id)" title="immu pro"></div>';
-        if(icon=='F') return '<div class="col-lg-2 col-md-2"><img class="select_img" src="images/usercenter/KIDNEY.png" id="layerA_A_B_imgKIDNEY" onclick="ChangeCare(this.id)" title="kidney pro"></div>';
-        if(icon=='G') return '<div class="col-lg-2 col-md-2"><img class="select_img" src="images/usercenter/URINARY.png" id="layerA_A_B_imgURINARY" onclick="ChangeCare(this.id)" title="urinary pro"></div>';
-        if(icon=='H') return '<div class="col-lg-2 col-md-2"><img class="select_img" src="images/usercenter/STOMA.png" id="layerA_A_B_imgSTOMA" onclick="ChangeCare(this.id)" title="stoma pro"></div>';
-        if(icon=='I') return '<div class="col-lg-2 col-md-2"><img class="select_img" src="images/usercenter/MEHAIR.png" id="layerA_A_B_imgMEHAIR" onclick="ChangeCare(this.id)" title="mehair pro"></div>';
-        if(icon=='J') return '<div class="col-lg-2 col-md-2"><img class="select_img" src="images/usercenter/STRESS.png" id="layerA_A_B_imgSTRESS" onclick="ChangeCare(this.id)" title="stress pro"></div>';
+        if(icon=='A') return '<div class="col-lg-2 col-md-2 text-center"><img class="select_img" src="images/questionnaire/icon/qn/joint.png" id="layerA_A_B_imgJOINT" onclick="ChangeCare(this.id)" title="joint pro"></div>';
+        if(icon=='B') return '<div class="col-lg-2 col-md-2 text-center"><img class="select_img" src="images/questionnaire/icon/qn/heart.png" id="layerA_A_B_imgHEART" onclick="ChangeCare(this.id)" title="heart pro"></div>';
+        if(icon=='C') return '<div class="col-lg-2 col-md-2 text-center"><img class="select_img" src="images/questionnaire/icon/qn/mouth.png" id="layerA_A_B_imgMOUTH" onclick="ChangeCare(this.id)" title="mouth pro"></div>';
+        if(icon=='D') return '<div class="col-lg-2 col-md-2 text-center"><img class="select_img" src="images/questionnaire/icon/qn/hair.png" id="layerA_A_B_imgLIHAIR" onclick="ChangeCare(this.id)" title="hair pro"></div>';
+        if(icon=='E') return '<div class="col-lg-2 col-md-2 text-center"><img class="select_img" src="images/questionnaire/icon/qn/immu.png" id="layerA_A_B_imgIMMU" onclick="ChangeCare(this.id)" title="immu pro"></div>';
+        if(icon=='F') return '<div class="col-lg-2 col-md-2 text-center"><img class="select_img" src="images/questionnaire/icon/qn/kidney.png" id="layerA_A_B_imgKIDNEY" onclick="ChangeCare(this.id)" title="kidney pro"></div>';
+        if(icon=='G') return '<div class="col-lg-2 col-md-2 text-center"><img class="select_img" src="images/questionnaire/icon/qn/urinary.png" id="layerA_A_B_imgURINARY" onclick="ChangeCare(this.id)" title="urinary pro"></div>';
+        if(icon=='H') return '<div class="col-lg-2 col-md-2 text-center"><img class="select_img" src="images/questionnaire/icon/qn/stoma.png" id="layerA_A_B_imgSTOMA" onclick="ChangeCare(this.id)" title="stoma pro"></div>';
+        if(icon=='I') return '<div class="col-lg-2 col-md-2 text-center"><img class="select_img" src="images/questionnaire/icon/qn/mehair.png" id="layerA_A_B_imgMEHAIR" onclick="ChangeCare(this.id)" title="mehair pro"></div>';
+        if(icon=='J') return '<div class="col-lg-2 col-md-2 text-center"><img class="select_img" src="images/questionnaire/icon/qn/stress.png" id="layerA_A_B_imgSTRESS" onclick="ChangeCare(this.id)" title="stress pro"></div>';
     }
     function GenerateCare(qnlist_icon,qnlist){
         var innerhtml = '';
@@ -829,11 +841,13 @@
             }
             innerhtml += '<br>';
         }
-        if(qnlist.extra_strangehabit.length>=1){
-            innerhtml += '<h4 style="color:#3D5BA8">高齡貓須知</h4>';
-            innerhtml += '<br>';
-            innerhtml += '<p class="tab">'+qnlist.BCN+'的目前已經是高齡貓囉，記憶力也開始退化，也有認知障礙的徵兆發生，建議您不要隨意更動家裡的傢俱擺設，尤其是常用的食物盆、水盆和貓砂盆擺放的位置都建議不要有大幅度的變動，對開始有認知障礙的老貓會有所幫助。</p>';
-            innerhtml += '<br>';
+        if(qnlist.extra_strangehabit!=null){
+            if(qnlist.extra_strangehabit.length>=1){
+                innerhtml += '<h4 style="color:#3D5BA8">高齡貓須知</h4>';
+                innerhtml += '<br>';
+                innerhtml += '<p class="tab">'+qnlist.BCN+'的目前已經是高齡貓囉，記憶力也開始退化，也有認知障礙的徵兆發生，建議您不要隨意更動家裡的傢俱擺設，尤其是常用的食物盆、水盆和貓砂盆擺放的位置都建議不要有大幅度的變動，對開始有認知障礙的老貓會有所幫助。</p>';
+                innerhtml += '<br>';
+            }
         }
         if(qnlist.BPR=='yes'){
             innerhtml += '<h4 style="color:#3D5BA8">懷孕的'+qnlist.BCN+'</h4>';
