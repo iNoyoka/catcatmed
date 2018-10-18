@@ -323,7 +323,7 @@ router.get('/joint_now',function(req,res,next){
 });
 router.post('/joint_now',function(req,res,next){
     req.session.joint_now = req.body.name;
-    req.session.qnrecordList.push('joint_med');
+    req.session.qnrecordList.push('joint_now');
     res.send('joint_med');
 });
 //

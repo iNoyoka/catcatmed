@@ -16,6 +16,7 @@
     </script>
     <link rel="stylesheet" href="stylesheets/header.css">
     <link rel="stylesheet" href="stylesheets/usercenter.css">
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
 </head>
 
 <body class="qrbody">
@@ -65,29 +66,29 @@
 			<div class="col-lg-3 col-md-3 text-center">
 				<div class="row">
 					<div class="col-lg-12 col-md-12" style="margin-top: 5vh">
-						<img src="images/questionnaire/icons-09.png" style="width:100%;">
+						<img src="images/questionnaire/icons-0901.png" style="width:100%;">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-12 col-md-12">
-						<h4><%=name%></h4>
+						<h4><span id="catname"></span></h4>
 					</div>
                 </div>
                 <br>
                 <br>
 				<div class="row">
 					<div class="col-lg-12 col-md-12">
-						<h5 id="day">DAY 33</h5>
+						<h5>DAY <span id="day"></span></h5>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-12 col-md-12">
-						<h5 id="dailygram">每日飲食量 60 克</h5>
+						<h5>每日飲食量 <span id="dailygram"></span> 克</h5>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-12 col-md-12">
-						<h5 id="dailydrink">每日飲水量 240 毫升</h5>
+						<h5>每日飲水量 <span id="dailydrink"></span> 毫升</h5>
 					</div>
                 </div>
                 <br>
@@ -125,7 +126,7 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
                                     <br>
-                                    <h4>您為<%=name%>所選擇的飼料</h4>
+                                    <h4>您為<span id="catname"></span>所選擇的飼料</h4>
                                     <br>
                                     <h5>品名: <span id="layerA_A_A_productname">CCM1000</span></h5>
                                     <h5>品牌: <span id="layerA_A_A_productbrand">GO</span></h5>
@@ -140,7 +141,7 @@
                                 <div class="col-lg-6 col-md-6">
                                     <div class="row productInformationInner-content">
                                         <div class="col-lg-12 col-md-12">
-                                            <p style="color:gray">依照您所提供的詳細身體資訊，卡卡貓推薦<%=name%>攝取以下游標營養區間</p>
+                                            <p style="color:gray">依照您所提供的詳細身體資訊，卡卡貓推薦<span id="catname"></span>攝取以下游標營養區間</p>
                                         </div> 
                                     </div>
                                     <div class="row productInformationInner-content">
@@ -211,7 +212,7 @@
                                     <div style="border: #EF5981 solid 1px; background-color: rgba(239, 89, 129, 0.5);border-radius: 5px;padding: 10px 10px;margin: 10px 0;width: 100%;">
                                         <span>可能的過敏原：</span>
                                         <br>
-                                        <span id="poteintialAlergent">雞肉絨、脫水家禽蛋白</span>
+                                        <span id="poteintialalergent">雞肉絨、脫水家禽蛋白</span>
                                     </div>
                                 </div>
                             </div>
@@ -251,12 +252,12 @@
                             </div>
                             <br>
                             <hr>
-                            <div class="row" id="tempA">
+                            <div class="row" id="tempA" style="display:none">
                                 <div class="col-lg-12 col-md-12">
 
                                 </div>
                             </div>
-                            <div class="row" id="tempB">
+                            <div class="row" id="tempB" style="display:none">
                                 <div class="col-lg-12 col-md-12">
 
                                 </div>
@@ -354,7 +355,6 @@
                                     <p class="doubletab">(3)過度幽閉或限制其行動。(沒有對外窗)</p>
                                     <p class="doubletab">(4)缺乏新鮮空氣和陽光，尤其是當貓咪在以前是習慣常到外面行動的。</p>
                                     <p class="doubletab">(5)改變貓咪的生活習慣。</p>
-                                    <img>
                                     <h5 class="tab" style="color:#EF5981">身體的變化</h5>
                                     <p class="doubletab">(1)肥胖、疾病或手術</p>
                                     <p class="doubletab">(2)身體上的改變。(剪指甲、洗澡或剃毛等貓咪原本不喜歡的活動)</p>
@@ -549,6 +549,7 @@
     var layerA_Atag = 'layerA_AtagA';
     var layerA_A_B_img = 'layerA_A_B_imgA';
     var layerA_A_C_img = 'layerA_A_C_imgA';
+    var temp = '#';
     function ChangeLayer(id){
         if(id!=layerA){
             $('#'+layerA).toggleClass('generalButton_select');
@@ -582,10 +583,37 @@
             layerA_A_B_img = id;
             $('#'+layerA_A_B_img).toggleClass('select_img_select');
             //fadein fadeout
+            if(id=='layerA_A_B_imgJOINT') tempid = 'A';
+            if(id=='layerA_A_B_imgHEART') tempid = 'B';
+            if(id=='layerA_A_B_imgMOUTH') tempid = 'C';
+            if(id=='layerA_A_B_imgLIHAIR') tempid = 'D';
+            if(id=='layerA_A_B_imgIMMU') tempid = 'E';
+            if(id=='layerA_A_B_imgKIDNEY') tempid = 'F';
+            if(id=='layerA_A_B_imgURINARY') tempid = 'G';
+            if(id=='layerA_A_B_imgSTOMA') tempid = 'H';
+            if(id=='layerA_A_B_imgMEHAIR') tempid = 'I';
+            if(id=='layerA_A_B_imgSTRESS') tempid = 'J';
+            if(id=='layerA_A_B_imgSTRESS') tempid = 'J';
+            if(id=='layerA_A_B_imgExtra') tempid = 'extra';
+            if(temp=='tempA'){
+                innerhtml = '';
+                temp = 'tempB';
+                innerhtml = GenerateCare(tempid,correctqnlist);
+                document.getElementById('tempB').innerHTML = innerhtml;
+                $('#tempA').fadeOut(200,function(){
+                    $('#tempB').fadeIn(200);
+                });
+            }
+            else{
+                innerhtml = '';
+                temp = 'tempA';
+                innerhtml = GenerateCare(tempid,correctqnlist);
+                document.getElementById('tempA').innerHTML = innerhtml;
+                $('#tempB').fadeOut(200,function(){
+                    $('#tempA').fadeIn(200);
+                });
+            }
         }
-    }
-    function ChangeCareImg(id,original){
-
     }
     function ChngeSearch(id){
         if(id!=layerA_A_C_img){
@@ -632,43 +660,404 @@
             method: 'POST',
             url: '/usercenter_requestData'
         }).done(function(data){
-            alert("?");
-            alert(data);
-        });
-        $('.circle').circleProgress({
+            var datasplit = data.split('#');
+            var buildTime = JSON.parse(datasplit[0]);
+            var productdetailinfo = JSON.parse(datasplit[1]);
+            var correctqnlist = JSON.parse(datasplit[2]);
+            var innerhtml = '';
+            correctqnlist.select_icon = JSON.parse(correctqnlist.select_icon);
+            correctqnlist.joint_below = JSON.parse(correctqnlist.joint_below);
+            correctqnlist.heart_behave = JSON.parse(correctqnlist.heart_behave);
+            correctqnlist.mouth_behave = JSON.parse(correctqnlist.mouth_behave);
+            correctqnlist.fur_behave = JSON.parse(correctqnlist.fur_behave);
+            correctqnlist.fur_tie = JSON.parse(correctqnlist.fur_tie);
+            correctqnlist.immu_behave = JSON.parse(correctqnlist.immu_behave);
+            correctqnlist.immu_behave_before = JSON.parse(correctqnlist.immu_behave_before);
+            correctqnlist.urinary_behave = JSON.parse(correctqnlist.urinary_behave);
+            correctqnlist.stoma_problem = JSON.parse(correctqnlist.stoma_problem);
+            correctqnlist.stress_now = JSON.parse(correctqnlist.stress_now);
+            correctqnlist.stress_enviornment = JSON.parse(correctqnlist.stress_enviornment);
+            correctqnlist.stress_enviornment_out = JSON.parse(correctqnlist.stress_enviornment_out);
+            correctqnlist.stress_lifestyle = JSON.parse(correctqnlist.stress_lifestyle);
+            correctqnlist.extra_alergent = JSON.parse(correctqnlist.extra_alergent);
+            // left part
+            document.getElementById('catname').innerHTML = correctqnlist.BCN;
+            document.getElementById('dailygram').innerHTML = productdetailinfo.dailyNeedGram;
+            document.getElementById('dailydrink').innerHTML = productdetailinfo.dailyNeedWater;
+            //layerA_A_A 1st banner
+            var imgdes = productdetailinfo.productCode.slice(3,7);
+            document.getElementById('layerA_A_A_productname').innerHTML = productdetailinfo.name_zh;
+            document.getElementById('layerA_A_A_productbrand').innerHTML = productdetailinfo.brand_zh;
+            document.getElementById('layerA_A_A_original').innerHTML = productdetailinfo.original;
+            document.getElementById('layerA_A_A_productimg').innerHTML = '<img src="images/questionnaire/product/'+imgdes+'.png">';
+            //layerA_A_A progressbar
+            $('#proA').css('left',productdetailinfo.proteinUpperLimit*2+'%');
+            $('#proB').css('left',productdetailinfo.proteinLowerLimit*2+'%');
+            $('#fatA').css('left',productdetailinfo.fatUpperLimit*2+'%');
+            $('#fatB').css('left',productdetailinfo.fatLowerLimit*2+'%');
+            $('#fibA').css('left',productdetailinfo.fiberUpperLimit*4+'%');
+            $('#fibB').css('left',productdetailinfo.fiberLowerLimit*4+'%');
+            move(productdetailinfo.protein,$('#myBarA'),2);
+            move(productdetailinfo.fat,$('#myBarB'),2);
+            move(productdetailinfo.fiber,$('#myBarC'),4);
+            //layerA_A_A circle
+            document.getElementById('circleInner_protein').innerHTML = productdetailinfo.proteinLevel + '%';
+            document.getElementById('circleInner_fat').innerHTML = productdetailinfo.fatLevel + '%';
+            document.getElementById('circleInner_carboh').innerHTML = productdetailinfo.carbohydrateLevel + '%';
+            $('.circle').circleProgress({
             emptyFill: 'white'
-        });
-        $('#circleA').circleProgress({
-            value: 0.20,
-            size: 80,
-            thickness: 8,
-            startAngle: Math.PI / 2,
-            fill: {
-            gradient: ["#3D5BA8", "#3D5BA8"]
+            });
+            $('#circleA').circleProgress({
+                value: productdetailinfo.carbohydrateLevel/100,
+                size: 80,
+                thickness: 8,
+                startAngle: Math.PI / 2,
+                fill: {
+                gradient: ["#3D5BA8", "#3D5BA8"]
+                }
+            });
+            $('#circleB').circleProgress({
+                value: productdetailinfo.fatLevel/100,
+                size: 96,
+                thickness: 8,
+                startAngle: Math.PI / 2,
+                fill: {
+                gradient: ["#87A7D6", "#87A7D6"]
+                }
+            });
+            $('#circleC').circleProgress({
+                value: productdetailinfo.proteinLevel/100,
+                size: 112,
+                thickness: 8,
+                startAngle: Math.PI / 2,
+                fill: {
+                gradient: ["#EF5981", "#EF5981"]
+                }
+            });
+            //layerA_A_A ingredient
+            document.getElementById('goodmeat').innerHTML = productdetailinfo.goodMeat;
+            document.getElementById('potentialalergent').innerHTML = productdetailinfo.potentialAlergent;
+            document.getElementById('ingredient').innerHTML = productdetailinfo.ingredient;
+            //layerA_A_B img
+            innerhtml = '';
+            for(i=0;i<correctqnlist.select_icon.length;i++){
+                //initial option
+                if(i==0){
+                    if(correctqnlist.select_icon[i]=='A') layerA_A_B_img = 'layerA_A_B_imgJOINT';
+                    if(correctqnlist.select_icon[i]=='B') layerA_A_B_img = 'layerA_A_B_imgHEART';
+                    if(correctqnlist.select_icon[i]=='C') layerA_A_B_img = 'layerA_A_B_imgMOUTH';
+                    if(correctqnlist.select_icon[i]=='D') layerA_A_B_img = 'layerA_A_B_imgLIHAIR';
+                    if(correctqnlist.select_icon[i]=='E') layerA_A_B_img = 'layerA_A_B_imgIMMU';
+                    if(correctqnlist.select_icon[i]=='F') layerA_A_B_img = 'layerA_A_B_imgKIDNEY';
+                    if(correctqnlist.select_icon[i]=='G') layerA_A_B_img = 'layerA_A_B_imgURINARY';
+                    if(correctqnlist.select_icon[i]=='H') layerA_A_B_img = 'layerA_A_B_imgSTOMA';
+                    if(correctqnlist.select_icon[i]=='I') layerA_A_B_img = 'layerA_A_B_imgMEHAIR';
+                    if(correctqnlist.select_icon[i]=='J') layerA_A_B_img = 'layerA_A_B_imgSTRESS';
+                }
+                innerhtml += GenerateOption(correctqnlist.select_icon[i]);
             }
-        });
-        $('#circleB').circleProgress({
-            value: 0.30,
-            size: 96,
-            thickness: 8,
-            startAngle: Math.PI / 2,
-            fill: {
-            gradient: ["#87A7D6", "#87A7D6"]
+            innerhtml += '<div class="col-lg-2 col-md-2"><img class="select_img" src="images/usercenter/extra.png" id="layerA_A_B_imgExtra" onclick="ChangeCare(this.id)" title="extra pro"></div>';
+            document.getElementById('layerA_A_B_selectorimg').innerHTML = innerhtml;
+            $('#'+layerA_A_B_img).toggleClass('select_img_select');
+            //layerA_A_B img name
+            innerhtml = '';
+            for(i=0;i<correctqnlist.select_icon.length;i++){
+                if(correctqnlist.select_icon[i]=='A') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">關節保養</p></div>';
+                if(correctqnlist.select_icon[i]=='B') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">心臟保健</p></div>';
+                if(correctqnlist.select_icon[i]=='C') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">保護口腔</p></div>';
+                if(correctqnlist.select_icon[i]=='D') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">亮毛護膚</p></div>';
+                if(correctqnlist.select_icon[i]=='E') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">增強免疫力</p></div>';
+                if(correctqnlist.select_icon[i]=='F') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">腎臟照護</p></div>';
+                if(correctqnlist.select_icon[i]=='G') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">泌尿道保健</p></div>';
+                if(correctqnlist.select_icon[i]=='H') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">腸胃保健</p></div>';
+                if(correctqnlist.select_icon[i]=='I') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">化毛</p></div>';
+                if(correctqnlist.select_icon[i]=='J') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">壓力照護</p></div>';
             }
+            innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">其他</p></div>';
+            document.getElementById('layerA_A_B_selectorname').innerHTML = innerhtml;
+            //tempA and tempB
+            innerhtml = '';
+            temp = 'tempA';
+            innerhtml = GenerateCare(correctqnlist.select_icon[0],correctqnlist);
+            document.getElementById('tempA').innerHTML = innerhtml;
+            $('#tempA').fadeIn(200);
         });
-        $('#circleC').circleProgress({
-            value: 0.45,
-            size: 112,
-            thickness: 8,
-            startAngle: Math.PI / 2,
-            fill: {
-            gradient: ["#EF5981", "#EF5981"]
-            }
-        });  
-        move(45,$('#myBarA'),2);
-        move(35,$('#myBarB'),2);
-        move(10,$('#myBarC'),4);
     });
+    function GenerateOption(icon){
+        if(icon=='A') return '<div class="col-lg-2 col-md-2"><img class="select_img" src="images/usercenter/JOINT.png" id="layerA_A_B_imgJOINT" onclick="ChangeCare(this.id)" title="joint pro"></div>';
+        if(icon=='B') return '<div class="col-lg-2 col-md-2"><img class="select_img" src="images/usercenter/HEART.png" id="layerA_A_B_imgHEART" onclick="ChangeCare(this.id)" title="heart pro"></div>';
+        if(icon=='C') return '<div class="col-lg-2 col-md-2"><img class="select_img" src="images/usercenter/MOUTH.png" id="layerA_A_B_imgMOUTH" onclick="ChangeCare(this.id)" title="mouth pro"></div>';
+        if(icon=='D') return '<div class="col-lg-2 col-md-2"><img class="select_img" src="images/usercenter/LIHAIR.png" id="layerA_A_B_imgLIHAIR" onclick="ChangeCare(this.id)" title="hair pro"></div>';
+        if(icon=='E') return '<div class="col-lg-2 col-md-2"><img class="select_img" src="images/usercenter/IMMU.png" id="layerA_A_B_imgIMMU" onclick="ChangeCare(this.id)" title="immu pro"></div>';
+        if(icon=='F') return '<div class="col-lg-2 col-md-2"><img class="select_img" src="images/usercenter/KIDNEY.png" id="layerA_A_B_imgKIDNEY" onclick="ChangeCare(this.id)" title="kidney pro"></div>';
+        if(icon=='G') return '<div class="col-lg-2 col-md-2"><img class="select_img" src="images/usercenter/URINARY.png" id="layerA_A_B_imgURINARY" onclick="ChangeCare(this.id)" title="urinary pro"></div>';
+        if(icon=='H') return '<div class="col-lg-2 col-md-2"><img class="select_img" src="images/usercenter/STOMA.png" id="layerA_A_B_imgSTOMA" onclick="ChangeCare(this.id)" title="stoma pro"></div>';
+        if(icon=='I') return '<div class="col-lg-2 col-md-2"><img class="select_img" src="images/usercenter/MEHAIR.png" id="layerA_A_B_imgMEHAIR" onclick="ChangeCare(this.id)" title="mehair pro"></div>';
+        if(icon=='J') return '<div class="col-lg-2 col-md-2"><img class="select_img" src="images/usercenter/STRESS.png" id="layerA_A_B_imgSTRESS" onclick="ChangeCare(this.id)" title="stress pro"></div>';
+    }
+    function GenerateCare(qnlist_icon,qnlist){
+        var innerhtml = '';
+        if(qnlist_icon=='A') innerhtml = CareJOINT(qnlist);
+        if(qnlist_icon=='B') innerhtml = CareHEART(qnlist);
+        if(qnlist_icon=='C') innerhtml = CareMOUTH(qnlist);
+        if(qnlist_icon=='D') innerhtml = CareLIHAIR(qnlist);
+        if(qnlist_icon=='E') innerhtml = CareIMMU(qnlist);
+        if(qnlist_icon=='F') innerhtml = CareKIDNEY(qnlist);
+        if(qnlist_icon=='G') innerhtml = CareURINARY(qnlist);
+        if(qnlist_icon=='H') innerhtml = CareSTOMA(qnlist);
+        if(qnlist_icon=='I') innerhtml = CareMEHAIR(qnlist);
+        if(qnlist_icon=='J') innerhtml = CareSTRESS(qnlist);
+        if(qnlist_icon=='extra') innerhtml = CareExtra(qnlist);
+        return innerhtml;
+    }
+    function CareExtra(qnlist){
+        var innerhtml = '';
+        if((qnlist.BCA_ageYear==1 && qnlist.BCA_ageMonth==0) || (qnlist.BCA_ageYear==0)){
+            innerhtml += '<h4 style="color:#3D5BA8">貓咪社會化</h4>';
+            innerhtml += '<br>';
+            innerhtml += '<p class="tab">兩個月左右是'+qnlist.BCN+'學習社會化最好的黃金時期，所謂社會化訓練即是要讓'+qnlist.BCN+'學會如何跟人群以及其他貓咪互動與相處，在社會化的訓練過程最重要的是要先注意疫苗預防注射的施打進度，若'+qnlist.BCN+'的預防針沒有接受施打,我們不建議讓'+qnlist.BCN+'與其他貓咪互動，以免感染傳染病。</p>';
+            innerhtml += '<p class="tab">同時兩月齡以上的貓咪正是需要透過遊戲學習的年紀，我們建議給予貓咪專屬的玩具互動，在遊戲中學習天生的狩獵技巧，當'+qnlist.BCN+'發現自己是個優秀的獵人時，會大大提升他的自信心唷!</p>';
+            innerhtml += '<br>';
+        }
+        if(((qnlist.BCA_ageYear==1 && qnlist.BCA_ageMonth==0) || (qnlist.BCA_ageYear==0 && qnlist.BCA_ageMonth>=6)) && qnlist.BNU=='no'){
+            innerhtml += '<h4 style="color:#3D5BA8">邁向青春期</h4>';
+            innerhtml += '<br>';
+            innerhtml += '<p class="tab">貓咪在六個月到一歲之間，因為開始邁向成年，性賀爾蒙也開始分泌，因為性賀爾蒙的分泌，貓咪容易感受到壓力，建議飼主可以在進早結紮，減少因賀爾蒙分泌摻生的壓力行為。</p>';
+            innerhtml += '<p class="tab">評估'+qnlist.BCN+'是否可以結紮的重要指標為乳齒使否轉換為恆齒，大約在1歲左右會完成犬齒的轉換，大部分的貓咪在犬齒換完後即準備進入性成熟階段，表示身體內的荷爾蒙開始改變，以至於會有發情的徵兆出現。</p>';
+            if(qnlist.BCS=='female'){
+                innerhtml += '<p class="tab" style="color:#EF5981">'+qnlist.BCN+'最好的結紮時間建議在首次發情前，可以大大降低未來在熟齡期婦科疾病的機率。</p>';
+            }
+            innerhtml += '<br>';
+        }
+        if(qnlist.extra_strangehabit.length>=1){
+            innerhtml += '<h4 style="color:#3D5BA8">高齡貓須知</h4>';
+            innerhtml += '<br>';
+            innerhtml += '<p class="tab">'+qnlist.BCN+'的目前已經是高齡貓囉，記憶力也開始退化，也有認知障礙的徵兆發生，建議您不要隨意更動家裡的傢俱擺設，尤其是常用的食物盆、水盆和貓砂盆擺放的位置都建議不要有大幅度的變動，對開始有認知障礙的老貓會有所幫助。</p>';
+            innerhtml += '<br>';
+        }
+        if(qnlist.BPR=='yes'){
+            innerhtml += '<h4 style="color:#3D5BA8">懷孕的'+qnlist.BCN+'</h4>';
+            innerhtml += '<br>';
+            innerhtml += '<p class="tab">懷孕是'+qnlist.BCN+'人生的大事，建議幫'+qnlist.BCN+'多補充點營養品，並且減少任何會造成她情緒緊張的情況，像是洗澡以及外出等等。</p>';
+            innerhtml += '<p class="tab">此外定期產檢是非常重要的，可以利用超音波確認寶寶心跳狀態、x光檢查可推測寶寶隻數以及評估頭圍是否能通過媽媽產道，來判斷是否需要剖腹產，都是非常重要的檢查</p>';
+            innerhtml += '<p class="tab">在懷孕末期'+qnlist.BCN+'通常會有便秘的問題，建議可以適量的使用化毛粉通便，並且能在家裡布置一個溫暖安靜安全的地方作為'+qnlist.BCN+'的產房。</p>';
+            innerhtml += '<br>';
+        }
+        if(qnlist.BSI=='B' || qnlist.BSI=='C'){
+            innerhtml += '<h4 style="color:#3D5BA8">蟲蟲防治</h4>';
+            innerhtml += '<br>';
+            innerhtml += '<p class="tab">室外放養可能會讓'+qnlist.BCN+'在外面感染到貓咪的傳染病，且發生意外打架的機率也比較高，卡卡貓的獸醫師強烈建議室內飼育，不僅可以減少傳染病的發生，'+qnlist.BCN+'也會更健康喔！</p>';
+            if(qnlist.extra_killbugs=='B'){
+                innerhtml += '<p class="tab">另外，驅蟲是對貓咪健康把關是非常重要的步驟，卡卡貓推薦您，外出貓建議每三個月驅蟲、每月除蚤，可以大幅預防'+qnlist.BCN+'體外跳蚤以及體內絛蟲情形。</p>';
+            }
+            innerhtml += '<br>';
+        }
+        if(qnlist.BSI=='A' && qnlist.extra_killbugs=='B'){
+            innerhtml += '<p class="tab">驅蟲對貓咪健康是非常重要的步驟，雖然'+qnlist.BCN+'是飼養在室內，但是跳蚤以及蟲卵很有可能會從人類的鞋底帶入家中，建議您室內貓也應該在三到六個月驅蟲一次。</p>';
+            innerhtml += '<br>';
+        }
+        if((qnlist.BBC=='D' || qnlist.BBC=='E') && qnlist.BNU=='yes'){
+            innerhtml += '<h4 style="color:#3D5BA8">身材控制</h4>';
+            innerhtml += '<br>';
+            innerhtml += '<p class="tab">'+qnlist.BCN+'結紮後因基礎代謝率變差，容易有體重增加過快的問題，請您注意餵食習慣，不建議採用任食吃到飽的方式，定時定量會是更能精準控制熱量的方法，也要注意結紮後的貓咪若無其他需求請勿再餵食幼貓飼料。</p>';
+            innerhtml += '<p class="tab">生活上建議您可以多陪'+qnlist.BCN+'玩，利用玩耍來維持運動，一次玩耍的時間建議在10分鐘，可以有效增加卡路里的消耗量，或是在餵食上額外增加餵食碗數量，各自放在家裡的不同角落，可以讓'+qnlist.BCN+'多走動，增加'+qnlist.BCN+'的運動量，都是讓'+qnlist.BCN+'回歸苗條身材的小撇步喔!</p>';
+            innerhtml += '<br>';
+        }
+        if(qnlist.extra_drinking=='A'){
+            innerhtml += '<h4 style="color:#3D5BA8">口渴的'+qnlist.BCN+'</h4>';
+            innerhtml += '<br>';
+            innerhtml += '<p class="tab">要注意是否為過量飲水喔，過量飲水可能是糖尿病慢性腎衰竭疾病的發生前兆，建議您可以再多注意一下'+qnlist.BCN+'。</p>';
+            innerhtml += '<br>';
+        }
+        return innerhtml;
+    }
+    function CareJOINT(qnlist){
+        var innerhtml = '';
+        if(qnlist.joint_now=='yes'){
+            innerhtml += '<h4 style="color:#3D5BA8">關節保養</h4>';
+            innerhtml += '<br>';
+            innerhtml += '<p class="tab" style="color:#EF5981">因為您跟我們說'+qnlist.BCN+'有關節方面的問題，卡卡貓可以為您提供以下的建議讓'+qnlist.BCN+'過得舒適一些！</p>';
+            if(qnlist.joint_med=='no'){
+                innerhtml += '<p class="doubletab"> - 建議您可以與醫生討論是否使用葡萄糖胺及軟骨素來緩解'+qnlist.BCN+'關節上的不適，也可以透過體重管理來減少關節負擔。</p>';
+            }
+            innerhtml += '<p class="doubletab"> - 佈置溫暖、柔軟的窩。</p>';
+            innerhtml += '<p class="doubletab"> - 將食物、水盆及貓砂盆放在'+qnlist.BCN+'容易到達的地方。</p>';
+            innerhtml += '<p class="doubletab" style="color:#EF5981"> - 有時關節的疼痛會讓'+qnlist.BCN+'將排泄物大在外面，多點耐心、不責罵才是對'+qnlist.BCN+'最好的方式！</p>';
+            innerhtml += '<p class="doubletab">最近天氣開始轉涼，您可以提供毛毯、墊子及保溫墊給'+qnlist.BCN+'，降低關節所造成的緊迫。</p>';
+            if(qnlist.joint_jump=='yes'){
+                innerhtml += '<p class="doubletab"> - 您可以放置「階梯」來減少'+qnlist.BCN+'上下跳動的情形。</p>';
+            }
+            if(qnlist.joint_daily!='A'){
+                innerhtml += '<p class="doubletab"> - 濕滑的地板在'+qnlist.BCN+'跑動、跳躍的時候，可能會造成關節額外的負擔，有時也會因摩擦力不足而滑倒、扭傷，堅硬的地面也會加劇關節處的壓迫。</p>';
+            }
+        }
+        else{
+            if(qnlist.joint_below[0]!='unsure' || qnlist.BSP!='米克斯' || qnlist.BCA_ageYear>=12){
+                innerhtml += '<h4 style="color:#3D5BA8">關節保養</h4>';
+                innerhtml += '<br>';
+                innerhtml += '<p class="tab" style="color:#EF5981">雖然'+qnlist.BCN+'目前沒有關節方面的問題，不過卡卡貓可以給您以下建議讓'+qnlist.BCN+'過的更舒適！</p>';
+                if(qnlist.BSP!='米克斯'){
+                    innerhtml += '<p class="doubletab"> - '+qnlist.BSP+'是關節炎的好發族群，建議'+qnlist.BCN+'能夠定期身體健康檢查，並做好體重管理降低關節骨頭負擔，也能補充關節保健補充品，減少關節問題。</p>';
+                }
+                if(qnlist.BCA_ageYear>=12){
+                    innerhtml += '<p class="doubletab"> - 研究指出，超過12歲以上的老貓將近70%會有退化性關節炎，為了'+qnlist.BCN+'的生活品質，建議'+qnlist.BCN+'能定期身體健康檢查，並做好體重管理降低關節骨頭負擔，或透過補充關節保健補充品，舒緩關節問題。</p>';
+                }
+                innerhtml += '<p class="doubletab"> - 佈置溫暖、柔軟的窩。</p>';
+                innerhtml += '<p class="doubletab"> - 將食物、水盆及貓砂盆放在'+qnlist.BCN+'容易到達的地方。</p>';
+                innerhtml += '<p class="doubletab">最近天氣開始轉涼，您可以提供毛毯、墊子及保溫墊給'+qnlist.BCN+'，降低關節所造成的緊迫。</p>';
+                if(qnlist.joint_jump=='yes'){
+                    innerhtml += '<p class="doubletab"> - 您可以放置「階梯」來減少'+qnlist.BCN+'上下跳動的情形。</p>';
+                }
+                if(qnlist.joint_daily!='A'){
+                    innerhtml += '<p class="doubletab"> - 濕滑的地板在'+qnlist.BCN+'跑動、跳躍的時候，可能會造成關節額外的負擔，有時也會因摩擦力不足而滑倒、扭傷，堅硬的地面也會加劇關節處的壓迫。</p>';
+                }
+            }
+            else{
+                innerhtml += '<h4 style="color:#3D5BA8">預防保健</h4>';
+                innerhtml += '<br>';
+                innerhtml += '<p class="tab">目前'+qnlist.BCN+'的關節狀況良好，可以適量補充關節保健補充品強化關節的功能，或是透過良好的運動習慣，適量的鍛鍊肌肉、韌帶來增加關節的穩定度。</p>';
+            }
+        }
+        innerhtml += '<br>';
+        return innerhtml;
+    }
+    function CareHEART(qnlist){
+        var innerhtml = '';
+        if(qnlist.heart_now=='yes'){
+            innerhtml += '<h4 style="color:#3D5BA8">心臟保健</h4>';
+            innerhtml += '<br>';
+            innerhtml += '<p class="tab" style="color:#EF5981">因為您跟我們說'+qnlist.BCN+'有心臟方面的問題，卡卡貓可以為您提供以下的建議讓'+qnlist.BCN+'的生活更有保障！</p>';
+            innerhtml += '<p class="doubletab"> - 對患有心臟病的'+qnlist.BCN+'來說，建議以少量多餐的方式攝取精緻蛋白質和熱量，並搭配體重控管和走路運動的方式降低心臟病的復發。建議您平時能夠數'+qnlist.BCN+'睡著後每分鐘的呼吸起伏，以不超過30下為主，若超過要立即送醫。</p>';
+            innerhtml += '<p class="doubletab"> - 若是幼貓或是較活潑的貓咪呼吸的次數會相對比較快，除此之外的貓咪如果出現呼吸急促、腹式呼吸、開口呼吸 等異常呼吸的狀況就應立即送醫檢查。</p>';
+            innerhtml += '<p class="doubletab"> - '+qnlist.BCN+'受到驚嚇容易造成急性心臟病發作，需要多注意。</p>';
+            if(qnlist.BCA_ageYear>=12){
+                innerhtml += '<p class="doubletab"> - 年紀大的'+qnlist.BCN+'血液循環循環較差，幫她按摩可以幫助'+qnlist.BCN+'保持健康。</p>';
+            }
+            if(qnlist.joint_med=='yes'){
+                innerhtml += '<p class="doubletab"> - 因為軟骨素和葡萄糖胺中有些成分中含有鈉鹽或鉀鹽，對心臟容易造成負擔，使用前須與醫師諮詢後再服用！</p>';
+            }
+            innerhtml += '<p class="doubletab"> - 天冷了，要注意好'+qnlist.BCN+'的保暖問題，建議居家環境維持在23~25度之間。</p>';
+        }else{
+            if(qnlist.joint_below[0]!='unsure' || qnlist.BSP!='米克斯' || qnlist.BCA_ageYear>=12){
+                innerhtml += '<h4 style="color:#3D5BA8">心臟保健</h4>';
+                innerhtml += '<br>';
+                innerhtml += '<p class="tab" style="color:#EF5981">雖然'+qnlist.BCN+'目前沒有心臟方面的問題，但是卡卡貓可以為您提供以下的建議讓'+qnlist.BCN+'的生活更有保障！</p>';
+                if(qnlist.BSP!='米克斯'){
+                    innerhtml += '<p class="doubletab"> - '+qnlist.BSP+'是罹患心血管疾病的高風險族群，除了需要定期接受健康檢查之外，也能補充牛磺酸、Q10、B群，且必須有規律運動的習慣，但切勿選擇高強度的劇烈運動，一次玩耍的時間建議在10分鐘，每十分鐘做一次休息。</p>';
+                }
+                if(qnlist.BCA_ageYear>=12){
+                    innerhtml += '<p class="doubletab"> - 老年貓咪是罹患心血管疾病的高風險族群，除了需要定期接受健康檢查之外，也能補充牛磺酸、Q10、B群，且必須有規律運動的習慣，但切勿選擇高強度的劇烈運動，一次玩耍的時間建議在10分鐘，每十分鐘做一次休息。</p>';
+                }
+                innerhtml += '<p class="doubletab"> - 若是幼貓或是較活潑的貓咪呼吸的次數會相對比較快，除此之外的貓咪如果出現呼吸急促、腹式呼吸、開口呼吸 等異常呼吸的狀況就應立即送醫檢查。</p>';
+                innerhtml += '<p class="doubletab"> - '+qnlist.BCN+'受到驚嚇有可能導致急性心臟病發作，需要多注意。</p>';
+                if(qnlist.BCA_ageYear>=12){
+                    innerhtml += '<p class="doubletab"> - 年紀大的'+qnlist.BCN+'血液循環循環較差，幫她按摩可以幫助'+qnlist.BCN+'保持健康。</p>';
+                }
+                if(qnlist.joint_med=='yes'){
+                    innerhtml += '<p class="doubletab"> - 因為軟骨素和葡萄糖胺中有些成分中含有鈉鹽或鉀鹽，對心臟容易造成負擔，使用前須與醫師諮詢後再服用！</p>';
+                }
+                innerhtml += '<p class="doubletab"> - 天冷了，要注意好'+qnlist.BCN+'的保暖問題，建議居家環境維持在23~25度之間。</p>';
+            }else{
+                innerhtml += '<h4 style="color:#3D5BA8">預防保健</h4>';
+                innerhtml += '<br>';
+                if(qnlist.BCA_ageYear>=12){
+                    innerhtml += '<p class="tab"> - 由於'+qnlist.BCN+'年紀大了，建議以走路的方式或是利用玩耍來維持運動保健心臟功能，建議一次玩耍的時間約10分鐘且每10分鐘休息一次，也能透過補充牛磺酸、Q10、B群來保護心臟。</p>';
+                }else{
+                    innerhtml += '<p class="tab"> - 給予'+qnlist.BCN+'適量的運動能夠強化心臟功能，也能透過補充牛磺酸、Q10、B群來保護心臟。</p>';
+                }
+                innerhtml += '<p class="tab"> - 天冷了，要注意好'+qnlist.BCN+'的保暖問題，建議居家環境維持在23~25度之間。</p>';
+            }
+        }
+        innerhtml += '<br>';
+        return innerhtml;
+    }
+    function CareMOUTH(qnlist){
+        var innerhtml = '';
+        if(qnlist.mouth_now=='yes'){
+            innerhtml += '<h4 style="color:#3D5BA8">保護口腔</h4>';
+            innerhtml += '<br>';
+            innerhtml += '<p class="tab" style="color:#EF5981">'+qnlist.BCN+'的口腔問題，可以透過少吃碳水化合物、多吃抗氧化食物增加抵抗力來減緩牙周的不適，而罹患齒齦炎的貓咪則須注重抵抗力的增加,以及定期就診檢查配合藥物控制的方式讓貓咪有更好的生活品質。</p>';
+            if(qnlist.fur_behave.includes('D')){
+                innerhtml += '<p class="doubletab"> - 口腔疾病所引起的疼痛可能會使的'+qnlist.BCN+'不愛理毛，要多幫'+qnlist.BCN+'理毛及口腔保健。</p>';
+            }
+            if(qnlist.mouth_brush=='A'){
+                innerhtml += '<p class="doubletab"> - 建議能開始幫'+qnlist.BCN+'養成刷牙的習慣，才能繼續開心吃東西，若已經無法重新培養刷牙習慣的貓咪，可透過減少吃過量的碳水化合物，以及各式的口腔清潔用品，如:口腔噴劑、口腔清潔凝膠、潔齒零食等來維持口腔健康。</p>';
+            }
+            if(qnlist.mouth_brush=='B'){
+                innerhtml += '<p class="doubletab"> - 刷牙是最能徹底清除貓咪齒垢的方式，建議須從小培養刷牙習慣，建立貓咪對於刷牙行為的接受度，而頻率也建議為每天刷牙，若三五天或一周做一次貓咪的接受度會很差。</p>';
+            }
+        }else{
+            innerhtml += '<h4 style="color:#3D5BA8">預防保健</h4>';
+            innerhtml += '<br>';
+            innerhtml += '<p class="tab" style="color:#EF5981">超過3歲的貓中大約有2/3會有牙科疾病，而3歲以下的貓咪也要多注意口腔健康。</p>';
+            innerhtml += '<p class="doubletab"> - 刷牙是最能徹底清除貓咪齒垢的方式，建議從小培養刷牙習慣建立貓咪對於刷牙行為的接受度，而頻率也建議為每天刷牙，若三五天或一周做一次貓咪的接受度會很低。</p>';
+            innerhtml += '<p class="doubletab"> - 已經無法重新培養刷牙習慣的貓咪，可透過減少吃過量的碳水化合物，以及各式的口腔清潔用品，如:口腔噴劑、口腔清潔凝膠、潔齒零食等來維持口腔健康。</p>';
+        }
+        innerhtml += '<p class="tab">您可以在「高手區」的「刷牙高手」找到更多照顧'+qnlist.BCN+'口腔的方法！</p>';
+        innerhtml += '<br>';
+        return innerhtml;
+    }
+    function CareIMMU(qnlist){
+        var innerhtml = '';
+        if(qnlist.immu_now=='yes'){
+            innerhtml += '<h4 style="color:#3D5BA8">增強免疫力</h4>';
+            innerhtml += '<br>';
+            innerhtml += '<p class="tab" style="color:#EF5981">感冒的'+qnlist.BCN+'除了遵照醫師的照顧以外，也要多注意'+qnlist.BCN+'最近的食慾及精神狀況。</p>';
+            if(qnlist.immu_spirit=='A' || qnlist.immu_spirit=='B'){
+                innerhtml += '<p class="doubletab"> - '+qnlist.BCN+'目前的回復狀況看起來不錯!平常可以多給'+qnlist.BCN+'多運動和補充保健食品增強抵抗力。</p>';
+            }else{
+                innerhtml += '<p class="doubletab"> - 食慾低落的'+qnlist.BCN+'還需要您多點耐心照顧了，可以吃點'+qnlist.BCN+'喜歡的食物，如:罐頭、鮮食補充體力。</p>';
+            }
+            if(qnlist.BCA_ageYear==0 && qnlist.BCA_ageMonth<=6){
+                innerhtml += '<p class="doubletab"> - 六個月以下的貓，因為免疫系統還尚未成熟，抵抗力較弱，建議您可以將室內溫度保持在25-28度之間，良好的通風也會讓'+qnlist.BCN+'更健康喔！</p>';
+            }
+        }else{
+            if(qnlist.immu_behave[0]!='unsure'){
+                innerhtml += '<h4 style="color:#3D5BA8">增強免疫力</h4>';
+                innerhtml += '<br>';
+                innerhtml += '<p class="tab" style="color:#EF5981">'+qnlist.BCN+'可能有感冒的狀況，要多注意最近的食慾及精神狀況，也可透過以下方法來增強'+qnlist.BCN+'的免疫力。</p>';
+                innerhtml += '<p class="doubletab"> - 避免潮濕環境，保持室內通風、乾燥。</p>';
+                innerhtml += '<p class="doubletab"> - 常曬太陽幫助'+qnlist.BCN+'殺菌，並清除家中可能過敏原。</p>';
+                innerhtml += '<p class="doubletab"> - 讓'+qnlist.BCN+'常運動增加抵抗力。</p>';
+                if(qnlist.immu_med=='no'){
+                    innerhtml += '<p class="doubletab"> - 您可以讓'+qnlist.BCN+'食用抗氧化保健食品、離胺酸(台灣80%的貓都患有貓皰疹病毒，平時增強免疫力可以預防病毒的侵害)。</p>';
+                }
+            }else{
+                innerhtml += '<h4 style="color:#3D5BA8">預防保健</h4>';
+                innerhtml += '<br>';
+                innerhtml += '<p class="tab" style="color:#EF5981">若是想幫'+qnlist.BCN+'增強免疫力可以嘗試以下方法：</p>';
+                innerhtml += '<p class="doubletab"> - 避免潮濕環境，保持室內通風、乾燥。</p>';
+                innerhtml += '<p class="doubletab"> - 常曬太陽幫助'+qnlist.BCN+'殺菌，並清除家中可能過敏原。</p>';
+                innerhtml += '<p class="doubletab"> - 讓'+qnlist.BCN+'常運動增加抵抗力。</p>';
+                if(qnlist.immu_med=='no'){
+                    innerhtml += '<p class="doubletab"> - 您可以讓'+qnlist.BCN+'食用抗氧化保健食品、離胺酸(台灣80%的貓都患有貓皰疹病毒，平時增強免疫力可以預防病毒的侵害)。</p>';
+                }
+                if(qnlist.BCA_ageYear==0 && qnlist.BCA_ageMonth<=6){
+                    innerhtml += '<p class="doubletab"> - 六個月以下的貓，因為免疫系統還尚未成熟，抵抗力較弱，建議您可以將室內溫度保持在25-28度之間，良好的通風也會讓'+qnlist.BCN+'更健康喔！</p>';
+                }
+            }
+        }
+        innerhtml += '<br>';
+        return innerhtml;
+    }
+    function CareLIHAIR(qnlist){
+        return '';
+    }
+    function CareKIDNEY(qnlist){
+        return '';
+    }
+    function CareURINARY(qnlist){
+        return '';
+    }
+    function CareSTOMA(qnlist){
+        return '';
+    }
+    function CareMEHAIR(qnlist){
+        return '';
+    }
+    function CareSTRESS(qnlist){
+        return '';
+    }
     function move(percent, $element,coe) {
         var progressBarWidth = percent * $element.width() / 100 * coe;
         $element.find('.myBar').animate({ width: progressBarWidth }, 500).html(percent + "% ");

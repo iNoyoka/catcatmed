@@ -1693,7 +1693,6 @@ app.post('/usercenter_requestData',function(req,res,next){
 						}
 						//ready to send data;
 						var listJSON = JSON.stringify(req.session.buildTime)+'#'+JSON.stringify(req.session.productdetailinfo)+'#'+JSON.stringify(req.session.correctqnlist);
-						console.log('sendDataToFront');
 						res.send(listJSON);
 					}
 				});
@@ -1920,7 +1919,6 @@ app.post('/usercenter_requestData',function(req,res,next){
 								}
 								//ready to send data;
 								var listJSON = JSON.stringify(req.session.buildTime)+'#'+JSON.stringify(req.session.productdetailinfo)+'#'+JSON.stringify(req.session.correctqnlist);
-								console.log('sendDataToFront');
 								res.send(listJSON);
 							}
 						});
