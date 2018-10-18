@@ -1322,10 +1322,38 @@ app.post('/clientSendOrder',function(req,res,next){
 //------------------------------------------
 // for demo page
 app.get('/repeatusername',function(req,res,next){
-
+	res.render('repeatusername');
 });
 app.post('/repeatusername',function(req,res,next){
-
+	var sql_check = "SELECT * FROM `ordersystem` WHERE username = '"+ req.body.keepername +"'";
+	con.query(sql_check,function(err,result){
+		if(err){
+			res.send('error');
+			throw err;
+		}
+		else{
+			if(result[0].userid==req.session.username){
+				req.session.catfoodID = result[0].productCode;
+				req.session.buildTime = result[0].buildTime;
+				var sql = "SELECT * FROM `userqnrecord` WHERE BCN = '"+ req.body.catname +"'";
+				con.query(sql_check,function(err,result){
+					if(err){
+						res.send('error');
+						throw err;
+					}else{
+						if(result[0].userid==req.session.username){
+							req.session.BCN = req.body.catname;
+							res.send('success');
+						}else{
+							res.send('error');
+						}
+					}
+				});
+			}else{
+				res.send('error');
+			}
+		}
+	});
 });
 app.get('/usercenter',function(req,res,next){	
 	if(req.session.username==null){
@@ -1339,7 +1367,7 @@ app.get('/usercenter',function(req,res,next){
 			}
 			else
 			{
-				if(result.length==0){	//repeat useraccount, goto /repeatusername to input cat name.
+				if(result.length==0){
 					res.redirect('/');
 				}else if(result.length>1){
 					res.redirect('/repeatusername');
