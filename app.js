@@ -1371,7 +1371,7 @@ app.get('/usercenter',function(req,res,next){
 			{
 				if(result.length==0){
 					res.redirect('/');
-				}else if(result.length>1){
+				}else if(result.length>1 && req.session.BCN==null){
 					res.redirect('/repeatusername');
 				}else{	//correct, add basic information
 					req.session.catfoodID = result[0].productCode;
