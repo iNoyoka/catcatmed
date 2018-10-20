@@ -1373,7 +1373,9 @@ app.get('/usercenter',function(req,res,next){
 					res.redirect('/');
 				}else if(result.length>1 && req.session.BCN==null){
 					res.redirect('/repeatusername');
+					req.session.recordUC = 0;
 				}else{	//correct, add basic information
+					req.session.recordUC = 1;
 					req.session.catfoodID = result[0].productCode;
 					req.session.buildTime = result[0].buildTime;
 					req.session.BCN = null;
@@ -1502,7 +1504,7 @@ app.post('/usercenter_requestData',function(req,res,next){
 	con.query(sql_qnlist,function(err,os){
 		if(err) throw err;
 		else{
-			if(req.session.BCN==null){	//only 1 result
+			if(req.session.recordUC==1){	//only 1 result
 				req.session.correctqnlist = FindCorrectQNList(os[0]);
 				var sql_product = "SELECT * FROM `productDB` WHERE productCode = '"+ req.session.catfoodID +"'";
 				//cattype and basic information
