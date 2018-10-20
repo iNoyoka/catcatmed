@@ -867,6 +867,8 @@
             innerhtml += '<br>';
         }
         if(qnlist.BSI=='A' && qnlist.extra_killbugs=='B'){
+            innerhtml += '<h4 style="color:#3D5BA8">蟲蟲防治</h4>';
+            innerhtml += '<br>';
             innerhtml += '<p class="tab">驅蟲對貓咪健康是非常重要的步驟，雖然'+qnlist.BCN+'是飼養在室內，但是跳蚤以及蟲卵很有可能會從人類的鞋底帶入家中，建議您室內貓也應該在三到六個月驅蟲一次。</p>';
             innerhtml += '<br>';
         }
@@ -1057,22 +1059,166 @@
         return innerhtml;
     }
     function CareLIHAIR(qnlist){
-        return '';
+        var innerhtml = ''
+        innerhtml += '<h4 style="color:#3D5BA8">亮毛護膚</h4>';
+        innerhtml += '<br>';
+        if(qnlist.fur_freq=='A'){
+            innerhtml += '<p class="tab" style="color:#EF5981">梳毛習慣</p>';
+            innerhtml += '<p class="doubletab"> - 即使掉毛不嚴重還是建議能多幫'+qnlist.BCN+'梳毛，不僅可以增進感情，也能讓'+qnlist.BCN+'的毛色更加柔亮。</p>';
+            innerhtml += '<p class="doubletab"> - 當換毛期來臨時更需每天梳理毛髮、清理廢毛，以免'+qnlist.BCN+'自行理毛時誤食過量毛髮造成腸胃不適的狀況。</p>';
+        }
+        if(qnlist.fur_behave!=null){
+            if(qnlist.fur_behave.includes('A')){
+                innerhtml += '<p class="tab" style="color:#EF5981">腫塊問題</p>';
+                innerhtml += '<p class="doubletab"> - 您和我們說'+qnlist.BCN+'身上好像有疑似腫塊的部分，卡卡貓建議您若有腫塊的問題建議盡快就醫檢查，交給獸醫做進一步診斷，以免延誤就醫黃金時間。</p>';
+            }
+            if(qnlist.fur_behave.includes('D')){
+                innerhtml += '<p class="tab" style="color:#EF5981">毛髮黯淡無光澤</p>';
+                innerhtml += '<p class="doubletab"> - 口腔疾病所引起的疼痛可能會使的'+qnlist.BCN+'不愛理毛，要多幫'+qnlist.BCN+'理毛以及口腔保健。</p>';
+            }
+            if(qnlist.fur_behave.includes('B')){
+                innerhtml += '<p class="tab" style="color:#EF5981">掉毛問題</p>';
+                innerhtml += '<p class="doubletab"> - '+qnlist.BCN+'疑似有掉毛過多的問題，目前可能是'+qnlist.BCN+'的換毛季，屬於正常現象，您可以每天梳理'+qnlist.BCN+'的毛髮,理清廢毛以免'+qnlist.BCN+'自行理毛時誤食入過量毛髮造成腸胃不適的狀況！</p>';
+                innerhtml += '<p class="doubletab"> - 處於換毛期的'+qnlist.BCN+'也要適時補充化毛粉、貓草或是其他高纖蔬果泥(南瓜泥、地瓜泥)幫助化毛。</p>';
+                innerhtml += '<p class="doubletab"> - 建議'+qnlist.BCN+'每天梳毛一次、每次7~10分鐘，也能透過適量的洗澡次數來加快換毛過程，縮短換毛時間。</p>';
+                innerhtml += '<p class="doubletab" style="color:#EF5981"> - 卡卡貓提醒您，洗澡過於頻繁會降低貓咪對於環境的免疫力，對貓咪而言並非好事喔！</p>'
+            }
+            if(qnlist.fur_behave.includes('C')){
+                innerhtml += '<p class="tab" style="color:#EF5981">局部脫毛</p>';
+                innerhtml += '<p class="doubletab">壓力可能會造成'+qnlist.BCN+'不自然的脫毛現象，可能的情況有三：</p>';
+                innerhtml += '<p class="tripletab"> - 環境變化：新環境、缺乏陽光和新鮮空氣、環境喧鬧吵雜等。</p>'
+                innerhtml += '<p class="tripletab"> - 身體變化：毛剃太短、疾病等。</p>'
+                innerhtml += '<p class="tripletab"> - 情緒壓力:：家中人員異動(或是新加入的寵物)、日常習慣改變、男/女朋友偶爾的到訪、無聊或孤單等。</p>'
+                innerhtml += '<p class="doubletab">壓力所造成的影響不僅限於脫毛，若是發現'+qnlist.BCN+'行為異常都須多加注意是否有上述變化，在幫助'+qnlist.BCN+'解除壓力。</p>';
+            }
+            if(qnlist.fur_behave.includes('F')){
+                innerhtml += '<p class="tab" style="color:#EF5981">黑頭粉刺(下巴)</p>';
+                innerhtml += '<p class="doubletab"> - '+qnlist.BCN+'的賀爾蒙、飲食油量過高，加上美容不到位，很有可能使的毛囊阻塞，抑或是接觸到化學物質所誘發的不適症狀，常見的有塑膠或橡膠製的飼料盆所導致。</p>';
+                innerhtml += '<p class="doubletab"> - 您可以利用溫水，以軟布沾取後輕輕擦拭'+qnlist.BCN+'下巴及尾巴根部即可，切勿大力摩擦，以免傷害毛囊導致不再長毛，以及更換飼料碗來避免粉刺復發。</p>';
+            }
+        }
+        innerhtml += '<h4 style="color:#3D5BA8">居家小撇步</h4>';
+        innerhtml += '<br>';
+        innerhtml += '<p class="tab" style="color:#EF5981">地上亂毛</p>';
+        innerhtml += '<p class="doubletab">常見的吸塵器是最佳幫手，若是貓咪討厭吸塵器的聲音，也能改用靜電拖把代替。</p>';
+        innerhtml += '<p class="tab" style="color:#EF5981">衣上雜毛</p>';
+        innerhtml += '<p class="doubletab">最簡單的方法就是將手沾溼拍打就能去除，或是利用除塵滾輪也能去除衣服上的雜毛。</p>';
+        innerhtml += '<p class="tab" style="color:#EF5981">漫天飛毛</p>';
+        innerhtml += '<p class="doubletab">將噴霧罐裝水，利用噴出的水霧將空中的毛絮帶至地面，就能好好清理了！</p>';
+        innerhtml += '<p class="tab">您可以在「高手區」的「梳毛高手」找到更多照顧'+qnlist.BCN+'毛髮的方法！</p>';        
+        innerhtml += '<br>';
+        return innerhtml;
     }
     function CareKIDNEY(qnlist){
-        return '';
+        var innerhtml = ''
+        innerhtml += '<h4 style="color:#3D5BA8">腎臟照護</h4>';
+        innerhtml += '<br>';
+        if(qnlist.kidney_now=='yes'){
+            innerhtml += '<p class="tab" style="color:#EF5981">腎臟疾病</p>';
+            innerhtml += '<p class="doubletab"> - 有腎臟疾病的'+qnlist.BCN+'平時的飲食需滿足「低蛋白、高品質蛋白、低磷、水份足、熱量夠」並與獸醫討論處方飼料的食用方法，並定期檢查確保健康。</p>';
+            innerhtml += '<p class="doubletab"> - 若有慢性腎衰竭的貓咪需要主人居家每日施打皮下點滴維持深以所需水分，但須先經主治醫師判斷後才可進行，且施打的方式也需與主治醫師諮詢，切勿自行處置。</p>';
+            innerhtml += '<p class="doubletab"> - 噁心、嘔吐、食慾不振是腎貓常見症狀，造成這些症狀的原因很多，甚至互相牽連，需要您的耐心，然而這些症狀都能透過治療得到舒緩。</p>';
+            if(qnlist.extra_cooking!='A'){
+                innerhtml += '<p class="tab" style="color:#EF5981">腎臟疾病與鮮食</p>';
+                innerhtml += '<p class="doubletab">平常的鮮食製作須特別注意腎貓的營養比例，過多和不足的微量元素對'+qnlist.BCN+'還是會有影響，建議詢問醫師的建議在自行下廚。</p>';
+            }
+        }
+        if(qnlist.kidney_urine=='yes'){
+            innerhtml += '<p class="tab">'+qnlist.BCN+'的泌尿疾病往後可能會影響腎功能，需要定期檢查並注意飲水量不能過低。</p>';
+        }
+        if(qnlist.BSP=='波斯貓'){
+            innerhtml += '<p class="tab">波斯貓的'+qnlist.BCN+'是腎病的高危險族群，平時除了定期檢查以外，飲水量不過低也是避免罹患腎病的小撇步。</p>';
+        }
+        if(qnlist.BCA_ageYear>=12){
+            innerhtml += '<p class="tab">上年紀的'+qnlist.BCN+'是腎病的高危險族群，三個月至六個月一次的定期檢查可以掌握腎臟的健康程度，緩解腎衰竭的速度，而且增加飲水量也是避免罹患腎病的不二法門。</p>';
+        }
+        if(qnlist.BCA_ageYear>=5 && qnlist.BCA_ageMonth<12){
+            innerhtml += '<p class="tab">早期定期健檢腎方面問題可以預防'+qnlist.BCN+'往後可能發生的腎臟疾病，建議每半年至一年可做一次健康檢查。</p>';
+        }
+        innerhtml += '<p class="tab">預防腎臟病的不二法門就是多喝水囉！</p>';
+        innerhtml += '<br>';
+        return innerhtml;
     }
     function CareURINARY(qnlist){
-        return '';
+        var innerhtml = ''
+        innerhtml += '<h4 style="color:#3D5BA8">泌尿道保健</h4>';
+        innerhtml += '<br>';
+        if(qnlist.urinary_now=='yes'){
+            innerhtml += '<p class="tab">患有泌尿系統相關疾病的'+qnlist.BCN+'首要任務就是要多喝水；減少小零食的次數(例如:小魚乾、柴魚片等)，除了可以緩解症狀減緩復發頻率之外，也能避免腎病的發生，若有結石相關病史，更注意是否需要搭配處方飼料的控制，需洽詢主治醫師。</p>';
+        }
+        innerhtml += '<p class="tab" style="color:#EF5981">水水大不同</p>';
+        innerhtml += '<p class="doubletab"> - 一般生水的來源可能因管線老舊造成水質不穩定，喝多了可能會使的貓咪拉肚子。</p>';
+        innerhtml += '<p class="doubletab"> - 礦泉水中的礦物質太高，過多的飲用容易導致尿路結石。</p>';
+        innerhtml += '<p class="doubletab"> - 徹底過濾的逆滲透水會把必要的礦物質、微量元素的濾掉。</p>';
+        innerhtml += '<p class="doubletab" style="color:#EF5981"> - 建議飲用煮過的開水！</p>';
+        innerhtml += '<p class="tab" style="color:#EF5981">照顧小秘訣</p>';
+        innerhtml += '<p class="doubletab"> - 小魚乾及柴魚片是屬於高礦物質的食物，建議減少'+qnlist.BCN+'的攝取量。</p>';
+        innerhtml += '<p class="doubletab"> - 避免改變貓砂類型、不要太頻繁更換貓砂品牌，也要多清潔貓砂給予舒適的環境避免貓咪憋尿。</p>';
+        innerhtml += '<p class="doubletab"> - 貓咪會因為天氣冷而變得不愛動，相對地喝水的意願也降低，因此上廁所的次數變少，導致細菌感染的機會增加，尿液中的結石也容易形成。</p>';
+        innerhtml += '<p class="doubletab"> - 給予溫水增加飲水意願，建議不要超過32度以免燙傷舌頭。</p>';
+        innerhtml += '<br>';
+        return innerhtml;
     }
     function CareSTOMA(qnlist){
-        return '';
+        var innerhtml = ''
+        innerhtml += '<h4 style="color:#3D5BA8">腸胃保健</h4>';
+        innerhtml += '<br>';
+        innerhtml += '<p class="tab">對於貓咪而言，腸胃問題的原因有很多，以下是一些我們可以給'+qnlist.BCN+'的建議，讓我們一起幫助'+qnlist.BCN+'解決這方面的問題吧！</p>';
+        innerhtml += '<p class="tab" style="color:#EF5981">便祕</p>';
+        innerhtml += '<p class="doubletab">便秘的貓咪平時要多補充水分及適當的增加運動量對於排便都有幫助，或是補充纖維素來刺激腸胃蠕動。此外貓砂盆的清潔也大大的影響貓咪如廁的意願，定期的肛門腺檢查也與貓咪的排便有關喔！</p>';
+        innerhtml += '<p class="tab" style="color:#EF5981">腹瀉</p>';
+        innerhtml += '<p class="tab">造成貓咪腹瀉可能有以下原因：</p>';
+        innerhtml += '<p class="doubletab"> - 消化不良</p>';
+        innerhtml += '<p class="doubletab"> - 飼料適應不良：要更換新的飼料時須新舊飼料摻和慢慢更換，不可立即轉換成新的飼料</p>';
+        innerhtml += '<p class="doubletab"> - 斷奶後的貓咪不建議給予貓奶，因易有乳糖不耐的問題。另外，鮮奶油更會刺激貓咪的腸道，絕對不可以給予！</p>';
+        innerhtml += '<p class="doubletab"> - 細菌(寄生蟲)感染：煮過的水、碗盆需要定時清理乾淨、水盆中滑滑的觸感通常是細菌滋生的現象，需要清理乾淨。</p>';
+        innerhtml += '<p class="doubletab"> - 病毒(傳染性腸炎)：常見的傳染性腸炎病毒有冠狀病毒以及小病毒，小病毒引起的傳染性腸炎又稱作「貓瘟」，是相當致命的傳染病毒，傳染率極高，一旦感染發病的死亡率也非常驚人，小病毒特別容易找上未接受完整預防注射的幼貓，所以若還未打完預防針的小貓，請務必注意傳染之風險！</p>';
+        innerhtml += '<p class="doubletab"> - 腸胃道疾病：腸道的疾病需就醫檢查，並補充營養品增強免疫力。</p>';
+        innerhtml += '<p class="doubletab"> - 生活環境壓力：環境的溫度變化會使貓咪著涼影響腸胃，引發腹瀉。</p>';
+        innerhtml += '<p class="tab" style="color:#EF5981">注意：若是'+qnlist.BCN+'不小心把排泄物拉在外面請多點耐心，責備他只會加深他的恐懼進而產生壓力問題！</p>';
+        innerhtml += '<br>';
+        innerhtml += '<p class="tab" style="color:#EF5981">嘔吐</p>';
+        innerhtml += '<p class="doubletab" style="color:#EF5981"> - 若有以下情況：血吐、上吐下瀉、黑色嘔吐物等狀況請立即就醫！</p>';
+        innerhtml += '<p class="doubletab"> - 如果'+qnlist.BCN+'嘔吐後精神良好，記得以溫水補充水分，且在兩小時內勿餵食觀察情況。</p>';
+        innerhtml += '<p class="doubletab"> - 可以少食多餐的方式幫助'+qnlist.BCN+'完整的消化食物，以及確保'+qnlist.BCN+'的食物新鮮不受潮，避免嘔吐現象發生。</p>';
+        innerhtml += '<p class="tab" style="color:#EF5981">異食癖</p>';
+        innerhtml += '<p class="doubletab"> - 貓的好奇心非常旺盛，對於外界的事物也感到非常的新奇，常常會有誤食異物的情形發生，建議主人盡可能移除或藏好所有貓咪會誤食的非食物產品，並且觀察糞便是否還有異物，觀察異食狀況是否改善。</p>';
+        return innerhtml;
     }
     function CareMEHAIR(qnlist){
-        return '';
+        var innerhtml = ''
+        innerhtml += '<h4 style="color:#3D5BA8">化毛</h4>';
+        innerhtml += '<br>';
+        innerhtml += '<p class="tab">化毛對貓咪是很重要的需求，定期使用化毛粉能有效改良'+qnlist.BCN+'的化毛問題，也能食用少量的南瓜泥，以及地瓜泥，幫助化毛！</p>';
+        innerhtml += '<p class="tab">另外，化毛膏的熱量高、碳水高....對身體負擔大，若是時常食用化毛膏可能會使貓咪變胖喔！</p>';
+        return innerhtml;
     }
     function CareSTRESS(qnlist){
-        return '';
+        var innerhtml = ''
+        innerhtml += '<h4 style="color:#3D5BA8">壓力照護</h4>';
+        innerhtml += '<br>';
+        innerhtml += '<p class="tab">生活中有很多事情會造成貓咪的壓力累積，由於原因十分繁多，建議您可以從生活中發生的事情或是'+qnlist.BCN+'的行為來判斷'+qnlist.BCN+'是否有壓力問題！</p>';
+        innerhtml += '<p class="tab" style="color:#EF5981">可能造成貓咪壓力的原因：</p>';
+        innerhtml += '<p class="doubletab"> - 洗澡</p>';
+        innerhtml += '<p class="doubletab"> - 外出</p>';
+        innerhtml += '<p class="doubletab"> - 過度的撫摸、擁抱</p>';
+        innerhtml += '<p class="doubletab"> - 家中有新的成員(尤其是其他貓咪)</p>';
+        innerhtml += '<p class="doubletab"> - 裝潢變更、家具換位</p>';
+        innerhtml += '<p class="doubletab"> - 住家附近開始出現噪音(施工地、節慶、宣傳車等等)</p>';
+        innerhtml += '<p class="doubletab"> - 您生活型態的改變</p>';
+        innerhtml += '<p class="tab">跟人類一樣，貓咪的精神壓力問題根據貓咪的不同，也會有不一樣的原因，建議您可以多加觀察'+qnlist.BCN+'喔！</p>';
+        innerhtml += '<br>';
+        innerhtml += '<p class="tab" style="color:#EF5981">貓咪有壓力時可能的行為：</p>';
+        innerhtml += '<p class="doubletab"> - 來回踱步</p>';
+        innerhtml += '<p class="doubletab"> - 四處躲藏</p>';
+        innerhtml += '<p class="doubletab"> - 食慾下降</p>';
+        innerhtml += '<p class="doubletab"> - 隨地便溺</p>';
+        innerhtml += '<p class="doubletab"> - 過度理毛</p>';
+        innerhtml += '<p class="doubletab"> - 攻擊其他貓咪或是人</p>';
+        innerhtml += '<p class="doubletab"> - 四肢肢端受傷</p>';
+        innerhtml += '<p class="tab">若貓咪有以上敘述之行為或其他令您感到疑惑的行為，歡迎錄下影像私訊給卡卡貓客服，將由專業獸醫師協助您進行判斷。</p>';
+        innerhtml += '<br>';
+        return innerhtml;
     }
     function move(percent, $element,coe) {
         var progressBarWidth = percent * $element.width() / 100 * coe;

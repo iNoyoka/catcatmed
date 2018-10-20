@@ -1325,6 +1325,7 @@ app.get('/repeatusername',function(req,res,next){
 	res.render('repeatusername');
 });
 app.post('/repeatusername',function(req,res,next){
+	var empty = []
 	var sql_check = "SELECT * FROM `ordersystem` WHERE username = '"+ req.body.keepername +"'";
 	con.query(sql_check,function(err,result){
 		if(err){
@@ -1332,7 +1333,8 @@ app.post('/repeatusername',function(req,res,next){
 			throw err;
 		}
 		else{
-			if(result[0].userid==req.session.username){
+			if(result[0]==null)	res.send('error');
+			else if(result[0].userid==req.session.username){
 				req.session.catfoodID = result[0].productCode;
 				req.session.buildTime = result[0].buildTime;
 				var sql = "SELECT * FROM `userqnrecord` WHERE BCN = '"+ req.body.catname +"'";
