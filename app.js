@@ -1338,15 +1338,21 @@ app.post('/repeatusername',function(req,res,next){
 				req.session.catfoodID = result[0].productCode;
 				req.session.buildTime = result[0].buildTime;
 				var sql = "SELECT * FROM `userqnrecord` WHERE BCN = '"+ req.body.catname +"'";
-				con.query(sql_check,function(err,result){
+				con.query(sql,function(err,resultC){
 					if(err){
+						console.log("?1");
 						res.send('error');
 						throw err;
-					}else{
-						if(result[0].userid==req.session.username){
+					}else if(resultC[0]==null){
+						console.log("?2");
+						res.send('error');
+					}
+					else{
+						if(resultC[0].username==req.session.username){
 							req.session.BCN = req.body.catname;
 							res.send('success');
 						}else{
+							console.log("?3");
 							res.send('error');
 						}
 					}
@@ -1372,13 +1378,12 @@ app.get('/usercenter',function(req,res,next){
 				if(result.length==0){
 					res.redirect('/');
 				}else if(result.length>1 && req.session.BCN==null){
-					res.redirect('/repeatusername');
 					req.session.recordUC = 0;
+					res.redirect('/repeatusername');
 				}else{	//correct, add basic information
-					req.session.recordUC = 1;
+					if(req.session.recordUC==null)	req.session.recordUC = 1;
 					req.session.catfoodID = result[0].productCode;
 					req.session.buildTime = result[0].buildTime;
-					req.session.BCN = null;
 					res.render('usercenter',{name: req.session.name});
 				}
 			}
@@ -1504,6 +1509,8 @@ app.post('/usercenter_requestData',function(req,res,next){
 	con.query(sql_qnlist,function(err,os){
 		if(err) throw err;
 		else{
+			//console.log(req.session.recordUC);
+			//console.log(req.session.BCN);
 			if(req.session.recordUC==1){	//only 1 result
 				req.session.correctqnlist = FindCorrectQNList(os[0]);
 				var sql_product = "SELECT * FROM `productDB` WHERE productCode = '"+ req.session.catfoodID +"'";
@@ -1728,9 +1735,12 @@ app.post('/usercenter_requestData',function(req,res,next){
 						res.send(listJSON);
 					}
 				});
-			}else{
+			}
+			else{
+				//console.log(os);
 				for(i in os){
 					if(os[i].BCN==req.session.BCN){
+						//console.log('HERE');
 						req.session.correctqnlist = FindCorrectQNList(os[i]);
 						var sql_product = "SELECT * FROM `productDB` WHERE productCode = '"+ req.session.catfoodID +"'";
 						//cattype and basic information
