@@ -562,8 +562,8 @@
             layerA = id;
             $('#'+layerA).toggleClass('generalButton_select');
             //fadein fadeout
-            $('#'+record+'inner').fadeOut(200,function(){
-                $('#'+layerA+'inner').fadeIn(200);
+            $('#'+record+'inner').fadeOut(10,function(){
+                $('#'+layerA+'inner').fadeIn(10);
             })
         }
     }
@@ -576,8 +576,8 @@
             //fadein fadeout
             id = id.replace('tag','_');
             record = record.replace('tag','_');
-            $('#'+record).fadeOut(200,function(){
-                $('#'+id).fadeIn(200,function(){
+            $('#'+record).fadeOut(10,function(){
+                $('#'+id).fadeIn(10,function(){
                     if(id=='layerA_A_B')    DrawLayerA_A_B();
                 });
             });         
@@ -606,8 +606,8 @@
                 innerhtml = '';
                 temp = 'tempB';
                 innerhtml = GenerateCare(tempid,correctqnlist);
-                $('#tempA').fadeOut(200,function(){
-                    $('#tempB').fadeIn(200,function(){
+                $('#tempA').fadeOut(10),function(){
+                    $('#tempB').fadeIn(10,function(){
                         document.getElementById('tempB').innerHTML = innerhtml;
                     });
                 });
@@ -617,8 +617,8 @@
                 temp = 'tempA';
                 innerhtml = GenerateCare(tempid,correctqnlist);
                 document.getElementById('tempA').innerHTML = innerhtml;
-                $('#tempB').fadeOut(200,function(){
-                    $('#tempA').fadeIn(200);
+                $('#tempB').fadeOut(10,function(){
+                    $('#tempA').fadeIn(10);
                 });
             }
         }
@@ -658,8 +658,8 @@
             }else if(layerA_A_C_img=='layerA_A_C_imgF'){
                 newpage = 'change';
             }
-            $('#'+originalpage).fadeOut(200,function(){
-                $('#'+newpage).fadeIn(200);
+            $('#'+originalpage).fadeOut(10,function(){
+                $('#'+newpage).fadeIn(10);
             });
         }
     }
@@ -701,10 +701,10 @@
             document.getElementById('layerA_A_A_original').innerHTML = productdetailinfo.original;
             document.getElementById('layerA_A_A_productimg').innerHTML = '<img src="images/questionnaire/product/'+imgdes+'.png">';
             //layerA_A_A progressbar
-            $('#proA').css('left',productdetailinfo.proteinUpperLimit*2+2+'%');
-            $('#proB').css('left',productdetailinfo.proteinLowerLimit*2+2+'%');
-            $('#fatA').css('left',productdetailinfo.fatUpperLimit*2+5+'%');
-            $('#fatB').css('left',productdetailinfo.fatLowerLimit*2+2+'%');
+            $('#proA').css('left',productdetailinfo.proteinUpperLimit*2+'%');
+            $('#proB').css('left',productdetailinfo.proteinLowerLimit*2+'%');
+            $('#fatA').css('left',productdetailinfo.fatUpperLimit*2+'%');
+            $('#fatB').css('left',productdetailinfo.fatLowerLimit*2+'%');
             $('#fibA').css('left',productdetailinfo.fiberUpperLimit*4+2+'%');
             $('#fibB').css('left',productdetailinfo.fiberLowerLimit*4+2+'%');
             move(productdetailinfo.protein,$('#myBarA'),2);
