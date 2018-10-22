@@ -78,19 +78,9 @@
                 <br>
 				<div class="row">
 					<div class="col-lg-12 col-md-12">
-						<h5>DAY <span id="day">10</span></h5>
+						<h5>DAY <span id="day">11</span></h5>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-lg-12 col-md-12">
-						<h5>每日飲食量 <span id="dailygram"></span> 克</h5>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-lg-12 col-md-12">
-						<h5>每日飲水量 <span id="dailydrink"></span> 毫升</h5>
-					</div>
-                </div>
                 <br>
                 <hr>
                 <div class="row">
@@ -149,9 +139,9 @@
                                         <div class="col-lg-12 col-md-12">
                                             <div class="myProgress" id="myBarA">
                                                 <div class="myBar" style="background-color:#EF5981"></div>
+                                                <img id="proA" class="tinyArrow" style="left:35%" src="images/questionnaire/icons-65.png">
+                                                <img id="proB" class="tinyArrow" style="left:55%" src="images/questionnaire/icons-65.png">
                                             </div>
-                                            <img id="proA" class="tinyArrow" style="left:35%" src="images/questionnaire/icons-65.png">
-                                            <img id="proB" class="tinyArrow" style="left:55%" src="images/questionnaire/icons-65.png">
                                         </div>
                                     </div>
                                     <div class="row productInformationInner-content">
@@ -159,9 +149,9 @@
                                         <div class="col-lg-12 col-md-12">
                                             <div class="myProgress" id="myBarB">
                                                 <div class="myBar" style="background-color:#87A7D6"></div>
+                                                <img id="fatA" class="tinyArrow" style="left:25%" src="images/questionnaire/icons-66.png">
+                                                <img id="fatB" class="tinyArrow" style="left:36%" src="images/questionnaire/icons-66.png">
                                             </div>
-                                            <img id="fatA" class="tinyArrow" style="left:25%" src="images/questionnaire/icons-66.png">
-                                            <img id="fatB" class="tinyArrow" style="left:36%" src="images/questionnaire/icons-66.png">
                                         </div>
                                     </div>
                                     <div class="row productInformationInner-content">
@@ -169,9 +159,9 @@
                                         <div class="col-lg-12 col-md-12">
                                             <div class="myProgress" id="myBarC">
                                                 <div class="myBar" style="background-color:#3D5BA8"></div>
+                                                <img id="fibA" class="tinyArrow" style="left:35%" src="images/questionnaire/icons-64.png">
+                                                <img id="fibB" class="tinyArrow" style="left:55%" src="images/questionnaire/icons-64.png">
                                             </div>
-                                            <img id="fibA" class="tinyArrow" style="left:35%" src="images/questionnaire/icons-64.png">
-                                            <img id="fibB" class="tinyArrow" style="left:55%" src="images/questionnaire/icons-64.png">
                                         </div>
                                     </div>
                                 </div>
@@ -601,6 +591,8 @@
             if(id=='layerA_A_B_imgMEHAIR') tempid = 'I';
             if(id=='layerA_A_B_imgSTRESS') tempid = 'J';
             if(id=='layerA_A_B_imgSTRESS') tempid = 'J';
+            if(id=='layerA_A_B_imgChange') tempid = 'change';
+            if(id=='layerA_A_B_imgCup') tempid = 'cup';
             if(id=='layerA_A_B_imgExtra') tempid = 'extra';
             if(temp=='tempA'){
                 innerhtml = '';
@@ -692,8 +684,6 @@
             document.getElementById('catnameA').innerHTML = correctqnlist.BCN;
             document.getElementById('catnameB').innerHTML = correctqnlist.BCN;
             document.getElementById('catnameC').innerHTML = correctqnlist.BCN;
-            document.getElementById('dailygram').innerHTML = productdetailinfo.dailyNeedGram;
-            document.getElementById('dailydrink').innerHTML = productdetailinfo.dailyNeedWater;
             //layerA_A_A 1st banner
             var imgdes = productdetailinfo.productCode.slice(3,7);
             document.getElementById('layerA_A_A_productname').innerHTML = productdetailinfo.name_zh;
@@ -769,6 +759,9 @@
             }
             innerhtml += GenerateOption(correctqnlist.select_icon[i]);
         }
+        //
+        innerhtml += '<div class="col-lg-2 col-md-2 text-center"><img class="select_img" src="images/usercenter/extra.png" id="layerA_A_B_imgChange" onclick="ChangeCare(this.id)" title="change pro"></div>';
+        innerhtml += '<div class="col-lg-2 col-md-2 text-center"><img class="select_img" src="images/usercenter/extra.png" id="layerA_A_B_imgCup" onclick="ChangeCare(this.id)" title="cup pro"></div>';        
         innerhtml += '<div class="col-lg-2 col-md-2 text-center"><img class="select_img" src="images/usercenter/extra.png" id="layerA_A_B_imgExtra" onclick="ChangeCare(this.id)" title="extra pro"></div>';
         document.getElementById('layerA_A_B_selectorimg').innerHTML = innerhtml;
         $('#'+layerA_A_B_img).toggleClass('select_img_select');
@@ -786,6 +779,9 @@
             if(correctqnlist.select_icon[i]=='I') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">化毛</p></div>';
             if(correctqnlist.select_icon[i]=='J') innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">壓力照護</p></div>';
         }
+        //
+        innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">轉換飼料</p></div>';
+        innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">使用量杯</p></div>';        
         innerhtml += '<div class="col-lg-2 col-md-2 text-center"><p style="margin-top: 3px">其他</p></div>';
         document.getElementById('layerA_A_B_selectorname').innerHTML = innerhtml;
         //tempA and tempB
@@ -819,7 +815,41 @@
         if(qnlist_icon=='H') innerhtml = CareSTOMA(qnlist);
         if(qnlist_icon=='I') innerhtml = CareMEHAIR(qnlist);
         if(qnlist_icon=='J') innerhtml = CareSTRESS(qnlist);
+        if(qnlist_icon=='change') innerhtml = CareChange(qnlist);
+        if(qnlist_icon=='cup') innerhtml = CareCup(qnlist);
         if(qnlist_icon=='extra') innerhtml = CareExtra(qnlist);
+        return innerhtml;
+    }
+    function CareChange(qnlist){
+        var innerhtml = '';
+        innerhtml += '<h4 style="color:#3D5BA8">轉換飼料技巧</h4>';
+        innerhtml += '<br>';
+        innerhtml += '<p class="tab">為了避免'+qnlist.BCN+'在換飼料時的絕食抗議或是吃完腸胃不舒服，轉換新食物的過程一定要緩慢，使用卡卡貓的卡滋卡滋桶，可以方便飼主們轉換飼料減少'+qnlist.BCN+'不適狀況的產生。</p>';
+        innerhtml += '<p class="tab">請按照以下方法進行飼料轉換配置，所有比例皆有經過科學驗算及實驗，請勿隨意更改飼料添加比例。</p>';
+        innerhtml += '<p class="tab" style="color:#EF5981">Step 1</p>';
+        innerhtml += '<p class="doubletab">將新飼料倒入1/3至卡滋卡滋桶再利用蓋子搖取半個蓋子的舊飼料加入卡滋卡滋桶中。</p>';
+        innerhtml += '<p class="tab" style="color:#EF5981">Step 2</p>';
+        innerhtml += '<p class="doubletab">按照圖片所示，依序加入所標示的量。</p>';
+        innerhtml += '<p class="tab" style="color:#EF5981">Step 3</p>';
+        innerhtml += '<p class="doubletab">蓋上保鮮蓋、上蓋。</p>';
+        innerhtml += '<p class="tab" style="color:#EF5981">Step 4</p>';
+        innerhtml += '<p class="doubletab">上下搖晃卡滋卡滋桶30秒，使飼料混合後即完成轉換飼料的流程。</p>';
+        innerhtml += '<br>';
+        return innerhtml;
+    }
+    function CareCup(qnlist){
+        var innerhtml = '';
+        innerhtml += '<h4 style="color:#3D5BA8">卡滋卡滋桶量杯蓋使用方法</h4>';
+        innerhtml += '<br>';
+        innerhtml += '<p class="tab">太陽 - 早上餵食</p>';
+        innerhtml += '<p class="tab">月亮 - 晚上餵食</p>';
+        innerhtml += '<p class="tab">星星 - 睡前餵食</p>';
+        innerhtml += '<p class="tab">黃色 - 飼料覆蓋至看不見黃色標籤即可</p>';
+        innerhtml += '<p class="tab">紅色 - 飼料覆蓋至看不見紅色標籤即可</p>';
+        innerhtml += '<p class="tab">綠色 - 飼料覆蓋至看不見綠色標籤即可</p>';
+        innerhtml += '<br>';
+        innerhtml += '<p class="tab" style="color:#EF5981">註：若同一時段有兩個顏色標籤，即該用餐時間時需餵食兩種標籤的飼料量。</p>';
+        innerhtml += '<br>';
         return innerhtml;
     }
     function CareExtra(qnlist){
@@ -1160,29 +1190,70 @@
         return innerhtml;
     }
     function CareSTOMA(qnlist){
-        var innerhtml = ''
-        innerhtml += '<h4 style="color:#3D5BA8">腸胃保健</h4>';
+        var innerhtml = '';
+        if(qnlist.stoma_problem[0]=='unsure'){
+            innerhtml += '<h4 style="color:#3D5BA8">腸胃保健</h4>';
+            innerhtml += '<br>';
+            innerhtml += '<p class="tab">對於貓咪而言，腸胃問題的原因有很多，以下是一些我們可以給'+qnlist.BCN+'的建議，讓我們一起幫助'+qnlist.BCN+'解決這方面的問題吧！</p>';
+            innerhtml += '<p class="tab" style="color:#EF5981">便祕</p>';
+            innerhtml += '<p class="doubletab">便秘的貓咪平時要多補充水分及適當的增加運動量對於排便都有幫助，或是補充纖維素來刺激腸胃蠕動。此外貓砂盆的清潔也大大的影響貓咪如廁的意願，定期的肛門腺檢查也與貓咪的排便有關喔！</p>';
+            innerhtml += '<p class="tab" style="color:#EF5981">腹瀉</p>';
+            innerhtml += '<p class="tab">造成貓咪腹瀉可能有以下原因：</p>';
+            innerhtml += '<p class="doubletab"> - 消化不良</p>';
+            innerhtml += '<p class="doubletab"> - 飼料適應不良：要更換新的飼料時須新舊飼料摻和慢慢更換，不可立即轉換成新的飼料</p>';
+            innerhtml += '<p class="doubletab"> - 斷奶後的貓咪不建議給予貓奶，因易有乳糖不耐的問題。另外，鮮奶油更會刺激貓咪的腸道，絕對不可以給予！</p>';
+            innerhtml += '<p class="doubletab"> - 細菌(寄生蟲)感染：煮過的水、碗盆需要定時清理乾淨、水盆中滑滑的觸感通常是細菌滋生的現象，需要清理乾淨。</p>';
+            innerhtml += '<p class="doubletab"> - 病毒(傳染性腸炎)：常見的傳染性腸炎病毒有冠狀病毒以及小病毒，小病毒引起的傳染性腸炎又稱作「貓瘟」，是相當致命的傳染病毒，傳染率極高，一旦感染發病的死亡率也非常驚人，小病毒特別容易找上未接受完整預防注射的幼貓，所以若還未打完預防針的小貓，請務必注意傳染之風險！</p>';
+            innerhtml += '<p class="doubletab"> - 腸胃道疾病：腸道的疾病需就醫檢查，並補充營養品增強免疫力。</p>';
+            innerhtml += '<p class="doubletab"> - 生活環境壓力：環境的溫度變化會使貓咪著涼影響腸胃，引發腹瀉。</p>';
+            innerhtml += '<p class="tab" style="color:#EF5981">注意：若是'+qnlist.BCN+'不小心把排泄物拉在外面請多點耐心，責備他只會加深他的恐懼進而產生壓力問題！</p>';
+            innerhtml += '<p class="tab" style="color:#EF5981">嘔吐</p>';
+            innerhtml += '<p class="doubletab" style="color:#EF5981"> - 若有以下情況：血吐、上吐下瀉、黑色嘔吐物等狀況請立即就醫！</p>';
+            innerhtml += '<p class="doubletab"> - 如果'+qnlist.BCN+'嘔吐後精神良好，記得以溫水補充水分，且在兩小時內勿餵食觀察情況。</p>';
+            innerhtml += '<p class="doubletab"> - 可以少食多餐的方式幫助'+qnlist.BCN+'完整的消化食物，以及確保'+qnlist.BCN+'的食物新鮮不受潮，避免嘔吐現象發生。</p>';
+            innerhtml += '<p class="tab" style="color:#EF5981">異食癖</p>';
+            innerhtml += '<p class="doubletab"> - 貓的好奇心非常旺盛，對於外界的事物也感到非常的新奇，常常會有誤食異物的情形發生，建議主人盡可能移除或藏好所有貓咪會誤食的非食物產品，並且觀察糞便是否還有異物，觀察異食狀況是否改善。</p>';
+        }else{
+            innerhtml += '<h4 style="color:#3D5BA8">腸胃保健</h4>';
+            innerhtml += '<br>';
+            if(qnlist.stoma_problem.includes('A')){
+                innerhtml += '<p class="tab" style="color:#EF5981">便祕</p>';
+                innerhtml += '<p class="doubletab">便秘的貓咪平時要多補充水分及適當的增加運動量對於排便都有幫助，或是補充纖維素來刺激腸胃蠕動。此外貓砂盆的清潔也大大的影響貓咪如廁的意願，定期的肛門腺檢查也與貓咪的排便有關喔！</p>';
+                if(qnlist.BCA_ageYear>=12 || qnlist.kidney_now=='yes'){
+                    innerhtml += '<p class="doubletab">老貓或有腎臟病史的貓很容易有便秘的困擾，除了水分以及纖維素的補充之外，也可以與主治醫師討論是否可添加適合腸胃的益生菌於飲食中，以幫助腸胃蠕動，進而改善排便的順暢度。若家中貓咪患有巨結腸症，切勿任意補充大量的纖維素。</p>';
+                }
+                if(qnlist.stoma_bathroom=='C'){
+                    innerhtml += '<p class="doubletab" style="color:#EF5981">便秘現象若未有改善、好轉現象，請就醫詢問專業建議。</p>';
+                }
+            }
+            if(qnlist.stoma_problem.includes('B')){
+                innerhtml += '<p class="tab" style="color:#EF5981">腹瀉</p>';
+                innerhtml += '<p class="tab">造成貓咪腹瀉可能有以下原因：</p>';
+                innerhtml += '<p class="doubletab"> - 消化不良</p>';
+                innerhtml += '<p class="doubletab"> - 飼料適應不良：要更換新的飼料時須新舊飼料摻和慢慢更換，不可立即轉換成新的飼料</p>';
+                innerhtml += '<p class="doubletab"> - 斷奶後的貓咪不建議給予貓奶，因易有乳糖不耐的問題。另外，鮮奶油更會刺激貓咪的腸道，絕對不可以給予！</p>';
+                innerhtml += '<p class="doubletab"> - 細菌(寄生蟲)感染：煮過的水、碗盆需要定時清理乾淨、水盆中滑滑的觸感通常是細菌滋生的現象，需要清理乾淨。</p>';
+                innerhtml += '<p class="doubletab"> - 病毒(傳染性腸炎)：常見的傳染性腸炎病毒有冠狀病毒以及小病毒，小病毒引起的傳染性腸炎又稱作「貓瘟」，是相當致命的傳染病毒，傳染率極高，一旦感染發病的死亡率也非常驚人，小病毒特別容易找上未接受完整預防注射的幼貓，所以若還未打完預防針的小貓，請務必注意傳染之風險！</p>';
+                innerhtml += '<p class="doubletab"> - 腸胃道疾病：腸道的疾病需就醫檢查，並補充營養品增強免疫力。</p>';
+                innerhtml += '<p class="doubletab"> - 生活環境壓力：環境的溫度變化會使貓咪著涼影響腸胃，引發腹瀉。</p>';
+                innerhtml += '<p class="tab" style="color:#EF5981">注意：若是'+qnlist.BCN+'不小心把排泄物拉在外面請多點耐心，責備他只會加深他的恐懼進而產生壓力問題！</p>';
+            }
+            if(qnlist.stoma_problem.includes('C')){
+                innerhtml += '<p class="tab" style="color:#EF5981">嘔吐</p>';
+                innerhtml += '<p class="doubletab" style="color:#EF5981"> - 若有以下情況：血吐、上吐下瀉、黑色嘔吐物等狀況請立即就醫！</p>';
+                innerhtml += '<p class="doubletab"> - 如果'+qnlist.BCN+'嘔吐後精神良好，記得以溫水補充水分，且在兩小時內勿餵食觀察情況。</p>';
+                innerhtml += '<p class="doubletab"> - 可以少食多餐的方式幫助'+qnlist.BCN+'完整的消化食物，以及確保'+qnlist.BCN+'的食物新鮮不受潮，避免嘔吐現象發生。</p>';
+            }
+            if(qnlist.stoma_problem.includes('D')){
+                innerhtml += '<p class="tab" style="color:#EF5981">腸胃保健</p>';
+                innerhtml += '<p class="doubletab"> - 如果'+qnlist.BCN+'腸道比較敏感，可以在食物裡面加入一些益生菌，保護腸道，沒有副作用。</p>';
+            }
+            if(qnlist.stoma_problem.includes('E')){
+                innerhtml += '<p class="tab" style="color:#EF5981">異食癖</p>';
+                innerhtml += '<p class="doubletab"> - 貓的好奇心非常旺盛，對於外界的事物也感到非常的新奇，常常會有誤食異物的情形發生，建議主人盡可能移除或藏好所有貓咪會誤食的非食物產品，並且觀察糞便是否還有異物，觀察異食狀況是否改善。</p>';
+            }
+        }
         innerhtml += '<br>';
-        innerhtml += '<p class="tab">對於貓咪而言，腸胃問題的原因有很多，以下是一些我們可以給'+qnlist.BCN+'的建議，讓我們一起幫助'+qnlist.BCN+'解決這方面的問題吧！</p>';
-        innerhtml += '<p class="tab" style="color:#EF5981">便祕</p>';
-        innerhtml += '<p class="doubletab">便秘的貓咪平時要多補充水分及適當的增加運動量對於排便都有幫助，或是補充纖維素來刺激腸胃蠕動。此外貓砂盆的清潔也大大的影響貓咪如廁的意願，定期的肛門腺檢查也與貓咪的排便有關喔！</p>';
-        innerhtml += '<p class="tab" style="color:#EF5981">腹瀉</p>';
-        innerhtml += '<p class="tab">造成貓咪腹瀉可能有以下原因：</p>';
-        innerhtml += '<p class="doubletab"> - 消化不良</p>';
-        innerhtml += '<p class="doubletab"> - 飼料適應不良：要更換新的飼料時須新舊飼料摻和慢慢更換，不可立即轉換成新的飼料</p>';
-        innerhtml += '<p class="doubletab"> - 斷奶後的貓咪不建議給予貓奶，因易有乳糖不耐的問題。另外，鮮奶油更會刺激貓咪的腸道，絕對不可以給予！</p>';
-        innerhtml += '<p class="doubletab"> - 細菌(寄生蟲)感染：煮過的水、碗盆需要定時清理乾淨、水盆中滑滑的觸感通常是細菌滋生的現象，需要清理乾淨。</p>';
-        innerhtml += '<p class="doubletab"> - 病毒(傳染性腸炎)：常見的傳染性腸炎病毒有冠狀病毒以及小病毒，小病毒引起的傳染性腸炎又稱作「貓瘟」，是相當致命的傳染病毒，傳染率極高，一旦感染發病的死亡率也非常驚人，小病毒特別容易找上未接受完整預防注射的幼貓，所以若還未打完預防針的小貓，請務必注意傳染之風險！</p>';
-        innerhtml += '<p class="doubletab"> - 腸胃道疾病：腸道的疾病需就醫檢查，並補充營養品增強免疫力。</p>';
-        innerhtml += '<p class="doubletab"> - 生活環境壓力：環境的溫度變化會使貓咪著涼影響腸胃，引發腹瀉。</p>';
-        innerhtml += '<p class="tab" style="color:#EF5981">注意：若是'+qnlist.BCN+'不小心把排泄物拉在外面請多點耐心，責備他只會加深他的恐懼進而產生壓力問題！</p>';
-        innerhtml += '<br>';
-        innerhtml += '<p class="tab" style="color:#EF5981">嘔吐</p>';
-        innerhtml += '<p class="doubletab" style="color:#EF5981"> - 若有以下情況：血吐、上吐下瀉、黑色嘔吐物等狀況請立即就醫！</p>';
-        innerhtml += '<p class="doubletab"> - 如果'+qnlist.BCN+'嘔吐後精神良好，記得以溫水補充水分，且在兩小時內勿餵食觀察情況。</p>';
-        innerhtml += '<p class="doubletab"> - 可以少食多餐的方式幫助'+qnlist.BCN+'完整的消化食物，以及確保'+qnlist.BCN+'的食物新鮮不受潮，避免嘔吐現象發生。</p>';
-        innerhtml += '<p class="tab" style="color:#EF5981">異食癖</p>';
-        innerhtml += '<p class="doubletab"> - 貓的好奇心非常旺盛，對於外界的事物也感到非常的新奇，常常會有誤食異物的情形發生，建議主人盡可能移除或藏好所有貓咪會誤食的非食物產品，並且觀察糞便是否還有異物，觀察異食狀況是否改善。</p>';
         return innerhtml;
     }
     function CareMEHAIR(qnlist){
@@ -1195,28 +1266,117 @@
     }
     function CareSTRESS(qnlist){
         var innerhtml = ''
-        innerhtml += '<h4 style="color:#3D5BA8">壓力照護</h4>';
-        innerhtml += '<br>';
-        innerhtml += '<p class="tab">生活中有很多事情會造成貓咪的壓力累積，由於原因十分繁多，建議您可以從生活中發生的事情或是'+qnlist.BCN+'的行為來判斷'+qnlist.BCN+'是否有壓力問題！</p>';
-        innerhtml += '<p class="tab" style="color:#EF5981">可能造成貓咪壓力的原因：</p>';
-        innerhtml += '<p class="doubletab"> - 洗澡</p>';
-        innerhtml += '<p class="doubletab"> - 外出</p>';
-        innerhtml += '<p class="doubletab"> - 過度的撫摸、擁抱</p>';
-        innerhtml += '<p class="doubletab"> - 家中有新的成員(尤其是其他貓咪)</p>';
-        innerhtml += '<p class="doubletab"> - 裝潢變更、家具換位</p>';
-        innerhtml += '<p class="doubletab"> - 住家附近開始出現噪音(施工地、節慶、宣傳車等等)</p>';
-        innerhtml += '<p class="doubletab"> - 您生活型態的改變</p>';
-        innerhtml += '<p class="tab">跟人類一樣，貓咪的精神壓力問題根據貓咪的不同，也會有不一樣的原因，建議您可以多加觀察'+qnlist.BCN+'喔！</p>';
-        innerhtml += '<br>';
-        innerhtml += '<p class="tab" style="color:#EF5981">貓咪有壓力時可能的行為：</p>';
-        innerhtml += '<p class="doubletab"> - 來回踱步</p>';
-        innerhtml += '<p class="doubletab"> - 四處躲藏</p>';
-        innerhtml += '<p class="doubletab"> - 食慾下降</p>';
-        innerhtml += '<p class="doubletab"> - 隨地便溺</p>';
-        innerhtml += '<p class="doubletab"> - 過度理毛</p>';
-        innerhtml += '<p class="doubletab"> - 攻擊其他貓咪或是人</p>';
-        innerhtml += '<p class="doubletab"> - 四肢肢端受傷</p>';
-        innerhtml += '<p class="tab">若貓咪有以上敘述之行為或其他令您感到疑惑的行為，歡迎錄下影像私訊給卡卡貓客服，將由專業獸醫師協助您進行判斷。</p>';
+        var score = 0;
+        var score_sec = 0;
+        if(qnlist.stress_now[0]=='unsure') score += 1;
+        if(qnlist.stress_enviornment[0]=='unsure') score += 1;
+        if(qnlist.stress_enviornment_out[0]=='unsure') score += 1;
+        if(qnlist.stress_lifestyle[0]=='unsure') score += 1;
+        //
+        if(qnlist.stress_now.includes('A')) score_sec += 1;
+        if(qnlist.stress_now.includes('B')) score_sec += 1;
+        if(qnlist.stress_now.includes('C')) score_sec += 1;
+        if(qnlist.stress_now.includes('D')) score_sec += 1;
+        if(qnlist.stress_now.includes('E')) score_sec += 1;
+        //
+        function SN(signal){
+            if(signal=='A') return '來回踱步';
+            if(signal=='B') return '四處躲藏';
+            if(signal=='C') return '食慾下降';
+            if(signal=='D') return '隨地便溺';
+            if(signal=='E') return '過度理毛';
+            else return '';
+        }
+        if(score==4){
+            innerhtml += '<h4 style="color:#3D5BA8">壓力照護</h4>';
+            innerhtml += '<br>';
+            innerhtml += '<p class="tab">生活中有很多事情會造成貓咪的壓力累積，由於原因十分繁多，建議您可以從生活中發生的事情或是'+qnlist.BCN+'的行為來判斷'+qnlist.BCN+'是否有壓力問題！</p>';
+            innerhtml += '<p class="tab" style="color:#EF5981">可能造成貓咪壓力的原因：</p>';
+            innerhtml += '<p class="doubletab"> - 洗澡</p>';
+            innerhtml += '<p class="doubletab"> - 外出</p>';
+            innerhtml += '<p class="doubletab"> - 過度的撫摸、擁抱</p>';
+            innerhtml += '<p class="doubletab"> - 家中有新的成員(尤其是其他貓咪)</p>';
+            innerhtml += '<p class="doubletab"> - 裝潢變更、家具換位</p>';
+            innerhtml += '<p class="doubletab"> - 住家附近開始出現噪音(施工地、節慶、宣傳車等等)</p>';
+            innerhtml += '<p class="doubletab"> - 您生活型態的改變</p>';
+            innerhtml += '<p class="tab">跟人類一樣，貓咪的精神壓力問題根據貓咪的不同，也會有不一樣的原因，建議您可以多加觀察'+qnlist.BCN+'喔！</p>';
+            innerhtml += '<br>';
+            innerhtml += '<p class="tab" style="color:#EF5981">貓咪有壓力時可能的行為：</p>';
+            innerhtml += '<p class="doubletab"> - 來回踱步</p>';
+            innerhtml += '<p class="doubletab"> - 四處躲藏</p>';
+            innerhtml += '<p class="doubletab"> - 食慾下降</p>';
+            innerhtml += '<p class="doubletab"> - 隨地便溺</p>';
+            innerhtml += '<p class="doubletab"> - 過度理毛</p>';
+            innerhtml += '<p class="doubletab"> - 攻擊其他貓咪或是人</p>';
+            innerhtml += '<p class="doubletab"> - 四肢肢端受傷</p>';
+            innerhtml += '<p class="tab">若貓咪有以上敘述之行為或其他令您感到疑惑的行為，歡迎錄下影像私訊給卡卡貓客服，將由專業獸醫師協助您進行判斷。</p>';
+        }else{
+            innerhtml += '<h4 style="color:#3D5BA8">壓力照護</h4>';
+            innerhtml += '<br>';
+            if(qnlist.stress_now.includes('F') || qnlist.stress_now.includes('G')){
+                innerhtml += '<p class="tab" style="color:#EF5981">攻擊行為</p>';
+                innerhtml += '<p class="doubletab">'+qnlist.BCN+'的行為上有非常明顯精神疾病的徵兆，卡卡貓強烈建議您，盡速與獸醫師聯絡，並且將您的貓咪攻擊及造成四肢末端受傷的狀況利用影片紀錄下來。</p>';
+            }
+            if(score_sec==1 || score_sec==2){
+                innerhtml += '<p class="tab" style="color:#EF5981">壓力問題</p>';
+                innerhtml += '<p class="doubletab">由於'+qnlist.BCN+'有';
+                for(i=0;i<qnlist.stress_now.length;i++){
+                    if(i==0){
+                        innerhtml += ''+SN(qnlist.stress_now[i])+'';
+                    }else{
+                        innerhtml += '、'+SN(qnlist.stress_now[i])+'';
+                    }
+                }
+                innerhtml += '的情形，可能是壓力的表現，建議您每天多撥出10~15分鐘陪貓咪玩遊戲，不僅可以消耗'+qnlist.BCN+'的體力，更能讓他放鬆、自在，如未改善請務必就醫，適時給予醫療上的幫助。</p>';
+            }else if(score_sec>=3){
+                innerhtml += '<p class="tab" style="color:#EF5981">壓力問題</p>';
+                innerhtml += '<p class="doubletab">';
+                for(i=0;i<qnlist.stress_now.length;i++){
+                    if(i==0){
+                        innerhtml += ''+SN(qnlist.stress_now[i])+'';
+                    }else{
+                        innerhtml += '、'+SN(qnlist.stress_now[i])+'';
+                    }
+                }
+                innerhtml += '，以上這些問題是'+qnlist.BCN+'很有壓力的表現，建議您可以減少帶'+qnlist.BCN+'外出或是洗澡等情形，並且與您的獸醫諮詢，避免更嚴重的情型發生。</p>';
+            }
+            if(qnlist.stress_enviornment[0]!='unsure'){
+                innerhtml += '<p class="tab" style="color:#EF5981">壓力問題 - 內部環境</p>';
+                for(i=0;i<qnlist.stress_enviornment.length;i++){
+                    if(i==0){
+                        innerhtml += ''+SE(qnlist.stress_enviornment[i])+'';
+                    }else{
+                        innerhtml += '、'+SE(qnlist.stress_enviornment[i])+'';
+                    }
+                }
+                innerhtml += '<p class="doubletab">等因素，是可能造成'+qnlist.BCN+'壓力的現象，減緩'+qnlist.BCN+'壓力的重點，是將造成'+qnlist.BCN+'壓力的事件避免或排除。建議您可以在居家環境中，將家裡的窗簾打開或增加魚缸造景，讓'+qnlist.BCN+'把注意力轉到其他物品上，能降低壓力對'+qnlist.BCN+'的影響。</p>';                
+            }
+            if(qnlist.stress_enviornment_out[0]!='unsure'){
+                innerhtml += '<p class="tab" style="color:#EF5981">壓力問題 - 外部環境</p>';
+                for(i=0;i<qnlist.stress_enviornment_out.length;i++){
+                    if(i==0){
+                        innerhtml += ''+SEO(qnlist.stress_enviornment_out[i])+'';
+                    }else{
+                        innerhtml += '、'+SEO(qnlist.stress_enviornment_out[i])+'';
+                    }
+                }
+                innerhtml += '<p class="doubletab">等事件不只會影響人，也會造成'+qnlist.BCN+'的壓力，建議您盡可能的將噪音隔離，給予'+qnlist.BCN+'安寧的環境，'+qnlist.BCN+'會更放鬆喔。</p>';
+            }
+            if(qnlist.stress_lifestyle[0]!='unsure'){
+                innerhtml += '<p class="tab" style="color:#EF5981">壓力問題 - 生活型態</p>';
+                for(i=0;i<qnlist.stress_lifestyle.length;i++){
+                    if(i==0){
+                        innerhtml += ''+SL(qnlist.stress_lifestyle[i])+'';
+                    }else{
+                        innerhtml += '、'+SL(qnlist.stress_lifestyle[i])+'';
+                    }
+                }
+                innerhtml += '<p class="doubletab">等生活型態的改變，對'+qnlist.BCN+'來說也是造成壓力的來源之一， 根據統計主人的氣味是會讓貓咪可以放鬆的要素之一，多陪伴他，還給他本來失去的與主人相處的時間，'+qnlist.BCN+'會更放鬆，更愛您喔！</p>';
+            }
+        }        
+        if(score>=3){
+            innerhtml += '<p class="tab">'+qnlist.BCN+'目前看起來沒有壓力問題，心理狀況良好，他對目前的生活很滿意喔！</p>';
+        }
         innerhtml += '<br>';
         return innerhtml;
     }

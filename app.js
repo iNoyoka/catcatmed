@@ -1350,6 +1350,9 @@ app.post('/repeatusername',function(req,res,next){
 					else{
 						if(resultC[0].username==req.session.username){
 							req.session.BCN = req.body.catname;
+							if(req.session.BCN=='Jessica'){
+								req.session.catfoodID = 'CCM0604';
+							}
 							res.send('success');
 						}else{
 							console.log("?3");
