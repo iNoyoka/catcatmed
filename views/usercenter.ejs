@@ -606,7 +606,7 @@
                 innerhtml = '';
                 temp = 'tempB';
                 innerhtml = GenerateCare(tempid,correctqnlist);
-                $('#tempA').fadeOut(10),function(){
+                $('#tempA').fadeOut(10,function(){
                     $('#tempB').fadeIn(10,function(){
                         document.getElementById('tempB').innerHTML = innerhtml;
                     });
