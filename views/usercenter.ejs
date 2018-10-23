@@ -760,8 +760,8 @@
             innerhtml += GenerateOption(correctqnlist.select_icon[i]);
         }
         //
-        innerhtml += '<div class="col-lg-2 col-md-2 text-center"><img class="select_img" src="images/usercenter/extra.png" id="layerA_A_B_imgChange" onclick="ChangeCare(this.id)" title="change pro"></div>';
-        innerhtml += '<div class="col-lg-2 col-md-2 text-center"><img class="select_img" src="images/usercenter/extra.png" id="layerA_A_B_imgCup" onclick="ChangeCare(this.id)" title="cup pro"></div>';        
+        innerhtml += '<div class="col-lg-2 col-md-2 text-center"><img class="select_img" src="images/usercenter/changefood.png" id="layerA_A_B_imgChange" onclick="ChangeCare(this.id)" title="change pro"></div>';
+        innerhtml += '<div class="col-lg-2 col-md-2 text-center"><img class="select_img" src="images/usercenter/cup.png" id="layerA_A_B_imgCup" onclick="ChangeCare(this.id)" title="cup pro"></div>';        
         innerhtml += '<div class="col-lg-2 col-md-2 text-center"><img class="select_img" src="images/usercenter/extra.png" id="layerA_A_B_imgExtra" onclick="ChangeCare(this.id)" title="extra pro"></div>';
         document.getElementById('layerA_A_B_selectorimg').innerHTML = innerhtml;
         $('#'+layerA_A_B_img).toggleClass('select_img_select');
@@ -859,7 +859,6 @@
             innerhtml += '<br>';
             innerhtml += '<p class="tab">兩個月左右是'+qnlist.BCN+'學習社會化最好的黃金時期，所謂社會化訓練即是要讓'+qnlist.BCN+'學會如何跟人群以及其他貓咪互動與相處，在社會化的訓練過程最重要的是要先注意疫苗預防注射的施打進度，若'+qnlist.BCN+'的預防針沒有接受施打,我們不建議讓'+qnlist.BCN+'與其他貓咪互動，以免感染傳染病。</p>';
             innerhtml += '<p class="tab">同時兩月齡以上的貓咪正是需要透過遊戲學習的年紀，我們建議給予貓咪專屬的玩具互動，在遊戲中學習天生的狩獵技巧，當'+qnlist.BCN+'發現自己是個優秀的獵人時，會大大提升他的自信心唷!</p>';
-            innerhtml += '<br>';
         }
         if(((qnlist.BCA_ageYear==1 && qnlist.BCA_ageMonth==0) || (qnlist.BCA_ageYear==0 && qnlist.BCA_ageMonth>=6)) && qnlist.BNU=='no'){
             innerhtml += '<h4 style="color:#3D5BA8">邁向青春期</h4>';
@@ -869,14 +868,12 @@
             if(qnlist.BCS=='female'){
                 innerhtml += '<p class="tab" style="color:#EF5981">'+qnlist.BCN+'最好的結紮時間建議在首次發情前，可以大大降低未來在熟齡期婦科疾病的機率。</p>';
             }
-            innerhtml += '<br>';
         }
         if(qnlist.extra_strangehabit!=null){
             if(qnlist.extra_strangehabit.length>=1){
                 innerhtml += '<h4 style="color:#3D5BA8">高齡貓須知</h4>';
                 innerhtml += '<br>';
                 innerhtml += '<p class="tab">'+qnlist.BCN+'的目前已經是高齡貓囉，記憶力也開始退化，也有認知障礙的徵兆發生，建議您不要隨意更動家裡的傢俱擺設，尤其是常用的食物盆、水盆和貓砂盆擺放的位置都建議不要有大幅度的變動，對開始有認知障礙的老貓會有所幫助。</p>';
-                innerhtml += '<br>';
             }
         }
         if(qnlist.BPR=='yes'){
@@ -885,7 +882,6 @@
             innerhtml += '<p class="tab">懷孕是'+qnlist.BCN+'人生的大事，建議幫'+qnlist.BCN+'多補充點營養品，並且減少任何會造成她情緒緊張的情況，像是洗澡以及外出等等。</p>';
             innerhtml += '<p class="tab">此外定期產檢是非常重要的，可以利用超音波確認寶寶心跳狀態、x光檢查可推測寶寶隻數以及評估頭圍是否能通過媽媽產道，來判斷是否需要剖腹產，都是非常重要的檢查</p>';
             innerhtml += '<p class="tab">在懷孕末期'+qnlist.BCN+'通常會有便秘的問題，建議可以適量的使用化毛粉通便，並且能在家裡布置一個溫暖安靜安全的地方作為'+qnlist.BCN+'的產房。</p>';
-            innerhtml += '<br>';
         }
         if(qnlist.BSI=='B' || qnlist.BSI=='C'){
             innerhtml += '<h4 style="color:#3D5BA8">蟲蟲防治</h4>';
@@ -894,27 +890,39 @@
             if(qnlist.extra_killbugs=='B'){
                 innerhtml += '<p class="tab">另外，驅蟲是對貓咪健康把關是非常重要的步驟，卡卡貓推薦您，外出貓建議每三個月驅蟲、每月除蚤，可以大幅預防'+qnlist.BCN+'體外跳蚤以及體內絛蟲情形。</p>';
             }
-            innerhtml += '<br>';
         }
         if(qnlist.BSI=='A' && qnlist.extra_killbugs=='B'){
             innerhtml += '<h4 style="color:#3D5BA8">蟲蟲防治</h4>';
             innerhtml += '<br>';
             innerhtml += '<p class="tab">驅蟲對貓咪健康是非常重要的步驟，雖然'+qnlist.BCN+'是飼養在室內，但是跳蚤以及蟲卵很有可能會從人類的鞋底帶入家中，建議您室內貓也應該在三到六個月驅蟲一次。</p>';
-            innerhtml += '<br>';
         }
         if((qnlist.BBC=='D' || qnlist.BBC=='E') && qnlist.BNU=='yes'){
             innerhtml += '<h4 style="color:#3D5BA8">身材控制</h4>';
             innerhtml += '<br>';
             innerhtml += '<p class="tab">'+qnlist.BCN+'結紮後因基礎代謝率變差，容易有體重增加過快的問題，請您注意餵食習慣，不建議採用任食吃到飽的方式，定時定量會是更能精準控制熱量的方法，也要注意結紮後的貓咪若無其他需求請勿再餵食幼貓飼料。</p>';
             innerhtml += '<p class="tab">生活上建議您可以多陪'+qnlist.BCN+'玩，利用玩耍來維持運動，一次玩耍的時間建議在10分鐘，可以有效增加卡路里的消耗量，或是在餵食上額外增加餵食碗數量，各自放在家裡的不同角落，可以讓'+qnlist.BCN+'多走動，增加'+qnlist.BCN+'的運動量，都是讓'+qnlist.BCN+'回歸苗條身材的小撇步喔!</p>';
-            innerhtml += '<br>';
         }
         if(qnlist.extra_drinking=='A'){
             innerhtml += '<h4 style="color:#3D5BA8">口渴的'+qnlist.BCN+'</h4>';
             innerhtml += '<br>';
             innerhtml += '<p class="tab">要注意是否為過量飲水喔，過量飲水可能是糖尿病慢性腎衰竭疾病的發生前兆，建議您可以再多注意一下'+qnlist.BCN+'。</p>';
-            innerhtml += '<br>';
         }
+        if(qnlist.BSP=='美國短毛貓'){
+            innerhtml += '<h4 style="color:#3D5BA8">美國短毛貓</h4>';
+            innerhtml += '<br>';
+            innerhtml += '<p class="tab">美國短毛貓是常見的家中的另一伴，屬於較為健康的貓種，平時能透過定期檢查以及體重管理來降低心血管疾病發生率。</p>';
+        }
+        if(qnlist.BSP=='英國短毛貓'){
+            innerhtml += '<h4 style="color:#3D5BA8">英國短毛貓</h4>';
+            innerhtml += '<br>';
+            innerhtml += '<p class="tab">英短屬於較健康的貓種，但由於臉平頭圓(鼻子短)，會容易有淚腺、打噴嚏及呼吸道方面的問題，平時需多加注意免疫力的提升，且有著敏感的腸胃，若是環境改變或頻繁更換飼料都容易造成腸胃不適，而先天上容易好發的心血管疾病也需透過體重管理降低疾病發生率。</p>';
+        }
+        if(qnlist.BSP=='蘇格蘭折耳'){
+            innerhtml += '<h4 style="color:#3D5BA8">蘇格蘭折耳</h4>';
+            innerhtml += '<br>';
+            innerhtml += '<p class="tab">蜜糖般的個性，折耳貓常讓人愛不釋手，而在那可愛外表背後卻有著難以言喻的痛，常見的骨骼關節病變、心臟病心肌肥大症、腎功能和呼吸道先天缺陷等都是折耳貓常見的問題，平常的保健、清潔和定期身體健康檢查以外更需要飼主多一分的關注和耐心，也是能陪著折耳貓健康的走下去。</p>';
+        }
+        innerhtml += '<br>';
         return innerhtml;
     }
     function CareJOINT(qnlist){
@@ -1287,30 +1295,25 @@
             if(signal=='E') return '過度理毛';
             else return '';
         }
-        if(score==4){
-            innerhtml += '<h4 style="color:#3D5BA8">壓力照護</h4>';
-            innerhtml += '<br>';
-            innerhtml += '<p class="tab">生活中有很多事情會造成貓咪的壓力累積，由於原因十分繁多，建議您可以從生活中發生的事情或是'+qnlist.BCN+'的行為來判斷'+qnlist.BCN+'是否有壓力問題！</p>';
-            innerhtml += '<p class="tab" style="color:#EF5981">可能造成貓咪壓力的原因：</p>';
-            innerhtml += '<p class="doubletab"> - 洗澡</p>';
-            innerhtml += '<p class="doubletab"> - 外出</p>';
-            innerhtml += '<p class="doubletab"> - 過度的撫摸、擁抱</p>';
-            innerhtml += '<p class="doubletab"> - 家中有新的成員(尤其是其他貓咪)</p>';
-            innerhtml += '<p class="doubletab"> - 裝潢變更、家具換位</p>';
-            innerhtml += '<p class="doubletab"> - 住家附近開始出現噪音(施工地、節慶、宣傳車等等)</p>';
-            innerhtml += '<p class="doubletab"> - 您生活型態的改變</p>';
-            innerhtml += '<p class="tab">跟人類一樣，貓咪的精神壓力問題根據貓咪的不同，也會有不一樣的原因，建議您可以多加觀察'+qnlist.BCN+'喔！</p>';
-            innerhtml += '<br>';
-            innerhtml += '<p class="tab" style="color:#EF5981">貓咪有壓力時可能的行為：</p>';
-            innerhtml += '<p class="doubletab"> - 來回踱步</p>';
-            innerhtml += '<p class="doubletab"> - 四處躲藏</p>';
-            innerhtml += '<p class="doubletab"> - 食慾下降</p>';
-            innerhtml += '<p class="doubletab"> - 隨地便溺</p>';
-            innerhtml += '<p class="doubletab"> - 過度理毛</p>';
-            innerhtml += '<p class="doubletab"> - 攻擊其他貓咪或是人</p>';
-            innerhtml += '<p class="doubletab"> - 四肢肢端受傷</p>';
-            innerhtml += '<p class="tab">若貓咪有以上敘述之行為或其他令您感到疑惑的行為，歡迎錄下影像私訊給卡卡貓客服，將由專業獸醫師協助您進行判斷。</p>';
-        }else{
+        function SE(signal){
+            if(signal=='A') return '增加或者減少新的成員'
+            if(signal=='B') return '有增加或減少新的寵物'
+            if(signal=='C') return '內部裝潢變更，或是家具改變位子'
+            else return ''
+        }
+        function SEO(signal){
+            if(signal=='A') return '節慶鞭炮聲音'
+            if(signal=='B') return '家裡附近有施工地'
+            if(signal=='C') return '吵雜的選舉車經過'
+            else return ''
+        }
+        function SL(signal){
+            if(signal=='A') return '長期不在家'
+            if(signal=='B') return '工作內容，工作時間變更'
+            if(signal=='C') return '家裡常常有人進出'
+            else return ''
+        }
+        if(score!=4){
             innerhtml += '<h4 style="color:#3D5BA8">壓力照護</h4>';
             innerhtml += '<br>';
             if(qnlist.stress_now.includes('F') || qnlist.stress_now.includes('G')){
