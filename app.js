@@ -1366,7 +1366,7 @@ app.post('/repeatusername',function(req,res,next){
 		}
 	});
 });
-app.get('/usercentertest',function(req,res,next){	
+app.get('/usercenter',function(req,res,next){	
 	if(req.session.username==null){
 		req.session.recordWebPage = 'usercenter';
 		res.redirect('/login');
