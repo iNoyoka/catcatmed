@@ -844,6 +844,7 @@
         innerhtml += '<p class="tab">太陽 - 早上餵食</p>';
         innerhtml += '<p class="tab">月亮 - 晚上餵食</p>';
         innerhtml += '<p class="tab">星星 - 睡前餵食</p>';
+        innerhtml += '<br>';
         innerhtml += '<p class="tab">黃色 - 飼料覆蓋至看不見黃色標籤即可</p>';
         innerhtml += '<p class="tab">紅色 - 飼料覆蓋至看不見紅色標籤即可</p>';
         innerhtml += '<p class="tab">綠色 - 飼料覆蓋至看不見綠色標籤即可</p>';
@@ -1345,6 +1346,7 @@
             }
             if(qnlist.stress_enviornment[0]!='unsure'){
                 innerhtml += '<p class="tab" style="color:#EF5981">壓力問題 - 內部環境</p>';
+                innerhtml += '<p class="doubletab">';
                 for(i=0;i<qnlist.stress_enviornment.length;i++){
                     if(i==0){
                         innerhtml += ''+SE(qnlist.stress_enviornment[i])+'';
@@ -1352,10 +1354,11 @@
                         innerhtml += '、'+SE(qnlist.stress_enviornment[i])+'';
                     }
                 }
-                innerhtml += '<p class="doubletab">等因素，是可能造成'+qnlist.BCN+'壓力的現象，減緩'+qnlist.BCN+'壓力的重點，是將造成'+qnlist.BCN+'壓力的事件避免或排除。建議您可以在居家環境中，將家裡的窗簾打開或增加魚缸造景，讓'+qnlist.BCN+'把注意力轉到其他物品上，能降低壓力對'+qnlist.BCN+'的影響。</p>';                
+                innerhtml += '等因素，是可能造成'+qnlist.BCN+'壓力的現象，減緩'+qnlist.BCN+'壓力的重點，是將造成'+qnlist.BCN+'壓力的事件避免或排除。建議您可以在居家環境中，將家裡的窗簾打開或增加魚缸造景，讓'+qnlist.BCN+'把注意力轉到其他物品上，能降低壓力對'+qnlist.BCN+'的影響。</p>';                
             }
             if(qnlist.stress_enviornment_out[0]!='unsure'){
                 innerhtml += '<p class="tab" style="color:#EF5981">壓力問題 - 外部環境</p>';
+                innerhtml += '<p class="doubletab">';
                 for(i=0;i<qnlist.stress_enviornment_out.length;i++){
                     if(i==0){
                         innerhtml += ''+SEO(qnlist.stress_enviornment_out[i])+'';
@@ -1363,10 +1366,11 @@
                         innerhtml += '、'+SEO(qnlist.stress_enviornment_out[i])+'';
                     }
                 }
-                innerhtml += '<p class="doubletab">等事件不只會影響人，也會造成'+qnlist.BCN+'的壓力，建議您盡可能的將噪音隔離，給予'+qnlist.BCN+'安寧的環境，'+qnlist.BCN+'會更放鬆喔。</p>';
+                innerhtml += '等事件不只會影響人，也會造成'+qnlist.BCN+'的壓力，建議您盡可能的將噪音隔離，給予'+qnlist.BCN+'安寧的環境，'+qnlist.BCN+'會更放鬆喔。</p>';
             }
             if(qnlist.stress_lifestyle[0]!='unsure'){
                 innerhtml += '<p class="tab" style="color:#EF5981">壓力問題 - 生活型態</p>';
+                innerhtml += '<p class="doubletab">';
                 for(i=0;i<qnlist.stress_lifestyle.length;i++){
                     if(i==0){
                         innerhtml += ''+SL(qnlist.stress_lifestyle[i])+'';
@@ -1374,7 +1378,7 @@
                         innerhtml += '、'+SL(qnlist.stress_lifestyle[i])+'';
                     }
                 }
-                innerhtml += '<p class="doubletab">等生活型態的改變，對'+qnlist.BCN+'來說也是造成壓力的來源之一， 根據統計主人的氣味是會讓貓咪可以放鬆的要素之一，多陪伴他，還給他本來失去的與主人相處的時間，'+qnlist.BCN+'會更放鬆，更愛您喔！</p>';
+                innerhtml += '等生活型態的改變，對'+qnlist.BCN+'來說也是造成壓力的來源之一， 根據統計主人的氣味是會讓貓咪可以放鬆的要素之一，多陪伴他，還給他本來失去的與主人相處的時間，'+qnlist.BCN+'會更放鬆，更愛您喔！</p>';
             }
         }        
         if(score>=3){
