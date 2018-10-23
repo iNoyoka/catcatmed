@@ -1368,7 +1368,7 @@ app.post('/repeatusername',function(req,res,next){
 });
 app.get('/usercentertest',function(req,res,next){	
 	if(req.session.username==null){
-		req.session.recordWebPage = 'usercentertest';
+		req.session.recordWebPage = 'usercenter';
 		res.redirect('/login');
 	}else{
 		var sql_check = "SELECT * FROM `ordersystem` WHERE userid = '"+ req.session.username +"'";
