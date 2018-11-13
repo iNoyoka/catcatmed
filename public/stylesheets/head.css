@@ -1,0 +1,40 @@
+@import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
+{
+	font-family: 'Noto Sans TC';
+}
+h1{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+h2{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+h3{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+h4{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+h5{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+span{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+p{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+a{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+button{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+th{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+input{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+select{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+/* scroll bar */
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+	border-radius: 100px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    background: white; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: gray;
+	border-radius: 100px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+body{
+    overflow-x: hidden;
+}

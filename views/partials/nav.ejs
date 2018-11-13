@@ -1,0 +1,66 @@
+<nav id="navigationBar" class="col-lg-12 col-md-12 fixed-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2 col-md-2 text-center navItem">
+                <a href="questionnaire">開始了解</a>
+            </div>
+            <div class="col-lg-2 col-md-2 text-center navItem">
+                <a href="#">關於我們</a>
+            </div>
+            <div class="col-lg-1 col-md-1"></div>
+            <div class="col-lg-2 col-md-2 navItem">
+                <img src="images/index/logo.png">
+            </div>
+            <div class="col-lg-1 col-md-1"></div>
+            <div class="col-lg-2 col-md-2 text-center navItem">
+                <a href="#">登入</a>
+            </div>
+            <div class="col-lg-2 col-md-2 text-center navItem">
+                <a href="#">註冊</a>
+            </div>
+        </div>
+    </div>
+</nav>
+<style>
+    #navigationBar{
+        height: 10vh;
+        position: fixed;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        transition: 500ms;
+        color: #3D5BA8;
+    }
+    .navigationBarLeave{
+        background-color: #f1f1f2 !important;
+        color: #3D5BA8 !important;
+        box-shadow: 0px 1px 20px rgba(0,0,0,0.1);
+        transition: 500ms;
+    }
+    .navItem{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+    .navItem img{
+       max-height: 8vh;
+    }
+    #navigationBar a{
+        text-decoration: none;
+        color: #3D5BA8;
+        transition: 500ms;
+    }
+    .navigationBarLeave a{
+        color: #3D5BA8 !important;
+        transition: 500ms;
+    }
+    #navigationBar a:hover{
+        text-decoration: none;
+        color: #87A7D6;
+        transition: 500ms;
+    }
+    .navigationBarLeave a:hover{
+        color: #87A7D6 !important;
+        transition: 500ms;
+    }
+</style>

@@ -233,12 +233,22 @@ router.post('/weight_control',function(req,res,next){
 //
 router.get('/catfood_select',function(req,res,next){
     req.session.catfood_select = null;
-    res.redirect('/questionnaire/select_icon')
+    res.redirect('/questionnaire/BEMAIL')
     //req.session.qnrecord = 'catfood_select';
     //res.render('questionnaire/catfood_select',{name:req.session.BCN});
 });
 router.post('/catfood_select',function(req,res,next){
     req.session.catfood_select = req.body.name;
+    req.session.qnrecordList.push(req.session.qnrecord);
+    res.send('select_icon');
+});
+router.get('/BEMAIL',function(req,res,next){
+    req.session.BEMAIL = null;
+    req.session.qnrecord = 'BEMAIL';
+    res.render('questionnaire/BEMAIL');
+});
+router.post('/BEMAIL',function(req,res,next){
+    req.session.BEMAIL = req.body.name;
     req.session.qnrecordList.push(req.session.qnrecord);
     res.send('select_icon');
 });
@@ -961,6 +971,10 @@ router.get('/final',function(req,res,next){
     }else{
         res.render('questionnaire/final',{name:req.session.BKN_name,sex:null});
     }
+});
+//
+router.get('/final_check',function(req,res,next){
+    res.render('questionnaire/final_check');
 });
 
 module.exports = router;

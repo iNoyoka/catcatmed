@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">    
+
+	<title>catcatmed| questionnaire</title>
+
+    <link rel="shortcut icon" type="image/png" href="../images/favicon.png"/>
+    <link rel="stylesheet" href="../bootstrap-3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../stylesheets/header.css">
+    <link rel="stylesheet" href="../stylesheets/qn.css">
+    <script src="../javascript/jquery/jquery_v-3-3-1.js"></script>
+    <script src="../bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .loader {
+            animation: spin 4s linear infinite;
+        }
+        @keyframes spin {
+            
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+            
+        }
+        .list h4{
+            font-weight: normal;
+        }
+        .list p{
+            display: inline-block;
+            font-weight: normal;
+            padding-top: 10px;
+            margin: 0;
+            color: #F6E3D6;
+            animation-name: flyin;
+            animation-duration: 0.5s;
+            animation-fill-mode: forwards;
+        }
+        @keyframes flyin{
+            0% {padding-top: 10px;color: #F6E3D6;}
+            100% {padding-top: 0px;color: black;}
+        }
+        .button{
+            margin-top: 20px;
+            color: #3D5BA8;
+            border: #3D5BA8 4px solid;
+            border-radius: 40px;
+            padding: 15px 30px;
+            font-size: 1.3em;
+            outline: none !important;
+        }
+        .button:hover{
+            color: white;
+            background-color: #3D5BA8;
+            transition: 300ms;
+        }
+    </style>
+</head>
+<body onselectstart="return false" class="qnbody" id="body" style="display: none">
+    <div style="height:20vh"></div>
+    <div style="height:80vh;overflow: hidden;" class="text-center">
+        <h3>正在為您分析sally的需求<span id="threedot" style="display:none"></span></h3>
+        <div class="loader" >
+            <img src="../images/questionnaire/icons-0901.png">
+        </div>
+        <div class="progressCircle">
+            
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4"></div>
+            <div class="col-lg-4 col-md-4" id="information">
+                <div class="list" id="info"></div>
+                <div class="list"  id="fat"></div>
+                <div class="list"  id="protein"></div>
+                <div class="list"  id="carbo"></div>
+                <div class="list"  id="water"></div>
+                <div class="list"  id="cal"></div>
+                <div class="list"  id="alergent"></div>
+                <div class="list"  id="icon"></div>
+            </div>
+            <div class="col-lg-4 col-md-4" id="button" style="display:none">
+                <button class="button" onclick="Send()">分析完成，查看結果</button>
+            </div>
+            <div class="col-lg-4 col-md-4">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    var info = ['整理健康資訊.....ok','所需脂質.....ok','所需蛋白質.....ok','所需碳水化合物.....ok','計算每日所需水分.....ok','計算每日攝取卡路里.....ok','篩選相關過敏原.....ok','注重項目確認中.....ok'];
+    var infoDelay = [0,10000,100000,100000,100000,100000,100000,100000];
+    var infoPlace = ['info','fat','protein','carbo','water','cal','alergent','icon'];
+    var funcA,funcB,funcC,funcD,funcE,funcF,funcG,funcH;
+    var transToButton;
+    $(document).ready(function(){
+        $('#body').fadeIn(500,function(){
+            funcA = setInterval(Info,0);
+            funcB = setInterval(Fat,2000);
+            funcC = setInterval(Protein,3000);
+            funcD = setInterval(Carbo,4500);
+            funcE = setInterval(Water,5500);
+            funcF = setInterval(Cal,6000);
+            funcG = setInterval(Alergent,6750);
+            funcH = setInterval(Icon,7500);
+            transToButton = setInterval(Information,8500);
+        });
+    });
+    function Information(){
+        clearInterval(transToButton);
+        $('#information').fadeOut(700,function(){
+            $('#button').fadeIn(500);
+        });
+    }
+    // Show Information in List
+    function Info(){
+        clearInterval(funcA);
+        var innerHTML = '';
+        var delay = 0;
+        innerHTML += '<h4>';
+        for(j=0;j<info[0].length;j++){
+            innerHTML += '<p style="animation-delay:'+delay+'s">'+info[0][j]+'</p>';
+            delay += 0.05;
+        }
+        innerHTML += '</h4>';
+        document.getElementById(infoPlace[0]).innerHTML = innerHTML;
+    }
+    function Fat(){
+        clearInterval(funcB);
+        var innerHTML = '';
+        var delay = 0;
+        innerHTML += '<h4>';
+        for(j=0;j<info[1].length;j++){
+            innerHTML += '<p style="animation-delay:'+delay+'s">'+info[1][j]+'</p>';
+            delay += 0.05;
+        }
+        innerHTML += '</h4>';
+        document.getElementById(infoPlace[1]).innerHTML = innerHTML;
+    }
+    function Protein(){
+        clearInterval(funcC);
+        var innerHTML = '';
+        var delay = 0;
+        innerHTML += '<h4>';
+        for(j=0;j<info[2].length;j++){
+            innerHTML += '<p style="animation-delay:'+delay+'s">'+info[2][j]+'</p>';
+            delay += 0.05;
+        }
+        innerHTML += '</h4>';
+        document.getElementById(infoPlace[2]).innerHTML = innerHTML;
+    }
+    function Carbo(){
+        clearInterval(funcD);
+        var innerHTML = '';
+        var delay = 0;
+        innerHTML += '<h4>';
+        for(j=0;j<info[3].length;j++){
+            innerHTML += '<p style="animation-delay:'+delay+'s">'+info[3][j]+'</p>';
+            delay += 0.05;
+        }
+        innerHTML += '</h4>';
+        document.getElementById(infoPlace[3]).innerHTML = innerHTML;
+    }
+    function Water(){
+        clearInterval(funcE);
+        var innerHTML = '';
+        var delay = 0;
+        innerHTML += '<h4>';
+        for(j=0;j<info[4].length;j++){
+            innerHTML += '<p style="animation-delay:'+delay+'s">'+info[4][j]+'</p>';
+            delay += 0.05;
+        }
+        innerHTML += '</h4>';
+        document.getElementById(infoPlace[4]).innerHTML = innerHTML;
+    }
+    function Cal(){
+        clearInterval(funcF);
+        var innerHTML = '';
+        var delay = 0;
+        innerHTML += '<h4>';
+        for(j=0;j<info[5].length;j++){
+            innerHTML += '<p style="animation-delay:'+delay+'s">'+info[5][j]+'</p>';
+            delay += 0.05;
+        }
+        innerHTML += '</h4>';
+        document.getElementById(infoPlace[5]).innerHTML = innerHTML;
+    }
+    function Alergent(){
+        clearInterval(funcG);
+        var innerHTML = '';
+        var delay = 0;
+        innerHTML += '<h4>';
+        for(j=0;j<info[6].length;j++){
+            innerHTML += '<p style="animation-delay:'+delay+'s">'+info[6][j]+'</p>';
+            delay += 0.05;
+        }
+        innerHTML += '</h4>';
+        document.getElementById(infoPlace[6]).innerHTML = innerHTML;
+    }
+    function Icon(){
+        clearInterval(funcH);
+        var innerHTML = '';
+        var delay = 0;
+        innerHTML += '<h4>';
+        for(j=0;j<info[7].length;j++){
+            innerHTML += '<p style="animation-delay:'+delay+'s">'+info[7][j]+'</p>';
+            delay += 0.05;
+        }
+        innerHTML += '</h4>';
+        document.getElementById(infoPlace[7]).innerHTML = innerHTML;
+    }
+    function Send(){
+        window.location.href = '/set/questionnaire_result';
+    }
+</script>
