@@ -104,8 +104,7 @@ app.get('/questionnaire_result',function(req,res,next){
 	res.render('questionnaire_result',{name:req.session.BCN});
 });
 app.post('/questionnaire_result',function(req,res,next){
-	//req.session.extra_knowhow!=null && req.session.select_icon!=null && req.session.BCA_ageYear!=null && req.session.BCW_kilo!=null && req.session.BBC!=null && req.session.BEF!=null && req.session.BNU!=null && req.session.extra_alergent!=null
-	if(true){ // need to insure that each req.session.xxx in function exist
+	if(req.session.extra_knowhow!=null && req.session.select_icon!=null && req.session.BCA_ageYear!=null && req.session.BCW_kilo!=null && req.session.BBC!=null && req.session.BEF!=null && req.session.BNU!=null && req.session.extra_alergent!=null){ // need to insure that each req.session.xxx in function exist
 		// 分析貓咪身體資料
 		var catage_year = parseInt(req.session.BCA_ageYear);
 		var catage_month = parseInt(req.session.BCA_ageMonth);
@@ -745,8 +744,12 @@ app.post('/questionnaire_result',function(req,res,next){
 });
 app.post('/askInformation',function(req,res,next){
 	var list = '';
-	list = JSON.stringify(req.session.BCS)+'#'+JSON.stringify(req.session.BCW_kilo)+'#'+JSON.stringify(req.session.BCW_gram)+'#'+JSON.stringify(req.session.BCA_ageYear)+'#'+JSON.stringify(req.session.BCA_ageMonth)+'#'+JSON.stringify(req.session.BSP)+'#'+JSON.stringify(req.session.BNU)+'#'+JSON.stringify(req.session.BBC)+'#'+JSON.stringify(req.session.select_icon);
-	res.send(list);
+	if(req.session.extra_knowhow!=null && req.session.select_icon!=null && req.session.BCA_ageYear!=null && req.session.BCW_kilo!=null && req.session.BBC!=null && req.session.BEF!=null && req.session.BNU!=null && req.session.extra_alergent!=null){ // need to insure that each req.session.xxx in function exist
+		list = JSON.stringify(req.session.BCS)+'#'+JSON.stringify(req.session.BCA_ageYear)+'#'+JSON.stringify(req.session.BCA_ageMonth)+'#'+JSON.stringify(req.session.BCW_kilo)+'#'+JSON.stringify(req.session.BCW_gram)+'#'+JSON.stringify(req.session.BSP)+'#'+JSON.stringify(req.session.BNU)+'#'+JSON.stringify(req.session.BBC)+'#'+JSON.stringify(req.session.select_icon);
+		res.send(list);
+	}else{
+		res.send('error');
+	}
 });
 
 //------------------------------------------
