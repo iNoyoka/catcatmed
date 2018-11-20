@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>catcatmed| 智慧型寵物營養系統</title>
+    <% include partials/head_layer1 %>
+</head>
+<style>
+    #body{
+        background-color: #F6E3D6;
+    }
+</style>
+<body id="body">
+    <nav id="navigationBar" class="col-lg-12 col-md-12 fixed-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 text-center navItem">
+                    <a href="#"></a>
+                </div>
+                <div class="col-lg-2 col-md-2 text-center navItem">
+                    <a href="#"></a>
+                </div>
+                <div class="col-lg-1 col-md-1"></div>
+                <div class="col-lg-2 col-md-2 navItem">
+                    <img src="images/index/logo.png">
+                </div>
+                <div class="col-lg-1 col-md-1"></div>
+                <div class="col-lg-2 col-md-2 text-center navItem">
+                    <a href="#"></a>
+                </div>
+                <div class="col-lg-2 col-md-2 text-center navItem">
+                    <a href="#"></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <style>
+        #navigationBar{
+            height: 10vh;
+            position: fixed;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            transition: 500ms;
+            color: #3D5BA8;
+        }
+        .navigationBarLeave{
+            background-color: #f1f1f2 !important;
+            color: #3D5BA8 !important;
+            box-shadow: 0px 1px 20px rgba(0,0,0,0.1);
+            transition: 500ms;
+        }
+        .navItem{
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+        .navItem img{
+        max-height: 8vh;
+        }
+        #navigationBar a{
+            text-decoration: none;
+            color: #3D5BA8;
+            transition: 500ms;
+        }
+        .navigationBarLeave a{
+            color: #3D5BA8 !important;
+            transition: 500ms;
+        }
+        #navigationBar a:hover{
+            text-decoration: none;
+            color: #87A7D6;
+            transition: 500ms;
+        }
+        .navigationBarLeave a:hover{
+            color: #87A7D6 !important;
+            transition: 500ms;
+        }
+        .tempButton{
+            background-color: white;
+            color: #3D5BA8;
+            border: #3D5BA8 2px solid;
+            border-radius: 10px;
+            padding: 4px 10px;
+        }
+        .tempButton:hover{
+            background-color: #3D5BA8;
+            color: white;
+            transition: 400ms;
+        }
+    </style>
+    <div class="row" style="height:30vh"></div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <img style="width: 10%" src="images/index/spinner.gif">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <h4>系統維護中</h4>
+            <br>
+            <h5>造成您的不便，敬請見諒！</h5>
+        </div>
+    </div>
+    <div class="row">
+        <!--<div class="col-lg-5 col-md-5 col-sm-5 sol-xs-5"><hr></div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">or</div>
+        <div class="col-lg-5 col-md-5 col-sm-5 sol-xs-5"><hr></div>-->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><hr></div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <input type="text" placeholder="example@gmail.com" id="email">
+            <button class="tempButton" onclick="Send()">好了請通知</button>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    function Send(){
+        if($('#email').val()==''){
+            alert('請先填寫Email，卡卡貓才能及時通知您喔！');
+        }else{
+            $.ajax({
+                method : 'POST',
+                url : '/emailRecording',
+                data:{
+                    email : $('#email').val()
+                }
+            }).done(function(data){
+                alert('感謝您的填寫！我們會會盡快通知您有關卡卡貓的最新消息！');
+                window.location.href = '/';
+            });
+        }
+    }
+</script>

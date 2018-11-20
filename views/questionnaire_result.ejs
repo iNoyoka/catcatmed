@@ -109,7 +109,7 @@
                                 <p style="margin:0">體重：<span id="catWeight"></span></p>
                                 <p style="margin:0">品種：<span id="catSpecies"></span></p>
                                 <p style="margin:0">狀態：<span id="catState"></span></p>
-                                <p style="margin:0">BCS：<span id="catBCS"></span></p>                                
+                                <p style="margin:0">體態：<span id="catBCS"></span></p>                                
                             </div>
                             <div class="col-lg-7 col-md-7" style="border-right: #3D5BA8 1px solid;border-left: #3D5BA8 1px solid;">
                                 <p style="margin:2px">根據您所選取的項目</p>
@@ -258,16 +258,16 @@
             }
             if(lss[0]=='boy') document.getElementById('catSex').innerHTML = '<img style="width:50%;" src="../images/product/element/boy.png">';
             if(lss[0]=='girl') document.getElementById('catSex').innerHTML = '<img style="width:50%;" src="../images/product/element/girl.png">';
-            document.getElementById('catAge').innerHTML = lss[1]+'歲'+lss[2]+'月';
-            document.getElementById('catWeight').innerHTML = lss[3]+'.'+lss[4]+'KG';
+            document.getElementById('catAge').innerHTML = lss[3]+'歲'+lss[4]+'月';
+            document.getElementById('catWeight').innerHTML = lss[1]+'.'+lss[2]+'KG';
             document.getElementById('catSpecies').innerHTML = lss[5];
             if(lss[6]=='yes') document.getElementById('catState').innerHTML = '已結紮';
             if(lss[6]=='no') document.getElementById('catState').innerHTML = '未結紮';
-            if(lss[7]=='A') document.getElementById('catBCS').innerHTML = '1';
-            if(lss[7]=='B') document.getElementById('catBCS').innerHTML = '2';
-            if(lss[7]=='C') document.getElementById('catBCS').innerHTML = '3';
-            if(lss[7]=='D') document.getElementById('catBCS').innerHTML = '4';
-            if(lss[7]=='E') document.getElementById('catBCS').innerHTML = '5';
+            if(lss[7]=='A') document.getElementById('catBCS').innerHTML = '過瘦';
+            if(lss[7]=='B') document.getElementById('catBCS').innerHTML = '稍瘦';
+            if(lss[7]=='C') document.getElementById('catBCS').innerHTML = '適中';
+            if(lss[7]=='D') document.getElementById('catBCS').innerHTML = '稍胖';
+            if(lss[7]=='E') document.getElementById('catBCS').innerHTML = '過胖';
             var Aimg = '';
             var Bimg = '';
             var Cimg = '';
@@ -390,104 +390,149 @@
             // 偵測是哪一個包裝的陣列
             // 決定要在這個陣列中拿取範圍內價格的東西
             var list = [];
+            var count = 0;
             if(priceTag=='A'){
                 list=listA;
-                for(i=0;i<list.length;i++){
+                count = 0;
+                if(list.length==0){
+                    innerHTML += '此價格區間沒有合適的飼料';
+                }
+                for(i=0;i<list.length && count<5;i++){
                     if(tag=='A' && list[i].price>=200 && list[i].price<300){
                         innerHTML += Write(list,i);
+                        count += 1;
                     }
                     if(tag=='B' && list[i].price>=300 && list[i].price<500){
                         innerHTML += Write(list,i);
+                        count += 1;
                     }
                     if(tag=='C' && list[i].price>=500 && list[i].price<650){
                         innerHTML += Write(list,i);
+                        count += 1;
                     }
                     if(tag=='D' && list[i].price>=650 && list[i].price<800){
                         innerHTML += Write(list,i);
+                        count += 1;
                     }
                     if(tag=='E' && list[i].price>=800){
                         innerHTML += Write(list,i);
+                        count += 1;
                     }
                 }
                 document.getElementById('product').innerHTML = innerHTML;
             }
             if(priceTag=='B'){
                 list=listB;
-                for(i=0;i<list.length;i++){
+                count = 0;
+                if(list.length==0){
+                    innerHTML += '此價格區間沒有合適的飼料';
+                }
+                for(i=0;i<list.length && count<5;i++){
                     if(tag=='A' && list[i].price>=200 && list[i].price<300){
                         innerHTML += Write(list,i);
+                        count += 1;
                     }
                     if(tag=='B' && list[i].price>=300 && list[i].price<450){
                         innerHTML += Write(list,i);
+                        count += 1;
                     }
                     if(tag=='C' && list[i].price>=450 && list[i].price<600){
                         innerHTML += Write(list,i);
+                        count += 1;
                     }
                     if(tag=='D' && list[i].price>=600 && list[i].price<750){
                         innerHTML += Write(list,i);
+                        count += 1;
                     }
                     if(tag=='E' && list[i].price>=750){
                         innerHTML += Write(list,i);
+                        count += 1;
                     }
                 }
                 document.getElementById('product').innerHTML = innerHTML;
             }
             if(priceTag=='C'){
                 list=listC;
-                for(i=0;i<list.length;i++){
+                count = 0;
+                if(list.length==0){
+                    innerHTML += '此價格區間沒有合適的飼料';
+                }
+                for(i=0;i<list.length && count<5;i++){
                     if(tag=='A' && list[i].price>=200 && list[i].price<300){
                         innerHTML += Write(list,i);
+                        count += 1;
                     }
                     if(tag=='B' && list[i].price>=300 && list[i].price<400){
                         innerHTML += Write(list,i);
+                        count += 1;
                     }
                     if(tag=='C' && list[i].price>=400 && list[i].price<500){
                         innerHTML += Write(list,i);
+                        count += 1;
                     }
                     if(tag=='D' && list[i].price>=500 && list[i].price<600){
                         innerHTML += Write(list,i);
+                        count += 1;
                     }
                     if(tag=='E' && list[i].price>=600){
                         innerHTML += Write(list,i);
+                        count += 1;
                     }
                 }
                 document.getElementById('product').innerHTML = innerHTML;
             }
             if(priceTag=='D'){
                 list=listD;
-                for(i=0;i<list.length;i++){
+                count = 0;
+                if(list.length==0){
+                    innerHTML += '此價格區間沒有合適的飼料';
+                }
+                for(i=0;i<list.length && count<5;i++){
                     if(tag=='A' && list[i].price>=100 && list[i].price<200){
                         innerHTML += Write(list,i);
+                        count += 1;
                     }
                     if(tag=='B' && list[i].price>=200 && list[i].price<300){
                         innerHTML += Write(list,i);
+                        count += 1;
                     }
                     if(tag=='C' && list[i].price>=300 && list[i].price<400){
                         innerHTML += Write(list,i);
+                        count += 1;
                     }
                     if(tag=='D' && list[i].price>=400 && list[i].price<500){
                         innerHTML += Write(list,i);
+                        count += 1;
                     }
                     if(tag=='E' && list[i].price>=500){
                         innerHTML += Write(list,i);
+                        count += 1;
                     }
                 }
                 document.getElementById('product').innerHTML = innerHTML;
             }
             if(priceTag=='E'){
                 list=listE;
-                for(i=0;i<list.length;i++){
+                count = 0;
+                if(list.length==0){
+                    innerHTML += '此價格區間沒有合適的飼料';
+                }
+                for(i=0;i<list.length && count<5;i++){
                     if(tag=='A' && list[i].price>=100 && list[i].price<150){
                         innerHTML += Write(list,i);
+                        count += 1;
                     }
                     if(tag=='B' && list[i].price>=150 && list[i].price<200){
                         innerHTML += Write(list,i);
+                        count += 1;
                     }
                     if(tag=='C' && list[i].price>=200 && list[i].price<250){
                         innerHTML += Write(list,i);
+                        count += 1;
                     }
                     if(tag=='D' && list[i].price>=250){
                         innerHTML += Write(list,i);
+                        count += 1;
                     }
                 }
                 document.getElementById('product').innerHTML = innerHTML;

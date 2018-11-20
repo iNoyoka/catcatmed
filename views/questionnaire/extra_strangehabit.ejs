@@ -60,6 +60,14 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="C" onclick="Icon(this.id)"><span class="BEFoptions">不在貓砂盆裡上廁所</span></div></div>
             </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="D" onclick="Icon(this.id)"><span class="BEFoptions">其他</span></div></div>
+            </div>
+            <div class="row" id="etc" style="display:none">
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+                    <input type="text" style="width: 100%" placeholder="請填寫" id="etc_content">
+                </div>
+            </div>
         </div>
     </div>
     <div class="row  text-center"><span class="warningSpan" id="warningSpan"></span></div>
@@ -105,10 +113,10 @@
             if(A==1) s.push('A');
             if(B==1) s.push('B');
             if(C==1) s.push('C');
-            if(D==1) s.push('D');
-            if(E==1) s.push('E');
-            if(F==1) s.push('F');
-            if(G==1) s.push('G');
+            if(D==1){
+                s.push('D');
+                s.push($('#etc_content').val());
+            }
             $.ajax({
                 method: 'POST',
                 url: 'extra_strangehabit',
@@ -138,9 +146,14 @@
         if(id=='A') {if(A==0)A=1; else A=0;}
         if(id=='B') {if(B==0)B=1; else B=0;}
         if(id=='C') {if(C==0)C=1; else C=0;}
-        if(id=='D') {if(D==0)D=1; else D=0;}
-        if(id=='E') {if(E==0)E=1; else E=0;}
-        if(id=='F') {if(F==0)F=1; else F=0;}
-        if(id=='G') {if(G==0)G=1; else G=0;}
+        if(id=='D') {
+            if(D==0){
+                D = 1;
+                $('#etc').toggle('slow');
+            }else{
+                D = 0;
+                $('#etc').toggle('slow');
+            }
+        }
     }
 </script>

@@ -973,7 +973,7 @@ router.get('/final',function(req,res,next){
 });
 //
 router.get('/final_check',function(req,res,next){
-    res.render('questionnaire/final_check');
+    res.render('questionnaire/final_check',{name:req.session.BCN});
 });
 
 module.exports = router;

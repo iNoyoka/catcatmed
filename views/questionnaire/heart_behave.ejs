@@ -67,6 +67,14 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="E" onclick="Icon(this.id)"><span class="BEFoptions">舌頭或腳掌發紫</span></div></div>
             </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12"><div class="BEFanswer" id="F" onclick="Icon(this.id)"><span class="BEFoptions">其他</span></div></div>
+            </div>
+            <div class="row" id="etc" style="display:none">
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+                    <input type="text" style="width: 100%" placeholder="請填寫" id="etc_content">
+                </div>
+            </div>
         </div>
     </div>
     <div class="row  text-center"><span class="warningSpan" id="warningSpan"></span></div>
@@ -94,6 +102,7 @@
     let C = 0;
     let D = 0;
     let E = 0;
+    let F = 0;
     function Back(){
         $.ajax({
             method : "POST",
@@ -103,7 +112,7 @@
         });
     }
     function Send(){
-        if((A+B+C+D+E)==0){
+        if((A+B+C+D+E+F)==0){
             document.getElementById('warningSpan').innerHTML = '若沒有上述的情形的話，請選擇“沒有/不確定”之選項喔！';
         }else{
             let s = [];
@@ -112,6 +121,10 @@
             if(C==1) s.push('C');
             if(D==1) s.push('D');
             if(E==1) s.push('E');
+            if(F==1){
+                s.push('F');
+                s.push($('#etc_content').val());
+            }
             $.ajax({
                 method: 'POST',
                 url: 'heart_behave',
@@ -143,5 +156,14 @@
         if(id=='C') {if(C==0)C=1; else C=0;}
         if(id=='D') {if(D==0)D=1; else D=0;}
         if(id=='E') {if(E==0)E=1; else E=0;}
+        if(id=='F') {
+            if(F==0){
+                F = 1;
+                $('#etc').toggle('slow');
+            }else{
+                F = 0;
+                $('#etc').toggle('slow');
+            }
+        }
     }
 </script>
