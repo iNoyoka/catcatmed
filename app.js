@@ -320,6 +320,11 @@ app.post('/questionnaire_result',function(req,res,next){
 			obj.mouth = mouth;
 			obj.alergent = alergent;
 			// 需要先進行計算才能給前端使用的Input
+			// 前端篩選用：代謝能、蛋白質、有穀無穀
+			obj.Metabolism = null;
+			obj.DailyProtein = null;
+			obj.Cereals = 0;
+			//
 			obj.proteinLevel = null;
 			obj.fatLevel = null;
 			obj.carbohydrateLevel = null;
@@ -568,17 +573,34 @@ app.post('/questionnaire_result',function(req,res,next){
 				for(i=0;i<list.length;i++){
 					var x  = kcal/list[i].kcal*10*list[i].DRY_protein;
 					if(catType == "成貓"){
-						if(5.5*catWeight<x && 11.5*catWeight>x)
+						if(5.5*catWeight<x && 11.5*catWeight>x){
+							list[i].DailyProtein = 1;
 							newList.push(list[i]);
+						}
+						else{
+							list[i].DailyProtein = 0;
+							newList.push(list[i]);
+						}
 					}else if(catType == "老貓"){
-						if(6*catWeight<x && 8.5*catWeight>x)
+						if(6*catWeight<x && 8.5*catWeight>x){
+							list[i].DailyProtein = 1;
 							newList.push(list[i]);
+						}else{
+							list[i].DailyProtein = 0;
+							newList.push(list[i]);
+						}
 					}else{
+						list[i].DailyProtein = 1;
 						newList.push(list[i]);
 					}
 				}
 				return newList;
 			}
+			listA = DailyProteinSelector(listA,catType,kcal,catWeight);
+			listB = DailyProteinSelector(listB,catType,kcal,catWeight);
+			listC = DailyProteinSelector(listC,catType,kcal,catWeight);
+			listD = DailyProteinSelector(listD,catType,kcal,catWeight);
+			listE = DailyProteinSelector(listE,catType,kcal,catWeight);
 			// 代謝能篩選函式
 			function MetabolismSelectorTypeA(list,catType,kcal){
 				var newList = [];
@@ -601,21 +623,72 @@ app.post('/questionnaire_result',function(req,res,next){
 					var x_carbohydrate = kcal/list[i].kcal*10*list[i].DRY_carbohydrate;
 					var x = (x_protein*3.5+x_fat*8.5+x_carbohydrate*3.5)/(kcal/list[i].kcal*1000);
 					if(catType == "成貓" || catType == "交配貓" || catType == "懷孕貓" || catType == "泌乳貓"){
-						if(x>4 && x<5)
+						if(x>4 && x<5){
+							list[i].Metabolism = 1;
 							newList.push(list[i]);
+						}else{
+							list[i].Metabolism = 0;
+							newList.push(list[i]);
+						}
 					}if(catType == "胖成貓"){
-						if(x>3.3 && x<3.8)
+						if(x>3.3 && x<3.8){
+							list[i].Metabolism = 1;
 							newList.push(list[i]);
+						}else{
+							list[i].Metabolism = 0;
+							newList.push(list[i]);
+						}
 					}if(catType == "老貓" || catType == "老老貓"){
-						if(x>4 && x<4.5)
+						if(x>4 && x<4.5){
+							list[i].Metabolism = 1;
 							newList.push(list[i]);
+						}else{
+							list[i].Metabolism = 0;
+							newList.push(list[i]);
+						}
 					}if(catType == "胖老貓" || catType == "胖老老貓"){
-						if(x>3.5 && x<4)
+						if(x>3.5 && x<4){
+							list[i].Metabolism = 1;
 							newList.push(list[i]);
+						}else{
+							list[i].Metabolism = 0;
+							newList.push(list[i]);
+						}
 					}
 				}
 				return newList;
 			}
+			listA = MetabolismSelectorTypeB(listA,catType,kcal);
+			listB = MetabolismSelectorTypeB(listB,catType,kcal);
+			listC = MetabolismSelectorTypeB(listC,catType,kcal);
+			listD = MetabolismSelectorTypeB(listD,catType,kcal);
+			listE = MetabolismSelectorTypeB(listE,catType,kcal);
+			// 判斷成分是否含有穀類
+			function CerealsRemover(list){
+				var newList;
+				for(i=0;i<list.length;i++){
+					if(list[i].ingredient.includes('玉米')) {list[i].Cereals = 1;}
+					if(list[i].ingredient.includes('小麥')) {list[i].Cereals = 1;}
+					if(list[i].ingredient.includes('米')) {list[i].Cereals = 1;}
+					if(list[i].ingredient.includes('糙米')) {list[i].Cereals = 1;}
+					if(list[i].ingredient.includes('燕麥')) {list[i].Cereals = 1;}
+					if(list[i].ingredient.includes('黑麥')) {list[i].Cereals = 1;}
+					if(list[i].ingredient.includes('大麥')) {list[i].Cereals = 1;}
+					if(list[i].ingredient.includes('米糠')) {list[i].Cereals = 1;}
+					if(list[i].ingredient.includes('釀造米')) {list[i].Cereals = 1;}
+					if(list[i].ingredient.includes('高粱')) {list[i].Cereals = 1;}
+					if(list[i].ingredient.includes('薏仁')) {list[i].Cereals = 1;}
+					if(list[i].ingredient.includes('大豆')) {list[i].Cereals = 1;}
+					if(list[i].ingredient.includes('黃豆')) {list[i].Cereals = 1;}
+					newList.push(list[i])
+				}
+				return newList;
+			}
+			listA = CerealsRemover(listA);
+			listB = CerealsRemover(listB);
+			listC = CerealsRemover(listC);
+			listD = CerealsRemover(listD);
+			listE = CerealsRemover(listE);
 			//---------------------------------------
 			// 篩選後排序
 			//---------------------------------------

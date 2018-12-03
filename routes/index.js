@@ -30,6 +30,10 @@ router.post('/askEmailRecording',function(req,res,next){
 	}
 });
 
+router.get('/aboutus',function(req,res,next){
+	res.render('aboutus');
+});
+
 //------------------------------------------
 // LIBRARY
 //------------------------------------------
