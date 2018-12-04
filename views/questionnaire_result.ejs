@@ -16,6 +16,8 @@
     gtag('js', new Date());
     gtag('config', 'UA-129519422-1');
     </script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <!-- Common CSS Setting -->
     <style>
         @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
@@ -60,6 +62,33 @@
             margin:0;
             padding:0;
         }
+        /* Tooltip container */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Tooltip text */
+        .tooltip .tooltiptext_bottom {
+            visibility: hidden;
+            width: 150%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            text-align: left;
+            padding: 5px 5px;
+            border-radius: 6px;
+            top: 100%;
+            left: 50%;
+            margin-left: -50%;
+        
+            /* Position the tooltip text - see examples below! */
+            position: absolute;
+            z-index: 1;
+        }
+        /* Show the tooltip text when you mouse over the tooltip container */
+        .tooltip:hover .tooltiptext_bottom {
+            visibility: visible;
+        }
     </style>
 </head>
 <body>
@@ -78,6 +107,7 @@
             /* navbar height */
             height:6vh;
             box-shadow: 0px 1px 20px rgba(0,0,0,0.1);
+            z-index: 10;
         }
         .navBarPadding{
             height:6vh;
@@ -97,8 +127,18 @@
             padding: 0;
         }
         .basicInformationInnerBlock p{
-            font-size: 0.7em;
+            font-size: 1em;
             margin:1px 5px;
+        }
+        .package{
+            border:white 1px solid;
+        }
+        .package:hover{
+            transition: 200ms;
+            border:#87A7D6 1px solid;
+        }
+        .package_select{
+            border:#EF5981 1px solid;
         }
     </style>
     <!-- Navigation Bar -->
@@ -115,44 +155,31 @@
             <div class="basicInformationInnerBlock">
                 <div style="width:25%;float: left;min-height: 20vh;">
                     <div><img src="images/product/element/boy.png" style="width:20%"></div>
-                    <p>年齡：<span></span></p>
-                    <p>體重：<span></span></p>
-                    <p>品種：<span></span></p>
-                    <p>狀態：<span></span></p>
-                    <p>體態：<span></span></p>
+                    <p>年齡： <span>6歲3月</span></p>
+                    <p>體重： <span>5.5公斤</span></p>
+                    <p>品種： <span>波斯貓</span></p>
+                    <p>狀態： <span>未結紮</span></p>
+                    <p>體態： <span>適中</span></p>
                 </div>
                 <div style="width:50%;float: left;min-height: 20vh;border-right: 1px solid #3D5BA8;border-left:1px solid #3D5BA8;">
                     <p>根據您所選取的項目</p>
-                    <div>
-                        <div style="width:33%;float:left;display:flex;
+                    <!-- 重視程度block(後兩個要加左方的border) -->
+                    <div style="width:33%;float: left;margin-bottom:1vh;" class="tooltip">
+                        <span class="tooltiptext_bottom">123</span>
+                        <div style="width:100%;display:flex;
                         align-items:center;
                         justify-content:center;">
-                            <img src="images/product/element/icons/joint.png" style="width:40%;float: left;position: relative;">
-                            <p style="width:60%;margin:0;display: inline-block;display:flex;
+                            <img src="images/product/element/icons/joint.png" style="width:40%;float: left;position: relative;margin:0 10%;">
+                            <p style="width:40%;margin:0;display: inline-block;display:flex;
                             align-items:center;
-                            justify-content:center;">關節</p>
+                            justify-content:center;color:#3D5BA8;">關節</p>
                         </div>
-                        <div style="width:33%;float:left;display:flex;
-                        align-items:center;
-                        justify-content:center;">
-                            <img src="images/product/element/icons/hair.png" style="width:40%;float: left;position: relative;">
-                            <p style="width:60%;margin:0;display: inline-block;display:flex;
-                            align-items:center;
-                            justify-content:center;">毛髮</p>
+                        <br style="clear:both;">
+                        <div style="width:100%;">
+                            <img src="images/product/element/meter_high.png" style="width:60%;margin: 0 20%;">
                         </div>
-                        <div style="width:33%;float:left;display:flex;
-                        align-items:center;
-                        justify-content:center;">
-                            <img src="images/product/element/icons/heart.png" style="width:40%;float: left;position: relative;">
-                            <p style="width:60%;margin:0;display: inline-block;display:flex;
-                            align-items:center;
-                            justify-content:center;">心臟</p>
-                        </div>
-                    </div>
-                    <br style="clear:both;">
-                    <div>
-                        <div style="width:33%;float:left;">
-                            <img src="images/product/element/meter_high.png" style="width:80%;">
+                        <div style="width:100%;text-align: center;">
+                            <p style="font-size:0.7em;color:#3D5BA8;">建議重視程度</p>
                         </div>
                     </div>
                 </div>
@@ -162,7 +189,175 @@
             </div>
         </div>
     </div>
+
     <!-- Information Here -->
+    <div>
+        <div class="container" style="padding: 2vh 0;">
+            <!-- 篩選 -->
+            <div style="width:30%;float: left;">
+                <div style="width:98%;margin:0 1%;background-color:#87A7D6;text-align: center;color: white;padding: 1vh 0;border: gray 1px solid;border-bottom: none;box-shadow: 0 0 20px rgba(0,0,0,0.15);">
+                    <h4 style="margin:0;">篩選條件</h4>
+                </div>
+                <div style="width:98%;margin:0 1%;border: 1px solid gray;border-top:none;">
+                    <!-- 包裝 -->
+                    <div style="display:flex;
+                    align-items:center;
+                    ">
+                        <img src="images/product/element/box_size.png" style="width:15%;float: left;margin-left:25%;">
+                        <p style="color:gray;font-size: 1.3em;"> 包裝大小 </p>
+                    </div>
+                    <div>
+                        <img src="images/product/element/bag1.png" style="width:12%;cursor: pointer;margin-left:1%;" class="package_select">
+                        <img src="images/product/element/bag2.png" style="width:15%;cursor: pointer;" class="package">
+                        <img src="images/product/element/bag3.png" style="width:18%;cursor: pointer;" class="package">
+                        <img src="images/product/element/bag4.png" style="width:20%;cursor: pointer;" class="package">
+                        <img src="images/product/element/bag5.png" style="width:21%;cursor: pointer;" class="package">
+                    </div>
+                    <div style="text-align:center;">
+                        <select style="width:90%;margin:0 5%;">
+                            <option>1-1.8公斤</option>
+                            <option>1.8-3公斤</option>
+                            <option>3-6公斤</option>
+                            <option>6-10公斤</option>
+                            <option>10+公斤</option>
+                        </select>
+                    </div>
+                    <hr>
+                    <!-- 價格區間 -->
+                    <div style="display:flex;
+                    align-items:center;
+                    ">
+                        <img src="images/product/element/price_range.png" style="width:15%;float: left;margin-left:25%;">
+                        <p style="color:gray;font-size: 1.3em;"> 價格分佈 </p>
+                    </div>
+                    <div></div>
+                    <hr>
+                    <!-- 有穀or無穀 -->
+                    <div style="display:flex;
+                    align-items:center;
+                    ">
+                        <img src="images/product/element/grain.png" style="width:15%;float: left;margin-left:25%;">
+                        <p style="color:gray;font-size: 1.3em;"> 穀類成分 </p>
+                    </div>
+                    <div></div>
+                    <hr>
+                    <!-- 進階篩選 -->
+                    <div style="display:flex;
+                    align-items:center;
+                    ">
+                        <img src="images/product/element/advance.png" style="width:15%;float: left;margin-left:20%;">
+                        <p style="color:gray;font-size: 1.3em;"> 蛋白質與代謝能 </p>
+                    </div>
+                    <div></div>
+                </div>
+            </div>
+            <!-- 飼料資訊 -->
+            <div style="width:70%;float: left;position: relative;">
+                <!-- 排序 -->
+                <div style="width:25%;margin-left:75%;position: relative;">
+                    <select style="width:100%;position:relative;">
+                        <option>最適合程度</option>
+                        <option>價格由高到低</option>
+                        <option>價格由低到高</option>
+                    </select>
+                </div>
+                <!-- 飼料 -->
+                <div style="width:98%;margin:1vh 0;margin-left:2%;background-color:white;box-shadow: 0 0 5px rgba(0,0,0,0.2);padding: 1vh 0;">
+                    <div style="width:25%;float: left;">
+                        <img src="images/product/product/0003.png" style="width:96%;margin:0 2%;">
+                        <div style="display:flex;align-items:center;justify-content:center;">
+                            <h5 style="margin:1vh 0;font-family:Impact !important">飼主評價：3.8</h5>
+                        </div>
+                        <div style="display:flex;align-items:center;justify-content:center;">
+                            <i class="fas fa-star" style="color:#EF5981;"></i>
+                            <i class="fas fa-star" style="color:#EF5981;"></i>
+                            <i class="fas fa-star" style="color:#EF5981;"></i>
+                            <i class="fas fa-star-half-alt" style="color:#EF5981;"></i>
+                            <i class="far fa-star" style="color:#EF5981;"></i>
+                        </div>
+                    </div>
+                    <div style="width:75%;float: left;">
+                        <h3 style="margin:0;">紐崔崔 火雞凍乾好好吃飼料</h3>
+                        <img src="images/product/element/flags/AUS.png" style="width:10%;">
+                        <br>
+                        <div style="width:66%;border-right: 1px #D0D2D3 solid;float: left;">
+                            <img src="images/product/element/icons_select/hair.png" style="width:15%;">
+                            <img src="images/product/element/icons_select/hair.png" style="width:15%;">
+                            <img src="images/product/element/icons_select/hair.png" style="width:15%;">
+                            <img src="images/product/element/icons_select/hair.png" style="width:15%;">
+                            <img src="images/product/element/icons_select/hair.png" style="width:15%;">
+                            <img src="images/product/element/icons_select/hair.png" style="width:15%;">
+                            <div>
+                                <!-- progress bar -->
+                                <h5 style="margin:0;font-weight:normal !important;">蛋白質</h5>
+                                <div style="width:90%;background-color:#F1F1F2;border-radius: 20px;">
+                                    <div style="text-align: center;line-height: 1.5vh;color:white;width:35%;height:1.5vh;background-color:#C1CEE1;border-radius: 20px;"><p style="margin:0;font-weight:normal !important;font-size: 1.5vh">35%</p></div>
+                                </div>
+                                <br>
+                                <h5 style="margin:0;font-weight:normal !important;">脂質</h5>
+                                <div style="width:90%;background-color:#F1F1F2;border-radius: 20px;">
+                                    <div style="text-align: center;line-height: 1.5vh;color:white;width:35%;height:1.5vh;background-color:#C1CEE1;border-radius: 20px;"><p style="margin:0;font-weight:normal !important;font-size: 1.5vh">35%</p></div>
+                                </div>
+                                <br>
+                                <h5 style="margin:0;font-weight:normal !important;">纖維素</h5>
+                                <div style="width:90%;background-color:#F1F1F2;border-radius: 20px;">
+                                    <div style="text-align: center;line-height: 1.5vh;color:white;width:35%;height:1.5vh;background-color:#C1CEE1;border-radius: 20px;"><p style="margin:0;font-weight:normal !important;font-size: 1.5vh">35%</p></div>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                        <div style="width:33%;float: left;">
+                            <h5 style="margin:0 5%;text-align: center;">最適每日飲食量</h5>
+                            <div style="width:100%;display:flex;
+                            align-items:center;
+                            justify-content:center;">
+                                <img src="images/product/element/Minus_icon.png" style="width:15%;cursor: pointer;">
+                                <p style="width:40%;margin:0;text-align: center;"><span>40</span>g</p>
+                                <img src="images/product/element/Plus_icon.png" style="width:15%;cursor: pointer;">
+                            </div>
+                            <div style="width:100%;display:flex;
+                            align-items:center;
+                            justify-content:center;">
+                                <img src="images/product/element/KG.png" style="width:15%;">
+                                <p style="width:40%;margin:0;text-align: center"><span>1.5</span>KG</p>
+                            </div>
+                            <div style="width:100%;display:flex;
+                            align-items:center;
+                            justify-content:center;">
+                                <img src="images/product/element/date.png" style="width:15%;">
+                                <p style="width:40%;margin:0;text-align: center"><span>31</span>天</p>
+                            </div>
+                            <br>
+                            <h5 style="margin:0 5%;text-align: center;">前往商城</h5>
+                            <div style="width:90%;margin:0 5%;background-color:#EF5981;border-top-left-radius: 5px;border-top-right-radius: 5px;border:1px solid #EF5981;display:flex;
+                            align-items:center;
+                            justify-content:center;">
+                                <img src="images/product/element/price_range.png" style="width:15%;">
+                                <p style="margin:0;">$1233</p>
+                            </div>
+                            <div  style="width:90%;margin:0 5%;border:1px solid #EF5981;padding:1vh 0;">
+                                <div style="display:flex;align-items:center;justify-content:center;">
+                                    <img src="images/product/element/market/pchome.png" style="width:30%;">
+                                    <a href="#" style="width:50%;text-align:center;">$1233</a>
+                                </div>
+                                <div style="display:flex;align-items:center;justify-content:center;">
+                                    <img src="images/product/element/market/力奇.png" style="width:30%;">
+                                    <a href="#" style="width:50%;text-align:center;">$1333</a>
+                                </div>
+                                <div style="display:flex;align-items:center;justify-content:center;">
+                                    <img src="images/product/element/market/愛寵.png" style="width:30%;">
+                                    <a href="#" style="width:50%;text-align:center;">$1433</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="clear:both;"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+    </div>
     <div style="height:120vh;"></div>
 </body>
 </html>
