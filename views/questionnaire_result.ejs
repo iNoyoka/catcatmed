@@ -20,24 +20,26 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- development version, includes helpful console warnings (Vue.js)-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <!-- Common CSS Setting -->
     <style>
         @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
         {
             font-family: 'Noto Sans TC';
         }
-        h1{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
-        h2{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
-        h3{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
-        h4{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
-        h5{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
-        span{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
-        p{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
-        a{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
-        button{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
-        th{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
-        input{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
-        select{font-family: monospace, Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+        h1{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+        h2{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+        h3{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+        h4{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+        h5{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+        span{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+        p{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+        a{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+        button{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+        th{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+        input{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+        select{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
         /* scroll bar */
         /* width */
         ::-webkit-scrollbar {
@@ -255,11 +257,9 @@
                     </div>
                     <div style="text-align:center;">
                         <select style="width:90%;margin:0 5%;" id="priceSelector">
-                            <option value="A">每公斤 200-300元</option>
-                            <option value="B">每公斤 300-500元</option>
-                            <option value="C">每公斤 500-650元</option>
-                            <option value="D">每公斤 650-800元</option>
-                            <option value="E">每公斤 800+元</option>
+                            <option v-for="price in prices" v-bind:value="price.value">
+                                {{ price.string }}
+                            </option>
                         </select>
                     </div>
                     <hr>
@@ -448,7 +448,7 @@
             $('#package_'+packageSize).toggleClass("package_select package");
             $('#packageSize').val(packageSize);
             // go to change price tag, refresh selector and redraw products
-            ChangePriceSelector();
+            
         }
     }
     function ChangePackageSizeBySel(){
@@ -459,9 +459,23 @@
             packageSize = id;
             $('#package_'+packageSize).toggleClass("package_select package");
             // go to change price tag, refresh selector and redraw products with initial value
-            ChangePriceSelector();
+            
         }
     }
+    // Generate Price Selector
+    const app = new Vue({
+        el: '#priceSelector',
+        data: {
+            prices: [
+                {value: 'A', string: "每公斤 200-300元"},
+                {value: 'B', string: "每公斤 300-500元"},
+                {value: 'C', string: "每公斤 500-650元"},
+                {value: 'D', string: "每公斤 650-800元"},
+                {value: 'E', string: "每公斤 800+元"},
+            ]
+        }
+    })
+    /*
     function ChangePriceSelector(){
         var innerHTML = '';
         if(packageSize=='xs'){
@@ -500,5 +514,5 @@
         }
         document.getElementById('priceSelector').innerHTML = innerHTML;
     }
-
+    */
 </script>
