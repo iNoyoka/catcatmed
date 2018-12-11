@@ -144,6 +144,11 @@
         .package_select{
             border:#EF5981 1px solid;
         }
+        .centralize{
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
     </style>
     <!-- Navigation Bar -->
     <nav>
@@ -154,38 +159,19 @@
     <div class="basicInformationBar">
         <div class="container">
             <div style="width:20%;float: left;text-align: center;color:white">
-                <h1 style="margin:0">Sally</h1>
+                <h1 style="margin:0"><%= name %></h1>
             </div>
             <div class="basicInformationInnerBlock">
                 <div style="width:25%;float: left;min-height: 20vh;">
                     <div><img src="images/product/element/boy.png" style="width:20%"></div>
-                    <p>年齡： <span>6歲3月</span></p>
-                    <p>體重： <span>5.5公斤</span></p>
-                    <p>品種： <span>波斯貓</span></p>
-                    <p>狀態： <span>未結紮</span></p>
-                    <p>體態： <span>適中</span></p>
+                    <p>年齡： <span id="ageyear">6</span>歲<span id="agemonth">3</span>個月</p>
+                    <p>體重： <span id="kilo">5</span>.<span id="gram">5</span>公斤</p>
+                    <p>品種： <span id="bsp">波斯貓</span></p>
+                    <p>狀態： <span id="bnu">未結紮</span></p>
+                    <p>體態： <span id="bbc">適中</span></p>
                 </div>
-                <div style="width:50%;float: left;min-height: 20vh;border-right: 1px solid #3D5BA8;border-left:1px solid #3D5BA8;">
-                    <p>根據您所選取的項目</p>
-                    <!-- 重視程度block(後兩個要加左方的border) -->
-                    <div style="width:33%;float: left;margin-bottom:1vh;" class="tooltip">
-                        <span class="tooltiptext_bottom">慢性口腔炎/牙齦炎<br>123</span>
-                        <div style="width:100%;display:flex;
-                        align-items:center;
-                        justify-content:center;">
-                            <img src="images/product/element/icons/joint.png" style="width:40%;float: left;position: relative;margin:0 10%;">
-                            <p style="width:40%;margin:0;display: inline-block;display:flex;
-                            align-items:center;
-                            justify-content:center;color:#3D5BA8;">關節</p>
-                        </div>
-                        <br style="clear:both;">
-                        <div style="width:100%;">
-                            <img src="images/product/element/meter_high.png" style="width:60%;margin: 0 20%;">
-                        </div>
-                        <div style="width:100%;text-align: center;">
-                            <p style="font-size:0.7em;color:#3D5BA8;">建議重視程度</p>
-                        </div>
-                    </div>
+                <div style="width:50%;float: left;min-height: 20vh;border-right: 1px solid #3D5BA8;border-left:1px solid #3D5BA8;" id="iconInformation">
+                    
                 </div>
                 <div style="width:23%;float: left;min-height: 20vh;margin-left:1%;" class="tooltip">
                     <span class="tooltiptext_bottom">根據AAFCO及研究數據演算，您貓咪的最適合主要營養攝取為此區間內，得以達成長期保健之目的。</span>
@@ -193,7 +179,7 @@
                     <br>
                     <!-- progress bar -->
                     <h5 style="margin:0;font-weight:normal !important;">蛋白質</h5>
-                    <div style="width:100%;background-color:#F1F1F2;">
+                    <div style="width:100%;background-color:#F1F1F2;" id="protein_range">
                         <div style="text-align: center;line-height: 1.8vh;color:white;width:7%;height:1.8vh;background-color:#C1CEE1;float: left;"></div>
                         <div style="text-align: center;line-height: 1.8vh;color:white;width:35%;height:1.8vh;background-color:#3D5BA8;float: left;"><p style="margin:0;font-weight:normal !important;font-size: 1.5vh">7-42%</p></div>
                         <div style="text-align: center;line-height: 1.8vh;color:white;width:58%;height:1.8vh;background-color:#C1CEE1;float: left;"></div>
@@ -201,12 +187,12 @@
                     </div>
                     <br>
                     <h5 style="margin:0;font-weight:normal !important;">脂質</h5>
-                    <div style="width:90%;background-color:#F1F1F2;">
+                    <div style="width:100%;background-color:#F1F1F2;" id="fat_range">
                         <div style="text-align: center;line-height: 1.8vh;color:white;width:35%;height:1.8vh;background-color:#C1CEE1;"></div>
                     </div>
                     <br>
                     <h5 style="margin:0;font-weight:normal !important;">纖維素</h5>
-                    <div style="width:90%;background-color:#F1F1F2;">
+                    <div style="width:100%;background-color:#F1F1F2;" id="fiber_range">
                         <div style="text-align: center;line-height: 1.8vh;color:white;width:35%;height:1.8vh;background-color:#C1CEE1;"></div>
                     </div>
                     <br>
@@ -232,20 +218,11 @@
                         <p style="color:gray;font-size: 1.3em;"> 包裝大小 </p>
                     </div>
                     <div>
-                        <img src="images/product/element/bag1.png" style="width:12%;cursor: pointer;margin-left:1%;" class="package_select" id="package_xs" onclick="ChangePackageSizeByPic(this.id)">
+                        <img src="images/product/element/bag1.png" style="width:12%;cursor: pointer;margin-left:1%;" class="package" id="package_xs" onclick="ChangePackageSizeByPic(this.id)">
                         <img src="images/product/element/bag2.png" style="width:15%;cursor: pointer;" class="package" id="package_s" onclick="ChangePackageSizeByPic(this.id)">
                         <img src="images/product/element/bag3.png" style="width:18%;cursor: pointer;" class="package" id="package_m" onclick="ChangePackageSizeByPic(this.id)">
                         <img src="images/product/element/bag4.png" style="width:20%;cursor: pointer;" class="package" id="package_l" onclick="ChangePackageSizeByPic(this.id)">
                         <img src="images/product/element/bag5.png" style="width:21%;cursor: pointer;" class="package" id="package_xl" onclick="ChangePackageSizeByPic(this.id)">
-                    </div>
-                    <div style="text-align:center;">
-                        <select style="width:90%;margin:0 5%;" id="packageSize" onchange="ChangePackageSizeBySel()">
-                            <option value="xs">1-1.8公斤</option>
-                            <option value="s">1.8-3公斤</option>
-                            <option value="m">3-6公斤</option>
-                            <option value="l">6-10公斤</option>
-                            <option value="xl">10+公斤</option>
-                        </select>
                     </div>
                     <hr>
                     <!-- 價格區間 -->
@@ -256,11 +233,7 @@
                         <p style="color:gray;font-size: 1.3em;"> 價格分佈 </p>
                     </div>
                     <div style="text-align:center;">
-                        <select style="width:90%;margin:0 5%;" id="priceSelector">
-                            <option v-for="price in prices" v-bind:value="price.value">
-                                {{ price.string }}
-                            </option>
-                        </select>
+                        <select style="width:90%;margin:0 5%;" id="priceSelector" onchange="ChangePriceRange()"></select>
                     </div>
                     <hr>
                     <!-- or無穀 -->
@@ -272,20 +245,20 @@
                     </div>
                     <div style="text-align:left;width:90%;margin-left:5%;">
                         <label class="">
-                            <input type="radio" name="radio">
+                            <input type="radio" name="radio" id="grand_yes" onchange="DrawCatfoodBlock()">
                             <span class="checkmark"></span>
                             <span>有穀飼料</span>
                         </label>
                         <br>
                         <label class="">
-                            <input type="radio" name="radio">
+                            <input type="radio" name="radio" id="grand_no" onchange="DrawCatfoodBlock()">
                             <span class="checkmark"></span>
                             <span>無穀飼料</span>
                             <span style="font-size:0.7em;color:gray;">飼料<span>不會</span>包含小麥、玉米...等成分</span>
                         </label>
                         <br>
                         <label class="">
-                            <input type="radio" checked="checked" name="radio">
+                            <input type="radio" checked="checked" name="radio" id="grand_both" onchange="DrawCatfoodBlock()">
                             <span class="checkmark"></span>
                             <span>兩種皆顯示</span>
                         </label>
@@ -301,13 +274,13 @@
                     <div style="text-align:left;width:90%;margin-left:5%;">
                         <p style="color:gray;font-size:0.7em;">您可以進一步將飼料做更嚴謹的篩選，但是由於條件稍為嚴格，飼料的種類可能會非常稀少！</p>
                         <label class="">
-                            <input type="checkbox">
+                            <input type="checkbox" id="DailyProtein" onchange="DrawCatfoodBlock()">
                             <span class="checkmark"></span>
                             <span>AAFCO蛋白質篩選</span>
                         </label>
                         <br>
                         <label class="">
-                            <input type="checkbox">
+                            <input type="checkbox" id="Metabolism" onchange="DrawCatfoodBlock()">
                             <span class="checkmark"></span>
                             <span>NRC代謝能篩選</span>
                         </label>
@@ -320,11 +293,11 @@
             <div style="width:70%;float: left;position: relative;">
                 <!-- 排序 -->
                 <div style="width:25%;margin-left:75%;position: relative;">
-                    <select style="width:100%;position:relative;">
-                        <option>最適合程度</option>
-                        <option>評價由高到低</option>
-                        <option>價格由高到低</option>
-                        <option>價格由低到高</option>
+                    <select style="width:100%;position:relative;" id="sorting_method" onchange="DrawCatfoodBlock()">
+                        <option value="match">最適合程度</option>
+                        <option value="score">評價由高到低</option>
+                        <option value="price_HL">價格由高到低</option>
+                        <option value="price_LH">價格由低到高</option>
                     </select>
                 </div>
                 <!-- 飼料 -->
@@ -345,7 +318,7 @@
                         </div>
                         <div style="width:75%;float: left;">
                             <h3 style="margin:0;">紐崔崔 火雞凍乾好好吃飼料</h3>
-                            <img src="images/product/element/flags/AUS.png" style="width:10%;">
+                            <img src="images/product/element/flags/美國.png" style="width:10%;">
                             <br>
                             <div style="width:66%;border-right: 1px #D0D2D3 solid;float: left;">
                                 <img src="images/product/element/icons_select/hair.png" style="width:15%;">
@@ -429,6 +402,7 @@
                         </div>
                         <div style="clear:both;"></div>
                     </div>
+                    //
                 </div>
             </div>
             <div style="clear:both;"></div>
@@ -437,7 +411,14 @@
 </body>
 </html>
 <script>
+    // for Draw() parameters
     var packageSize = 'xs';
+    var listA, listB, listC, listD, listE;
+    var select_icon;
+    var priceUpperBound = 300, priceLowerBound = 200;
+    var grand = 'both';
+    var protein = 'off', metabolism = 'off';
+    var sort = 'match';
     // Change Package Size
     function ChangePackageSizeByPic(id){
         id = id.split("_");
@@ -446,36 +427,12 @@
             $('#package_'+packageSize).toggleClass("package_select package");
             packageSize = id[1];
             $('#package_'+packageSize).toggleClass("package_select package");
-            $('#packageSize').val(packageSize);
             // go to change price tag, refresh selector and redraw products
-            
-        }
-    }
-    function ChangePackageSizeBySel(){
-        id = $('#packageSize').val()
-        if(id[1]==packageSize){} // do nothing
-        else{
-            $('#package_'+packageSize).toggleClass("package_select package");
-            packageSize = id;
-            $('#package_'+packageSize).toggleClass("package_select package");
-            // go to change price tag, refresh selector and redraw products with initial value
-            
+            ChangePriceSelector();
+            $('#sort_method').val('match');
         }
     }
     // Generate Price Selector
-    const app = new Vue({
-        el: '#priceSelector',
-        data: {
-            prices: [
-                {value: 'A', string: "每公斤 200-300元"},
-                {value: 'B', string: "每公斤 300-500元"},
-                {value: 'C', string: "每公斤 500-650元"},
-                {value: 'D', string: "每公斤 650-800元"},
-                {value: 'E', string: "每公斤 800+元"},
-            ]
-        }
-    })
-    /*
     function ChangePriceSelector(){
         var innerHTML = '';
         if(packageSize=='xs'){
@@ -484,6 +441,8 @@
             innerHTML += '<option value="C">每公斤 500-650元</option>';
             innerHTML += '<option value="D">每公斤 650-800元</option>';
             innerHTML += '<option value="E">每公斤 800+元</option>';
+            priceUpperBound = 300;
+            priceLowerBound = 200;
         }
         if(packageSize=='s'){
             innerHTML += '<option value="A">每公斤 200-300元</option>';
@@ -491,6 +450,8 @@
             innerHTML += '<option value="C">每公斤 450-600元</option>';
             innerHTML += '<option value="D">每公斤 600-750元</option>';
             innerHTML += '<option value="E">每公斤 750+元</option>';
+            priceUpperBound = 300;
+            priceLowerBound = 200;
         }
         if(packageSize=='m'){
             innerHTML += '<option value="A">每公斤 200-300元</option>';
@@ -498,6 +459,8 @@
             innerHTML += '<option value="C">每公斤 400-500元</option>';
             innerHTML += '<option value="D">每公斤 500-600元</option>';
             innerHTML += '<option value="E">每公斤 600+元</option>';
+            priceUpperBound = 300;
+            priceLowerBound = 200;
         }
         if(packageSize=='l'){
             innerHTML += '<option value="A">每公斤 100-200元</option>';
@@ -505,14 +468,335 @@
             innerHTML += '<option value="C">每公斤 300-400元</option>';
             innerHTML += '<option value="D">每公斤 400-500元</option>';
             innerHTML += '<option value="E">每公斤 500+元</option>';
+            priceUpperBound = 200;
+            priceLowerBound = 100;
         }
         if(packageSize=='xl'){
             innerHTML += '<option value="A">每公斤 100-150元</option>';
             innerHTML += '<option value="B">每公斤 150-200元</option>';
             innerHTML += '<option value="C">每公斤 200-250元</option>';
             innerHTML += '<option value="D">每公斤 250+元</option>';
+            priceUpperBound = 150;
+            priceLowerBound = 100;
         }
         document.getElementById('priceSelector').innerHTML = innerHTML;
+        DrawCatfoodBlock();
     }
-    */
+    function ChangePriceRange(){
+        if(packageSize=='xs'){
+            if($('#priceSelector').val()=='A') {priceUpperBound = 300; priceLowerBound = 200;}
+            if($('#priceSelector').val()=='B') {priceUpperBound = 500; priceLowerBound = 300;}
+            if($('#priceSelector').val()=='C') {priceUpperBound = 650; priceLowerBound = 500;}
+            if($('#priceSelector').val()=='D') {priceUpperBound = 800; priceLowerBound = 650;}
+            if($('#priceSelector').val()=='E') {priceUpperBound = 10000; priceLowerBound = 800;}
+        }else if(packageSize=='s'){
+            if($('#priceSelector').val()=='A') {priceUpperBound = 300; priceLowerBound = 200;}
+            if($('#priceSelector').val()=='B') {priceUpperBound = 450; priceLowerBound = 300;}
+            if($('#priceSelector').val()=='C') {priceUpperBound = 600; priceLowerBound = 450;}
+            if($('#priceSelector').val()=='D') {priceUpperBound = 750; priceLowerBound = 600;}
+            if($('#priceSelector').val()=='E') {priceUpperBound = 10000; priceLowerBound = 750;}
+        }else if(packageSize=='m'){
+            if($('#priceSelector').val()=='A') {priceUpperBound = 300; priceLowerBound = 200;}
+            if($('#priceSelector').val()=='B') {priceUpperBound = 400; priceLowerBound = 300;}
+            if($('#priceSelector').val()=='C') {priceUpperBound = 500; priceLowerBound = 400;}
+            if($('#priceSelector').val()=='D') {priceUpperBound = 600; priceLowerBound = 500;}
+            if($('#priceSelector').val()=='E') {priceUpperBound = 10000; priceLowerBound = 600;}
+        }else if(packageSize=='l'){
+            if($('#priceSelector').val()=='A') {priceUpperBound = 200; priceLowerBound = 100;}
+            if($('#priceSelector').val()=='B') {priceUpperBound = 300; priceLowerBound = 200;}
+            if($('#priceSelector').val()=='C') {priceUpperBound = 400; priceLowerBound = 300;}
+            if($('#priceSelector').val()=='D') {priceUpperBound = 500; priceLowerBound = 400;}
+            if($('#priceSelector').val()=='E') {priceUpperBound = 10000; priceLowerBound = 500;}
+        }else if(packageSize=='xl'){
+            if($('#priceSelector').val()=='A') {priceUpperBound = 150; priceLowerBound = 100;}
+            if($('#priceSelector').val()=='B') {priceUpperBound = 200; priceLowerBound = 150;}
+            if($('#priceSelector').val()=='C') {priceUpperBound = 250; priceLowerBound = 200;}
+            if($('#priceSelector').val()=='D') {priceUpperBound = 10000; priceLowerBound = 250;}
+        }else{
+            // error handler
+        }
+        DrawCatfoodBlock();
+    }
+    // Draw food blocks
+    function DrawCatfoodBlock(){
+        // Need to be rewriten by VUE or REACT someday.
+        var innerHTML = '', list = [];
+        // condition for draw
+        if(packageSize=='xs') for(i=0;i<listA.length;i++) list.push(listA[i]);
+        if(packageSize=='s')  for(i=0;i<listB.length;i++) list.push(listB[i]);
+        if(packageSize=='m')  for(i=0;i<listC.length;i++) list.push(listC[i]);
+        if(packageSize=='l')  for(i=0;i<listD.length;i++) list.push(listD[i]);
+        if(packageSize=='xl') for(i=0;i<listE.length;i++) list.push(listE[i]);
+        if($('#sorting_method').val()=='score'){
+            list = list.sort(function(a,b){
+				return a.score/(a.scorecount+1) > b.socre/(b.scorecount+1) ? -1 : 1; 
+			});
+        }
+        if($('#sorting_method').val()=='price_HL'){
+            list = list.sort(function(a,b){
+				return parseInt(a.APrice) > parseInt(b.APrice) ? -1 : 1; 
+			});
+        }
+        if($('#sorting_method').val()=='price_LH'){
+            list = list.sort(function(a,b){
+				return parseInt(a.APrice) > parseInt(b.APrice) ? 1 : -1; 
+			});
+        }
+        innerHTML = Draw(list);
+        if(innerHTML==''){
+            innerHTML += '<div style="width:98%;margin:1vh 0;margin-left:2%;background-color:white;box-shadow: 0 0 5px rgba(0,0,0,0.2);padding: 1vh 0;text-align:center">';
+            innerHTML += '<p>此價格與包裝區間沒有適合您貓咪的飼料喔~您可以嘗試選取其他的包裝+價格組合來查看更多飼料！</p>';
+            innerHTML += '</div>';
+        }
+        document.getElementById('CatFood').innerHTML = innerHTML;
+    }
+    function Draw(list){
+        var innerHTML = '';
+        for(i=0;i<list.length;i++){
+            if(list[i].APrice/list[i].kilogram>priceLowerBound && list[i].APrice/list[i].kilogram<priceUpperBound){
+                if(list[i].Cereals!=1 && $('#grand_yes').is(":checked"))    continue;
+                if(list[i].Cereals!=0 && $('#grand_no').is(":checked")) continue;
+                if(list[i].Metabolism==0 && $("#Metabolism").is(":checked")) continue;
+                if(list[i].DaDailyProtein==0 && $("#DailyProtein").is(":checked"))  continue;
+                innerHTML += '<div style="width:98%;margin:1vh 0;margin-left:2%;background-color:white;box-shadow: 0 0 5px rgba(0,0,0,0.2);padding: 1vh 0;">';
+                innerHTML += '<div style="width:25%;float: left;text-align:center;" class="">';
+                // product img
+                innerHTML += '<img src="images/product/product/'+list[i].productCode.slice(3,7)+'.png" style="max-width:96%;max-height:20vh;">';
+                // product score (with stars)
+                if(list[i].score==0)   innerHTML += '<div class="centralize"><h5 style="margin:1vh 0;font-family:Impact !important">飼主評價：尚無評價</h5></div>';
+                else{
+                    var scoreavg = Math.round(list[i].score/list[i].scorecount);
+                    innerHTML += '<div class="centralize"><h5 style="margin:1vh 0;font-family:Impact !important">飼主評價：'+scoreavg+'</h5></div>';
+                    innerHTML += '<div class="centralize">';
+                    if(scoreavg==5){
+                        innerHTML += '<i class="fas fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="fas fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="fas fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="fas fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="fas fa-star" style="color:#EF5981;"></i>';
+                    }else if(scoreavg<5 && scoreavg>4){
+                        innerHTML += '<i class="fas fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="fas fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="fas fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="fas fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="fas fa-star-half-alt" style="color:#EF5981;"></i>';
+                    }else if(scoreavg==4){
+                        innerHTML += '<i class="fas fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="fas fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="fas fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="fas fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="far fa-star" style="color:#EF5981;"></i>';
+                    }else if(scoreavg<4 && scoreavg>3){
+                        innerHTML += '<i class="fas fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="fas fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="fas fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="fas fa-star-half-alt" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="far fa-star" style="color:#EF5981;"></i>';
+                    }else if(scoreavg==3){
+                        innerHTML += '<i class="fas fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="fas fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="fas fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="far fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="far fa-star" style="color:#EF5981;"></i>';
+                    }else if(scoreavg<3 && scoreavg>2){
+                        innerHTML += '<i class="fas fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="fas fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="fas fa-star-half-alt" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="far fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="far fa-star" style="color:#EF5981;"></i>';
+                    }else if(scoreavg==2){
+                        innerHTML += '<i class="fas fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="fas fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="far fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="far fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="far fa-star" style="color:#EF5981;"></i>';
+                    }else if(scoreavg<2 && scoreavg>1){
+                        innerHTML += '<i class="fas fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="fas fa-star-half-alt" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="far fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="far fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="far fa-star" style="color:#EF5981;"></i>';
+                    }else if(scoreavg==1){
+                        innerHTML += '<i class="fas fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="far fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="far fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="far fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="far fa-star" style="color:#EF5981;"></i>';
+                    }else if(scoreavg<1 && scoreavg>=0){
+                        innerHTML += '<i class="fas fa-star-half-alt" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="far fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="far fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="far fa-star" style="color:#EF5981;"></i>';
+                        innerHTML += '<i class="far fa-star" style="color:#EF5981;"></i>';
+                    }
+                    innerHTML += '</div>';
+                }            
+                innerHTML += '</div>';
+                // product name
+                innerHTML += '<div style="width:75%;float: left;"><h3 style="margin:0;">'+list[i].brand_zh+' '+list[i].name_zh+'</h3>';
+                // flag
+                innerHTML += '<img src="images/product/element/flags/'+list[i].original+'.png" style="width:10%;"><br>';
+                innerHTML += '<div style="width:66%;border-right: 1px #D0D2D3 solid;float: left;">';
+                // icon
+                if(list[i].immu==1){
+                    if(select_icon.includes('E')) innerHTML += '<img src="images/product/element/icons_select/immu.png" style="width:15%;">';
+                    else innerHTML += '<img src="images/product/element/icons/immu.png" style="width:15%;">';
+                }
+                if(list[i].heart==1){
+                    if(select_icon.includes('B')) innerHTML += '<img src="images/product/element/icons_select/heart.png" style="width:15%;">';
+                    else innerHTML += '<img src="images/product/element/icons/heart.png" style="width:15%;">';
+                }
+                if(list[i].hair==1){
+                    if(select_icon.includes('D')) innerHTML += '<img src="images/product/element/icons_select/hair.png" style="width:15%;">';
+                    else innerHTML += '<img src="images/product/element/icons/hair.png" style="width:15%;">';
+                }
+                if(list[i].mehair==1){
+                    if(select_icon.includes('I')) innerHTML += '<img src="images/product/element/icons_select/mehair.png" style="width:15%;">';
+                    else innerHTML += '<img src="images/product/element/icons/mehair.png" style="width:15%;">';
+                }
+                if(list[i].joint==1){
+                    if(select_icon.includes('A')) innerHTML += '<img src="images/product/element/icons_select/joint.png" style="width:15%;">';
+                    else innerHTML += '<img src="images/product/element/icons/joint.png" style="width:15%;">';
+                }
+                if(list[i].stoma==1){
+                    if(select_icon.includes('H')) innerHTML += '<img src="images/product/element/icons_select/stoma.png" style="width:15%;">';
+                    else innerHTML += '<img src="images/product/element/icons/stoma.png" style="width:15%;">';
+                }
+                if(list[i].urinary==1){
+                    if(select_icon.includes('H') || select_icon.includes('F')) innerHTML += '<img src="images/product/element/icons_select/urinary.png" style="width:15%;">';
+                    else innerHTML += '<img src="images/product/element/icons/urinary.png" style="width:15%;">';
+                }
+                if(list[i].mouth==1){
+                    if(select_icon.includes('G')) innerHTML += '<img src="images/product/element/icons_select/mouth.png" style="width:15%;">';
+                    else innerHTML += '<img src="images/product/element/icons/mouth.png" style="width:15%;">';
+                }
+                if(list[i].alergent==1){
+                    innerHTML += '<img src="images/product/element/icons/alergent.png" style="width:15%;">';
+                }
+                innerHTML += '<br><br><div>';
+                //progress bar
+                innerHTML += '<h5 style="margin:0;font-weight:normal !important;">蛋白質</h5><div style="width:90%;background-color:#F1F1F2;border-radius: 20px;"><div style="text-align: center;line-height: 1.8vh;color:white;width:'+list[i].protein*2+'%;height:1.8vh;background-color:#C1CEE1;border-radius: 20px;"><p style="margin:0;font-weight:normal !important;font-size: 1.5vh">'+list[i].protein+'%</p></div></div><br>';
+                innerHTML += '<h5 style="margin:0;font-weight:normal !important;">脂質</h5><div style="width:90%;background-color:#F1F1F2;border-radius: 20px;"><div style="text-align: center;line-height: 1.8vh;color:white;width:'+list[i].fat*3+'%;height:1.8vh;background-color:#C1CEE1;border-radius: 20px;"><p style="margin:0;font-weight:normal !important;font-size: 1.5vh">'+list[i].fat+'%</p></div></div><br>';
+                innerHTML += '<h5 style="margin:0;font-weight:normal !important;">纖維素</h5><div style="width:90%;background-color:#F1F1F2;border-radius: 20px;"><div style="text-align: center;line-height: 1.8vh;color:white;width:'+list[i].fiber*3+'%;height:1.8vh;background-color:#C1CEE1;border-radius: 20px;"><p style="margin:0;font-weight:normal !important;font-size: 1.5vh">'+list[i].fiber+'%</p></div></div><br>';
+                innerHTML += '</div></div><div style="width:33%;float: left;"><h5 style="margin:0 5%;text-align: center;">最適每日飲食量</h5>';
+                // dailygram
+                innerHTML += '<div class="centralize"><img src="images/product/element/Minus_icon.png" style="width:15%;cursor: pointer;"><p style="width:40%;margin:0;text-align: center;"><span>'+list[i].dailyNeedGram+'</span>g</p><img src="images/product/element/Plus_icon.png" style="width:15%;cursor: pointer;"></div><br>';
+                // kilo
+                innerHTML += '<div class="centralize"><img src="images/product/element/KG.png" style="width:15%;"><p style="width:40%;margin:0;text-align: center"><span>'+list[i].kilogram+'</span>KG</p><div style="width:15%;text-align: center;" title="此包飼料公斤數"><i class="far fa-question-circle"></i></div></div>';
+                // days
+                innerHTML += '<div style="width:100%;" class="centralize"><img src="images/product/element/date.png" style="width:15%;"><p style="width:40%;margin:0;text-align: center"><span>'+Math.round(list[i].kilogram*1000/list[i].dailyNeedGram)+'</span>天</p><div style="width:15%;text-align: center;" title="推測可食用天數"><i class="far fa-question-circle"></i></div></div><br>';
+                // lowest price
+                innerHTML += '<h5 style="margin:0 5%;text-align: center;">前往商城</h5><div style="width:90%;margin:0 5%;background-color:#EF5981;border-top-left-radius: 5px;border-top-right-radius: 5px;border:1px solid #EF5981;display:flex;align-items:center;justify-content:center;"><img src="images/product/element/price_range.png" style="width:15%;"><p style="margin:0;">$'+list[i].APrice+'</p></div><div  style="width:90%;margin:0 5%;border:1px solid #EF5981;padding:1vh 0;">';
+                // price and link
+                innerHTML += '<div class="centralize"><img src="images/product/element/market/'+list[i].A+'.png" style="width:30%;"><a href="'+list[i].ALink+'" target="_blank" style="width:50%;text-align:center;">$'+list[i].APrice+'</i></a><a style="width:10%;text-align:left;"><i class="fas fa-angle-right"></i></a></div>';
+                if(list[i].B!='')   innerHTML += '<div class="centralize"><img src="images/product/element/market/'+list[i].B+'.png" style="width:30%;"><a href="'+list[i].BLink+'" target="_blank" style="width:50%;text-align:center;">$'+list[i].BPrice+'</i></a><a style="width:10%;text-align:left;"><i class="fas fa-angle-right"></i></a></div>';
+                if(list[i].C!='')   innerHTML += '<div class="centralize"><img src="images/product/element/market/'+list[i].C+'.png" style="width:30%;"><a href="'+list[i].CLink+'" target="_blank" style="width:50%;text-align:center;">$'+list[i].CPrice+'</i></a><a style="width:10%;text-align:left;"><i class="fas fa-angle-right"></i></a></div>';
+                // end
+                innerHTML += '</div></div><div style="clear:both;"></div></div><div style="clear:both;"></div></div>';
+            }
+        }
+        return innerHTML;
+    }
+    // Initial
+    $(document).ready(function(){
+        $.ajax({
+            method: 'POST',
+            url: 'questionnaire_result'
+        }).done(function(data){
+            // handle data
+            if(data=='/questionnaire'){
+                // error occur
+                window.location.href = data;
+            }else{
+                var splitdata = data.split('#');
+                // packageSize first change
+                packageSize = JSON.parse(splitdata[0]);
+                $('#package_'+packageSize).toggleClass("package_select package");
+                // store list
+                listA = JSON.parse(splitdata[1]);
+                listB = JSON.parse(splitdata[2]);
+                listC = JSON.parse(splitdata[3]);
+                listD = JSON.parse(splitdata[4]);
+                listE = JSON.parse(splitdata[5]);
+                // record select icon
+                select_icon = JSON.parse(splitdata[6]);
+                // Draw cat food Block
+                ChangePriceSelector();
+                DrawCatfoodBlock();
+                // Draw range
+                var proteinUp = parseInt(JSON.parse(splitdata[7]));
+                var proteinDown = parseInt(JSON.parse(splitdata[8]));
+                var proteinMinus = (50 - proteinUp)*2;
+                var proteinMinus2 = (proteinUp - proteinDown)*2;
+                var fatUp = parseInt(JSON.parse(splitdata[9]));
+                var fatDown = parseInt(JSON.parse(splitdata[10]));
+                var fatMinus = (100/3-fatUp)*3;
+                var fatMinus2 = (fatUp-fatDown)*3;
+                var fiberUp = parseInt(JSON.parse(splitdata[11]));
+                var fiberDown = parseInt(JSON.parse(splitdata[12]));
+                var fiberMinus = (100/3-fiberUp)*3;
+                var fiberMinus2 = (fiberUp-fiberDown)*3;
+                document.getElementById('protein_range').innerHTML = '<div style="text-align: center;line-height: 1.8vh;color:white;width:'+proteinDown*2+'%;height:1.8vh;background-color:#C1CEE1;float: left;"></div><div style="text-align: center;line-height: 1.8vh;color:white;width:'+proteinMinus2+'%;height:1.8vh;background-color:#3D5BA8;float: left;"><p style="margin:0;font-weight:normal !important;font-size: 1.5vh">'+proteinDown+'-'+proteinUp+'%</p></div><div style="text-align: center;line-height: 1.8vh;color:white;width:'+proteinMinus+'%;height:1.8vh;background-color:#C1CEE1;float: left;"></div><div style="clear:both;"></div>';
+                document.getElementById('fat_range').innerHTML = '<div style="text-align: center;line-height: 1.8vh;color:white;width:'+fatDown*3+'%;height:1.8vh;background-color:#C1CEE1;float: left;"></div><div style="text-align: center;line-height: 1.8vh;color:white;width:'+fatMinus2+'%;height:1.8vh;background-color:#3D5BA8;float: left;"><p style="margin:0;font-weight:normal !important;font-size: 1.5vh">'+fatDown+'-'+fatUp+'%</p></div><div style="text-align: center;line-height: 1.8vh;color:white;width:'+fatMinus+'%;height:1.8vh;background-color:#C1CEE1;float: left;"></div><div style="clear:both;"></div>';
+                document.getElementById('fiber_range').innerHTML = '<div style="text-align: center;line-height: 1.8vh;color:white;width:'+fiberDown*3+'%;height:1.8vh;background-color:#C1CEE1;float: left;"></div><div style="text-align: center;line-height: 1.8vh;color:white;width:'+fiberMinus2+'%;height:1.8vh;background-color:#3D5BA8;float: left;"><p style="margin:0;font-weight:normal !important;font-size: 1.5vh">'+fiberDown+'-'+fiberUp+'%</p></div><div style="text-align: center;line-height: 1.8vh;color:white;width:'+fiberMinus+'%;height:1.8vh;background-color:#C1CEE1;float: left;"></div><div style="clear:both;"></div>';
+            }
+        });
+        // post to server to ask basic information, and draw it.  
+        $.ajax({
+            method: 'POST',
+            url: 'askInformation'
+        }).done(function(data){
+            if(data=='error'){
+                // error occur
+                alert('Oops!看來您在填寫問卷的時候發生了一些問題...\n麻煩您回到問卷的部分稍作確認，有任何的問題都可以向卡卡貓的客服反映！\n卡卡貓感謝您~');
+            }else{
+                var splitdata = data.split('@');
+                var BCS = JSON.parse(splitdata[0]);
+                var BCA_ageYear = JSON.parse(splitdata[1]);
+                var BCA_ageMonth = JSON.parse(splitdata[2]);
+                var BCW_kilo = JSON.parse(splitdata[3]);
+                var BCW_gram = JSON.parse(splitdata[4]);
+                var BSP = JSON.parse(splitdata[5]);
+                var BNU = JSON.parse(splitdata[6]);
+                var BBC = JSON.parse(splitdata[7]);
+                var iconlist = JSON.parse(splitdata[8]);
+                var iconlist_split;
+                var innerHTML = '';
+                iconlist_split = iconlist[0].split('#');
+                innerHTML += '<p>根據您所選取的項目</p>';
+                innerHTML += '<div style="width:33%;float: left;margin-bottom:1vh;" class="tooltip">';
+                innerHTML += '<span class="tooltiptext_bottom">'+iconlist_split[3]+'</span>';
+                innerHTML += '<div class="centralize"><img src="images/product/element/icons/'+iconlist_split[0]+'.png" style="width:40%;float: left;position: relative;margin:0 10%;"><p style="width:40%;margin:0;display: inline-block;display:flex;align-items:center;justify-content:center;color:#3D5BA8;">'+iconlist_split[1]+'</p></div>';
+                innerHTML += '<br style="clear:both;"><div style="width:100%;"><img src="images/product/element/meter_'+iconlist_split[2]+'.png" style="width:60%;margin: 0 20%;"></div><div style="width:100%;text-align: center;"><p style="font-size:0.7em;color:#3D5BA8;">建議重視程度</p></div></div>';
+                if(iconlist.length>=2){
+                    iconlist_split = iconlist[1].split('#');
+                    innerHTML += '<div style="width:33%;float: left;margin-bottom:1vh;border-left:1px solid gray;" class="tooltip">';
+                    innerHTML += '<span class="tooltiptext_bottom">'+iconlist_split[3]+'</span>';
+                    innerHTML += '<div class="centralize"><img src="images/product/element/icons/'+iconlist_split[0]+'.png" style="width:40%;float: left;position: relative;margin:0 10%;"><p style="width:40%;margin:0;display: inline-block;display:flex;align-items:center;justify-content:center;color:#3D5BA8;">'+iconlist_split[1]+'</p></div>';
+                    innerHTML += '<br style="clear:both;"><div style="width:100%;"><img src="images/product/element/meter_'+iconlist_split[2]+'.png" style="width:60%;margin: 0 20%;"></div><div style="width:100%;text-align: center;"><p style="font-size:0.7em;color:#3D5BA8;">建議重視程度</p></div></div>';
+                }
+                if(iconlist.length==3){
+                    iconlist_split = iconlist[2].split('#');
+                    innerHTML += '<div style="width:33%;float: left;margin-bottom:1vh;border-left:1px solid gray;" class="tooltip">';
+                    innerHTML += '<span class="tooltiptext_bottom">'+iconlist_split[3]+'</span>';
+                    innerHTML += '<div class="centralize"><img src="images/product/element/icons/'+iconlist_split[0]+'.png" style="width:40%;float: left;position: relative;margin:0 10%;"><p style="width:40%;margin:0;display: inline-block;display:flex;align-items:center;justify-content:center;color:#3D5BA8;">'+iconlist_split[1]+'</p></div>';
+                    innerHTML += '<br style="clear:both;"><div style="width:100%;"><img src="images/product/element/meter_'+iconlist_split[2]+'.png" style="width:60%;margin: 0 20%;"></div><div style="width:100%;text-align: center;"><p style="font-size:0.7em;color:#3D5BA8;">建議重視程度</p></div></div>';
+                }
+                innerHTML += '<div style="clear:both;"></div>';
+                document.getElementById('iconInformation').innerHTML = innerHTML;
+                document.getElementById('ageyear').innerHTML = BCA_ageYear;
+                document.getElementById('agemonth').innerHTML = BCA_ageMonth;
+                document.getElementById('kilo').innerHTML = BCW_kilo;
+                document.getElementById('gram').innerHTML = BCW_gram;
+                document.getElementById('bsp').innerHTML = BSP;
+                if(BNU=='yes')  document.getElementById('bnu').innerHTML = '已結紮';
+                if(BNU=='no')  document.getElementById('bnu').innerHTML = '未結紮';
+                if(BBC=='A') document.getElementById('bbc').innerHTML = '過瘦';
+                if(BBC=='B') document.getElementById('bbc').innerHTML = '稍瘦';
+                if(BBC=='C') document.getElementById('bbc').innerHTML = '適中';
+                if(BBC=='D') document.getElementById('bbc').innerHTML = '稍胖';
+                if(BBC=='E') document.getElementById('bbc').innerHTML = '過胖';
+            }
+        });
+    })
 </script>
