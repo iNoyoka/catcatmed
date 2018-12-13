@@ -1017,6 +1017,7 @@ router.get('/final_check',function(req,res,next){
 // 2. build a user account
 // 3. clear the cache of qnrecord
 router.post('/questionnairePassToResult',function(req,res,next){
+    var error = false;
     // Keep useremail in session
     req.session.username = req.session.BEMAIL;
     // 1. store answer to DB
@@ -1068,13 +1069,14 @@ router.post('/questionnairePassToResult',function(req,res,next){
                 });
             }else{
                 console.log('Account already exist, build account failed.');
-                res.send('error');
+                error = true;
             }
         }
     });
     // 3. clear cache
     req.session.qnrecord = null;
     req.session.qnrecordList = null;
-    res.send('success');
+    if(error) res.send('error')
+    else res.send('success');
 });
 module.exports = router;
