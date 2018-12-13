@@ -472,7 +472,7 @@ app.post('/questionnaire_result',function(req,res,next){
 						}else if(catType == "幼貓"){
 							if(result[i].DRY_fat>18&&result[i].DRY_fat<35&&result[i].DRY_protein>35&&result[i].DRY_protein<50)
 							{
-								if(result[i].productName_ZH.includes('老')) continue;
+								if(!result[i].productName_ZH.includes('幼')) continue;
 								list.push(AddObjToList(result[i].productCode,result[i].kilogram,result[i].A,result[i].APrice,result[i].ALink,result[i].B,result[i].BPrice,result[i].BLink,result[i].C,result[i].CPrice,result[i].CLink,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].kcal,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].protein,result[i].fat,result[i].fiber,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients,catWeight,result[i].immu,result[i].heart,result[i].hair,result[i].mehair,result[i].joint,result[i].stoma,result[i].urinary,result[i].mouth,result[i].lowalergent,50,35,35,18,35,0,result[i].score,result[i].scorecount));
 								proteinUp = 50; proteinDown = 35; fatUp = 35; fatDown = 18; fiberUp = 35; fiberDown = 0;
 							}
@@ -897,7 +897,7 @@ app.post('/askInformation',function(req,res,next){
 				if(req.session.mouth_behave.includes('E')) icon_information += '<br>-在食物或是水盆的旁邊駐足';
 				if(req.session.mouth_behave.includes('F')) icon_information += '<br>-甩頭，經常用前腳拍打嘴巴';
 			}else if(req.session.mouth_behave!='unsure'){
-				icon_information = 'mouth#口腔#hmid#有可能有口腔部分的問題，建議您多留意一下您的貓咪，持續追蹤貓咪狀況';
+				icon_information = 'mouth#口腔#mid#有可能有口腔部分的問題，建議您多留意一下您的貓咪，持續追蹤貓咪狀況';
 				if(req.session.mouth_behave.includes('A')) icon_information += '<br>-過度流口水';
 				if(req.session.mouth_behave.includes('B')) icon_information += '<br>-口臭';
 				if(req.session.mouth_behave.includes('C')) icon_information += '<br>-有棕黃色牙垢';

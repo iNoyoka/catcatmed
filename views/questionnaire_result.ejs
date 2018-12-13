@@ -743,15 +743,15 @@
                 var proteinMinus2 = (proteinUp - proteinDown)*2;
                 var fatUp = parseInt(JSON.parse(splitdata[9]));
                 var fatDown = parseInt(JSON.parse(splitdata[10]));
-                var fatMinus = (100/3-fatUp)*3;
-                var fatMinus2 = (fatUp-fatDown)*3;
+                var fatMinus = (50-fatUp)*2;
+                var fatMinus2 = (fatUp-fatDown)*2;
                 var fiberUp = parseInt(JSON.parse(splitdata[11]));
                 var fiberDown = parseInt(JSON.parse(splitdata[12]));
-                var fiberMinus = (100/3-fiberUp)*3;
-                var fiberMinus2 = (fiberUp-fiberDown)*3;
+                var fiberMinus = (50-fiberUp)*2;
+                var fiberMinus2 = (fiberUp-fiberDown)*2;
                 document.getElementById('protein_range').innerHTML = '<div style="text-align: center;line-height: 1.8vh;color:white;width:'+proteinDown*2+'%;height:1.8vh;background-color:#C1CEE1;float: left;"></div><div style="text-align: center;line-height: 1.8vh;color:white;width:'+proteinMinus2+'%;height:1.8vh;background-color:#3D5BA8;float: left;"><p style="margin:0;font-weight:normal !important;font-size: 1.5vh">'+proteinDown+'-'+proteinUp+'%</p></div><div style="text-align: center;line-height: 1.8vh;color:white;width:'+proteinMinus+'%;height:1.8vh;background-color:#C1CEE1;float: left;"></div><div style="clear:both;"></div>';
-                document.getElementById('fat_range').innerHTML = '<div style="text-align: center;line-height: 1.8vh;color:white;width:'+fatDown*3+'%;height:1.8vh;background-color:#C1CEE1;float: left;"></div><div style="text-align: center;line-height: 1.8vh;color:white;width:'+fatMinus2+'%;height:1.8vh;background-color:#3D5BA8;float: left;"><p style="margin:0;font-weight:normal !important;font-size: 1.5vh">'+fatDown+'-'+fatUp+'%</p></div><div style="text-align: center;line-height: 1.8vh;color:white;width:'+fatMinus+'%;height:1.8vh;background-color:#C1CEE1;float: left;"></div><div style="clear:both;"></div>';
-                document.getElementById('fiber_range').innerHTML = '<div style="text-align: center;line-height: 1.8vh;color:white;width:'+fiberDown*3+'%;height:1.8vh;background-color:#C1CEE1;float: left;"></div><div style="text-align: center;line-height: 1.8vh;color:white;width:'+fiberMinus2+'%;height:1.8vh;background-color:#3D5BA8;float: left;"><p style="margin:0;font-weight:normal !important;font-size: 1.5vh">'+fiberDown+'-'+fiberUp+'%</p></div><div style="text-align: center;line-height: 1.8vh;color:white;width:'+fiberMinus+'%;height:1.8vh;background-color:#C1CEE1;float: left;"></div><div style="clear:both;"></div>';
+                document.getElementById('fat_range').innerHTML = '<div style="text-align: center;line-height: 1.8vh;color:white;width:'+fatDown*2+'%;height:1.8vh;background-color:#C1CEE1;float: left;"></div><div style="text-align: center;line-height: 1.8vh;color:white;width:'+fatMinus2+'%;height:1.8vh;background-color:#3D5BA8;float: left;"><p style="margin:0;font-weight:normal !important;font-size: 1.5vh">'+fatDown+'-'+fatUp+'%</p></div><div style="text-align: center;line-height: 1.8vh;color:white;width:'+fatMinus+'%;height:1.8vh;background-color:#C1CEE1;float: left;"></div><div style="clear:both;"></div>';
+                document.getElementById('fiber_range').innerHTML = '<div style="text-align: center;line-height: 1.8vh;color:white;width:'+fiberDown*2+'%;height:1.8vh;background-color:#C1CEE1;float: left;"></div><div style="text-align: center;line-height: 1.8vh;color:white;width:'+fiberMinus2+'%;height:1.8vh;background-color:#3D5BA8;float: left;"><p style="margin:0;font-weight:normal !important;font-size: 1.5vh">'+fiberDown+'-'+fiberUp+'%</p></div><div style="text-align: center;line-height: 1.8vh;color:white;width:'+fiberMinus+'%;height:1.8vh;background-color:#C1CEE1;float: left;"></div><div style="clear:both;"></div>';
             }
         });
         // post to server to ask basic information, and draw it.  
