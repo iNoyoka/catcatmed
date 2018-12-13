@@ -1,6 +1,43 @@
 var express = require('express');
 var router = express.Router();
 
+//-----------------------------------------
+// DATABASE SETTING
+//-----------------------------------------
+var mysql = require('mysql');
+var config = {
+	host: 'localhost',
+	user: 'root',
+	password: '3Hptp3s5vpKPiy97',
+	database: 'catcatmed'
+};
+var con;
+//database disconnect handler
+function handleDisconnect(){
+	con = mysql.createConnection(config);
+	con.connect(function(err){
+		if(err){
+			console.log('error occur when connect to db:',err);
+			setTimeout(handleDisconnect,2000);
+		}
+	});
+	con.on('error',function(err){
+		console.log('db error',err);
+		if(err.code === 'PROTOCAL_CONNECTION_LOST'){
+			handleDisconnect();
+		}else{
+			throw err;
+		}
+	});
+}
+handleDisconnect();
+//trigger database every 5 sec
+setInterval(function(){				
+	con.query('SELECT 1');
+},5000);
+
+var datetime = require('node-datetime');
+
 // 首頁以及分流
 router.get('/', function(req, res, next) {
     if(req.session.qnrecordList==null){
@@ -976,4 +1013,68 @@ router.get('/final_check',function(req,res,next){
     res.render('questionnaire/final_check',{name:req.session.BCN});
 });
 
+// 1. store answer to database
+// 2. build a user account
+// 3. clear the cache of qnrecord
+router.post('/questionnairePassToResult',function(req,res,next){
+    // Keep useremail in session
+    req.session.username = req.session.BEMAIL;
+    // 1. store answer to DB
+    // clear part session
+    req.session.select_icon = JSON.stringify(req.session.select_icon);
+    req.session.joint_below = JSON.stringify(req.session.joint_below);
+    req.session.heart_behave = JSON.stringify(req.session.heart_behave);
+    req.session.mouth_behave = JSON.stringify(req.session.mouth_behave);
+    req.session.fur_behave = JSON.stringify(req.session.fur_behave);
+    req.session.fur_tie = JSON.stringify(req.session.fur_tie);
+    req.session.immu_behave = JSON.stringify(req.session.immu_behave);
+    req.session.immu_behave_before = JSON.stringify(req.session.immu_behave_before);
+    req.session.urinary_behave = JSON.stringify(req.session.urinary_behave);
+    req.session.stoma_problem = JSON.stringify(req.session.stoma_problem);
+    req.session.stress_now = JSON.stringify(req.session.stress_now);
+    req.session.stress_enviornment = JSON.stringify(req.session.stress_enviornment);
+    req.session.stress_enviornment_out = JSON.stringify(req.session.stress_enviornment_out);
+    req.session.stress_lifestyle = JSON.stringify(req.session.stress_lifestyle);
+    req.session.extra_alergent = JSON.stringify(req.session.extra_alergent);
+    var sql = 'INSERT INTO `userqnrecord` (BKN_name,BKN_age,BKN_sex,BCN,BCS,BCA_ageYear,BCA_ageMonth,BSP,BNU,BPR,BPT,BFN,BFA_kittyNum,BFA_week,BCW_kilo,BCW_gram,BEF,BSI,BBC,weight_control,catfood_select,BEMAIL,select_icon,joint_now,joint_med,joint_below,joint_jump,joint_daily,heart_now,heart_behave,heart_avgtemp,mouth_now,mouth_behave,mouth_brush,fur_freq,fur_behave,fur_tie,immu_now,immu_behave,immu_behave_before,immu_spirit,immu_med,kidney_now,kidney_urine,kidney_health,urinary_now,urinary_behave,urinary_together,urinary_water,stoma_problem,stoma_bathroom,stoma_strange,melt_freq,stress_now,stress_enviornment,stress_enviornment_out,stress_lifestyle,extra_eatinghabit,extra_eatingfreq,extra_weekcan,extra_freshflesh,extra_minifish,extra_killbugs,extra_vacci,extra_alergent,extra_drinking,extra_cooking,extra_strangehabit,extra_place,extra_knowhow) VALUES?';
+    var values = [
+        [req.session.BKN_name,req.session.BKN_age,req.session.BKN_sex,req.session.BCN,req.session.BCS,req.session.BCA_ageYear,req.session.BCA_ageMonth,req.session.BSP,req.session.BNU,req.session.BPR,req.session.BPT,req.session.BFN,req.session.BFA_kittyNum,req.session.BFA_week,req.session.BCW_kilo,req.session.BCW_gram,req.session.BEF,req.session.BSI,req.session.BBC,req.session.weight_control,req.session.catfood_select,req.session.BEMAIL,req.session.select_icon,req.session.joint_now,req.session.joint_med,req.session.joint_below,req.session.joint_jump,req.session.joint_daily,req.session.heart_now,req.session.heart_behave,req.session.heart_avgtemp,req.session.mouth_now,req.session.mouth_behave,req.session.mouth_brush,req.session.fur_freq,req.session.fur_behave,req.session.fur_tie,req.session.immu_now,req.session.immu_behave,req.session.immu_behave_before,req.session.immu_spirit,req.session.immu_med,req.session.kidney_now,req.session.kidney_urine,req.session.kidney_health,req.session.urinary_now,req.session.urinary_behave,req.session.urinary_together,req.session.urinary_water,req.session.stoma_problem,req.session.stoma_bathroom,req.session.stoma_strange,req.session.melt_freq,req.session.stress_now,req.session.stress_enviornment,req.session.stress_enviornment_out,req.session.stress_lifestyle,req.session.extra_eatinghabit,req.session.extra_eatingfreq,req.session.extra_weekcan,req.session.extra_freshflesh,req.session.extra_minifish,req.session.extra_killbugs,req.session.extra_vacci,req.session.extra_alergent,req.session.extra_drinking,req.session.extra_cooking,req.session.extra_strangehabit,req.session.extra_place,req.session.extra_knowhow]
+    ];
+    con.query(sql,[values],function(err,result){
+        if(err){
+            console.log('Unknown SQL error while store qnrecord to database.');
+            throw err;
+        }else{
+            console.log('User:'+req.session.username+' Complete questionnaire.');
+        }
+    });
+    // 2. build a user account
+    var sql_check = 'SELECT * FROM `useraccount` WHERE username = "'+req.session.username+'"';
+    con.query(sql_check,function(err,result){
+        if(err){
+            console.log('Unknown SQL error while building user account.');
+            throw err;
+        }else{
+            if(result[0]==null){
+                console.log('Account doesn"t exist, start building account.');
+                var dt = datetime.create();
+                var formatted = dt.format('Y-m-d H:M:S');
+                var sql = 'INSERT INTO `useraccount` (name, username, password, buildtime, whetherCommand, possiblePurchaseCatFood) VALUES?';
+                var values = [
+                    [req.session.BKN_name,req.session.username,req.session.username,formatted,0,'']
+                ];
+                con.query(sql,[values],function(err,result){
+                    if(err) throw err;
+                });
+            }else{
+                console.log('Account already exist, build account failed.');
+                res.send('error');
+            }
+        }
+    });
+    // 3. clear cache
+    req.session.qnrecord = null;
+    req.session.qnrecordList = null;
+    res.send('success');
+});
 module.exports = router;

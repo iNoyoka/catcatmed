@@ -5,7 +5,7 @@ var customerList = [];
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	res.render('index_temp',{name: req.session.name});
+	res.render('index',{name: req.session.name});
 });
 
 router.get('/index_mobile',function(req,res,next){
@@ -30,16 +30,23 @@ router.post('/askEmailRecording',function(req,res,next){
 	}
 });
 
-router.get('/aboutus',function(req,res,next){
-	res.render('aboutus');
-});
-
 //------------------------------------------
 // LIBRARY
 //------------------------------------------
 router.get('/library',function(req,res,next){
-	if(req.session.cart==null) req.session.cart = [];
-	res.render('library',{username: req.session.name,productLength:req.session.cart.length});
+	res.render('library');
+});
+router.post('/libraryMessage',function(req,res,next){
+	res.send('success!');
 });
 
+//------------------------------------------
+// About us
+//------------------------------------------
+router.get('/aboutus',function(req,res,next){
+	res.render('aboutus');
+});
+router.get('/aboutusMessage',function(req,res,next){
+	res.send('success');
+});
 module.exports = router;

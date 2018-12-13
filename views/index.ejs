@@ -1,138 +1,226 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Web Page Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
+    <!-- Web Describe -->
     <title>catcatmed| 智慧型寵物營養系統</title>
-    <% include partials/head_layer1 %>
-</head>
-<body id="body">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129519422-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-129519422-1');
+    </script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- development version, includes helpful console warnings (Vue.js)-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- Common CSS Setting -->
     <style>
-        .firstBanner{
-            height: 100vh;
-            padding-top: 25vh;
-            margin: 0;
+        @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
+        {
+            font-family: 'Noto Sans TC';
         }
-        video{
-            position: fixed;
-            width: 100%;
+        h1{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+        h2{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+        h3{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+        h4{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+        h5{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+        span{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+        p{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+        a{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+        button{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+        th{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+        input{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+        select{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+        li{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: normal;}
+        /* scroll bar */
+        /* width */
+        ::-webkit-scrollbar {
+            width: 5px;
+            border-radius: 100px;
         }
-        .firstBanner h1{
-            margin: 30px 0;
-            font-size: 3em;
-            color: rgba(0,0,0,0);
-            animation-name: firstBanner_animation1;
-            animation-duration: 1s;
-            animation-fill-mode: forwards;
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: white; 
         }
-        .firstBanner h5{
-            margin: 30px 0;
-            color: rgba(0,0,0,0);
-            animation-name: firstBanner_animation1;
-            animation-duration: 1s;
-            animation-delay: 0.6s;
-            animation-fill-mode: forwards;
+        
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: gray;
+            border-radius: 100px;
         }
-        .firstBanner_button{
-            border: rgba(0,0,0,0) 1px solid;
-            color: rgba(0,0,0,0);
-            font-size: 1em;
-            background-color: rgba(0,0,0,0);
-            padding: 1em 3em;
-            border-radius: 40px;
-            margin-top: 2em;
-            cursor: pointer;
-            outline: none !important;
-            animation-name: firstBanner_animation2;
-            animation-duration: 1s;
-            animation-delay: 1.2s;
-            animation-fill-mode: forwards;
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
         }
-        .firstBanner_button_after{
-            border: black 1px solid;
-            color: black;
-            font-size: 1em;
-            background-color: rgba(0,0,0,0);
-            padding: 1em 3em;
-            border-radius: 40px;
-            margin-top: 2em;
-            cursor: pointer;
-            outline: none !important;
+        body{
+            overflow-x: hidden;
+            margin:0;
+            padding:0;
         }
-        .bubble{
-            border: black 1px solid;
-            color: black;
-            font-size: 1em;
-            background-color: rgba(0,0,0,0);
-            padding: 1em 3em;
-            border-radius: 40px;
-            margin-top: 2em;
-            cursor: pointer;
-            outline: none !important;
-            animation-name: firstBanner_animationBubble;
-            animation-duration: 0.5s;
-            animation-fill-mode: forwards;
+        /* Tooltip container */
+        .tooltip {
+            position: relative;
+            display: inline-block;
         }
-        .banner{
-            height: 85vh;
+
+        /* Tooltip text */
+        .tooltip .tooltiptext_bottom {
+            visibility: hidden;
+            min-width: 150%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            text-align: left;
+            padding: 5px 5px;
+            border-radius: 6px;
+            top: 100%;
+            left: 50%;
+            margin-left: -50%;
+        
+            /* Position the tooltip text - see examples below! */
+            position: absolute;
+            z-index: 1;
         }
-        /* animation part */
-        @keyframes firstBanner_animation1{
-            0% {color: rgba(0,0,0,0);margin:60px}
-            100% {color: black;margin:30px}
-        }
-        @keyframes firstBanner_animation2{
-            0% {border: rgba(0,0,0,0) 1px solid;color: rgba(0,0,0,0);margin:60px}
-            100% {border: black 1px solid;color: black;margin:30px}
-        }
-        @keyframes firstBanner_animationBubble{
-            0% {font-size: 1em;padding: 1em 3em;margin-top: 2em}
-            30% {font-size: 1em;padding: 1.3em 4em;margin-top: 1.7em;}
-            100% {font-size: 1em;padding: 1em 3em;margin-top: 2em;}
+        /* Show the tooltip text when you mouse over the tooltip container */
+        .tooltip:hover .tooltiptext_bottom {
+            visibility: visible;
         }
     </style>
+</head>
+<body>
+    <style>
+        /* Common */
+        .container{
+            width:80%;
+            margin-left:10%;
+            margin-right:10%;
+        }
+        /* navbar */
+        .navBar{
+            width:100%;
+            background-color: #F1F1F2;
+            margin:0;
+            position: fixed;
+            /* navbar height */
+            height:10vh;
+            box-shadow: 0px 1px 20px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+        .navBarPadding{
+            height:10vh;
+        }
+        .centralize{
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+        a{
+            text-decoration: none;
+            color: #3D5BA8;
+            font-size: 1.4em;
+        }
+        .newButton{
+            position:absolute;
+            bottom:5vh;
+            left:50%;
+            transform: translateX(-50%);
+            background-color: #87A7D6;
+            padding: 3vh 50px;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            border-radius: 10px;
+            border: 3px solid #87A7D6;
+            color:#F1F1F2;
+        }
+        .newButton:hover{
+            transition: 300ms;
+            color: #3D5BA8;
+            border: 3px solid #3D5BA8;
+        }
+    </style>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="navBar container">
+            <div style="width:40%;float:left;height: 10vh;" class="centralize">
+                <a href="/library">文獻整理</a>
+            </div>
+            <div style="width:20%;float:left;text-align: center;">
+                <a href="/"><img src="images/index/logo.png" style="height:8vh;margin:1vh auto;"></a>
+            </div>
+            <div style="width:40%;float:left;height: 10vh;" class="centralize">
+                <a href="/aboutus">關於我們</a>
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+        <div class="navBarPadding"></div>
+    </nav>
+
+    <!-- Background Vedio -->
     <!--This video is made by : Cat in the grass in the sun By MattiaMc - Lo Bianco Mattia-->
-    <video src="images/index/cat_in_the_sun.mp4" autoplay></video>
-    <header class="row">
-        <% include partials/nav %>
-    </header>
-    <body>
-        <div class="row firstBanner">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <h1>三分鐘找出貓小孩完整營養需求</h1>
-                <h5>讓卡卡貓專業獸醫團隊，為您把關貓咪的健康</h5>
-                <button class="firstBanner_button" id="firstBanner_button" onclick="window.location.href = '/questionnaire'">開始了解</button>
+    <video src="images/index/cat_in_the_sun.mp4" autoplay  loop="loop" style="position:fixed;z-index:-1;"></video>
+
+    <!-- body -->
+    <div style="margin-top:5vh;margin-bottom:5vh;z-index:2;" class="container">
+        <div style="width:50%;float:left;">
+            <div class="container" style="height:80vh;background-color: rgba(0, 0, 0, 0.7);border-radius: 20px;color:white;position: relative;">
+                <h1 style="text-align:center;color:white;">第一次使用本系統</h1>
+                <h3 style="margin-left:10%;color: yellow;">使用須知</h3>
+                <ul>
+                    <li style="margin-left:10%;">註冊會員，清楚記錄貓咪飲食、健康狀況，一鍵搞定</li>
+                    <li style="margin-left:10%;">快速演算，挑選最適合的飼料</li>
+                </ul>
+                <h3 style="margin-left:10%;color: yellow;">操作指南</h3>
+                <ul>
+                    <li style="margin-left:10%;">花費三到五分鐘填寫貓咪基本資訊</li>
+                    <li style="margin-left:10%;">等待系統進行最合適飼料演算</li>
+                    <li style="margin-left:10%;">挑選系統所推薦的飼料並進行購買</li>
+                </ul>
+                <h3 style="margin-left:10%;color: yellow;">您將會獲得...</h3>
+                <ul>
+                    <li style="margin-left:10%;">經科學分析後，推薦最符合貓咪身體狀況的市售飼料【詳情請見文獻整理】</li>
+                    <li style="margin-left:10%;">同一款飼料，最優惠的價格</li>
+                    <li style="margin-left:10%;">建立會員系統，追蹤、分析貓咪食用飼料的情況</li>
+                </ul>
+                <button class="newButton">立即開始</button>
             </div>
         </div>
-    </body>
-    <footer>
-        <% include partials/footer %>
-    </footer>
+        <div style="width:50%;float:left;">
+            <div class="container" style="height:80vh;background-color: rgba(0, 0, 0, 0.7);border-radius: 20px;color:white;position: relative;">
+                <h1 style="text-align:center;color:white;">多次使用</h1>
+                <h3 style="margin-left:10%;color: yellow;">使用須知</h3>
+                <ul>
+                    <li style="margin-left:10%;">登入會員系統，回覆使用心得，可獲得商品折扣券</li>
+                </ul>
+                <h3 style="margin-left:10%;color: yellow;">操作指南</h3>
+                <ul>
+                    <li style="margin-left:10%;">修正會員中心資料，快速更正貓咪身體資訊</li>
+                    <li style="margin-left:10%;">等待系統進行最合適飼料演算</li>
+                    <li style="margin-left:10%;">挑選系統所推薦的飼料並進行購買</li>
+                </ul>
+                <h3 style="margin-left:10%;color: yellow;">您將會獲得...</h3>
+                <ul>
+                    <li style="margin-left:10%;">經科學分析後，推薦最符合貓咪身體狀況的市售飼料【詳情請見文獻整理】</li>
+                    <li style="margin-left:10%;">同一款飼料，最優惠的價格</li>
+                    <li style="margin-left:10%;">建立會員系統，追蹤、分析貓咪食用飼料的情況</li>
+                    <li style="margin-left:10%;">會員罩起來，領取折價券</li>
+                </ul>
+                <button class="newButton">準備好了</button>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+
+    <!-- footer -->
+
 </body>
 </html>
-<script>
-    var navBackground = true;
-    var firstBanner_button = true;
-    $(window).scroll(function(){
-        if($(window).scrollTop()>=100 && navBackground){
-            navBackground = false;
-            $('#navigationBar').toggleClass('navigationBarLeave');
-        }
-        if($(window).scrollTop()<100 && !navBackground){
-            navBackground = true;
-            $('#navigationBar').toggleClass('navigationBarLeave');
-        }
-    });
-    $('#firstBanner_button').hover(
-        function(){
-            $('#firstBanner_button').toggleClass('bubble');
-            if(firstBanner_button){
-                $('#firstBanner_button').toggleClass('firstBanner_button');
-                firstBanner_button = false;
-            }
-            else if(!firstBanner_button){
-                $('#firstBanner_button').toggleClass('firstBanner_button_after');
-            }
-        },function(){
-            $('#firstBanner_button').toggleClass('bubble firstBanner_button_after');
-        }
-    );
-</script>

@@ -31,8 +31,6 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `userqnrecord`;
 CREATE TABLE IF NOT EXISTS `userqnrecord` (
   `CCMUserqnrPId` int(9) NOT NULL AUTO_INCREMENT,
-  `name` text COLLATE utf8_unicode_ci NOT NULL,
-  `username` text CHARACTER SET latin1 NOT NULL,
   `BKN_name` text COLLATE utf8_unicode_ci,
   `BKN_age` text COLLATE utf8_unicode_ci,
   `BKN_sex` text COLLATE utf8_unicode_ci,
@@ -53,6 +51,8 @@ CREATE TABLE IF NOT EXISTS `userqnrecord` (
   `BSI` text COLLATE utf8_unicode_ci,
   `BBC` text COLLATE utf8_unicode_ci,
   `weight_control` text COLLATE utf8_unicode_ci,
+  `catfood_select` text COLLATE utf8_unicode_ci,
+  `BEMAIL` text COLLATE utf8_unicode_ci,
   `select_icon` text COLLATE utf8_unicode_ci,
   `joint_now` text COLLATE utf8_unicode_ci,
   `joint_med` text COLLATE utf8_unicode_ci,
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `userqnrecord` (
 -- 資料表的匯出資料 `productDB`
 --
 /*
-INSERT INTO `userqnrecord` (`CCMUserqnrPId`,`name`,`username`,`BKN_name`,`BKN_age`,`BKN_sex`,`BCN`,`BCS`,`BCA_ageYear`,`BCA_ageMonth`,`BSP`,`BNU`,`BPR`,`BPT`,`BFN`,`BFA_kittyNum`,`BFA_week`,`BCW_kilo`,`BCW_gram`,`BEF`,`BSI`,`BBC`,`weight_control`,`select_icon`,`joint_now`,`joint_med`,`joint_below`,`joint_jump`,`joint_daily`,`heart_now`,`heart_behave`,`heart_avgtemp`,`mouth_now`,`mouth_behave`,`mouth_brush`,`fur_freq`,`fur_behave`,`fur_tie`,`immu_now`,`immu_behave`,`immu_behave_before`,`immu_spirit`,`immu_med`,`kidney_now`,`kidney_urine`,`kidney_health`,`urinary_now`,`urinary_behave`,`urinary_together`,`urinary_water`,`stoma_problem`,`stoma_bathroom`,`stoma_strange`,`melt_freq`,`stress_now`,`stress_enviornment`,`stress_enviornment_out`,`stress_lifestyle`,`extra_eatinghabit`,`extra_eatingfreq`,`extra_weekcan`,`extra_freshflesh`,`extra_minifish`,`extra_killbugs`,`extra_vacci`,`extra_alergent`,`extra_drinking`,`extra_cooking`,`extra_strangehabit`,`extra_place`,`extra_knowhow`) VALUES
+INSERT INTO `userqnrecord` (`CCMUserqnrPId`,`BKN_name`,`BKN_age`,`BKN_sex`,`BCN`,`BCS`,`BCA_ageYear`,`BCA_ageMonth`,`BSP`,`BNU`,`BPR`,`BPT`,`BFN`,`BFA_kittyNum`,`BFA_week`,`BCW_kilo`,`BCW_gram`,`BEF`,`BSI`,`BBC`,`weight_control`,`catfood_select`,`BEMAIL`,`select_icon`,`joint_now`,`joint_med`,`joint_below`,`joint_jump`,`joint_daily`,`heart_now`,`heart_behave`,`heart_avgtemp`,`mouth_now`,`mouth_behave`,`mouth_brush`,`fur_freq`,`fur_behave`,`fur_tie`,`immu_now`,`immu_behave`,`immu_behave_before`,`immu_spirit`,`immu_med`,`kidney_now`,`kidney_urine`,`kidney_health`,`urinary_now`,`urinary_behave`,`urinary_together`,`urinary_water`,`stoma_problem`,`stoma_bathroom`,`stoma_strange`,`melt_freq`,`stress_now`,`stress_enviornment`,`stress_enviornment_out`,`stress_lifestyle`,`extra_eatinghabit`,`extra_eatingfreq`,`extra_weekcan`,`extra_freshflesh`,`extra_minifish`,`extra_killbugs`,`extra_vacci`,`extra_alergent`,`extra_drinking`,`extra_cooking`,`extra_strangehabit`,`extra_place`,`extra_knowhow`) VALUES
 COMMIT;
 */
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

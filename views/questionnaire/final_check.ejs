@@ -210,6 +210,15 @@
         document.getElementById(infoPlace[7]).innerHTML = innerHTML;
     }
     function Send(){
-        window.location.href = '/questionnaire_result';
+        $.ajax({
+            method: 'POST',
+            url: 'questionnairePassToResult',
+            data: {
+                start: true
+            }
+        }).done(function(data){
+            if(data=='success') window.location.href = '/questionnaire_result';
+            else window.location.href = '/';
+        });
     }
 </script>

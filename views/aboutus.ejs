@@ -1,21 +1,256 @@
 <!DOCTYPE html>
-<html>
 <head>
-    <title>catcatmed| 智慧型寵物營養系統</title>
-    <% include partials/head_layer1 %>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About Us - 卡卡貓</title>
+<meta name="description" content="">
+<meta name="author" content="">
+
+<!-- Favicons
+    ================================================== -->
+<link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon">
+<link rel="apple-touch-icon" href="../stylesheets/AboutUs_package/img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../stylesheets/AboutUs_package/img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../stylesheets//AboutUs_package/img/apple-touch-icon-114x114.png">
+
+<!-- Bootstrap -->
+<link rel="stylesheet" type="text/css"  href="../stylesheets/AboutUs_package/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="../stylesheets/AboutUs_package/fonts/font-awesome/css/font-awesome.css">
+
+<!-- Stylesheet
+    ================================================== -->
+<link rel="stylesheet" type="text/css"  href="../stylesheets/AboutUs_package/css/style.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+      @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
+      {
+          font-family: 'Noto Sans TC';
+      }
+      h1{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+      h2{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+      h3{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+      h4{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+      h5{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+      span{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+      p{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+      a{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+      button{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+      th{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+      input{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+      select{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: bold;}
+      li{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;font-weight: normal;}
+      /* scroll bar */
+      /* width */
+      ::-webkit-scrollbar {
+          width: 5px;
+          border-radius: 100px;
+      }
+      /* Track */
+      ::-webkit-scrollbar-track {
+          background: white; 
+      }
+      
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+          background: gray;
+          border-radius: 100px;
+      }
+
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+          background: #555;
+      }
+      body{
+          overflow-x: hidden;
+          margin:0;
+          padding:0;
+      }
+      /* Tooltip container */
+      .tooltip {
+          position: relative;
+          display: inline-block;
+      }
+
+      /* Tooltip text */
+      .tooltip .tooltiptext_bottom {
+          visibility: hidden;
+          min-width: 150%;
+          background-color: rgba(0, 0, 0, 0.8);
+          color: #fff;
+          text-align: left;
+          padding: 5px 5px;
+          border-radius: 6px;
+          top: 100%;
+          left: 50%;
+          margin-left: -50%;
+      
+          /* Position the tooltip text - see examples below! */
+          position: absolute;
+          z-index: 1;
+      }
+      /* Show the tooltip text when you mouse over the tooltip container */
+      .tooltip:hover .tooltiptext_bottom {
+          visibility: visible;
+      }
+  </style>
 </head>
-<body>
-    <header class="row">
-        <% include partials/nav %>
-    </header>
-    <body>
-        
-    </body>
-    <footer>
-        <% include partials/footer %>
-    </footer>
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<!-- Navigation
+    ==========================================-->
+<nav id="menu" class="navbar navbar-default navbar-fixed-top">
+  <div class="container"> 
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+      <a class="navbar-brand page-scroll" href="/"><i class="fa fa-bookmark-o"></i> 回首頁</a> </div>
+    
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#about" class="page-scroll">Story</a></li>
+        <li><a href="#services" class="page-scroll">Vision</a></li>
+        <li><a href="#pricing" class="page-scroll">團隊介紹</a></li>
+        <li><a href="#contact" class="page-scroll">聯絡我們</a></li>
+      </ul>
+    </div>
+    <!-- /.navbar-collapse --> 
+  </div>
+  <!-- /.container-fluid --> 
+</nav>
+<!-- Header -->
+<header id="header">
+  <div class="intro">
+    <div class="overlay">
+      <div class="container">
+        <div class="row">
+          <div class="intro-text">
+            <h2>the Story</h2>
+            <p>從學生時期開始養貓到變成上班、小資族的我們，要怎麼在有限的金援下給予貓咪最好的生活，無論是不斷的網路爬文、詢問專家、諮詢獸醫都是我們能做的最大努力，但龐大臨亂的資訊、無系統的整理，外加每隻貓的狀況不一樣，根本無法徹底解決毛孩的問題。</p>
+            <p>卡卡貓是由一群獸醫、營養師、及資訊工程背景的貓奴，共同建立的智慧數據系統。在照顧的過程中遇到所有貓主人共同面臨的問題，衍生出的解決方式，讓在乎貓咪的我們，有更精準、方便的照護。自己的毛孩自照顧，因此卡卡貓誕生了...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Strip -->
+<div id="services">
+    <div class="section-title text-center center">
+      <h1>“貓飲食，怎麼吃；沒有最完美的配方，但有最適合的選擇”</h1>
+    </div>
+</div>
+
+<!-- Vision -->
+<div id="about">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-6"> <img src="../stylesheets/AboutUs_package/img/about.jpg" class="img-responsive thumbnail"> </div>
+      <div class="col-xs-12 col-md-6">
+        <div class="about-text">
+          <h2>800分之1</h2>
+          <h3>美國伴侶動物研究指出，貓的疾病有八成都與飲食相關，且在十大死因中，六項為肥胖導致疾病。在市面上超過800款的貓食品牌商品，以及天差地遠的價格分佈，選擇一款最適合的飲食幾乎是不可能的任務。沒有一個完整的飲食照護資訊，能清楚的分析毛孩的營養需求，更沒有一個系統能明確告訴我們哪個品牌，怎麼吃，才最適合我們的毛小孩，最後，毛孩點點滴滴的身體訊息是玩耍還是生病呢？種種的問題，毛孩都需要我們的答案。</h3>
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-6"> <img src="../stylesheets/AboutUs_package/img/cateat.jpg" class="img-responsive thumbnail"> </div>
+      <div class="col-xs-12 col-md-6">
+        <div class="about-text">
+          <h2>自己的毛孩自己餵</h2>
+          <h3>因為我們需要，所以我們創造。卡卡貓整合獸醫師及營養研究，且利用國內外學術期刊與論文，透過科學整合與大數據分析，打造最適合毛小孩的飲食菜單，不但能降低疾病的產生，更能達到疾病預防的目的。卡卡貓期待每位飼主能享用正確且客製化的資訊，與毛孩健康的一起走下去。</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Team -->
+<div id="pricing">
+<!--whole part-->
+<div>
+    <!--title-->
+    <div class="text-center">
+        <h1>團隊介紹</h1>
+    </div>
+    <!--picture part-->
+    <div class="row">
+        <div class="col-md-3">
+            <img src="../stylesheets/AboutUs_package/img/安定.jpeg">
+        </div>
+        <div class="col-md-3">
+            <img src="../stylesheets/AboutUs_package/img/新方.jpeg">
+        </div>
+        <div class="col-md-2">
+            <img src="../stylesheets/AboutUs_package/img/scarlett.jpg">
+        </div>
+        <div class="col-md-2">
+            <img src="../stylesheets/AboutUs_package/img/miranda.jpg">
+        </div>
+        <div class="col-md-2">
+            <img src="../stylesheets/AboutUs_package/img/audrey.jpg">
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- 聯絡我們 -->
+<div id="contact" class="text-center">
+  <div class="container">
+    <div class="section-title center">
+      <h2>聯絡我們</h2>
+      <hr>
+      <p>呼魯呼魯，卡卡貓在聽！</p>
+    <div class="col-md-8 col-md-offset-2">
+      <form name="sentMessage" id="contactForm" novalidate>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <input type="text" id="name" class="form-control" placeholder="姓名" required="required">
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <input type="email" id="email" class="form-control" placeholder="e-mail" required="required">
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <textarea name="message" id="message" class="form-control" rows="4" placeholder="訊息" required></textarea>
+          <p class="help-block text-danger"></p>
+        </div>
+        <div id="success"></div>
+        <button type="submit" class="btn btn-custom btn-lg">完成</button>
+      </form>
+      <div class="social">
+        <ul>
+          <li><a href="https://www.facebook.com/profile.php?id=100002619845042"><i class="fa fa-facebook"></i></a></li>
+          <li><a href="https://www.instagram.com/catcatmed/"><i class="fa fa-instagram"></i></a></li>
+          <li><a href="#"><i class="fa fa-google"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="footer">
+  <div class="container text-center">
+    <div class="fnav">
+      <p>Copyright &copy; 2018 CatCatMed卡卡貓</p>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="../stylesheets/AboutUs_package/js/jquery.1.11.1.js"></script> 
+<script type="text/javascript" src="../stylesheets/AboutUs_package/js/bootstrap.js"></script> 
+<script type="text/javascript" src="../stylesheets/AboutUs_package/js/SmoothScroll.js"></script> 
+<script type="text/javascript" src="../stylesheets/AboutUs_package/js/jqBootstrapValidation.js"></script> 
+<script type="text/javascript" src="../stylesheets/AboutUs_package/js/contact_me.js"></script> 
+<script type="text/javascript" src="../stylesheets/AboutUs_package/js/main.js"></script>
 </body>
 </html>
-<script>
-    
-</script>

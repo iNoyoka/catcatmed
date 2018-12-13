@@ -152,7 +152,9 @@
     </style>
     <!-- Navigation Bar -->
     <nav>
-        <div class="navBar">this is navigation bar</div>
+        <div class="navBar">
+            
+        </div>
         <div class="navBarPadding"></div>
     </nav>
     <!-- Cat Basic Information Block -->
@@ -688,14 +690,25 @@
                 // lowest price
                 innerHTML += '<h5 style="margin:0 5%;text-align: center;">前往商城</h5><div style="width:90%;margin:0 5%;background-color:#EF5981;border-top-left-radius: 5px;border-top-right-radius: 5px;border:1px solid #EF5981;display:flex;align-items:center;justify-content:center;"><img src="images/product/element/price_range.png" style="width:15%;"><p style="margin:0;">$'+list[i].APrice+'</p></div><div  style="width:90%;margin:0 5%;border:1px solid #EF5981;padding:1vh 0;">';
                 // price and link
-                innerHTML += '<div class="centralize"><img src="images/product/element/market/'+list[i].A+'.png" style="width:30%;"><a href="'+list[i].ALink+'" target="_blank" style="width:50%;text-align:center;">$'+list[i].APrice+'</i></a><a style="width:10%;text-align:left;"><i class="fas fa-angle-right"></i></a></div>';
-                if(list[i].B!='')   innerHTML += '<div class="centralize"><img src="images/product/element/market/'+list[i].B+'.png" style="width:30%;"><a href="'+list[i].BLink+'" target="_blank" style="width:50%;text-align:center;">$'+list[i].BPrice+'</i></a><a style="width:10%;text-align:left;"><i class="fas fa-angle-right"></i></a></div>';
-                if(list[i].C!='')   innerHTML += '<div class="centralize"><img src="images/product/element/market/'+list[i].C+'.png" style="width:30%;"><a href="'+list[i].CLink+'" target="_blank" style="width:50%;text-align:center;">$'+list[i].CPrice+'</i></a><a style="width:10%;text-align:left;"><i class="fas fa-angle-right"></i></a></div>';
+                innerHTML += '<div class="centralize"><img src="images/product/element/market/'+list[i].A+'.png" style="width:30%;"><a id="'+list[i].productCode+'@A" onclick="SendLinkToServer(this.id)" href="'+list[i].ALink+'" target="_blank" style="width:50%;text-align:center;">$'+list[i].APrice+'</i></a><a style="width:10%;text-align:left;"><i class="fas fa-angle-right"></i></a></div>';
+                if(list[i].B!='')   innerHTML += '<div class="centralize"><img src="images/product/element/market/'+list[i].B+'.png" style="width:30%;"><a id="'+list[i].productCode+'@B" onclick="SendLinkToServer(this.id)" href="'+list[i].BLink+'" target="_blank" style="width:50%;text-align:center;">$'+list[i].BPrice+'</i></a><a style="width:10%;text-align:left;"><i class="fas fa-angle-right"></i></a></div>';
+                if(list[i].C!='')   innerHTML += '<div class="centralize"><img src="images/product/element/market/'+list[i].C+'.png" style="width:30%;"><a id="'+list[i].productCode+'@C" onclick="SendLinkToServer(this.id)" href="'+list[i].CLink+'" target="_blank" style="width:50%;text-align:center;">$'+list[i].CPrice+'</i></a><a style="width:10%;text-align:left;"><i class="fas fa-angle-right"></i></a></div>';
                 // end
                 innerHTML += '</div></div><div style="clear:both;"></div></div><div style="clear:both;"></div></div>';
             }
         }
         return innerHTML;
+    }
+    // send to record link
+    function SendLinkToServer(productCode){
+        var code = productCode.split('@');
+        $.ajax({
+            method: 'POST',
+            url: 'recordLinkToDB',
+            data:{
+                link: code[0]
+            }
+        });
     }
     // Initial
     $(document).ready(function(){

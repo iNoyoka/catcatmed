@@ -8,7 +8,6 @@ const cheerio = require('cheerio');
 
 var indexRouter = require('./routes/index');
 var questionnaireRouter = require('./routes/questionnaire');
-var setRouter = require('./routes/set');
 var accountRouter = require('./routes/account');
 var adminRouter = require('./routes/admin');
 
@@ -78,8 +77,6 @@ var datetime = require('node-datetime');
 app.use('/', indexRouter);
 //questionnaire
 app.use('/questionnaire',questionnaireRouter);
-//provide set -> algorithm
-app.use('/set',setRouter)
 //account related, login, signup ...etc
 app.use('/account',accountRouter)
 //adminpage
@@ -449,65 +446,75 @@ app.post('/questionnaire_result',function(req,res,next){
 					proteinAllList.push(result[i].DRY_protein);
 					fatAllList.push(result[i].DRY_fat);
 					carbohydrateAllList.push(result[i].DRY_carbohydrate);
-					if(result[i].kcal!=-1 && SelectorOfIcon(result[i]) && SelectorOfAlergent(result[i]) && !(catType=='幼貓'&&!result[i].productName_ZH.includes('幼')) && !(catType!='幼貓'&&result[i].productName_ZH.includes('幼')) && !((catType=='老貓'||catType=='胖老貓'||catType=='老老貓'||catType=='胖老老貓')&&!result[i].productName_ZH.includes('老')) && !((catType!='老貓'||catType!='胖老貓'||catType!='老老貓'||catType!='胖老老貓')&&result[i].productName_ZH.includes('老'))){ // DELETE DATA WHICH INFORMATION MISSED
+					if(result[i].kcal!=-1 && SelectorOfIcon(result[i]) && SelectorOfAlergent(result[i])){
 						if(catType == "成貓" && !req.session.select_icon.includes('I')){					
 							if(result[i].DRY_fat>10&&result[i].DRY_fat<30&&result[i].DRY_fiber<5.7&&result[i].DRY_protein>30&&result[i].DRY_protein<45&&result[i].DRY_carbohydrate<=40)
 							{
 								// 下次要更改，調換以下兩行順序並將AddObjToList中最後六個argv換成這六個var
+								if(result[i].productName_ZH.includes('老') || result[i].productName_ZH.includes('幼')) continue;
 								list.push(AddObjToList(result[i].productCode,result[i].kilogram,result[i].A,result[i].APrice,result[i].ALink,result[i].B,result[i].BPrice,result[i].BLink,result[i].C,result[i].CPrice,result[i].CLink,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].kcal,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].protein,result[i].fat,result[i].fiber,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients,catWeight,result[i].immu,result[i].heart,result[i].hair,result[i].mehair,result[i].joint,result[i].stoma,result[i].urinary,result[i].mouth,result[i].lowalergent,42,27,30,10,5,0,result[i].score,result[i].scorecount));
 								proteinUp = 42; proteinDown = 27; fatUp = 30; fatDown = 10; fiberUp = 5; fiberDown = 0;
 							}
 						}else if(catType == "成貓" && req.session.select_icon.includes('I')){
 							if(result[i].DRY_fat>10&&result[i].DRY_fat<30&&result[i].DRY_fiber<=12&&result[i].DRY_protein>30&&result[i].DRY_protein<45&&result[i].DRY_carbohydrate<=40)
 							{
+								if(result[i].productName_ZH.includes('老') || result[i].productName_ZH.includes('幼')) continue;
 								list.push(AddObjToList(result[i].productCode,result[i].kilogram,result[i].A,result[i].APrice,result[i].ALink,result[i].B,result[i].BPrice,result[i].BLink,result[i].C,result[i].CPrice,result[i].CLink,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].kcal,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].protein,result[i].fat,result[i].fiber,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients,catWeight,result[i].immu,result[i].heart,result[i].hair,result[i].mehair,result[i].joint,result[i].stoma,result[i].urinary,result[i].mouth,result[i].lowalergent,42,27,30,10,11.3,0,result[i].score,result[i].scorecount));
 								proteinUp = 42; proteinDown = 27; fatUp = 30; fatDown = 10; fiberUp = 11.3; fiberDown = 0;
 							}
 						}else if(catType == "胖成貓"){
 							if(result[i].DRY_fat>9&&result[i].DRY_fat<20&&result[i].DRY_fiber>6&&result[i].DRY_fiber<15&&result[i].DRY_protein>30&&result[i].DRY_protein<45&&result[i].DRY_carbohydrate<=35)
 							{
+								if(result[i].productName_ZH.includes('老') || result[i].productName_ZH.includes('幼')) continue;
 								list.push(AddObjToList(result[i].productCode,result[i].kilogram,result[i].A,result[i].APrice,result[i].ALink,result[i].B,result[i].BPrice,result[i].BLink,result[i].C,result[i].CPrice,result[i].CLink,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].kcal,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].protein,result[i].fat,result[i].fiber,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients,catWeight,result[i].immu,result[i].heart,result[i].hair,result[i].mehair,result[i].joint,result[i].stoma,result[i].urinary,result[i].mouth,result[i].lowalergent,42,27,20,9,15,6,result[i].score,result[i].scorecount));
 								proteinUp = 42; proteinDown = 27; fatUp = 20; fatDown = 9; fiberUp = 15; fiberDown = 6;
 							}
 						}else if(catType == "幼貓"){
 							if(result[i].DRY_fat>18&&result[i].DRY_fat<35&&result[i].DRY_protein>35&&result[i].DRY_protein<50)
 							{
+								if(result[i].productName_ZH.includes('老')) continue;
 								list.push(AddObjToList(result[i].productCode,result[i].kilogram,result[i].A,result[i].APrice,result[i].ALink,result[i].B,result[i].BPrice,result[i].BLink,result[i].C,result[i].CPrice,result[i].CLink,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].kcal,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].protein,result[i].fat,result[i].fiber,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients,catWeight,result[i].immu,result[i].heart,result[i].hair,result[i].mehair,result[i].joint,result[i].stoma,result[i].urinary,result[i].mouth,result[i].lowalergent,50,35,35,18,35,0,result[i].score,result[i].scorecount));
 								proteinUp = 50; proteinDown = 35; fatUp = 35; fatDown = 18; fiberUp = 35; fiberDown = 0;
 							}
 						}else if(catType == "懷孕貓"){
 							if(result[i].DRY_fat>18&&result[i].DRY_fat<35&&result[i].DRY_protein>35&&result[i].DRY_protein<50)
 							{
+								if(result[i].productName_ZH.includes('老') || result[i].productName_ZH.includes('幼')) continue;
 								list.push(AddObjToList(result[i].productCode,result[i].kilogram,result[i].A,result[i].APrice,result[i].ALink,result[i].B,result[i].BPrice,result[i].BLink,result[i].C,result[i].CPrice,result[i].CLink,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].kcal,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].protein,result[i].fat,result[i].fiber,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients,catWeight,result[i].immu,result[i].heart,result[i].hair,result[i].mehair,result[i].joint,result[i].stoma,result[i].urinary,result[i].mouth,result[i].lowalergent,50,35,35,18,35,0,result[i].score,result[i].scorecount));
 								proteinUp = 50; proteinDown = 35; fatUp = 35; fatDown = 18; fiberUp = 35; fiberDown = 0;
 							}
 						}else if(catType == "泌乳貓"){
 							if(result[i].DRY_fat>18&&result[i].DRY_fat<35&&result[i].DRY_protein>35&&result[i].DRY_protein<50)
 							{
+								if(result[i].productName_ZH.includes('老') || result[i].productName_ZH.includes('幼')) continue;
 								list.push(AddObjToList(result[i].productCode,result[i].kilogram,result[i].A,result[i].APrice,result[i].ALink,result[i].B,result[i].BPrice,result[i].BLink,result[i].C,result[i].CPrice,result[i].CLink,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].kcal,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].protein,result[i].fat,result[i].fiber,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients,catWeight,result[i].immu,result[i].heart,result[i].hair,result[i].mehair,result[i].joint,result[i].stoma,result[i].urinary,result[i].mouth,result[i].lowalergent,50,35,35,18,35,0,result[i].score,result[i].scorecount));
 								proteinUp = 50; proteinDown = 35; fatUp = 35; fatDown = 18; fiberUp = 35; fiberDown = 0;
 							}
 						}else if(catType == "交配貓"){
 							if(result[i].DRY_fat>10&&result[i].DRY_fat<30&&result[i].DRY_protein>30&&result[i].DRY_protein<45)
 							{
+								if(result[i].productName_ZH.includes('老') || result[i].productName_ZH.includes('幼')) continue;
 								list.push(AddObjToList(result[i].productCode,result[i].kilogram,result[i].A,result[i].APrice,result[i].ALink,result[i].B,result[i].BPrice,result[i].BLink,result[i].C,result[i].CPrice,result[i].CLink,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].kcal,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].protein,result[i].fat,result[i].fiber,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients,catWeight,result[i].immu,result[i].heart,result[i].hair,result[i].mehair,result[i].joint,result[i].stoma,result[i].urinary,result[i].mouth,result[i].lowalergent,42,27,25,9,35,0,result[i].score,result[i].scorecount));
 								proteinUp = 42; proteinDown = 27; fatUp = 25; fatDown = 9; fiberUp = 35; fiberDown = 0;
 							}
 						}else if(catType == "老貓" && !req.session.select_icon.includes('I')){
 							if(result[i].DRY_fat>18&&result[i].DRY_fat<25&&result[i].DRY_fiber<=5&&result[i].DRY_protein>30&&result[i].DRY_protein<45&&result[i].DRY_carbohydrate<=35)
 							{
+								if(result[i].productName_ZH.includes('幼')) continue;
 								list.push(AddObjToList(result[i].productCode,result[i].kilogram,result[i].A,result[i].APrice,result[i].ALink,result[i].B,result[i].BPrice,result[i].BLink,result[i].C,result[i].CPrice,result[i].CLink,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].kcal,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].protein,result[i].fat,result[i].fiber,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients,catWeight,result[i].immu,result[i].heart,result[i].hair,result[i].mehair,result[i].joint,result[i].stoma,result[i].urinary,result[i].mouth,result[i].lowalergent,42,27,22,16,4.5,0,result[i].score,result[i].scorecount));
 								proteinUp = 42; proteinDown = 27; fatUp = 22; fatDown = 16; fiberUp = 4.5; fiberDown = 0;
 							}
 						}else if(catType == "老貓" && req.session.select_icon.includes('I')){
 							if(result[i].DRY_fat>18&&result[i].DRY_fat<25&&result[i].DRY_fiber<=12&&result[i].DRY_protein>30&&result[i].DRY_protein<45&&result[i].DRY_carbohydrate<=35)
 							{
+								if(result[i].productName_ZH.includes('幼')) continue;
 								list.push(AddObjToList(result[i].productCode,result[i].kilogram,result[i].A,result[i].APrice,result[i].ALink,result[i].B,result[i].BPrice,result[i].BLink,result[i].C,result[i].CPrice,result[i].CLink,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].kcal,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].protein,result[i].fat,result[i].fiber,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients,catWeight,result[i].immu,result[i].heart,result[i].hair,result[i].mehair,result[i].joint,result[i].stoma,result[i].urinary,result[i].mouth,result[i].lowalergent,42,27,22,16,11.3,0,result[i].score,result[i].scorecount));
 								proteinUp = 42; proteinDown = 27; fatUp = 22; fatDown = 16; fiberUp = 11.3; fiberDown = 0;
 							}
 						}else if(catType == "老老貓" || catType == "胖老老貓" || catType == "胖老貓"){
 							if(result[i].DRY_fat>10&&result[i].DRY_fat<18&&result[i].DRY_fiber>5&&result[i].DRY_fiber<15&&result[i].DRY_protein>30&&result[i].DRY_protein<45&&result[i].DRY_carbohydrate<=35)
 							{
+								if(result[i].productName_ZH.includes('幼')) continue;
 								list.push(AddObjToList(result[i].productCode,result[i].kilogram,result[i].A,result[i].APrice,result[i].ALink,result[i].B,result[i].BPrice,result[i].BLink,result[i].C,result[i].CPrice,result[i].CLink,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].kcal,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].protein,result[i].fat,result[i].fiber,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients,catWeight,result[i].immu,result[i].heart,result[i].hair,result[i].mehair,result[i].joint,result[i].stoma,result[i].urinary,result[i].mouth,result[i].lowalergent,42,27,16,9,15,4.5,result[i].score,result[i].scorecount));
 								proteinUp = 42; proteinDown = 27; fatUp = 16; fatDown = 9; fiberUp = 15; fiberDown = 4.5;
 							}
@@ -575,7 +582,7 @@ app.post('/questionnaire_result',function(req,res,next){
 			function DailyProteinSelector(list,catType,kcal,catWeight){
 				var newList = [];
 				for(i=0;i<list.length;i++){
-					var x  = kcal/list[i].kcal*10*list[i].DRY_protein;
+					var x  = kcal/list[i].kcal*10*list[i].protein;
 					if(catType == "成貓"){
 						if(5.5*catWeight<x && 11.5*catWeight>x){
 							list[i].DailyProtein = 1;
@@ -882,7 +889,7 @@ app.post('/askInformation',function(req,res,next){
 			if(req.session.mouth_now=='yes'){
 				icon_information = 'mouth#口腔#high#曾經有口腔疾病，需要高度的關注與額外保健<br>建議您定期和獸醫師追蹤病情，以確保貓咪的健康！';
 			}else if(req.session.mouth_behave.length>=2){
-				icon_information = 'mouth#口腔#hhigh#非常有可能有口腔部分的問題，建議您可以抽空諮詢一下獸醫師的意見！';
+				icon_information = 'mouth#口腔#high#非常有可能有口腔部分的問題，建議您可以抽空諮詢一下獸醫師的意見！';
 				if(req.session.mouth_behave.includes('A')) icon_information += '<br>-過度流口水';
 				if(req.session.mouth_behave.includes('B')) icon_information += '<br>-口臭';
 				if(req.session.mouth_behave.includes('C')) icon_information += '<br>-有棕黃色牙垢';
@@ -1049,6 +1056,37 @@ app.post('/askInformation',function(req,res,next){
 	}else{
 		res.send('error');
 	}
+});
+
+// Record Product Link
+app.post('/recordLinkToDB',function(req,res,next){
+	if(req.session.recordlink==null){
+		req.session.recordlink = [];
+		req.session.recordlink.push(req.body.link);
+		var value = '#' + req.body.link;
+		var sql = 'UPDATE `useraccount` SET possiblePurchaseCatFood = "'+value+'" WHERE username = "'+req.session.username+'"';
+		con.query(sql,function(err,result){
+			if(err) throw err;
+			console.log('update "'+value+'" success.');
+		});
+	}else{
+		if(req.session.recordlink.includes(req.body.link)){
+			// do nothing
+		}else{
+			// add and save
+			req.session.recordlink.push(req.body.link);
+			var value = '';
+			for(i=0;i<req.session.recordlink.length;i++){
+				value += '#' + req.session.recordlink[i];
+			}
+			var sql = 'UPDATE `useraccount` SET possiblePurchaseCatFood = "'+value+'" WHERE username = "'+req.session.username+'"';
+			con.query(sql,function(err,result){
+				if(err) throw err;
+				console.log('update "'+value+'" success.');
+			});
+		}
+	}
+	res.send('success');
 });
 
 //------------------------------------------
