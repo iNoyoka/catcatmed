@@ -1022,24 +1022,24 @@ router.post('/questionnairePassToResult',function(req,res,next){
     req.session.username = req.session.BEMAIL;
     // 1. store answer to DB
     // clear part session
-    req.session.select_icon = JSON.stringify(req.session.select_icon);
-    req.session.joint_below = JSON.stringify(req.session.joint_below);
-    req.session.heart_behave = JSON.stringify(req.session.heart_behave);
-    req.session.mouth_behave = JSON.stringify(req.session.mouth_behave);
-    req.session.fur_behave = JSON.stringify(req.session.fur_behave);
-    req.session.fur_tie = JSON.stringify(req.session.fur_tie);
-    req.session.immu_behave = JSON.stringify(req.session.immu_behave);
-    req.session.immu_behave_before = JSON.stringify(req.session.immu_behave_before);
-    req.session.urinary_behave = JSON.stringify(req.session.urinary_behave);
-    req.session.stoma_problem = JSON.stringify(req.session.stoma_problem);
-    req.session.stress_now = JSON.stringify(req.session.stress_now);
-    req.session.stress_enviornment = JSON.stringify(req.session.stress_enviornment);
-    req.session.stress_enviornment_out = JSON.stringify(req.session.stress_enviornment_out);
-    req.session.stress_lifestyle = JSON.stringify(req.session.stress_lifestyle);
-    req.session.extra_alergent = JSON.stringify(req.session.extra_alergent);
+    var select_icon = JSON.stringify(req.session.select_icon);
+    var joint_below = JSON.stringify(req.session.joint_below);
+    var heart_behave = JSON.stringify(req.session.heart_behave);
+    var mouth_behave = JSON.stringify(req.session.mouth_behave);
+    var fur_behave = JSON.stringify(req.session.fur_behave);
+    var fur_tie = JSON.stringify(req.session.fur_tie);
+    var immu_behave = JSON.stringify(req.session.immu_behave);
+    var immu_behave_before = JSON.stringify(req.session.immu_behave_before);
+    var urinary_behave = JSON.stringify(req.session.urinary_behave);
+    var stoma_problem = JSON.stringify(req.session.stoma_problem);
+    var stress_now = JSON.stringify(req.session.stress_now);
+    var stress_enviornment = JSON.stringify(req.session.stress_enviornment);
+    var stress_enviornment_out = JSON.stringify(req.session.stress_enviornment_out);
+    var stress_lifestyle = JSON.stringify(req.session.stress_lifestyle);
+    var extra_alergent = JSON.stringify(req.session.extra_alergent);
     var sql = 'INSERT INTO `userqnrecord` (BKN_name,BKN_age,BKN_sex,BCN,BCS,BCA_ageYear,BCA_ageMonth,BSP,BNU,BPR,BPT,BFN,BFA_kittyNum,BFA_week,BCW_kilo,BCW_gram,BEF,BSI,BBC,weight_control,catfood_select,BEMAIL,select_icon,joint_now,joint_med,joint_below,joint_jump,joint_daily,heart_now,heart_behave,heart_avgtemp,mouth_now,mouth_behave,mouth_brush,fur_freq,fur_behave,fur_tie,immu_now,immu_behave,immu_behave_before,immu_spirit,immu_med,kidney_now,kidney_urine,kidney_health,urinary_now,urinary_behave,urinary_together,urinary_water,stoma_problem,stoma_bathroom,stoma_strange,melt_freq,stress_now,stress_enviornment,stress_enviornment_out,stress_lifestyle,extra_eatinghabit,extra_eatingfreq,extra_weekcan,extra_freshflesh,extra_minifish,extra_killbugs,extra_vacci,extra_alergent,extra_drinking,extra_cooking,extra_strangehabit,extra_place,extra_knowhow) VALUES?';
     var values = [
-        [req.session.BKN_name,req.session.BKN_age,req.session.BKN_sex,req.session.BCN,req.session.BCS,req.session.BCA_ageYear,req.session.BCA_ageMonth,req.session.BSP,req.session.BNU,req.session.BPR,req.session.BPT,req.session.BFN,req.session.BFA_kittyNum,req.session.BFA_week,req.session.BCW_kilo,req.session.BCW_gram,req.session.BEF,req.session.BSI,req.session.BBC,req.session.weight_control,req.session.catfood_select,req.session.BEMAIL,req.session.select_icon,req.session.joint_now,req.session.joint_med,req.session.joint_below,req.session.joint_jump,req.session.joint_daily,req.session.heart_now,req.session.heart_behave,req.session.heart_avgtemp,req.session.mouth_now,req.session.mouth_behave,req.session.mouth_brush,req.session.fur_freq,req.session.fur_behave,req.session.fur_tie,req.session.immu_now,req.session.immu_behave,req.session.immu_behave_before,req.session.immu_spirit,req.session.immu_med,req.session.kidney_now,req.session.kidney_urine,req.session.kidney_health,req.session.urinary_now,req.session.urinary_behave,req.session.urinary_together,req.session.urinary_water,req.session.stoma_problem,req.session.stoma_bathroom,req.session.stoma_strange,req.session.melt_freq,req.session.stress_now,req.session.stress_enviornment,req.session.stress_enviornment_out,req.session.stress_lifestyle,req.session.extra_eatinghabit,req.session.extra_eatingfreq,req.session.extra_weekcan,req.session.extra_freshflesh,req.session.extra_minifish,req.session.extra_killbugs,req.session.extra_vacci,req.session.extra_alergent,req.session.extra_drinking,req.session.extra_cooking,req.session.extra_strangehabit,req.session.extra_place,req.session.extra_knowhow]
+        [req.session.BKN_name,req.session.BKN_age,req.session.BKN_sex,req.session.BCN,req.session.BCS,req.session.BCA_ageYear,req.session.BCA_ageMonth,req.session.BSP,req.session.BNU,req.session.BPR,req.session.BPT,req.session.BFN,req.session.BFA_kittyNum,req.session.BFA_week,req.session.BCW_kilo,req.session.BCW_gram,req.session.BEF,req.session.BSI,req.session.BBC,req.session.weight_control,req.session.catfood_select,req.session.BEMAIL,select_icon,req.session.joint_now,req.session.joint_med,joint_below,req.session.joint_jump,req.session.joint_daily,req.session.heart_now,heart_behave,req.session.heart_avgtemp,req.session.mouth_now,mouth_behave,req.session.mouth_brush,req.session.fur_freq,fur_behave,fur_tie,req.session.immu_now,immu_behave,immu_behave_before,req.session.immu_spirit,req.session.immu_med,req.session.kidney_now,req.session.kidney_urine,req.session.kidney_health,req.session.urinary_now,urinary_behave,req.session.urinary_together,req.session.urinary_water,stoma_problem,req.session.stoma_bathroom,req.session.stoma_strange,req.session.melt_freq,stress_now,stress_enviornment,stress_enviornment_out,stress_lifestyle,req.session.extra_eatinghabit,req.session.extra_eatingfreq,req.session.extra_weekcan,req.session.extra_freshflesh,req.session.extra_minifish,req.session.extra_killbugs,req.session.extra_vacci,extra_alergent,req.session.extra_drinking,req.session.extra_cooking,req.session.extra_strangehabit,req.session.extra_place,req.session.extra_knowhow]
     ];
     con.query(sql,[values],function(err,result){
         if(err){

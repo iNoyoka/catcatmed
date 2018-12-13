@@ -888,7 +888,7 @@ app.post('/askInformation',function(req,res,next){
 		if(req.session.select_icon.includes('C')){	// mouth
 			if(req.session.mouth_now=='yes'){
 				icon_information = 'mouth#口腔#high#曾經有口腔疾病，需要高度的關注與額外保健<br>建議您定期和獸醫師追蹤病情，以確保貓咪的健康！';
-			}else if(req.session.mouth_behave.length>=2){
+			}else if(!req.session.mouth_behave.length>=2){
 				icon_information = 'mouth#口腔#high#非常有可能有口腔部分的問題，建議您可以抽空諮詢一下獸醫師的意見！';
 				if(req.session.mouth_behave.includes('A')) icon_information += '<br>-過度流口水';
 				if(req.session.mouth_behave.includes('B')) icon_information += '<br>-口臭';
@@ -905,7 +905,7 @@ app.post('/askInformation',function(req,res,next){
 				if(req.session.mouth_behave.includes('E')) icon_information += '<br>-在食物或是水盆的旁邊駐足';
 				if(req.session.mouth_behave.includes('F')) icon_information += '<br>-甩頭，經常用前腳拍打嘴巴';
 			}else{
-				icon_information = 'mouth#口腔#hlow#目前口腔健康狀態良好<br>建議繼續注重您貓咪的口腔保健';
+				icon_information = 'mouth#口腔#low#目前口腔健康狀態良好<br>建議繼續注重您貓咪的口腔保健';
 			}
 			if(icon_information!=''){
 				icon_information_list.push(icon_information);
