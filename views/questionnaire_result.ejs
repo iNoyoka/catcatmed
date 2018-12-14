@@ -109,12 +109,12 @@
             margin:0;
             position: fixed;
             /* navbar height */
-            height:6vh;
+            height:10vh;
             box-shadow: 0px 1px 20px rgba(0,0,0,0.1);
             z-index: 10;
         }
         .navBarPadding{
-            height:6vh;
+            height:10vh;
         }
         /* basic information */
         .basicInformationBar{
@@ -149,11 +149,28 @@
             align-items:center;
             justify-content:center;
         }
+        a{
+            text-decoration: none;
+            color: #3D5BA8;
+            font-weight: normal;
+        }
     </style>
     <!-- Navigation Bar -->
     <nav>
-        <div class="navBar">
-            
+        <div class="navBar container">
+            <div style="width:40%;float:left;height: 10vh;" class="centralize">
+                <a href="/questionnaire">開始了解</a>
+            </div>
+            <div style="width:20%;float:left;text-align: center;">
+                <a href="/"><img src="images/index/logo.png" style="height:8vh;margin:1vh auto;"></a>
+            </div>
+            <div style="width:15%;float:left;height: 10vh;" class="centralize">
+                <a href="/library">文獻資料</a>
+            </div>
+            <div style="width:15%;float:left;height: 10vh;" class="centralize">
+                <a href="/aboutus">關於我們</a>
+            </div>
+            <div style="clear:both;"></div>
         </div>
         <div class="navBarPadding"></div>
     </nav>
@@ -721,7 +738,6 @@
                 // error occur
                 window.location.href = data;
             }else{
-                alert(data);
                 var splitdata = data.split('#');
                 // packageSize first change
                 packageSize = JSON.parse(splitdata[0]);
