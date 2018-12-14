@@ -3,6 +3,23 @@
 <head>
     <title>卡卡貓catcatmed| 智慧型寵物營養系統</title>
     <% include partials/head_layer1 %>
+    <script type="text/javascript">
+        testExp = new RegExp('Android|webOS|iPhone|iPad|' +
+                        'BlackBerry|Windows Phone|'  +
+                        'Opera Mini|IEMobile|Mobile' , 
+                       'i');
+       
+       if (testExp.test(navigator.userAgent))
+           window.location.href="/index_mobile";
+   </script>
+   <!-- Global site tag (gtag.js) - Google Analytics -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129519422-1"></script>
+   <script>
+   window.dataLayer = window.dataLayer || [];
+   function gtag(){dataLayer.push(arguments);}
+   gtag('js', new Date());
+   gtag('config', 'UA-129519422-1');
+   </script>
 </head>
 <body id="body">
     <style>
