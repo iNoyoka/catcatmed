@@ -472,9 +472,10 @@ app.post('/questionnaire_result',function(req,res,next){
 						}else if(catType == "幼貓"){
 							if(result[i].DRY_fat>18&&result[i].DRY_fat<35&&result[i].DRY_protein>35&&result[i].DRY_protein<50)
 							{
-								if(!result[i].productName_ZH.includes('幼')) continue;
-								list.push(AddObjToList(result[i].productCode,result[i].kilogram,result[i].A,result[i].APrice,result[i].ALink,result[i].B,result[i].BPrice,result[i].BLink,result[i].C,result[i].CPrice,result[i].CLink,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].kcal,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].protein,result[i].fat,result[i].fiber,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients,catWeight,result[i].immu,result[i].heart,result[i].hair,result[i].mehair,result[i].joint,result[i].stoma,result[i].urinary,result[i].mouth,result[i].lowalergent,50,35,35,18,35,0,result[i].score,result[i].scorecount));
-								proteinUp = 50; proteinDown = 35; fatUp = 35; fatDown = 18; fiberUp = 35; fiberDown = 0;
+								if(result[i].productName_ZH.includes('幼')){
+									list.push(AddObjToList(result[i].productCode,result[i].kilogram,result[i].A,result[i].APrice,result[i].ALink,result[i].B,result[i].BPrice,result[i].BLink,result[i].C,result[i].CPrice,result[i].CLink,result[i].productName_ZH,result[i].productCompany_ZH,result[i].productCompany_EN,result[i].productOriginal,result[i].kcal,result[i].MeatLevel_total,result[i].DRY_protein,result[i].DRY_fat,result[i].DRY_carbohydrate,result[i].protein,result[i].fat,result[i].fiber,result[i].goodMeat,result[i].potentialAlergent,kcal,result[i].productIngredients,catWeight,result[i].immu,result[i].heart,result[i].hair,result[i].mehair,result[i].joint,result[i].stoma,result[i].urinary,result[i].mouth,result[i].lowalergent,50,35,35,18,35,0,result[i].score,result[i].scorecount));
+									proteinUp = 50; proteinDown = 35; fatUp = 35; fatDown = 18; fiberUp = 35; fiberDown = 0;
+								}
 							}
 						}else if(catType == "懷孕貓"){
 							if(result[i].DRY_fat>18&&result[i].DRY_fat<35&&result[i].DRY_protein>35&&result[i].DRY_protein<50)
@@ -641,7 +642,7 @@ app.post('/questionnaire_result',function(req,res,next){
 							list[i].Metabolism = 0;
 							newList.push(list[i]);
 						}
-					}if(catType == "胖成貓"){
+					}else if(catType == "胖成貓"){
 						if(x>3.3 && x<3.8){
 							list[i].Metabolism = 1;
 							newList.push(list[i]);
@@ -649,7 +650,7 @@ app.post('/questionnaire_result',function(req,res,next){
 							list[i].Metabolism = 0;
 							newList.push(list[i]);
 						}
-					}if(catType == "老貓" || catType == "老老貓"){
+					}else if(catType == "老貓" || catType == "老老貓"){
 						if(x>4 && x<4.5){
 							list[i].Metabolism = 1;
 							newList.push(list[i]);
@@ -657,7 +658,7 @@ app.post('/questionnaire_result',function(req,res,next){
 							list[i].Metabolism = 0;
 							newList.push(list[i]);
 						}
-					}if(catType == "胖老貓" || catType == "胖老老貓"){
+					}else if(catType == "胖老貓" || catType == "胖老老貓"){
 						if(x>3.5 && x<4){
 							list[i].Metabolism = 1;
 							newList.push(list[i]);
@@ -665,6 +666,9 @@ app.post('/questionnaire_result',function(req,res,next){
 							list[i].Metabolism = 0;
 							newList.push(list[i]);
 						}
+					}else{
+						list[i].Metabolism = 1;
+						newList.push(list[i]);
 					}
 				}
 				return newList;
