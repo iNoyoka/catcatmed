@@ -8,8 +8,8 @@ router.get('/', function(req, res, next) {
 	res.render('index',{name: req.session.name});
 });
 
-router.get('/index_mobile',function(req,res,next){
-	res.render('index_mobile', { username: req.session.name});
+router.get('/index_m',function(req,res,next){
+	res.render('index_m', { username: req.session.name});
 });
 
 router.post('/emailRecording',function(req,res,next){
