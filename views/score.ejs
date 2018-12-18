@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>卡卡貓catcatmed | 飼料評價</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129519422-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-129519422-1');
+    </script>
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+    <h4>請問您選擇的飼料是</h4>
+    <div id="catfood"></div>
+    <hr>
+    <h4>適口性</h4>
+    <label>
+        <input type="radio" name="q1">
+        <span>完全不吃，很困擾</span>
+    </label>
+    <br>
+    <label>
+        <input type="radio" name="q1">
+        <span>願意嘗試，食量較小</span>
+    </label>
+    <br>
+    <label>
+        <input type="radio" name="q1">
+        <span>沒有特殊狀況，稍微挑食</span>
+    </label>
+    <br>
+    <label>
+        <input type="radio" name="q1">
+        <span>應狀況良好，跟平常一樣</span>
+    </label>
+    <br>
+    <label>
+        <input type="radio" name="q1">
+        <span>愛不釋手，適口性超好</span>
+    </label>
+    <hr>
+    <h4>大便臭不臭</h4>
+    <label>
+        <input type="radio" name="q3">
+        <span>貓砂蓋住就沒味道</span>
+    </label>
+    <br>
+    <label>
+        <input type="radio" name="q3">
+        <span>一般便便的味道，還好</span>
+    </label>
+    <br>
+    <label>
+        <input type="radio" name="q3">
+        <span>正常便便的味道，還能忍受</span>
+    </label>
+    <br>
+    <label>
+        <input type="radio" name="q3">
+        <span>特臭，氣味蓋都蓋不住</span>
+    </label>
+    <br>
+    <label>
+        <input type="radio" name="q3">
+        <span>實在有夠臭，還沒靠近就能聞到</span>
+    </label>
+    <hr>
+    <h4>有無夾鏈袋</h4>
+    <label>
+        <input type="radio" name="q4">
+        <span>袋子有密封袋設計</span>
+    </label>
+    <br>
+    <label>
+        <input type="radio" name="q4">
+        <span>袋子無密封袋設計</span>
+    </label>
+    <hr>
+    <div id="function"></div>
+    <hr>
+    <div id="improve"></div>
+    <hr>
+    <h4>綜合來說，您會給這款飼料幾顆星的評價?(一是最差，五是最好)</h4>
+    <label>
+        <input type="radio" name="qs">
+        <span>一星</span>
+    </label>
+    <label>
+        <input type="radio" name="qs">
+        <span>二星</span>
+    </label>
+    <label>
+        <input type="radio" name="qs">
+        <span>三星</span>
+    </label>
+    <label>
+        <input type="radio" name="qs">
+        <span>四星</span>
+    </label>
+    <label>
+        <input type="radio" name="qs">
+        <span>五星</span>
+    </label>
+    <br>
+    <button onclick="Send();">提交</button>
+</body>
+</html>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    var currentid = '';
+    var list;
+    $(document).ready(function(data){
+        $.ajax({
+            method: 'POST',
+            url: 'catfoodScoringAskData'
+        }).done(function(data){
+            if(data=='noData'){
+                window.location.href = '/usercenter';
+            }
+            list = JSON.parse(data);
+            var innerHTML = '';
+            for(i=0;i<list.length;i++){
+                innerHTML += '<label id="'+list[i].productCode+'" onclick="ChangeQuestion(this.id);"><input type="radio" name="q0"><span>'+list[i].brand_zh+' '+list[i].name_zh+'</span></label><br>';
+            }
+            document.getElementById('catfood').innerHTML = innerHTML;
+        });
+    }); 
+    function ChangeQuestion(id){
+        if(id!=currentid){
+            currentid = id;
+            var innerHTML = '';
+            var innerHTMLSEC = '';
+            for(i=0;i<list.length;i++){
+                if(list[i].productCode==id){
+                    if(list[i].hair==1){
+                        innerHTML += '<h4>亮毛功能</h4>';
+                        innerHTML += '<label><input type="radio" name="q5"><span>毛髮枯燥、無光澤</span></label><br>';
+                        innerHTML += '<label><input type="radio" name="q5"><span>毛髮維持原樣</span></label><br>';
+                        innerHTML += '<label><input type="radio" name="q5"><span>毛髮狀況稍有改善</span></label><br>';
+                        innerHTML += '<label><input type="radio" name="q5"><span>毛髮狀況明顯改善</span></label><br>';
+                        innerHTML += '<label><input type="radio" name="q5"><span>毛髮更光澤、柔順</span></label><br>';
+                    }
+                    if(list[i].mehair==1){
+                        innerHTML += '<h4>化毛功能</h4>';
+                        innerHTML += '<label><input type="radio" name="q6"><span>時常嘔吐，且當中有毛髮</span></label><br>';
+                        innerHTML += '<label><input type="radio" name="q6"><span>偶爾嘔吐，且當中有毛髮</span></label><br>';
+                        innerHTML += '<label><input type="radio" name="q6"><span>一般般，無特殊改變</span></label><br>';
+                        innerHTML += '<label><input type="radio" name="q6"><span>排泄物中有些許毛髮</span></label><br>';
+                        innerHTML += '<label><input type="radio" name="q6"><span>排泄物中有大量毛髮</span></label><br>';
+                    }
+                    if(list[i].mouth==1){
+                        innerHTML += '<h4>口腔保健</h4>';
+                        innerHTML += '<label><input type="radio" name="q7"><span>稍微靠近就能聞到嘴巴臭</span></label><br>';
+                        innerHTML += '<label><input type="radio" name="q7"><span>張開嘴巴才會聞到臭味</span></label><br>';
+                        innerHTML += '<label><input type="radio" name="q7"><span>維持原狀</span></label><br>';
+                        innerHTML += '<label><input type="radio" name="q7"><span>口臭狀況稍微改善</span></label><br>';
+                        innerHTML += '<label><input type="radio" name="q7"><span>口臭狀況明顯改善</span></label><br>';
+                    }
+                    if(list[i].stoma==1){
+                        innerHTML += '<h4>腸胃保健</h4>';
+                        innerHTML += '<label><input type="radio" name="q8"><span>時常拉稀，精神狀況不佳</span></label><br>';
+                        innerHTML += '<label><input type="radio" name="q8"><span>時常拉稀</span></label><br>';
+                        innerHTML += '<label><input type="radio" name="q8"><span>軟硬參半</span></label><br>';
+                        innerHTML += '<label><input type="radio" name="q8"><span>排便正常</span></label><br>';
+                        innerHTML += '<label><input type="radio" name="q8"><span>排便正常，且立即見效</span></label><br>';
+                    }
+                    document.getElementById('function').innerHTML = innerHTML;
+                    if(list[i].immu==1 || list[i].urinary==1 || list[i].joint==1 || list[i].heart==1){
+                        innerHTMLSEC += '<h4>以下狀況是否有明顯改善</h4>';
+                        if(list[i].immu==1){
+                            innerHTMLSEC += '<h4>免疫</h4>';
+                            innerHTMLSEC += '<label><input type="radio" name="q9"><span>like</span></label>';
+                            innerHTMLSEC += '<label><input type="radio" name="q9"><span>dislike</span></label><br>';
+                        }
+                        if(list[i].urinary==1){
+                            innerHTMLSEC += '<h4>泌尿</h4>';
+                            innerHTMLSEC += '<label><input type="radio" name="q10"><span>like</span></label>';
+                            innerHTMLSEC += '<label><input type="radio" name="q10"><span>dislike</span></label><br>';
+                        }
+                        if(list[i].joint==1){
+                            innerHTMLSEC += '<h4>關節</h4>';
+                            innerHTMLSEC += '<label><input type="radio" name="q11"><span>like</span></label>';
+                            innerHTMLSEC += '<label><input type="radio" name="q11"><span>dislike</span></label><br>';
+                        }
+                        if(list[i].heart==1){
+                            innerHTMLSEC += '<h4>心臟</h4>';
+                            innerHTMLSEC += '<label><input type="radio" name="q12"><span>like</span></label>';
+                            innerHTMLSEC += '<label><input type="radio" name="q12"><span>dislike</span></label><br>';
+                        }
+                        document.getElementById('improve').innerHTML = innerHTMLSEC;
+                    }
+                }
+            }
+        }
+    }
+    function Send(){
+        // check and send data to server
+        // url : catfoodScoring // method: post
+    }
+</script>
