@@ -49,7 +49,7 @@
                 <h3>請問<%= name %>的體態(BCS)為?</h3>
             <% }else{ %>
                 <h3>請問貓孩的體態(BCS)為?</h3>
-            <% } %>            
+            <% } %> 
             <div class="row hidden-xs">
                 <div class="col-lg-1 col-md-1 col-sm-1"></div>
                 <div class="col-lg-2 col-md-2 col-sm-2"><div class="answerIMG" id="A" onclick="Send(this.id)"><span><img class="IMGoptions" src="../images/questionnaire/bcs/bcs 1.png"></span></div></div>
@@ -66,16 +66,48 @@
                 <div class="col-lg-2 col-md-2 col-sm-2 text-center"><h4>稍胖</h4></div>
                 <div class="col-lg-2 col-md-2 col-sm-2 text-center"><h4>過胖</h4></div>
             </div>
+            <!--Mobile-->
+            <div class="row hidden-lg hidden-md hidden-sm">
+                <div class="col-xs-6"><div class="answerIMG" id="F" onclick="Send(this.id)"><span><img class="IMGoptions" src="../images/questionnaire/bcs/bcs 1.png"></span></div></div>
+                <div class="col-xs-6"><div class="answerIMG" id="G" onclick="Send(this.id)"><span><img class="IMGoptions" src="../images/questionnaire/bcs/bcs 2.png"></span></div></div>
+                <div class="col-xs-6 text-center"><h4>過瘦</h4></div>
+                <div class="col-xs-6 text-center"><h4>稍瘦</h4></div>
+                <div class="col-xs-6"><div class="answerIMG" id="H" onclick="Send(this.id)"><span><img class="IMGoptions" src="../images/questionnaire/bcs/bcs 3.png"></span></div></div>
+                <div class="col-xs-6"><div class="answerIMG" id="I" onclick="Send(this.id)"><span><img class="IMGoptions" src="../images/questionnaire/bcs/bcs 4.png"></span></div></div>
+                <div class="col-xs-6 text-center"><h4>適中</h4></div>
+                <div class="col-xs-6 text-center"><h4>稍胖</h4></div>
+                <div class="col-xs-6 col-xs-offset-3"><div class="answerIMG" id="J" onclick="Send(this.id)"><span><img class="IMGoptions" src="../images/questionnaire/bcs/bcs 5.png"></span></div></div>
+                <div class="col-xs-6 col-xs-offset-3 text-center"><h4>過胖</h4></div>
+            </div>
         </div>
     </div>
     <div class="row hidden-xs padding"></div>    
-    <div class="row">
+    <div class="row hidden-xs">
         <div class="col-lg-6 col-md-6 col-lg-offset-4 col-md-offset-4 text-left">
             <h4>BCS 過瘦 - 肋骨、腰椎明顯可見，且摸完全不到脂肪</h4>
             <h4>BCS 稍瘦 - 肋骨看得見，並且於肋骨及脊椎部分摸到少許脂肪，腹部沒什麼脂肪</h4>
             <h4>BCS 適中 - 肋骨及脊椎不明顯，但能容易摸到，腹部有些許脂肪，腰身明顯</h4>
             <h4>BCS 稍胖 - 肋骨及脊椎看不到，且不容易摸到，沒有腰線</h4>
             <h4>BCS 過胖 - 胸腔、腹部都是脂肪，整隻貓像圓球一般</h4>
+        </div>
+    </div>
+    <div class="row hidden-lg hidden-md hidden-sm">
+        <div class="col-xs-10 col-xs-offset-1">
+            <h4>BCS 過瘦</h4>
+            <h5>肋骨、腰椎明顯可見，且摸完全不到脂肪</h5>
+            <hr>
+            <h4>BCS 稍瘦</h4>
+            <h5>肋骨看得見，並且於肋骨及脊椎部分摸到少許脂肪，腹部沒什麼脂肪</h5>
+            <hr>
+            <h4>BCS 適中</h4>
+            <h5>肋骨及脊椎不明顯，但能容易摸到，腹部有些許脂肪，腰身明顯</h5>
+            <hr>
+            <h4>BCS 稍胖</h4>
+            <h5>肋骨及脊椎看不到，且不容易摸到，沒有腰線</h5>
+            <hr>
+            <h4>BCS 過胖</h4>
+            <h5>胸腔、腹部都是脂肪，整隻貓像圓球一般</h5>
+            <hr>
         </div>
     </div>
     <div class="row hidden-xs padding"></div>    
@@ -102,11 +134,17 @@
         });
     }
     function Send(id){
+        var trueid = id;
+        if(id=='F') trueid = 'A';
+        if(id=='G') trueid = 'B';
+        if(id=='H') trueid = 'C';
+        if(id=='I') trueid = 'D';
+        if(id=='J') trueid = 'E';
         $.ajax({  
             method : "POST",
             url: 'BBC',
             data: {
-                name: id
+                name: trueid
             }
         }).done(function(data){       
             window.location.href = '' + data;
