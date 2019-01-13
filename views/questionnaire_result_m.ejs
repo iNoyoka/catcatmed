@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Web Page Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
+    <!-- Web Describe -->
+    <title>卡卡貓catcatmed| 飲食推薦系統</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129519422-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-129519422-1');
+    </script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <!-- development version, includes helpful console warnings (Vue.js)-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- bootstrap     -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!-- Common CSS Setting -->
+    <style>
+        @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
+        {
+            font-family: 'Noto Sans TC';
+        }
+        h1{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;}
+        h2{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;}
+        h3{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;}
+        h4{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;}
+        h5{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;}
+        span{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;}
+        p{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;}
+        a{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;}
+        button{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;}
+        th{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;}
+        input{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;}
+        select{font-family: 'Noto Sans TC', Microsoft JhengHei, 'Noto Sans TC' !important;}
+        /* scroll bar */
+        /* width */
+        ::-webkit-scrollbar {
+            width: 5px;
+            border-radius: 100px;
+        }
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: white; 
+        }
+        
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: gray;
+            border-radius: 100px;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        body{
+            overflow-x: hidden;
+            margin:0;
+            padding:0;
+        }
+        /* Tooltip container */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Tooltip text */
+        .tooltip .tooltiptext_bottom {
+            visibility: hidden;
+            min-width: 150%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            text-align: left;
+            padding: 5px 5px;
+            border-radius: 6px;
+            top: 100%;
+            left: 50%;
+            margin-left: -50%;
+        
+            /* Position the tooltip text - see examples below! */
+            position: absolute;
+            z-index: 1;
+        }
+        /* Show the tooltip text when you mouse over the tooltip container */
+        .tooltip:hover .tooltiptext_bottom {
+            visibility: visible;
+        }
+    </style>
+</head>
+<body style="overflow-x:hidden;">
+    <style>
+        /* font color: #404041 */
+        .def_container{
+            width:100%;
+            padding-left: 2%;
+            padding-right: 2%;
+        }
+        .def_container p{
+            margin-top: 1vh;
+            margin-bottom: 1vh;
+        }
+        .selectorButton{
+            width: 98%;
+            background-color: #F1F2F3;
+            color: #404041;
+            border-radius: 30px;
+            border: 1px solid gray;
+            font-size: 0.9em;
+            padding-top: 1vh;
+            padding-bottom: 1vh;
+            outline: none;
+        }
+        .selectorButtonType2{
+            width: 98%;
+            background-color: #404041;
+            color: white;
+            border-radius: 30px;
+            border: 1px solid #404041;
+            font-size: 0.9em;
+            padding-top: 1vh;
+            padding-bottom: 1vh;
+            outline: none;
+        }
+        .menu-icon{
+            width: 30px;
+            height: 4vh;
+            margin-top: 1vh;
+            margin-bottom: 1vh;
+            border-top: 0.8vh solid #404041;
+            border-bottom: 0.8vh solid #404041;
+            background-color: #404041;
+            padding: 0.8vh 0;
+            background-clip:content-box;
+        }   
+        .leftToRight{
+            animation-name: LTR;
+            animation-duration: 0.6s;
+            animation-fill-mode: forwards;
+        }
+        .rightToLeft{
+            animation-name: RTL;
+            animation-duration: 0.6s;
+            animation-fill-mode: forwards;
+        }
+        .rotateUpToDown{
+            animation-name: RUTD;
+            animation-duration: 0.6s;
+            animation-fill-mode: forwards;
+        }
+        .rotateDownToUp{
+            animation-name: RDTU;
+            animation-duration: 0.6s;
+            animation-fill-mode: forwards;
+        }
+        .rotatePlusToCross{
+            animation-name: RPTC;
+            animation-duration: 0.6s;
+            animation-fill-mode: forwards;
+        }
+        .rotateCrossToPlus{
+            animation-name: RCTP;
+            animation-duration: 0.6s;
+            animation-fill-mode: forwards;
+        }
+        h5{
+            font-weight: 100 !important;
+        }
+        .package{
+            border:#F0F1F2 1px solid;
+        }
+        .package:hover{
+            transition: 200ms;
+            border:#87A7D6 1px solid;
+        }
+        .package_select{
+            border:#EF5981 1px solid;
+        }
+        @keyframes LTR{
+            from{right:0}
+            to{right:-100%;}
+        }
+        @keyframes RTL{
+            from{right:-100%;}
+            to{right:0;}
+        }
+        @keyframes RUTD{
+            from{transform: rotate(0deg);}
+            to{transform: rotate(-180deg);}
+        }
+        @keyframes RDTU{
+            from{transform: rotate(-180deg);}
+            to{transform: rotate(0deg);}
+        }
+        @keyframes RPTC{
+            from{transform: rotate(0deg);}
+            to{transform: rotate(135deg);}
+        }
+        @keyframes RCTP{
+            from{transform: rotate(135deg);}
+            to{transform: rotate(0deg);}
+        }
+    </style>
+    <div style="position: fixed;bottom:20px;right:30px;font-size:3em;color:#EF5981;z-index: 5;" onclick="ToggleBodyCollapse();" id="PlusCrossButton"><i class="fas fa-plus-circle"></i></div>
+    <div class="def_container" style="background-color: #F6E3D6;padding-top:2vh;padding-bottom: 2vh;">
+        <div style="float: left;">
+            <img src="images/index/logo.png" style="height: 6vh;">
+        </div>
+        <div style="float: right;" onclick="ShowNavCollapse();">
+            <span style="font-family:Comic Sans MS;font-size:14px;"><div class="menu-icon"></div></span>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+    <div class="def_container" style="background-color: #FBF5F1;padding-top:2vh;padding-bottom: 2vh;">
+        <p><span style="font-style: italic;font-size:1.3em;font-weight: bold;">Sally</span> 的專業推薦</p>
+        <div style="width:96%;margin-left: 2%;margin-right: 2%;">
+            <div style="width:33.33%;float: left;" class="dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle selectorButton" data-toggle="dropdown"><i class="fas fa-sort"></i>  包裝大小</button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">1-1.8 KG</a>
+                    <a class="dropdown-item" href="#">1.8-3 KG</a>
+                    <a class="dropdown-item" href="#">3-6 KG</a>
+                    <a class="dropdown-item" href="#">6-10 KG</a>
+                    <a class="dropdown-item" href="#">10+ KG</a>
+                </div>
+            </div>
+            <div style="width:33.33%;float: left;" class="dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle selectorButton" data-toggle="dropdown"><i class="fas fa-dollar-sign"></i>  價格</button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Link 1</a>
+                    <a class="dropdown-item" href="#">Link 2</a>
+                    <a class="dropdown-item" href="#">Link 3</a>
+                </div>
+            </div>
+            <div style="width:33.33%;float: left;"><button class="selectorButtonType2" onclick="ShowFunnelCollapse();"><i class="fas fa-sliders-h"></i>  進階篩選</button></div>
+            <div style="clear:both;"></div>
+        </div>
+    </div>
+    <div class="def_container" style="padding-top: 1vh;">
+        <div class="form-group" style="width:48%; margin-right:2%;float: right;">
+            <select class="form-control custom-select" id="sort_method">
+                <option value="match">最適選擇</option>
+                <option value="score">評價最高</option>
+                <option value="price_HL">價格由高到低</option>
+                <option value="price_LH">價格由低到高</option>
+            </select>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <!--PRODUCT PART-->
+    <div class="def_container" style="position: relative;">
+        <div style="width:96%;margin-left:2%;margin-right:2%;box-shadow:0px 1px 20px rgba(0, 0, 0, 0.1);border-radius: 15px;">
+            <div style="width:100%;background-color:white;margin-top:1vh;border-top-left-radius:15px;border-top-right-radius:15px;">
+                <div style="width:45%;float:left;display:flex;align-items:center;justify-content:center;">
+                    <img src="images/product/product/0003.png" style="width:100%;background-color:#F6E3D6;border-top-left-radius:15px;border-top-right-radius:15px;">
+                </div>
+                <div style="width:55%;float:left;">
+                    <p style="font-style:italic;margin:1px 0;">Gather 卡樂</p>
+                    <p style="font-weight:bold;margin:1px 0;">牧野鮮雞</p>
+                    <div style="display:flex;">
+                        <i class="fas fa-star" style="color:#FED144;"></i>
+                        <i class="fas fa-star" style="color:#FED144;"></i>
+                        <i class="fas fa-star" style="color:#FED144;"></i>
+                        <i class="fas fa-star-half-alt" style="color:#FED144;"></i>
+                        <i class="far fa-star" style="color:#FED144;"></i>
+                    </div>
+                    <div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;">
+                        <span><i class="fas fa-check" style="color:green;margin-right:5px;"></i>化毛</span>
+                    </div>
+                    <div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;">
+                        <span>口腔保健</span>
+                    </div>
+                    <div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;">
+                        <span>免疫力</span>
+                    </div>
+                    <div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;">
+                        <span>心臟保健</span>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <p style="float:right;margin-right:2px;">食用天數63天</p>
+                    <div style="clear:both;"></div>
+                    <div style="float:right;margin-right:2px;margin-bottom:2px;padding:5px 10px;background-color:#EF5981;color:white;">
+                        <h4 style="margin:0;">NT 1200</h4>
+                    </div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div style="clear:both;"></div>
+            </div>
+            <hr style="margin:0;">
+            <div id="CCM0001Collapse" class="collapse" style="width:90%;margin: 1vh 5%;">
+                <!--protein progressbar-->
+                <div style="width:20%;text-align:right;font-size:0.8em;float: left;">
+                    <span>蛋白質</span>
+                </div>
+                <div style="width:60%;text-align:right;font-size:0.8em;float: left;">
+                    <div style="width:90%;background-color:#F1F1F2;border-radius: 20px;margin:5px 5%;">
+                        <div style="width:35%;height:0.8em;background-color:#C1CEE1;border-radius: 20px;"></div>
+                    </div>
+                </div>
+                <div style="width:20%;text-align:left;font-size:0.8em;float: left;">
+                    <span>32%</span>
+                </div>
+                <div style="clear:both;"></div>
+                <!--fat progressbar-->
+                <div style="width:20%;text-align:right;font-size:0.8em;float: left;">
+                    <span>脂質</span>
+                </div>
+                <div style="width:60%;text-align:right;font-size:0.8em;float: left;">
+                    <div style="width:90%;background-color:#F1F1F2;border-radius: 20px;margin:5px 5%;">
+                        <div style="width:5%;height:0.8em;background-color:#C1CEE1;border-radius: 20px;"></div>
+                    </div>
+                </div>
+                <div style="width:20%;text-align:left;font-size:0.8em;float: left;">
+                    <span>5%</span>
+                </div>
+                <div style="clear:both;"></div>
+                <!--fiber progressbar-->
+                <div style="width:20%;text-align:right;font-size:0.8em;float: left;">
+                    <span>纖維素</span>
+                </div>
+                <div style="width:60%;text-align:right;font-size:0.8em;float: left;">
+                    <div style="width:90%;background-color:#F1F1F2;border-radius: 20px;margin:5px 5%;">
+                        <div style="width:10%;height:0.8em;background-color:#C1CEE1;border-radius: 20px;"></div>
+                    </div>
+                </div>
+                <div style="width:20%;text-align:left;font-size:0.8em;float: left;">
+                    <span>10%</span>
+                </div>
+                <div style="clear:both;"></div>
+                <p style="font-size:0.7em;">成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分</p>
+            </div>
+            <div style="width:100%;background-color:#F1F1F2;text-align:center;margin-bottom:1vh;border-bottom-left-radius: 15px;border-bottom-right-radius:15px;" data-toggle="collapse" data-target="#CCM0001Collapse">
+                <p style="margin:0;font-size:0.8em;padding:5px 0;">查看詳細標示</p>
+            </div>
+            <img src="images/product/element/flags/美國.png" class="rounded" style="width:10%;position:absolute;right:20px;top:10px;">
+        </div>
+    </div>
+    <!--NAV COLLAPSE-->
+    <div style="position: fixed;top:0px;right:-100%;background-color:#404041;z-index: 10;height:100vh;width:100%;" id="navBarCollapse">
+        <div style="float:right; color: white;font-size: 3em;padding: 0 20px;" onclick="HideNavCollapse();"><i class="fas fa-times"></i></div>
+        <div style="clear: both;margin: 10vh 0;"></div>
+        <div style="text-align:center;color:#EF5981;font-size: 2em;">
+            <a style="text-decoration: none;" onclick="window.location.href = '/index_m'">首頁</a>
+            <br>
+            <br>
+            <a style="text-decoration: none;" onclick="window.location.href = '/questionnaire'">重新填寫</a>
+            <br>
+            <br>
+            <a style="text-decoration: none;" onclick="window.location.href = '/library'">文獻資料</a>
+        </div>
+    </div>
+    <!--FUNNEL-->
+    <div style="position: fixed;top:0;right:-100%;background-color:#F0F1F2;z-index: 10;min-height:100vh;width:100%;overflow: auto;" id="funnelCollapse">
+        <div style="float: right;color: #404041;font-size: 1em;padding: 0 20px;margin: 1vh 0;" onclick="HideFunnelCollapse();"><span style="color:gray;"> 關閉進階篩選 </span><i class="fas fa-times-circle"></i></i></div>
+        <hr style="margin:1vh 0;clear: both;">
+        <div style="width:96%; margin: 1vh 2%;background-color: #D0D2D3;padding: 1vh 20px;border-radius: 10px;" data-toggle="collapse" data-target="#packageSizeCollapse" onclick="RotateArrow(this.id);" id="packageSize">
+            <i class="fas fa-angle-down"></i>
+            <span>包裝大小</span>
+        </div>
+        <div id="packageSizeCollapse" class="collapse" style="width:90%;margin: 1vh 5%;">
+            <div>
+                <img src="images/product/element/bag1.png" style="width:12%;cursor: pointer;margin-left:1%;" class="package_select" id="package_xs" onclick="ChangePackageSizeByPic(this.id)">
+                <img src="images/product/element/bag2.png" style="width:15%;cursor: pointer;" class="package" id="package_s" onclick="ChangePackageSizeByPic(this.id)">
+                <img src="images/product/element/bag3.png" style="width:18%;cursor: pointer;" class="package" id="package_m" onclick="ChangePackageSizeByPic(this.id)">
+                <img src="images/product/element/bag4.png" style="width:20%;cursor: pointer;" class="package" id="package_l" onclick="ChangePackageSizeByPic(this.id)">
+                <img src="images/product/element/bag5.png" style="width:21%;cursor: pointer;" class="package" id="package_xl" onclick="ChangePackageSizeByPic(this.id)">
+            </div>
+        </div>
+        <div style="width:96%; margin: 1vh 2%;background-color: #D0D2D3;padding: 1vh 20px;border-radius: 10px;" data-toggle="collapse" data-target="#priceCollapse" onclick="RotateArrow(this.id);" id="price">
+            <i class="fas fa-angle-down"></i>
+            <span>價格</span>
+        </div>
+        <div id="priceCollapse" class="collapse" style="width:90%; margin: 1vh 5%;">
+            <label class="">
+                <input type="checkbox" id="DailyProtein" onchange="DrawCatfoodBlock()">
+                <span class="checkmark"></span>
+                <span>100-200</span>
+            </label>
+            <br>
+        </div>
+        <div style="width:96%; margin: 1vh 2%;background-color: #D0D2D3;padding: 1vh 20px;border-radius: 10px;" data-toggle="collapse" data-target="#cerealCollapse" onclick="RotateArrow(this.id);" id="cereal">
+            <i class="fas fa-angle-down"></i>
+            <span>有穀/無穀</span>
+        </div>
+        <div id="cerealCollapse" class="collapse" style="width:90%; margin: 1vh 5%;">
+            <label class="">
+                <input type="radio" name="radio" id="grand_yes" onchange="DrawCatfoodBlock()">
+                <span class="checkmark"></span>
+                <span>有穀飼料</span>
+            </label>
+            <br>
+            <label class="">
+                <input type="radio" name="radio" id="grand_no" onchange="DrawCatfoodBlock()">
+                <span class="checkmark"></span>
+                <span>無穀飼料</span>
+                <span style="font-size:0.7em;color:gray;">飼料<span>不會</span>包含小麥、玉米...等成分</span>
+            </label>
+            <br>
+            <label class="">
+                <input type="radio" checked="checked" name="radio" id="grand_both" onchange="DrawCatfoodBlock()">
+                <span class="checkmark"></span>
+                <span>兩種皆顯示</span>
+            </label>
+        </div>
+        <div style="width:96%; margin: 1vh 2%;background-color: #D0D2D3;padding: 1vh 20px;border-radius: 10px;" data-toggle="collapse" data-target="#originalCollapse" onclick="RotateArrow(this.id);" id="original">
+            <i class="fas fa-angle-down"></i>
+            <span>產地</span>
+        </div>
+        <div id="originalCollapse" class="collapse" style="width:90%; margin: 1vh 5%;">
+            <div style="width:50%;float:left;">
+                <label class="">
+                    <input type="checkbox" id="America" onchange="DrawCatfoodBlock()">
+                    <span class="checkmark"></span>
+                    <span>美國</span>
+                </label>
+                <br>
+                <label class="">
+                    <input type="checkbox" id="Australia" onchange="DrawCatfoodBlock()">
+                    <span class="checkmark"></span>
+                    <span>澳洲</span>
+                </label>
+                <br>
+                <label class="">
+                    <input type="checkbox" id="Brazil" onchange="DrawCatfoodBlock()">
+                    <span class="checkmark"></span>
+                    <span>巴西</span>
+                </label>
+                <br>
+                <label class="">
+                    <input type="checkbox" id="Canada" onchange="DrawCatfoodBlock()">
+                    <span class="checkmark"></span>
+                    <span>加拿大</span>
+                </label>
+                <br>
+                <label class="">
+                    <input type="checkbox" id="England" onchange="DrawCatfoodBlock()">
+                    <span class="checkmark"></span>
+                    <span>英國</span>
+                </label>
+                <br>
+                <label class="">
+                    <input type="checkbox" id="France" onchange="DrawCatfoodBlock()">
+                    <span class="checkmark"></span>
+                    <span>法國</span>
+                </label>
+            </div>
+            <div style="width:50%;float:left;">
+                <label class="">
+                    <input type="checkbox" id="Korea" onchange="DrawCatfoodBlock()">
+                    <span class="checkmark"></span>
+                    <span>韓國</span>
+                </label>
+                <br>
+                <label class="">
+                    <input type="checkbox" id="Newzeland" onchange="DrawCatfoodBlock()">
+                    <span class="checkmark"></span>
+                    <span>紐西蘭</span>
+                </label>
+                <br>
+                <label class="">
+                    <input type="checkbox" id="Thailand" onchange="DrawCatfoodBlock()">
+                    <span class="checkmark"></span>
+                    <span>泰國</span>
+                </label>
+                <br>
+                <label class="">
+                    <input type="checkbox" id="Japan" onchange="DrawCatfoodBlock()">
+                    <span class="checkmark"></span>
+                    <span>日本</span>
+                </label>
+                <br>
+                <label class="">
+                    <input type="checkbox" id="Italy" onchange="DrawCatfoodBlock()">
+                    <span class="checkmark"></span>
+                    <span>義大利</span>
+                </label>
+                <br>
+                <label class="">
+                    <input type="checkbox" id="Taiwan" onchange="DrawCatfoodBlock()">
+                    <span class="checkmark"></span>
+                    <span>台灣</span>
+                </label>
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+        <div style="width:96%; margin: 1vh 2%;background-color: #D0D2D3;padding: 1vh 20px;border-radius: 10px;" data-toggle="collapse" data-target="#advancedCollapse" onclick="RotateArrow(this.id);" id="advanced">
+            <i class="fas fa-angle-down"></i>
+            <span>蛋白質與代謝能</span>
+        </div>
+        <div id="advancedCollapse" class="collapse" style="width:90%; margin: 1vh 5%;">
+            <p style="color:gray;font-size:0.7em;">您可以進一步將飼料做更嚴謹的篩選，但是由於條件稍為嚴格，飼料的種類可能會非常稀少！</p>
+            <label class="">
+                <input type="checkbox" id="DailyProtein" onchange="DrawCatfoodBlock()">
+                <span class="checkmark"></span>
+                <span>AAFCO蛋白質篩選</span>
+            </label>
+            <br>
+            <label class="">
+                <input type="checkbox" id="Metabolism" onchange="DrawCatfoodBlock()">
+                <span class="checkmark"></span>
+                <span>NRC代謝能篩選</span>
+            </label>
+        </div>
+    </div>
+    <!--BODY INFORMATION-->
+    <div style="position: absolute;top:0px;right:-100%;background-color:#404041;z-index: 2;height:100vh;width:100%;padding:5vh 5%;color:white;overflow: auto;" id="bodyInfoCollapse">
+        <!---->
+        <h4 style="color:#EF5981;">基本資料</h4>
+        <h5 id="name">Sally</h5>
+        <h5>年齡：<span id="age"></span></h5>
+        <h5>體重：<span id="weight"></span></h5>
+        <h5>品種：<span id="species"></span></h5>
+        <h5>狀態：<span id="state"></span></h5>
+        <h5>體態：<span id="bcs"></span></h5>
+        <br>
+        <!---->
+        <h4 style="color:#EF5981;">狀況診斷</h4>
+        <div id="condition">
+            <div style="display:flex;align-items:center;">
+                <img src="images/product/element/meter_high.png" style="width:25%;float:left;margin-right:10px;">
+                <h5 style="float:left;">腎臟</h5>
+            </div>
+            <p>需要注意....</p>
+        </div>
+        <br>
+        <!---->
+        <h4 style="color:#EF5981;">營養需求</h4>
+        <h5>蛋白質</h5>
+        <div style="width:100%;background-color:#F1F1F2;" id="protein_range">
+            <div style="text-align: center;line-height: 1.8vh;color:white;width:7%;height:1.8vh;background-color:#C1CEE1;float: left;"></div>
+            <div style="text-align: center;line-height: 1.8vh;color:white;width:35%;height:1.8vh;background-color:#3D5BA8;float: left;"><p style="margin:0;font-weight:normal !important;font-size: 1.5vh">7-42%</p></div>
+            <div style="text-align: center;line-height: 1.8vh;color:white;width:58%;height:1.8vh;background-color:#C1CEE1;float: left;"></div>
+            <div style="clear:both;"></div>
+        </div>
+        <h5>脂質</h5>
+        <div style="width:100%;background-color:#F1F1F2;" id="fat_range">
+            <div style="text-align: center;line-height: 1.8vh;color:white;width:7%;height:1.8vh;background-color:#C1CEE1;float: left;"></div>
+            <div style="text-align: center;line-height: 1.8vh;color:white;width:35%;height:1.8vh;background-color:#3D5BA8;float: left;"><p style="margin:0;font-weight:normal !important;font-size: 1.5vh">7-42%</p></div>
+            <div style="text-align: center;line-height: 1.8vh;color:white;width:58%;height:1.8vh;background-color:#C1CEE1;float: left;"></div>
+            <div style="clear:both;"></div>
+        </div>
+        <h5>纖維素</h5>
+        <div style="width:100%;background-color:#F1F1F2;" id="fiber_range">
+            <div style="text-align: center;line-height: 1.8vh;color:white;width:7%;height:1.8vh;background-color:#C1CEE1;float: left;"></div>
+            <div style="text-align: center;line-height: 1.8vh;color:white;width:35%;height:1.8vh;background-color:#3D5BA8;float: left;"><p style="margin:0;font-weight:normal !important;font-size: 1.5vh">7-42%</p></div>
+            <div style="text-align: center;line-height: 1.8vh;color:white;width:58%;height:1.8vh;background-color:#C1CEE1;float: left;"></div>
+            <div style="clear:both;"></div>
+        </div>
+    </div>
+</body>
+</html>
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- bootstrap -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script>
+    //----------------------------------
+    // USE FOR PAGE COLLAPSE
+    //----------------------------------    
+    // Page Collapse
+    function ShowNavCollapse(){
+        if($('#navBarCollapse').hasClass('leftToRight')){
+            $('#navBarCollapse').toggleClass('rightToLeft leftToRight');
+        }else{
+            $('#navBarCollapse').toggleClass('rightToLeft');
+        }
+    }
+    function HideNavCollapse(){
+        $('#navBarCollapse').toggleClass('rightToLeft leftToRight');
+    }
+    //
+    function ShowFunnelCollapse(){
+        if($('#funnelCollapse').hasClass('leftToRight')){
+            $('#funnelCollapse').toggleClass('rightToLeft leftToRight');
+        }else{
+            $('#funnelCollapse').toggleClass('rightToLeft');
+        }
+    }
+    function HideFunnelCollapse(){
+        $('#funnelCollapse').toggleClass('rightToLeft leftToRight');
+    }
+    //
+    var bodyInfo = 0;
+    function ToggleBodyCollapse(){
+        if(bodyInfo==0){
+            if($('#bodyInfoCollapse').hasClass('leftToRight')){
+                $('#bodyInfoCollapse').toggleClass('rightToLeft leftToRight');
+            }else{
+                $('#bodyInfoCollapse').toggleClass('rightToLeft');
+            }
+            if($('#PlusCrossButton').hasClass('rotateCrossToPlus')){
+                $('#PlusCrossButton').toggleClass('rotateCrossToPlus rotatePlusToCross');
+            }else{
+                $('#PlusCrossButton').toggleClass('rotatePlusToCross');
+            }
+            bodyInfo = 1;
+        }else{
+            $('#bodyInfoCollapse').toggleClass('rightToLeft leftToRight');
+            $('#PlusCrossButton').toggleClass('rotateCrossToPlus rotatePlusToCross');
+            bodyInfo = 0;
+        }
+    }
+    // Flip arrows and buttons
+    var recordArrowId = 'temp';
+    function RotateArrow(id){
+        var i = $('#'+id).find('i');
+        if(id!=recordArrowId){
+            var j = $('#'+recordArrowId).find('i');
+            if(j.hasClass('rotateUpToDown')){
+                j.toggleClass('rotateUpToDown rotateDownToUp');
+            }else if(j.hasClass('rotateDownToUp')){
+                j.toggleClass('rotateUpToDown rotateDownToUp');
+            }else{
+                j.toggleClass('rotateUpToDown');
+            }
+            $('#'+recordArrowId+'Collapse').collapse('hide');
+            recordArrowId = id;
+        }
+        if(i.hasClass('rotateUpToDown')){
+            i.toggleClass('rotateUpToDown rotateDownToUp');
+        }else if(i.hasClass('rotateDownToUp')){
+            i.toggleClass('rotateUpToDown rotateDownToUp');
+        }else{
+            i.toggleClass('rotateUpToDown');
+        }
+        
+    }
+    //----------------------------------
+    // DRAW PRODUCT AND INFORMATION
+    //----------------------------------    
+    $(document).ready(function(){
+        ChangePriceSelector();
+    });
+    // for Draw() parameters
+    var packageSize = 'xs';
+    var listA, listB, listC, listD, listE;
+    var select_icon;
+    var priceUpperBound = 300, priceLowerBound = 200;
+    var grand = 'both';
+    var protein = 'off', metabolism = 'off';
+    var sort = 'match';
+    // Change Package Size
+    function ChangePackageSizeByPic(id){
+        id = id.split("_");
+        if(id[1]==packageSize){} // do nothing
+        else{
+            $('#package_'+packageSize).toggleClass("package_select package");
+            packageSize = id[1];
+            $('#package_'+packageSize).toggleClass("package_select package");
+            // go to change price tag, refresh selector and redraw products
+            ChangePriceSelector();
+            $('#sort_method').val('match');
+        }
+    }
+    function ChangePriceSelector(){
+        var innerHTML = '';
+        if(packageSize=='xs'){
+            innerHTML += '<label class=""><input type="checkbox" checked="checked" id="xs_priceA" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 200-300元</span></label><br>';
+            innerHTML += '<label class=""><input type="checkbox" id="xs_priceB" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 300-500元</span></label><br>';
+            innerHTML += '<label class=""><input type="checkbox" id="xs_priceC" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 500-650元</span></label><br>';
+            innerHTML += '<label class=""><input type="checkbox" id="xs_priceD" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 650-800元</span></label><br>';
+            innerHTML += '<label class=""><input type="checkbox" id="xs_priceE" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 800+元</span></label><br>';
+        }
+        if(packageSize=='s'){
+            innerHTML += '<label class=""><input type="checkbox" checked="checked" id="s_priceA" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 200-300元</span></label><br>';
+            innerHTML += '<label class=""><input type="checkbox" id="s_priceB" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 300-450元</span></label><br>';
+            innerHTML += '<label class=""><input type="checkbox" id="s_priceC" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 450-600元</span></label><br>';
+            innerHTML += '<label class=""><input type="checkbox" id="s_priceD" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 600-750元</span></label><br>';
+            innerHTML += '<label class=""><input type="checkbox" id="s_priceE" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 750+元</span></label><br>';
+        }
+        if(packageSize=='m'){
+            innerHTML += '<label class=""><input type="checkbox" checked="checked" id="m_priceA" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 200-300元</span></label><br>';
+            innerHTML += '<label class=""><input type="checkbox" id="m_priceB" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 300-400元</span></label><br>';
+            innerHTML += '<label class=""><input type="checkbox" id="m_priceC" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 400-500元</span></label><br>';
+            innerHTML += '<label class=""><input type="checkbox" id="m_priceD" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 500-600元</span></label><br>';
+            innerHTML += '<label class=""><input type="checkbox" id="m_priceE" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 600+元</span></label><br>';
+        }
+        if(packageSize=='l'){
+            innerHTML += '<label class=""><input type="checkbox" checked="checked" id="l_priceA" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 100-200元</span></label><br>';
+            innerHTML += '<label class=""><input type="checkbox" id="l_priceB" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 200-300元</span></label><br>';
+            innerHTML += '<label class=""><input type="checkbox" id="l_priceC" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 300-400元</span></label><br>';
+            innerHTML += '<label class=""><input type="checkbox" id="l_priceD" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 400-500元</span></label><br>';
+            innerHTML += '<label class=""><input type="checkbox" id="l_priceE" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 500+元</span></label><br>';
+        }
+        if(packageSize=='xl'){
+            innerHTML += '<label class=""><input type="checkbox" checked="checked" id="xl_priceA" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 100-150元</span></label><br>';
+            innerHTML += '<label class=""><input type="checkbox" id="xl_priceB" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 150-200元</span></label><br>';
+            innerHTML += '<label class=""><input type="checkbox" id="xl_priceC" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 200-250元</span></label><br>';
+            innerHTML += '<label class=""><input type="checkbox" id="xl_priceD" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 250+元</span></label><br>';
+        }
+        document.getElementById('priceCollapse').innerHTML = innerHTML;
+    }
+</script>

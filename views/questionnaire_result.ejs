@@ -16,6 +16,15 @@
     gtag('js', new Date());
     gtag('config', 'UA-129519422-1');
     </script>
+    <script type="text/javascript">
+        testExp = new RegExp('Android|webOS|iPhone|iPad|' +
+                        'BlackBerry|Windows Phone|'  +
+                        'Opera Mini|IEMobile|Mobile' , 
+                       'i');
+       
+       if (testExp.test(navigator.userAgent))
+           window.location.href="/questionnaire_result_m";
+   </script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <!-- jQuery -->

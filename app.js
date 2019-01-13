@@ -102,6 +102,9 @@ app.get('/questionnaire_result',function(req,res,next){
 	*/
 	res.render('questionnaire_result',{name:req.session.BCN});
 });
+app.get('/questionnaire_result_m',function(req,res,next){
+	res.render('questionnaire_result_m');
+});
 app.post('/questionnaire_result',function(req,res,next){
 	if(req.session.extra_knowhow!=null && req.session.select_icon!=null && req.session.BCA_ageYear!=null && req.session.BCW_kilo!=null && req.session.BBC!=null && req.session.BEF!=null && req.session.BNU!=null && req.session.extra_alergent!=null){ // need to insure that each req.session.xxx in function exist
 		// 分析貓咪身體資料
@@ -857,7 +860,7 @@ app.post('/askInformation',function(req,res,next){
 				if(req.session.joint_below.includes('E')) icon_information += '<br>-曾經創傷過';
 				if(req.session.joint_below.includes('F')) icon_information += '<br>-時常維持同一姿勢';
 			}else{
-				icon_information = 'joint#關節#low#目前關節健康狀態良好<br>建議繼續注重您貓咪的關節保健';
+				icon_information = 'joint#關節#low#目前關節健康狀態良好<br>請繼續保持';
 			}
 			if(icon_information!=''){
 				icon_information_list.push(icon_information);
@@ -882,7 +885,7 @@ app.post('/askInformation',function(req,res,next){
 				if(req.session.heart_behave.includes('D')) icon_information += '<br>-運動後喘氣恢復較久';
 				if(req.session.heart_behave.includes('E')) icon_information += '<br>-舌頭或腳掌發紫';
 			}else{
-				icon_information = 'heart#心臟#low#目前心臟健康狀態良好<br>建議繼續注重您貓咪的心臟保健';
+				icon_information = 'heart#心臟#low#目前心臟健康狀態良好<br>請繼續保持';
 			}
 			if(icon_information!=''){
 				icon_information_list.push(icon_information);
@@ -909,7 +912,7 @@ app.post('/askInformation',function(req,res,next){
 				if(req.session.mouth_behave.includes('E')) icon_information += '<br>-在食物或是水盆的旁邊駐足';
 				if(req.session.mouth_behave.includes('F')) icon_information += '<br>-甩頭，經常用前腳拍打嘴巴';
 			}else{
-				icon_information = 'mouth#口腔#low#目前口腔健康狀態良好<br>建議繼續注重您貓咪的口腔保健';
+				icon_information = 'mouth#口腔#low#目前口腔健康狀態良好<br>請繼續保持';
 			}
 			if(icon_information!=''){
 				icon_information_list.push(icon_information);
@@ -934,7 +937,7 @@ app.post('/askInformation',function(req,res,next){
 				if(req.session.fur_behave.includes('E')) icon_information += '<br>-毛髮打結';
 				if(req.session.fur_behave.includes('F')) icon_information += '<br>-有貓粉刺出現';
 			}else{
-				icon_information = 'hair#毛髮#low#目前毛髮健康狀態良好<br>建議繼續注重您貓咪的毛髮保健';
+				icon_information = 'hair#毛髮#low#目前毛髮健康狀態良好<br>請繼續保持';
 			}
 			if(icon_information!=''){
 				icon_information_list.push(icon_information);
@@ -957,7 +960,7 @@ app.post('/askInformation',function(req,res,next){
 				if(req.session.immu_behave.includes('C')) icon_information += '<br>-噴嚏以及咳嗽';
 				if(req.session.immu_behave.includes('D')) icon_information += '<br>-呼吸困難';
 			}else{
-				icon_information = 'immu#免疫#low#目前健康狀態良好<br>建議繼續注重您貓咪的身體保健';
+				icon_information = 'immu#免疫#low#目前健康狀態良好<br>請繼續保持';
 			}
 			if(icon_information!=''){
 				icon_information_list.push(icon_information);
@@ -968,7 +971,7 @@ app.post('/askInformation',function(req,res,next){
 			if(req.session.kidney_now=='yes'){
 				icon_information = 'kidney#腎臟#high#曾經有腎臟病史，需要高度的關注與額外保健<br>建議您定期和獸醫師追蹤病情，以確保貓咪的健康！';
 			}else{
-				icon_information = 'kidney#腎臟#mid#目前健康狀態良好<br>不過腎臟和泌尿系統是貓咪需要特別關注的健康問題<br>建議繼續注重您貓咪的腎臟保健';
+				icon_information = 'kidney#腎臟#mid#目前健康狀態良好<br>請繼續保持';
 			}
 			if(icon_information!=''){
 				icon_information_list.push(icon_information);
@@ -995,7 +998,7 @@ app.post('/askInformation',function(req,res,next){
 				if(req.session.urinary_behave.includes('E')) icon_information += '<br>-尿量很少';
 				if(req.session.urinary_behave.includes('F')) icon_information += '<br>-嘴巴有很濃的尿味';
 			}else{
-				icon_information = 'urinary#泌尿#low#目前健康狀態良好<br>建議繼續注重您貓咪的身體保健';
+				icon_information = 'urinary#泌尿#low#目前健康狀態良好<br>請繼續保持';
 			}
 			if(icon_information!=''){
 				icon_information_list.push(icon_information);
@@ -1016,7 +1019,7 @@ app.post('/askInformation',function(req,res,next){
 				if(req.session.stoma_problem.includes('C')) icon_information += '<br>-嘔吐';
 				if(req.session.stoma_problem.includes('E')) icon_information += '<br>-異食癖';
 			}else{
-				icon_information = 'stoma#腸胃#low#目前腸胃健康狀態良好<br>建議繼續注重您貓咪的腸胃保健';
+				icon_information = 'stoma#腸胃#low#目前腸胃健康狀態良好<br>請繼續保持';
 			}
 			if(icon_information!=''){
 				icon_information_list.push(icon_information);
@@ -1048,7 +1051,7 @@ app.post('/askInformation',function(req,res,next){
 				if(req.session.stress_now.includes('F')) icon_information += '<br>-攻擊其他貓或是人';
 				if(req.session.stress_now.includes('G')) icon_information += '<br>-四肢末端受傷';
 			}else{
-				icon_information = 'stress#壓力#low#目前壓力控管狀態良好<br>建議繼續注重您貓咪的壓力問題喔！';
+				icon_information = 'stress#壓力#low#目前壓力控管狀態良好<br>請繼續保持';
 			}
 			if(icon_information!=''){
 				icon_information_list.push(icon_information);

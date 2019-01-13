@@ -70,11 +70,8 @@ router.post('/askEmailRecording',function(req,res,next){
 //------------------------------------------
 // LIBRARY
 //------------------------------------------
-router.get('/library',function(req,res,next){
-	res.render('library');
-});
-router.post('/libraryMessage',function(req,res,next){
-	res.send('success!');
+router.get('/literature',function(req,res,next){
+	res.render('literature');
 });
 
 //------------------------------------------
