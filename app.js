@@ -83,7 +83,6 @@ app.use('/account',accountRouter)
 app.use('/admin',adminRouter)
 
 app.get('/questionnaire_result',function(req,res,next){
-	/*
 	req.session.BCN = '地球貓';
 	req.session.BCS = 'girl';
 	req.session.BSP = '火星貓';
@@ -99,11 +98,25 @@ app.get('/questionnaire_result',function(req,res,next){
 	req.session.catfood_select = 'A';
 	req.session.extra_knowhow = 'A';
 	req.session.catfood_select = 's';
-	*/
 	res.render('questionnaire_result',{name:req.session.BCN});
 });
 app.get('/questionnaire_result_m',function(req,res,next){
-	res.render('questionnaire_result_m');
+	req.session.BCN = '地球貓';
+	req.session.BCS = 'girl';
+	req.session.BSP = '火星貓';
+	req.session.BCA_ageYear = 2;
+	req.session.BCA_ageMonth = 4;
+	req.session.BCW_kilo = 3;
+	req.session.BCW_gram = 0;
+	req.session.BBC = 'C';
+	req.session.BEF = 'B';
+	req.session.BNU = 'yes';
+	req.session.select_icon = ['A','B','C'];
+	req.session.extra_alergent = ['unsure'];
+	req.session.catfood_select = 'A';
+	req.session.extra_knowhow = 'A';
+	req.session.catfood_select = 's';
+	res.render('questionnaire_result_m',{name:req.session.BCN});
 });
 app.post('/questionnaire_result',function(req,res,next){
 	if(req.session.extra_knowhow!=null && req.session.select_icon!=null && req.session.BCA_ageYear!=null && req.session.BCW_kilo!=null && req.session.BBC!=null && req.session.BEF!=null && req.session.BNU!=null && req.session.extra_alergent!=null){ // need to insure that each req.session.xxx in function exist

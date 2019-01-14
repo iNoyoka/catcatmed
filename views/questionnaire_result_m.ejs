@@ -22,7 +22,6 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <!-- bootstrap     -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
     <!-- Common CSS Setting -->
     <style>
         @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
@@ -209,7 +208,7 @@
             to{transform: rotate(0deg);}
         }
     </style>
-    <div style="position: fixed;bottom:20px;right:30px;font-size:3em;color:#EF5981;z-index: 5;" onclick="ToggleBodyCollapse();" id="PlusCrossButton"><i class="fas fa-plus-circle"></i></div>
+    <div style="position: fixed;bottom:20px;right:30px;font-size:3em;color:#EF5981;z-index: 5;" onclick="ToggleBodyCollapse();" id="PlusCrossButton"><i style="background-color:white;border-radius:50%;box-shadow:0px 1px 20px rgba(0, 0, 0, 0.2);" class="fas fa-plus-circle"></i></div>
     <div class="def_container" style="background-color: #F6E3D6;padding-top:2vh;padding-bottom: 2vh;">
         <div style="float: left;">
             <img src="images/index/logo.png" style="height: 6vh;">
@@ -220,24 +219,21 @@
         <div style="clear: both;"></div>
     </div>
     <div class="def_container" style="background-color: #FBF5F1;padding-top:2vh;padding-bottom: 2vh;">
-        <p><span style="font-style: italic;font-size:1.3em;font-weight: bold;">Sally</span> 的專業推薦</p>
+        <p><span style="font-style: italic;font-size:1.3em;font-weight: bold;"><%= name %></span> 的專業推薦</p>
         <div style="width:96%;margin-left: 2%;margin-right: 2%;">
             <div style="width:33.33%;float: left;" class="dropdown">
                 <button type="button" class="btn btn-primary dropdown-toggle selectorButton" data-toggle="dropdown"><i class="fas fa-sort"></i>  包裝大小</button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">1-1.8 KG</a>
-                    <a class="dropdown-item" href="#">1.8-3 KG</a>
-                    <a class="dropdown-item" href="#">3-6 KG</a>
-                    <a class="dropdown-item" href="#">6-10 KG</a>
-                    <a class="dropdown-item" href="#">10+ KG</a>
+                    <a class="dropdown-item" href="#" onclick="ChangePackageSizeByPic('package_xs');" id="dropdown_xs"><i style="color:green;" class="fas fa-check"></i>  1-1.8 KG</a>
+                    <a class="dropdown-item" href="#" onclick="ChangePackageSizeByPic('package_s');" id="dropdown_s"><i style="color:white;" class="fas fa-check"></i>  1.8-3 KG</a>
+                    <a class="dropdown-item" href="#" onclick="ChangePackageSizeByPic('package_m');" id="dropdown_m"><i style="color:white;" class="fas fa-check"></i>  3-6 KG</a>
+                    <a class="dropdown-item" href="#" onclick="ChangePackageSizeByPic('package_l');" id="dropdown_l"><i style="color:white;" class="fas fa-check"></i>  6-10 KG</a>
+                    <a class="dropdown-item" href="#" onclick="ChangePackageSizeByPic('package_xl');" id="dropdown_xl"><i style="color:white;" class="fas fa-check"></i>  10+ KG</a>
                 </div>
             </div>
             <div style="width:33.33%;float: left;" class="dropdown">
                 <button type="button" class="btn btn-primary dropdown-toggle selectorButton" data-toggle="dropdown"><i class="fas fa-dollar-sign"></i>  價格</button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Link 1</a>
-                    <a class="dropdown-item" href="#">Link 2</a>
-                    <a class="dropdown-item" href="#">Link 3</a>
+                <div class="dropdown-menu" id="dropdown_price">
                 </div>
             </div>
             <div style="width:33.33%;float: left;"><button class="selectorButtonType2" onclick="ShowFunnelCollapse();"><i class="fas fa-sliders-h"></i>  進階篩選</button></div>
@@ -255,47 +251,50 @@
         </div>
         <div style="clear:both;"></div>
     </div>
+
     <!--PRODUCT PART-->
-    <div class="def_container" style="position: relative;">
+    <div class="def_container" style="position: relative;display:none;" id="product01">
         <div style="width:96%;margin-left:2%;margin-right:2%;box-shadow:0px 1px 20px rgba(0, 0, 0, 0.1);border-radius: 15px;">
             <div style="width:100%;background-color:white;margin-top:1vh;border-top-left-radius:15px;border-top-right-radius:15px;">
-                <div style="width:45%;float:left;display:flex;align-items:center;justify-content:center;">
+                <div style="width:45%;float:left;display:flex;align-items:center;justify-content:center;" id="product01_productImg">
                     <img src="images/product/product/0003.png" style="width:100%;background-color:#F6E3D6;border-top-left-radius:15px;border-top-right-radius:15px;">
                 </div>
                 <div style="width:55%;float:left;">
-                    <p style="font-style:italic;margin:1px 0;">Gather 卡樂</p>
-                    <p style="font-weight:bold;margin:1px 0;">牧野鮮雞</p>
-                    <div style="display:flex;">
+                    <p style="font-style:italic;margin:1px 0;" id="product01_brand">Gather 卡樂</p>
+                    <p style="font-weight:bold;margin:1px 0;" id="product01_name">牧野鮮雞</p>
+                    <div style="display:flex;" id="product01_scoreCommand">
                         <i class="fas fa-star" style="color:#FED144;"></i>
                         <i class="fas fa-star" style="color:#FED144;"></i>
                         <i class="fas fa-star" style="color:#FED144;"></i>
                         <i class="fas fa-star-half-alt" style="color:#FED144;"></i>
                         <i class="far fa-star" style="color:#FED144;"></i>
                     </div>
-                    <div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;">
-                        <span><i class="fas fa-check" style="color:green;margin-right:5px;"></i>化毛</span>
+                    <div id="product01_icon">
+                        <div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;">
+                            <span><i class="fas fa-check" style="color:green;margin-right:5px;"></i>化毛</span>
+                        </div>
+                        <div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;">
+                            <span>口腔保健</span>
+                        </div>
+                        <div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;">
+                            <span>免疫力</span>
+                        </div>
+                        <div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;">
+                            <span>心臟保健</span>
+                        </div>
+                        <div style="clear:both;"></div>
                     </div>
-                    <div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;">
-                        <span>口腔保健</span>
-                    </div>
-                    <div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;">
-                        <span>免疫力</span>
-                    </div>
-                    <div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;">
-                        <span>心臟保健</span>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <p style="float:right;margin-right:2px;">食用天數63天</p>
+                    <p style="float:right;margin-right:2px;" id="product01_eatday">食用天數63天</p>
                     <div style="clear:both;"></div>
                     <div style="float:right;margin-right:2px;margin-bottom:2px;padding:5px 10px;background-color:#EF5981;color:white;">
-                        <h4 style="margin:0;">NT 1200</h4>
+                        <h4 style="margin:0;" id="product01_price">NT 1200</h4>
                     </div>
                     <div style="clear:both;"></div>
                 </div>
                 <div style="clear:both;"></div>
             </div>
             <hr style="margin:0;">
-            <div id="CCM0001Collapse" class="collapse" style="width:90%;margin: 1vh 5%;">
+            <div id="product01_Collapse" class="collapse" style="width:90%;margin: 1vh 5%;">
                 <!--protein progressbar-->
                 <div style="width:20%;text-align:right;font-size:0.8em;float: left;">
                     <span>蛋白質</span>
@@ -337,12 +336,23 @@
                 <div style="clear:both;"></div>
                 <p style="font-size:0.7em;">成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分成分</p>
             </div>
-            <div style="width:100%;background-color:#F1F1F2;text-align:center;margin-bottom:1vh;border-bottom-left-radius: 15px;border-bottom-right-radius:15px;" data-toggle="collapse" data-target="#CCM0001Collapse">
+            <div style="width:100%;background-color:#D0D2D3;text-align:center;margin-bottom:1vh;border-bottom-left-radius: 15px;border-bottom-right-radius:15px;" data-toggle="collapse" data-target="#product01_Collapse">
                 <p style="margin:0;font-size:0.8em;padding:5px 0;">查看詳細標示</p>
             </div>
-            <img src="images/product/element/flags/美國.png" class="rounded" style="width:10%;position:absolute;right:20px;top:10px;">
+            <div id="product01_flag">
+                <img src="images/product/element/flags/美國.png" class="rounded" style="width:10%;position:absolute;right:20px;top:10px;">
+            </div>
         </div>
     </div>
+
+    <!--Nothing PART-->
+    <div class="def_container" style="position: relative;display:none;" id="nothing">
+        <div style="width:98%;margin:1vh 0;margin-left:2%;background-color:white;box-shadow: 0 0 5px rgba(0,0,0,0.2);padding: 1vh 0;text-align:center">
+            <p>此價格與包裝區間沒有適合您貓咪的飼料喔~<br>您可以嘗試選取其他的包裝+價格組合來查看更多飼料！</p>
+        </div>
+    </div>
+    
+
     <!--NAV COLLAPSE-->
     <div style="position: fixed;top:0px;right:-100%;background-color:#404041;z-index: 10;height:100vh;width:100%;" id="navBarCollapse">
         <div style="float:right; color: white;font-size: 3em;padding: 0 20px;" onclick="HideNavCollapse();"><i class="fas fa-times"></i></div>
@@ -354,11 +364,11 @@
             <a style="text-decoration: none;" onclick="window.location.href = '/questionnaire'">重新填寫</a>
             <br>
             <br>
-            <a style="text-decoration: none;" onclick="window.location.href = '/library'">文獻資料</a>
+            <a style="text-decoration: none;" onclick="window.location.href = '/literature'">文獻資料</a>
         </div>
     </div>
     <!--FUNNEL-->
-    <div style="position: fixed;top:0;right:-100%;background-color:#F0F1F2;z-index: 10;min-height:100vh;width:100%;overflow: auto;" id="funnelCollapse">
+    <div style="position: fixed;top:0;bottom:0;overflow-y:scroll;overflow-x:hidden;right:-100%;background-color:#F0F1F2;z-index: 10;min-height:100vh;width:100%;overflow: auto;" id="funnelCollapse">
         <div style="float: right;color: #404041;font-size: 1em;padding: 0 20px;margin: 1vh 0;" onclick="HideFunnelCollapse();"><span style="color:gray;"> 關閉進階篩選 </span><i class="fas fa-times-circle"></i></i></div>
         <hr style="margin:1vh 0;clear: both;">
         <div style="width:96%; margin: 1vh 2%;background-color: #D0D2D3;padding: 1vh 20px;border-radius: 10px;" data-toggle="collapse" data-target="#packageSizeCollapse" onclick="RotateArrow(this.id);" id="packageSize">
@@ -379,12 +389,6 @@
             <span>價格</span>
         </div>
         <div id="priceCollapse" class="collapse" style="width:90%; margin: 1vh 5%;">
-            <label class="">
-                <input type="checkbox" id="DailyProtein" onchange="DrawCatfoodBlock()">
-                <span class="checkmark"></span>
-                <span>100-200</span>
-            </label>
-            <br>
         </div>
         <div style="width:96%; margin: 1vh 2%;background-color: #D0D2D3;padding: 1vh 20px;border-radius: 10px;" data-toggle="collapse" data-target="#cerealCollapse" onclick="RotateArrow(this.id);" id="cereal">
             <i class="fas fa-angle-down"></i>
@@ -511,25 +515,19 @@
         </div>
     </div>
     <!--BODY INFORMATION-->
-    <div style="position: absolute;top:0px;right:-100%;background-color:#404041;z-index: 2;height:100vh;width:100%;padding:5vh 5%;color:white;overflow: auto;" id="bodyInfoCollapse">
+    <div style="position: fixed;top:0px;bottom:0;overflow-y:scroll;overflow-x:hidden;right:-100%;background-color:#404041;z-index: 2;height:100vh;width:100%;padding:5vh 5%;color:white;overflow: auto;" id="bodyInfoCollapse">
         <!---->
         <h4 style="color:#EF5981;">基本資料</h4>
-        <h5 id="name">Sally</h5>
-        <h5>年齡：<span id="age"></span></h5>
-        <h5>體重：<span id="weight"></span></h5>
-        <h5>品種：<span id="species"></span></h5>
-        <h5>狀態：<span id="state"></span></h5>
-        <h5>體態：<span id="bcs"></span></h5>
+        <h5><%= name %></h5>
+        <h5>年齡：<span id="ageyear"></span>歲<span id="agemonth"></span>個月</h5>
+        <h5>體重：<span id="kilo"></span>.<span id="gram"></span>公斤</h5>
+        <h5>品種：<span id="bsp"></span></h5>
+        <h5>狀態：<span id="bnu"></span></h5>
+        <h5>體態：<span id="bbc"></span></h5>
         <br>
         <!---->
         <h4 style="color:#EF5981;">狀況診斷</h4>
-        <div id="condition">
-            <div style="display:flex;align-items:center;">
-                <img src="images/product/element/meter_high.png" style="width:25%;float:left;margin-right:10px;">
-                <h5 style="float:left;">腎臟</h5>
-            </div>
-            <p>需要注意....</p>
-        </div>
+        <div id="iconInformation"></div>
         <br>
         <!---->
         <h4 style="color:#EF5981;">營養需求</h4>
@@ -560,7 +558,6 @@
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- bootstrap -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script>
@@ -614,18 +611,6 @@
     var recordArrowId = 'temp';
     function RotateArrow(id){
         var i = $('#'+id).find('i');
-        if(id!=recordArrowId){
-            var j = $('#'+recordArrowId).find('i');
-            if(j.hasClass('rotateUpToDown')){
-                j.toggleClass('rotateUpToDown rotateDownToUp');
-            }else if(j.hasClass('rotateDownToUp')){
-                j.toggleClass('rotateUpToDown rotateDownToUp');
-            }else{
-                j.toggleClass('rotateUpToDown');
-            }
-            $('#'+recordArrowId+'Collapse').collapse('hide');
-            recordArrowId = id;
-        }
         if(i.hasClass('rotateUpToDown')){
             i.toggleClass('rotateUpToDown rotateDownToUp');
         }else if(i.hasClass('rotateDownToUp')){
@@ -637,26 +622,123 @@
     }
     //----------------------------------
     // DRAW PRODUCT AND INFORMATION
-    //----------------------------------    
-    $(document).ready(function(){
-        ChangePriceSelector();
-    });
+    //----------------------------------  
     // for Draw() parameters
     var packageSize = 'xs';
+    var currentPrice = 'priceA';
     var listA, listB, listC, listD, listE;
     var select_icon;
     var priceUpperBound = 300, priceLowerBound = 200;
     var grand = 'both';
     var protein = 'off', metabolism = 'off';
-    var sort = 'match';
+    var sort = 'match'; 
+    //testing
+    
+    $(document).ready(function(){
+        ChangePriceSelector();
+    });
+    
+    /*
+    $(document).ready(function(){
+        $.ajax({
+            method: 'POST',
+            url: 'questionnaire_result'
+        }).done(function(data){
+            // error occur
+            if(data=='/questionnaire'){
+                window.location.href = data;
+            }else{
+                var splitdata = data.split('#');
+                // packageSize first change
+                packageSize = JSON.parse(splitdata[0]);
+                $('#package_'+packageSize).toggleClass("package_select package");
+                // store list
+                listA = JSON.parse(splitdata[1]);
+                listB = JSON.parse(splitdata[2]);
+                listC = JSON.parse(splitdata[3]);
+                listD = JSON.parse(splitdata[4]);
+                listE = JSON.parse(splitdata[5]);
+                // record select icon
+                select_icon = JSON.parse(splitdata[6]);
+                // Draw cat food Block
+                ChangePriceSelector();
+                DrawCatfoodBlock();
+                // Draw range
+                var proteinUp = parseInt(JSON.parse(splitdata[7]));
+                var proteinDown = parseInt(JSON.parse(splitdata[8]));
+                var proteinMinus = (50 - proteinUp)*2;
+                var proteinMinus2 = (proteinUp - proteinDown)*2;
+                var fatUp = parseInt(JSON.parse(splitdata[9]));
+                var fatDown = parseInt(JSON.parse(splitdata[10]));
+                var fatMinus = (50-fatUp)*2;
+                var fatMinus2 = (fatUp-fatDown)*2;
+                var fiberUp = parseInt(JSON.parse(splitdata[11]));
+                var fiberDown = parseInt(JSON.parse(splitdata[12]));
+                var fiberMinus = (50-fiberUp)*2;
+                var fiberMinus2 = (fiberUp-fiberDown)*2;
+                document.getElementById('protein_range').innerHTML = '<div style="text-align: center;line-height: 1.8vh;color:white;width:'+proteinDown*2+'%;height:1.8vh;background-color:#C1CEE1;float: left;"></div><div style="text-align: center;line-height: 1.8vh;color:white;width:'+proteinMinus2+'%;height:1.8vh;background-color:#3D5BA8;float: left;"><p style="margin:0;font-weight:normal !important;font-size: 1.5vh">'+proteinDown+'-'+proteinUp+'%</p></div><div style="text-align: center;line-height: 1.8vh;color:white;width:'+proteinMinus+'%;height:1.8vh;background-color:#C1CEE1;float: left;"></div><div style="clear:both;"></div>';
+                document.getElementById('fat_range').innerHTML = '<div style="text-align: center;line-height: 1.8vh;color:white;width:'+fatDown*2+'%;height:1.8vh;background-color:#C1CEE1;float: left;"></div><div style="text-align: center;line-height: 1.8vh;color:white;width:'+fatMinus2+'%;height:1.8vh;background-color:#3D5BA8;float: left;"><p style="margin:0;font-weight:normal !important;font-size: 1.5vh">'+fatDown+'-'+fatUp+'%</p></div><div style="text-align: center;line-height: 1.8vh;color:white;width:'+fatMinus+'%;height:1.8vh;background-color:#C1CEE1;float: left;"></div><div style="clear:both;"></div>';
+                document.getElementById('fiber_range').innerHTML = '<div style="text-align: center;line-height: 1.8vh;color:white;width:'+fiberDown*2+'%;height:1.8vh;background-color:#C1CEE1;float: left;"></div><div style="text-align: center;line-height: 1.8vh;color:white;width:'+fiberMinus2+'%;height:1.8vh;background-color:#3D5BA8;float: left;"><p style="margin:0;font-weight:normal !important;font-size: 1.5vh">'+fiberDown+'-'+fiberUp+'%</p></div><div style="text-align: center;line-height: 1.8vh;color:white;width:'+fiberMinus+'%;height:1.8vh;background-color:#C1CEE1;float: left;"></div><div style="clear:both;"></div>';
+            }
+        });
+        // post to server to ask basic information, and draw it.  
+        $.ajax({
+            method: 'POST',
+            url: 'askInformation'
+        }).done(function(data){
+            if(data=='error'){
+                // error occur
+                alert('Oops!看來您在填寫問卷的時候發生了一些問題...\n麻煩您回到問卷的部分稍作確認，有任何的問題都可以向卡卡貓的客服反映！\n卡卡貓感謝您~');
+            }else{
+                var splitdata = data.split('@');
+                var BCS = JSON.parse(splitdata[0]);
+                var BCA_ageYear = JSON.parse(splitdata[1]);
+                var BCA_ageMonth = JSON.parse(splitdata[2]);
+                var BCW_kilo = JSON.parse(splitdata[3]);
+                var BCW_gram = JSON.parse(splitdata[4]);
+                var BSP = JSON.parse(splitdata[5]);
+                var BNU = JSON.parse(splitdata[6]);
+                var BBC = JSON.parse(splitdata[7]);
+                var iconlist = JSON.parse(splitdata[8]);
+                var iconlist_split;
+                var innerHTML = '';
+                iconlist_split = iconlist[0].split('#');
+                innerHTML += '<div style="display:flex;align-items:center;"><img src="images/product/element/meter_'+iconlist_split[2]+'.png" style="width:25%;float:left;margin-right:10px;"><h5 style="float:left;">'+iconlist_split[1]+'</h5></div><p>'+iconlist_split[3]+'</p>';
+                if(iconlist.length>=2){
+                    iconlist_split = iconlist[1].split('#');
+                    innerHTML += '<div style="display:flex;align-items:center;"><img src="images/product/element/meter_'+iconlist_split[2]+'.png" style="width:25%;float:left;margin-right:10px;"><h5 style="float:left;">'+iconlist_split[1]+'</h5></div><p>'+iconlist_split[3]+'</p>';
+                }
+                if(iconlist.length==3){
+                    iconlist_split = iconlist[2].split('#');
+                    innerHTML += '<div style="display:flex;align-items:center;"><img src="images/product/element/meter_'+iconlist_split[2]+'.png" style="width:25%;float:left;margin-right:10px;"><h5 style="float:left;">'+iconlist_split[1]+'</h5></div><p>'+iconlist_split[3]+'</p>';
+                }
+                document.getElementById('iconInformation').innerHTML = innerHTML;
+                document.getElementById('ageyear').innerHTML = BCA_ageYear;
+                document.getElementById('agemonth').innerHTML = BCA_ageMonth;
+                document.getElementById('kilo').innerHTML = BCW_kilo;
+                document.getElementById('gram').innerHTML = BCW_gram;
+                document.getElementById('bsp').innerHTML = BSP;
+                if(BNU=='yes')  document.getElementById('bnu').innerHTML = '已結紮';
+                if(BNU=='no')  document.getElementById('bnu').innerHTML = '未結紮';
+                if(BBC=='A') document.getElementById('bbc').innerHTML = '過瘦';
+                if(BBC=='B') document.getElementById('bbc').innerHTML = '稍瘦';
+                if(BBC=='C') document.getElementById('bbc').innerHTML = '適中';
+                if(BBC=='D') document.getElementById('bbc').innerHTML = '稍胖';
+                if(BBC=='E') document.getElementById('bbc').innerHTML = '過胖';
+            }
+        });
+    });
+    */
     // Change Package Size
     function ChangePackageSizeByPic(id){
         id = id.split("_");
         if(id[1]==packageSize){} // do nothing
         else{
             $('#package_'+packageSize).toggleClass("package_select package");
+            $('#dropdown_'+packageSize).find('i').css("color","white");
             packageSize = id[1];
             $('#package_'+packageSize).toggleClass("package_select package");
+            $('#dropdown_'+packageSize).find('i').css("color","green");
             // go to change price tag, refresh selector and redraw products
             ChangePriceSelector();
             $('#sort_method').val('match');
@@ -664,40 +746,228 @@
     }
     function ChangePriceSelector(){
         var innerHTML = '';
+        var innerHTML2 = '';
         if(packageSize=='xs'){
-            innerHTML += '<label class=""><input type="checkbox" checked="checked" id="xs_priceA" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 200-300元</span></label><br>';
-            innerHTML += '<label class=""><input type="checkbox" id="xs_priceB" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 300-500元</span></label><br>';
-            innerHTML += '<label class=""><input type="checkbox" id="xs_priceC" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 500-650元</span></label><br>';
-            innerHTML += '<label class=""><input type="checkbox" id="xs_priceD" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 650-800元</span></label><br>';
-            innerHTML += '<label class=""><input type="checkbox" id="xs_priceE" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 800+元</span></label><br>';
+            innerHTML += '<label class=""><input type="radio" name="radioPrice" checked="checked" id="xs_priceA" onchange="ChangePriceRange(this.id);"><span class="checkmark"></span><span>每公斤 200-300元</span></label><br>';
+            innerHTML += '<label class=""><input type="radio" name="radioPrice" id="xs_priceB" onchange="ChangePriceRange(this.id);"><span class="checkmark"></span><span>每公斤 300-500元</span></label><br>';
+            innerHTML += '<label class=""><input type="radio" name="radioPrice" id="xs_priceC" onchange="ChangePriceRange(this.id);"><span class="checkmark"></span><span>每公斤 500-650元</span></label><br>';
+            innerHTML += '<label class=""><input type="radio" name="radioPrice" id="xs_priceD" onchange="ChangePriceRange(this.id);"><span class="checkmark"></span><span>每公斤 650-800元</span></label><br>';
+            innerHTML += '<label class=""><input type="radio" name="radioPrice" id="xs_priceE" onchange="ChangePriceRange(this.id);"><span class="checkmark"></span><span>每公斤 800+元</span></label><br>';
+            innerHTML2 += '<a class="dropdown-item" href="#" id="_priceA" onclick="ChangePriceRange(this.id);"><i style="color:green;" class="fas fa-check"></i>  200-300/KG</a>';
+            innerHTML2 += '<a class="dropdown-item" href="#" id="_priceB" onclick="ChangePriceRange(this.id);"><i style="color:white;" class="fas fa-check"></i>  300-500/KG</a>';
+            innerHTML2 += '<a class="dropdown-item" href="#" id="_priceC" onclick="ChangePriceRange(this.id);"><i style="color:white;" class="fas fa-check"></i>  500-650/KG</a>';
+            innerHTML2 += '<a class="dropdown-item" href="#" id="_priceD" onclick="ChangePriceRange(this.id);"><i style="color:white;" class="fas fa-check"></i>  650-800/KG</a>';
+            innerHTML2 += '<a class="dropdown-item" href="#" id="_priceE" onclick="ChangePriceRange(this.id);"><i style="color:white;" class="fas fa-check"></i>  800+/KG</a>';
         }
         if(packageSize=='s'){
-            innerHTML += '<label class=""><input type="checkbox" checked="checked" id="s_priceA" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 200-300元</span></label><br>';
-            innerHTML += '<label class=""><input type="checkbox" id="s_priceB" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 300-450元</span></label><br>';
-            innerHTML += '<label class=""><input type="checkbox" id="s_priceC" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 450-600元</span></label><br>';
-            innerHTML += '<label class=""><input type="checkbox" id="s_priceD" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 600-750元</span></label><br>';
-            innerHTML += '<label class=""><input type="checkbox" id="s_priceE" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 750+元</span></label><br>';
+            innerHTML += '<label class=""><input type="radio" name="radioPrice" checked="checked" id="s_priceA" onchange="ChangePriceRange(this.id);"><span class="checkmark"></span><span>每公斤 200-300元</span></label><br>';
+            innerHTML += '<label class=""><input type="radio" name="radioPrice" id="s_priceB" onchange="ChangePriceRange(this.id);"><span class="checkmark"></span><span>每公斤 300-450元</span></label><br>';
+            innerHTML += '<label class=""><input type="radio" name="radioPrice" id="s_priceC" onchange="ChangePriceRange(this.id);"><span class="checkmark"></span><span>每公斤 450-600元</span></label><br>';
+            innerHTML += '<label class=""><input type="radio" name="radioPrice" id="s_priceD" onchange="ChangePriceRange(this.id);"><span class="checkmark"></span><span>每公斤 600-750元</span></label><br>';
+            innerHTML += '<label class=""><input type="radio" name="radioPrice" id="s_priceE" onchange="ChangePriceRange(this.id);"><span class="checkmark"></span><span>每公斤 750+元</span></label><br>';
+            innerHTML2 += '<a class="dropdown-item" href="#" id="_priceA" onclick="ChangePriceRange(this.id);"><i style="color:green;" class="fas fa-check"></i>  200-300/KG</a>';
+            innerHTML2 += '<a class="dropdown-item" href="#" id="_priceB" onclick="ChangePriceRange(this.id);"><i style="color:white;" class="fas fa-check"></i>  300-450/KG</a>';
+            innerHTML2 += '<a class="dropdown-item" href="#" id="_priceC" onclick="ChangePriceRange(this.id);"><i style="color:white;" class="fas fa-check"></i>  450-600/KG</a>';
+            innerHTML2 += '<a class="dropdown-item" href="#" id="_priceD" onclick="ChangePriceRange(this.id);"><i style="color:white;" class="fas fa-check"></i>  600-750/KG</a>';
+            innerHTML2 += '<a class="dropdown-item" href="#" id="_priceE" onclick="ChangePriceRange(this.id);"><i style="color:white;" class="fas fa-check"></i>  750+/KG</a>';
         }
         if(packageSize=='m'){
-            innerHTML += '<label class=""><input type="checkbox" checked="checked" id="m_priceA" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 200-300元</span></label><br>';
-            innerHTML += '<label class=""><input type="checkbox" id="m_priceB" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 300-400元</span></label><br>';
-            innerHTML += '<label class=""><input type="checkbox" id="m_priceC" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 400-500元</span></label><br>';
-            innerHTML += '<label class=""><input type="checkbox" id="m_priceD" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 500-600元</span></label><br>';
-            innerHTML += '<label class=""><input type="checkbox" id="m_priceE" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 600+元</span></label><br>';
+            innerHTML += '<label class=""><input type="radio" name="radioPrice" checked="checked" id="m_priceA" onchange="ChangePriceRange(this.id);"><span class="checkmark"></span><span>每公斤 200-300元</span></label><br>';
+            innerHTML += '<label class=""><input type="radio" name="radioPrice" id="m_priceB" onchange="ChangePriceRange(this.id);"><span class="checkmark"></span><span>每公斤 300-400元</span></label><br>';
+            innerHTML += '<label class=""><input type="radio" name="radioPrice" id="m_priceC" onchange="ChangePriceRange(this.id);"><span class="checkmark"></span><span>每公斤 400-500元</span></label><br>';
+            innerHTML += '<label class=""><input type="radio" name="radioPrice" id="m_priceD" onchange="ChangePriceRange(this.id);"><span class="checkmark"></span><span>每公斤 500-600元</span></label><br>';
+            innerHTML += '<label class=""><input type="radio" name="radioPrice" id="m_priceE" onchange="ChangePriceRange(this.id);"><span class="checkmark"></span><span>每公斤 600+元</span></label><br>';
+            innerHTML2 += '<a class="dropdown-item" href="#" id="_priceA" onclick="ChangePriceRange(this.id);"><i style="color:green;" class="fas fa-check"></i>  200-300/KG</a>';
+            innerHTML2 += '<a class="dropdown-item" href="#" id="_priceB" onclick="ChangePriceRange(this.id);"><i style="color:white;" class="fas fa-check"></i>  300-400/KG</a>';
+            innerHTML2 += '<a class="dropdown-item" href="#" id="_priceC" onclick="ChangePriceRange(this.id);"><i style="color:white;" class="fas fa-check"></i>  400-500/KG</a>';
+            innerHTML2 += '<a class="dropdown-item" href="#" id="_priceD" onclick="ChangePriceRange(this.id);"><i style="color:white;" class="fas fa-check"></i>  500-600/KG</a>';
+            innerHTML2 += '<a class="dropdown-item" href="#" id="_priceE" onclick="ChangePriceRange(this.id);"><i style="color:white;" class="fas fa-check"></i>  600+/KG</a>';
         }
         if(packageSize=='l'){
-            innerHTML += '<label class=""><input type="checkbox" checked="checked" id="l_priceA" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 100-200元</span></label><br>';
-            innerHTML += '<label class=""><input type="checkbox" id="l_priceB" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 200-300元</span></label><br>';
-            innerHTML += '<label class=""><input type="checkbox" id="l_priceC" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 300-400元</span></label><br>';
-            innerHTML += '<label class=""><input type="checkbox" id="l_priceD" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 400-500元</span></label><br>';
-            innerHTML += '<label class=""><input type="checkbox" id="l_priceE" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 500+元</span></label><br>';
+            innerHTML += '<label class=""><input type="radio" name="radioPrice" checked="checked" id="l_priceA" onchange="ChangePriceRange(this.id);"><span class="checkmark"></span><span>每公斤 100-200元</span></label><br>';
+            innerHTML += '<label class=""><input type="radio" name="radioPrice" id="l_priceB" onchange="ChangePriceRange(this.id);"><span class="checkmark"></span><span>每公斤 200-300元</span></label><br>';
+            innerHTML += '<label class=""><input type="radio" name="radioPrice" id="l_priceC" onchange="ChangePriceRange(this.id);"><span class="checkmark"></span><span>每公斤 300-400元</span></label><br>';
+            innerHTML += '<label class=""><input type="radio" name="radioPrice" id="l_priceD" onchange="ChangePriceRange(this.id);"><span class="checkmark"></span><span>每公斤 400-500元</span></label><br>';
+            innerHTML += '<label class=""><input type="radio" name="radioPrice" id="l_priceE" onchange="ChangePriceRange(this.id);"><span class="checkmark"></span><span>每公斤 500+元</span></label><br>';
+            innerHTML2 += '<a class="dropdown-item" href="#" id="_priceA" onclick="ChangePriceRange(this.id);"><i style="color:green;" class="fas fa-check"></i>  100-200/KG</a>';
+            innerHTML2 += '<a class="dropdown-item" href="#" id="_priceB" onclick="ChangePriceRange(this.id);"><i style="color:white;" class="fas fa-check"></i>  200-300/KG</a>';
+            innerHTML2 += '<a class="dropdown-item" href="#" id="_priceC" onclick="ChangePriceRange(this.id);"><i style="color:white;" class="fas fa-check"></i>  300-400/KG</a>';
+            innerHTML2 += '<a class="dropdown-item" href="#" id="_priceD" onclick="ChangePriceRange(this.id);"><i style="color:white;" class="fas fa-check"></i>  400-500/KG</a>';
+            innerHTML2 += '<a class="dropdown-item" href="#" id="_priceE" onclick="ChangePriceRange(this.id);"><i style="color:white;" class="fas fa-check"></i>  500+/KG</a>';
         }
         if(packageSize=='xl'){
-            innerHTML += '<label class=""><input type="checkbox" checked="checked" id="xl_priceA" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 100-150元</span></label><br>';
-            innerHTML += '<label class=""><input type="checkbox" id="xl_priceB" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 150-200元</span></label><br>';
-            innerHTML += '<label class=""><input type="checkbox" id="xl_priceC" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 200-250元</span></label><br>';
-            innerHTML += '<label class=""><input type="checkbox" id="xl_priceD" onchange="DrawCatfoodBlock()"><span class="checkmark"></span><span>每公斤 250+元</span></label><br>';
+            innerHTML += '<label class=""><input type="radio" name="radioPrice" checked="checked" id="xl_priceA" onchange="ChangePriceRange(this.id);"><span class="checkmark"></span><span>每公斤 100-150元</span></label><br>';
+            innerHTML += '<label class=""><input type="radio" name="radioPrice" id="xl_priceB" onchange="ChangePriceRange(this.id);"><span class="checkmark"></span><span>每公斤 150-200元</span></label><br>';
+            innerHTML += '<label class=""><input type="radio" name="radioPrice" id="xl_priceC" onchange="ChangePriceRange(this.id);"><span class="checkmark"></span><span>每公斤 200-250元</span></label><br>';
+            innerHTML += '<label class=""><input type="radio" name="radioPrice" id="xl_priceD" onchange="ChangePriceRange(this.id);"><span class="checkmark"></span><span>每公斤 250+元</span></label><br>';
+            innerHTML2 += '<a class="dropdown-item" href="#" id="_priceA" onclick="ChangePriceRange(this.id);"><i style="color:green;" class="fas fa-check"></i>  100-150/KG</a>';
+            innerHTML2 += '<a class="dropdown-item" href="#" id="_priceB" onclick="ChangePriceRange(this.id);"><i style="color:white;" class="fas fa-check"></i>  150-200/KG</a>';
+            innerHTML2 += '<a class="dropdown-item" href="#" id="_priceC" onclick="ChangePriceRange(this.id);"><i style="color:white;" class="fas fa-check"></i>  200-250/KG</a>';
+            innerHTML2 += '<a class="dropdown-item" href="#" id="_priceD" onclick="ChangePriceRange(this.id);"><i style="color:white;" class="fas fa-check"></i>  250+/KG</a>';
         }
+        currentPrice = 'priceA';
         document.getElementById('priceCollapse').innerHTML = innerHTML;
+        document.getElementById('dropdown_price').innerHTML = innerHTML2;
+    }
+    function ChangePriceRange(id){
+        var split = id.split('_');
+        if(split[1]!=currentPrice){
+            $('#_'+currentPrice).find('i').css('color','white');
+            currentPrice = split[1];
+            $('#_'+currentPrice).find('i').css('color','green');
+            document.getElementById(packageSize+'_'+currentPrice).checked = true;
+        }
+        if(packageSize == 'xs'){
+            if(currentPrice == 'priceA'){priceUpperBound = 300; priceLowerBound = 200;}
+            if(currentPrice == 'priceB'){priceUpperBound = 500; priceLowerBound = 300;}
+            if(currentPrice == 'priceC'){priceUpperBound = 650; priceLowerBound = 500;}
+            if(currentPrice == 'priceD'){priceUpperBound = 800; priceLowerBound = 650;}
+            if(currentPrice == 'priceE'){priceUpperBound = 10000; priceLowerBound = 800;}
+        }
+        if(packageSize == 's'){
+            if(currentPrice == 'priceA'){priceUpperBound = 300; priceLowerBound = 200;}
+            if(currentPrice == 'priceB'){priceUpperBound = 450; priceLowerBound = 300;}
+            if(currentPrice == 'priceC'){priceUpperBound = 600; priceLowerBound = 450;}
+            if(currentPrice == 'priceD'){priceUpperBound = 750; priceLowerBound = 600;}
+            if(currentPrice == 'priceE'){priceUpperBound = 10000; priceLowerBound = 750;}
+        }
+        if(packageSize == 'm'){
+            if(currentPrice == 'priceA'){priceUpperBound = 300; priceLowerBound = 200;}
+            if(currentPrice == 'priceB'){priceUpperBound = 400; priceLowerBound = 300;}
+            if(currentPrice == 'priceC'){priceUpperBound = 500; priceLowerBound = 400;}
+            if(currentPrice == 'priceD'){priceUpperBound = 600; priceLowerBound = 500;}
+            if(currentPrice == 'priceE'){priceUpperBound = 1000; priceLowerBound = 600;}
+        }
+        if(packageSize == 'l'){
+            if(currentPrice == 'priceA'){priceUpperBound = 200; priceLowerBound = 100;}
+            if(currentPrice == 'priceB'){priceUpperBound = 300; priceLowerBound = 200;}
+            if(currentPrice == 'priceC'){priceUpperBound = 400; priceLowerBound = 300;}
+            if(currentPrice == 'priceD'){priceUpperBound = 500; priceLowerBound = 400;}
+            if(currentPrice == 'priceE'){priceUpperBound = 1000; priceLowerBound = 500;}
+        }
+        if(packageSize == 'xl'){
+            if(currentPrice == 'priceA'){priceUpperBound = 150; priceLowerBound = 100;}
+            if(currentPrice == 'priceB'){priceUpperBound = 200; priceLowerBound = 150;}
+            if(currentPrice == 'priceC'){priceUpperBound = 250; priceLowerBound = 200;}
+            if(currentPrice == 'priceD'){priceUpperBound = 10000; priceLowerBound = 250;}
+        }
+        DrawCatfoodBlock();
+    }
+    function DrawCatfoodBlock(){
+        var list = [];
+        // condition for draw
+        if(packageSize=='xs') for(i=0;i<listA.length;i++) list.push(listA[i]);
+        if(packageSize=='s')  for(i=0;i<listB.length;i++) list.push(listB[i]);
+        if(packageSize=='m')  for(i=0;i<listC.length;i++) list.push(listC[i]);
+        if(packageSize=='l')  for(i=0;i<listD.length;i++) list.push(listD[i]);
+        if(packageSize=='xl') for(i=0;i<listE.length;i++) list.push(listE[i]);
+        if($('#sorting_method').val()=='score'){
+            list = list.sort(function(a,b){
+				return a.score/(a.scorecount+1) > b.socre/(b.scorecount+1) ? -1 : 1; 
+			});
+        }
+        if($('#sorting_method').val()=='price_HL'){
+            list = list.sort(function(a,b){
+				return parseInt(a.APrice) > parseInt(b.APrice) ? -1 : 1; 
+			});
+        }
+        if($('#sorting_method').val()=='price_LH'){
+            list = list.sort(function(a,b){
+				return parseInt(a.APrice) > parseInt(b.APrice) ? 1 : -1; 
+			});
+        }
+        var count = 0;
+        var innerHTML = '';
+        for(i=0;i<list.length && count<5;i++){
+            if(list[i].APrice/list[i].kilogram>priceLowerBound && list[i].APrice/list[i].kilogram<priceUpperBound){
+                if(list[i].Cereals!=1 && $('#grand_yes').is(":checked"))    continue;
+                if(list[i].Cereals!=0 && $('#grand_no').is(":checked")) continue;
+                if(list[i].Metabolism==0 && $("#Metabolism").is(":checked")) continue;
+                if(list[i].DailyProtein==0 && $("#DailyProtein").is(":checked"))  continue;
+                // country selector
+                count += 1;
+                $('#nothing').css('display','none');
+                $('#product0'+count).css('display','normal');
+                innerHTML = '<img src="images/product/product/'+list[i].productCode.slice(3,7)+'.png" style="width:100%;background-color:#F6E3D6;border-top-left-radius:15px;border-top-right-radius:15px;">';
+                document.getElementById('product0'+count+'_productImg').innerHTML = innerHTML;
+                document.getElementById('product0'+count+'_brand').innerHTML = list[i].brand_en+' '+list[i].brand_zh;
+                document.getElementById('product0'+count+'_name').innerHTML = list[i].name_zh;
+                innerHTML = '';
+                if(list[i].score==0) innerHTML += '<p>此款飼料尚無評價</p>';
+                else{
+                    var scoreavg = Math.round(list[i].score/list[i].scorecount);
+                }
+                document.getElementById('product0'+count+'_scoreCommand').innerHTML = innerHTML;
+                innerHTML = '';
+                if(list[i].immu==1){
+                    if(select_icon.includes('E')) innerHTML += '<div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;"><span><i class="fas fa-check" style="color:green;margin-right:5px;"></i>免疫力</span></div>';
+                    else innerHTML += '<div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;"><span>免疫力</span></div>';
+                }
+                if(list[i].heart==1){
+                    if(select_icon.includes('B')) innerHTML += '<div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;"><span><i class="fas fa-check" style="color:green;margin-right:5px;"></i>心臟保健</span></div>';
+                    else innerHTML += '<div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;"><span>心臟保健</span></div>';
+                }
+                if(list[i].hair==1){
+                    if(select_icon.includes('D')) innerHTML += '<div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;"><span><i class="fas fa-check" style="color:green;margin-right:5px;"></i>毛髮保健</span></div>';
+                    else innerHTML += '<div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;"><span>毛髮保健</span></div>';
+                }
+                if(list[i].mehair==1){
+                    if(select_icon.includes('I')) innerHTML += '<div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;"><span><i class="fas fa-check" style="color:green;margin-right:5px;"></i>化毛</span></div>';
+                    else innerHTML += '<div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;"><span>化毛</span></div>';
+                }
+                if(list[i].joint==1){
+                    if(select_icon.includes('A')) innerHTML += '<div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;"><span><i class="fas fa-check" style="color:green;margin-right:5px;"></i>關節保健</span></div>';
+                    else innerHTML += '<div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;"><span>關節保健</span></div>';
+                }
+                if(list[i].stoma==1){
+                    if(select_icon.includes('H')) innerHTML += '<div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;"><span><i class="fas fa-check" style="color:green;margin-right:5px;"></i>腸胃保健</span></div>';
+                    else innerHTML += '<div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;"><span>腸胃保健</span></div>';
+                }
+                if(list[i].urinary==1){
+                    if(select_icon.includes('H') || select_icon.includes('F')) innerHTML += '<div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;"><span><i class="fas fa-check" style="color:green;margin-right:5px;"></i>泌尿保健</span></div>';
+                    else innerHTML += '<div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;"><span>泌尿保健</span></div>';
+                }
+                if(list[i].mouth==1){
+                    if(select_icon.includes('G')) innerHTML += '<div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;"><span><i class="fas fa-check" style="color:green;margin-right:5px;"></i>口腔健康</span></div>';
+                    else innerHTML += '<div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;"><span>口腔健康</span></div>';
+                }
+                if(list[i].alergent==1){
+                    innerHTML += '<div style="float:left;font-size:0.7em;margin-top:5px;margin-right:5px;background-color:#F6E3D6;padding:5px 10px;border-radius:15px;"><span>低敏配方</span></div>';
+                }
+                document.getElementById('product0'+count+'_icon').innerHTML = innerHTML;
+                document.getElementById('product0'+count+'_eatday').innerHTML = '食用天數'+Math.round(list[i].kilogram*1000/list[i].dailyNeedGram)+'天';
+                document.getElementById('product0'+count+'_price').innerHTML = 'NT '+list[i].APrice;
+                innerHTML = '';
+                innerHTML += '<!--protein progressbar-->';
+                innerHTML += '<div style="width:20%;text-align:right;font-size:0.8em;float: left;"><span>蛋白質</span></div>';
+                innerHTML += '<div style="width:60%;text-align:right;font-size:0.8em;float: left;">';
+                innerHTML += '<div style="width:90%;background-color:#F1F1F2;border-radius: 20px;margin:5px 5%;">';
+                innerHTML += '<div style="width:'+list[i].protein*2'%;height:0.8em;background-color:#C1CEE1;border-radius: 20px;"></div></div></div>';
+                innerHTML += '<div style="width:20%;text-align:left;font-size:0.8em;float: left;"><span>'+list[i].protein+'%</span></div><div style="clear:both;"></div>';
+                innerHTML += '<!--fat progressbar-->';
+                innerHTML += '<div style="width:20%;text-align:right;font-size:0.8em;float: left;"><span>脂質</span></div>';
+                innerHTML += '<div style="width:60%;text-align:right;font-size:0.8em;float: left;">';
+                innerHTML += '<div style="width:90%;background-color:#F1F1F2;border-radius: 20px;margin:5px 5%;">';
+                innerHTML += '<div style="width:'+list[i].fat*3+'%;height:0.8em;background-color:#C1CEE1;border-radius: 20px;"></div></div></div>';
+                innerHTML += '<div style="width:20%;text-align:left;font-size:0.8em;float: left;"><span>'+list[i].fat+'%</span></div><div style="clear:both;"></div>';
+                innerHTML += '<!--fiber progressbar-->';
+                innerHTML += '<div style="width:20%;text-align:right;font-size:0.8em;float: left;"><span>纖維素</span></div>';
+                innerHTML += '<div style="width:60%;text-align:right;font-size:0.8em;float: left;">';
+                innerHTML += '<div style="width:90%;background-color:#F1F1F2;border-radius: 20px;margin:5px 5%;">';
+                innerHTML += '<div style="width:'+list[i].fiber*3+'%;height:0.8em;background-color:#C1CEE1;border-radius: 20px;"></div></div></div>';
+                innerHTML += '<div style="width:20%;text-align:left;font-size:0.8em;float: left;"><span>'+list[i].fiber+'%</span></div>';
+                innerHTML += '<div style="clear:both;"></div>';
+                innerHTML += '<p style="font-size:0.7em;">'+list[i].ingredient+'</p>';
+                document.getElementById('product0'+count+'_Collapse').innerHTML = innerHTML;
+                document.getElementById('product0'+count+'_flag').innerHTML = '<img src="images/product/element/flags/'+list[i].original+'.png" class="rounded" style="width:10%;position:absolute;right:20px;top:10px;">';
+            }
+        }
+        if(count == 0){
+            // no result
+            $('#nothing').css('display: normal');
+        }
+    }
+    function WhetherOriginalSelected(){
+
     }
 </script>

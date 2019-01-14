@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="../stylesheets/qn.css">
     <script src="../javascript/jquery/jquery_v-3-3-1.js"></script>
     <script src="../bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <style>
         .loader {
             animation: spin 4s linear infinite;
@@ -61,8 +63,9 @@
     <div style="height:20vh"></div>
     <div style="height:80vh;overflow: hidden;" class="text-center">
         <h3>正在為您分析<%=name%>的需求<span id="threedot" style="display:none"></span></h3>
-        <div class="loader" >
-            <img src="../images/questionnaire/icons-0901.png">
+        <div style="height:200px;" id="picture">
+            <img src="../images/index/Loading.gif">
+            <span style="color:#3D5BA8;font-size:150px;display:none;"><i class="far fa-check-circle"></i></span>
         </div>
         <div class="progressCircle">
             
@@ -109,6 +112,9 @@
     });
     function Information(){
         clearInterval(transToButton);
+        $('#picture').find('img').fadeOut(700,function(){
+            $('#picture').find('span').fadeIn(500);
+        });
         $('#information').fadeOut(700,function(){
             $('#button').fadeIn(500);
         });
