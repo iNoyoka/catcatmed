@@ -83,6 +83,7 @@ app.use('/account',accountRouter)
 app.use('/admin',adminRouter)
 
 app.get('/questionnaire_result',function(req,res,next){
+	/*
 	req.session.BCN = '地球貓';
 	req.session.BCS = 'girl';
 	req.session.BSP = '火星貓';
@@ -98,9 +99,11 @@ app.get('/questionnaire_result',function(req,res,next){
 	req.session.catfood_select = 'A';
 	req.session.extra_knowhow = 'A';
 	req.session.catfood_select = 's';
+	*/
 	res.render('questionnaire_result',{name:req.session.BCN});
 });
 app.get('/questionnaire_result_m',function(req,res,next){
+	/*
 	req.session.BCN = '地球貓';
 	req.session.BCS = 'girl';
 	req.session.BSP = '火星貓';
@@ -116,6 +119,7 @@ app.get('/questionnaire_result_m',function(req,res,next){
 	req.session.catfood_select = 'A';
 	req.session.extra_knowhow = 'A';
 	req.session.catfood_select = 's';
+	*/
 	res.render('questionnaire_result_m',{name:req.session.BCN});
 });
 app.post('/questionnaire_result',function(req,res,next){
