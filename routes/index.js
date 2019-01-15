@@ -74,15 +74,6 @@ router.get('/literature',function(req,res,next){
 	res.render('literature');
 });
 
-//------------------------------------------
-// About us
-//------------------------------------------
-router.get('/aboutus',function(req,res,next){
-	res.render('aboutus');
-});
-router.get('/aboutusMessage',function(req,res,next){
-	res.send('success');
-});
 
 //------------------------------------------
 // UserCenter

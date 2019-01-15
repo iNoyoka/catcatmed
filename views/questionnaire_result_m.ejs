@@ -724,6 +724,7 @@
             <p>此價格與包裝區間沒有適合您貓咪的飼料喔~<br>您可以嘗試選取其他的包裝+價格組合來查看更多飼料！</p>
         </div>
     </div>
+    <div style="margin-bottom:15vh;"></div>
     
 
     <!--NAV COLLAPSE-->
@@ -787,6 +788,7 @@
                 <span>兩種皆顯示</span>
             </label>
         </div>
+        <!--
         <div style="width:96%; margin: 1vh 2%;background-color: #D0D2D3;padding: 1vh 20px;border-radius: 10px;" data-toggle="collapse" data-target="#originalCollapse" onclick="RotateArrow(this.id);" id="original">
             <i class="fas fa-angle-down"></i>
             <span>產地</span>
@@ -868,6 +870,7 @@
             </div>
             <div style="clear:both;"></div>
         </div>
+        -->
         <div style="width:96%; margin: 1vh 2%;background-color: #D0D2D3;padding: 1vh 20px;border-radius: 10px;" data-toggle="collapse" data-target="#advancedCollapse" onclick="RotateArrow(this.id);" id="advanced">
             <i class="fas fa-angle-down"></i>
             <span>蛋白質與代謝能</span>
@@ -925,6 +928,7 @@
             <div style="text-align: center;line-height: 1.8vh;color:white;width:58%;height:1.8vh;background-color:#C1CEE1;float: left;"></div>
             <div style="clear:both;"></div>
         </div>
+        <div style="margin-bottom:15vh;"></div>
     </div>
 </body>
 </html>
@@ -1277,7 +1281,8 @@
                 innerHTML = '';
                 innerHTML += '<img src="images/product/product/'+list[i].productCode.slice(3,7)+'.png" style="width:100%;background-color:#F6E3D6;border-top-left-radius:15px;border-top-right-radius:15px;">';
                 document.getElementById('product0'+count+'_productImg').innerHTML = innerHTML;
-                document.getElementById('product0'+count+'_brand').innerHTML = list[i].brand_en+' '+list[i].brand_zh;
+                if(list[i].brand_zh=='科納丘') document.getElementById('product0'+count+'_brand').innerHTML = list[i].brand_zh;
+                else    document.getElementById('product0'+count+'_brand').innerHTML = list[i].brand_en+' '+list[i].brand_zh;
                 document.getElementById('product0'+count+'_name').innerHTML = list[i].name_zh;
                 innerHTML = '';
                 if(list[i].score==0) innerHTML += '<p>此款飼料尚無評價</p>';

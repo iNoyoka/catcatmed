@@ -25,17 +25,16 @@
     <div class="row hidden-xs padding"></div>
     <div class="row padding"></div>
     <div class="row">
-        <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 text-center">
+        <div class="col-lg-4 col-lg-offset-4 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 text-center">
             <% if(name){ %>
                 <h3><%= name %>的體重為何?</h3>
             <% }else{ %>
                 <h3>貓孩的體重為何?</h3>
             <% } %>
             <div class="row hidden-xs padding"></div>
-            <div class="row">
-                <div class="col-lg-4 col-lg-offset-2 col-md-4 col-md-offset-2 col-sm-4 col-offset-2 col-xs-6">
+            <div class="row hidden-xs" style="display: flex;justify-content: center;align-items: center;">
+                <div class="col-lg-3 col-md-3 col-sm-3">
                     <select class="form-control" id="kilo">
-                        <option value="null">公斤</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -55,9 +54,11 @@
                         <option value="15+">15+</option>
                     </select>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <p style="margin:0;">公斤</p>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
                     <select class="form-control" id="gram">
-                        <option value="null">公克</option>
                         <option value="0">0</option>
                         <option value="1">100</option>
                         <option value="2">200</option>
@@ -70,6 +71,51 @@
                         <option value="9">900</option>
                     </select>
                 </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <p style="margin:0;">公克</p>
+                </div>
+            </div>
+            <div class="row hidden-lg hidden-md hidden-sm" style="display: flex;justify-content: center;align-items: center;">
+                <div class="col-xs-6">
+                    <select class="form-control" id="kilo_xs">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="15+">15+</option>
+                    </select>
+                </div>
+                <div class="col-xs-6"><p style="margin:0;">公斤</p></div>
+            </div>
+            <br>
+            <div class="row hidden-lg hidden-md hidden-sm" style="display: flex;justify-content: center;align-items: center;">
+                <div class="col-xs-6">
+                    <select class="form-control" id="gram_xs">
+                        <option value="0">0</option>
+                        <option value="1">100</option>
+                        <option value="2">200</option>
+                        <option value="3">300</option>
+                        <option value="4">400</option>
+                        <option value="5">500</option>
+                        <option value="6">600</option>
+                        <option value="7">700</option>
+                        <option value="8">800</option>
+                        <option value="9">900</option>
+                    </select>
+                </div>
+                <div class="col-xs-6"><p style="margin:0;">公克</p></div>
             </div>
         </div>
     </div>    
@@ -111,21 +157,34 @@
     function Send(){
         let kilo = $('#kilo').val();
         let gram = $('#gram').val();
-        if(kilo=='null' || gram=='null'){
-            document.getElementById('warningSpan').innerHTML = '請正確填寫貓咪的公斤與公克數喔！';
-        }else if(kilo=='0' && gram=='0'){
+        let kilo_xs = $("#kilo_xs").val();
+        let gram_xs = $("#gram_xs").val();
+        if((kilo=='0' && gram=='0') && (kilo_xs=='0' && gram_xs=='0')){
             document.getElementById('warningSpan').innerHTML = '卡卡貓沒辦法幫沒有體重的貓咪做身體健檢喔！';
         }else{
-            $.ajax({
-                method : 'POST',
-                url : 'BCW',
-                data: {
-                    kilo : kilo,
-                    gram : gram
-                }
-            }).done(function(data){
-                window.location.href = '' + data;
-            });
+            if(kilo!='0'||gram!='0'){
+                $.ajax({
+                    method : 'POST',
+                    url : 'BCW',
+                    data: {
+                        kilo : kilo,
+                        gram : gram
+                    }
+                }).done(function(data){
+                    window.location.href = '' + data;
+                });
+            }else{
+                $.ajax({
+                    method : 'POST',
+                    url : 'BCW',
+                    data: {
+                        kilo : kilo_xs,
+                        gram : gram_xs
+                    }
+                }).done(function(data){
+                    window.location.href = '' + data;
+                });
+            }
         }
     }
 </script>
