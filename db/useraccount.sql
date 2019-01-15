@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `useraccount` (
   `name` text COLLATE utf8_unicode_ci,
   `username` text COLLATE utf8_unicode_ci,
   `password` text COLLATE utf8_unicode_ci,
+  `phone` text COLLATE utf8_unicode_ci,
   `buildtime` datetime NOT NULL,
   `whetherCommand` float,
   `possiblePurchaseCatFood` text COLLATE utf8_unicode_ci,

@@ -286,6 +286,17 @@ router.get('/BEMAIL',function(req,res,next){
 router.post('/BEMAIL',function(req,res,next){
     req.session.BEMAIL = req.body.name;
     req.session.qnrecordList.push(req.session.qnrecord);
+    res.send('BPHONE');
+});
+//
+router.get('/BPHONE',function(req,res,next){
+    req.session.BPHONE = null;
+    req.session.qnrecord = 'BPHONE';
+    res.render('questionnaire/BPHONE');
+});
+router.post('/BPHONE',function(req,res,next){
+    req.session.BPHONE = req.body.name;
+    req.session.qnrecordList.push(req.session.qnrecord);
     res.send('select_icon');
 });
 //
@@ -1060,9 +1071,9 @@ router.post('/questionnairePassToResult',function(req,res,next){
                 console.log('Account doesn"t exist, start building account.');
                 var dt = datetime.create();
                 var formatted = dt.format('Y-m-d H:M:S');
-                var sql = 'INSERT INTO `useraccount` (name, username, password, buildtime, whetherCommand, possiblePurchaseCatFood) VALUES?';
+                var sql = 'INSERT INTO `useraccount` (name, username, password, phone, buildtime, whetherCommand, possiblePurchaseCatFood) VALUES?';
                 var values = [
-                    [req.session.BKN_name,req.session.username,req.session.username,formatted,0,'']
+                    [req.session.BKN_name,req.session.username,req.session.username,req.session.BPHONE,formatted,0,'']
                 ];
                 con.query(sql,[values],function(err,result){
                     if(err) throw err;
