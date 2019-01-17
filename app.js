@@ -22,6 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser('catcatmed secret jay paul rax edward'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('static'));
 
 //-----------------------------------------
 // SESSION SETTING
