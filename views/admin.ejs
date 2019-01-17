@@ -65,6 +65,7 @@
                     <th scope="col">姓名</th>
                     <th scope="col">帳號</th>
                     <th scope="col">密碼</th>
+                    <th scope="col">手機</th>
                     <th scope="col">建構時間</th>
                     <th scope="col">評論狀態</th>
                     <th scope="col">可能購買飼料</th>
@@ -75,6 +76,7 @@
                         <th scope="row">1</th>
                         <td>Mark</td>
                         <td>Otto</td>
+                        <td>@mdo</td>
                         <td>@mdo</td>
                         <td>@mdo</td>
                         <td>@mdo</td>
@@ -179,7 +181,7 @@
                     var re = JSON.parse(data);
                     var innerHTML = '';
                     for(i in re){
-                        innerHTML += '<tr><th scope="row">'+re[i].CCMUserPId+'</th><td>'+re[i].name+'</td><td>'+re[i].username+'</td><td>'+re[i].password+'</td><td>'+re[i].buildtime+'</td><td>'+re[i].whetherCommand+'</td><td>'+re[i].possiblePurchaseCatFood+'</td></tr>';
+                        innerHTML += '<tr><th scope="row">'+re[i].CCMUserPId+'</th><td>'+re[i].name+'</td><td>'+re[i].username+'</td><td>'+re[i].password+'</td><td>'+re[i].phone+'</td><td>'+re[i].buildtime+'</td><td>'+re[i].whetherCommand+'</td><td>'+re[i].possiblePurchaseCatFood+'</td></tr>';
                     }
                     document.getElementById('customerAccountInfo').innerHTML = innerHTML;
                 });
