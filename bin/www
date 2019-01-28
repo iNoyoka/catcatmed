@@ -15,19 +15,23 @@ var http = require('http');
  */
 
  
-var port = normalizePort(process.env.PORT || '80'); //443
-app.set('port', port);
+
+
+
+var httpsServer = https.createServer(ssl.options,function(req,res){
+  res.writeHead(301, { "Location": "http://" + req.headers['host'] + req.url });
+  res.end();
+}).listen(443);
 
 /*
-
-var httpsServer = https.createServer(ssl.options,app);
-httpsServer.listen(443);
-
 http.createServer(function (req, res) {
     res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
     res.end();
 }).listen(80);
 */
+
+var port = normalizePort(process.env.PORT || '80'); //443
+app.set('port', port);
 
 
 var server = http.createServer(app);
