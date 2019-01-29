@@ -297,7 +297,12 @@ router.get('/BPHONE',function(req,res,next){
 router.post('/BPHONE',function(req,res,next){
     req.session.BPHONE = req.body.name;
     req.session.qnrecordList.push(req.session.qnrecord);
-    res.send('select_icon');
+    if(req.session.BPHONE=='') res.send('select_icon');
+    else    res.send('BPHONE_info');
+});
+//
+router.get('/BPHONE_info',function(req,res,next){
+    res.render('questionnaire/BPHONE_info');
 });
 //
 router.get('/select_icon',function(req,res,next){
