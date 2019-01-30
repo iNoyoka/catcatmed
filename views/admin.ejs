@@ -87,38 +87,85 @@
             </div>
         </div>
         <div class="row d-none" id="questionnaireViewBlock">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <table class="table table-hover table-dark">
+            <div style="overflow: auto;">
+                <table class="table table-hover table-dark">
                 <thead>
                     <tr>
                     <th scope="col">Index</th>
                     <th scope="col">飼主姓名</th>
+                    <th scope="col">飼主年紀</th>
                     <th scope="col">飼主性別</th>
-                    <th scope="col">email</th>
-                    <th scope="col">寵物年紀</th>
-                    <th scope="col">品種</th>
+                    <th scope="col">寵物名字</th>
+                    <th scope="col">寵物性別</th>
+                    <th scope="col">寵物年齡</th>
+                    <th scope="col">品種</th>  
+                    <th scope="col">是否結紮</th>  
+                    <th scope="col">有無懷孕</th>  
+                    <th scope="col">懷孕時間</th>  
+                    <th scope="col">是否哺乳</th>  
+                    <th scope="col">小貓數量</th>  
+                    <th scope="col">小貓年紀</th>  
+                    <th scope="col">寵物重量</th>
+                    <th scope="col">運動頻率</th>  
+                    <th scope="col">活動地點</th>  
                     <th scope="col">體態</th>
+                    <th scope="col">體態控制</th>
+                    <th scope="col">飼料包裝</th>
+                    <th scope="col">email</th>
                     <th scope="col">icon選擇</th>
-                    <th scope="col">飼養地點</th>
+                    <th scope="col">關節狀況</th>
+                    <th scope="col">是否用藥（關節）</th>
+                    <th scope="col">關節症狀</th>
+                    <th scope="col">關節（跳躍）</th>
+                    <th scope="col">關節（每日）</th>
+                    <th scope="col">心臟狀況</th>
+                    <th scope="col">心臟症狀</th>
+                    <th scope="col">心臟＿平均溫度</th>
+                    <th scope="col">口腔狀況</th>
+                    <th scope="col">口腔症狀</th>
+                    <th scope="col">刷牙情況</th>
+                    <th scope="col">梳毛頻率</th>
+                    <th scope="col">皮毛症狀</th>
+                    <th scope="col">皮毛打結</th>
+                    <th scope="col">免疫狀況</th>
+                    <th scope="col">免疫症狀</th>
+                    <th scope="col">免疫症狀二</th>
+                    <th scope="col">免疫精神</th>
+                    <th scope="col">免疫用藥</th>
+                    <th scope="col">腎臟狀況</th>
+                    <th scope="col">腎臟泌尿</th>
+                    <th scope="col">腎臟健康</th>
+                    <th scope="col">泌尿狀況</th>
+                    <th scope="col">泌尿症狀</th>
+                    <th scope="col">共用貓盆</th>
+                    <th scope="col">泌尿飲水</th>
+                    <th scope="col">腸胃問題</th>
+                    <th scope="col">拉肚子情況</th>
+                    <th scope="col">拉肚子症狀</th>
+                    <th scope="col">化毛問題</th>
+                    <th scope="col">壓力狀況</th>
+                    <th scope="col">壓力環境一</th>
+                    <th scope="col">壓力環境二</th>
+                    <th scope="col">壓力生活型態</th>
+                    <th scope="col">飲食習慣</th>
+                    <th scope="col">飲食頻率</th>
+                    <th scope="col">每週罐頭</th>
                     <th scope="col">生鮮食</th>
-                    <th scope="col">罐頭</th>
+                    <th scope="col">小魚乾</th>
+                    <th scope="col">除蟲</th>
                     <th scope="col">預防針</th>
+                    <th scope="col">過敏食物</th>
+                    <th scope="col">飲水習慣</th>
+                    <th scope="col">煮飯</th>
+                    <th scope="col">怪行為</th>
+                    <th scope="col">飼養地點</th>
+                    <th scope="col">如何得知卡卡貓</th>
                     </tr>
                 </thead>
                 <tbody id="questionnaireViewInfo">
                     <tr>
                         <th scope="row">1</th>
                         <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
                     </tr>
                 </tbody>
                 </table>
@@ -194,6 +241,77 @@
                     var re = JSON.parse(data);
                     var innerHTML = '';
                     for(i in re){
+                        innerHTML += '<tr>';
+                        innerHTML += '<th scope="row">'+re[i].CCMUserqnrPId+'</th>';
+                        innerHTML += '<td>'+re[i].BKN_name+'</th>';
+                        innerHTML += '<td>'+re[i].BKN_age+'</th>';
+                        innerHTML += '<td>'+re[i].BKN_sex+'</th>';
+                        innerHTML += '<td>'+re[i].BCN+'</th>';
+                        innerHTML += '<td>'+re[i].BCS+'</th>';
+                        innerHTML += '<td>'+re[i].BCA_ageYear+'年'+re[i].BCA_ageMonth+'月</th>';
+                        innerHTML += '<td>'+re[i].BSP+'</th>';
+                        innerHTML += '<td>'+re[i].BNU+'</th>';
+                        innerHTML += '<td>'+re[i].BPR+'</th>';
+                        innerHTML += '<td>'+re[i].BPT+'</th>';
+                        innerHTML += '<td>'+re[i].BFN+'</th>';
+                        innerHTML += '<td>'+re[i].BFA_kittyNum+'</th>';
+                        innerHTML += '<td>'+re[i].BFA_week+'</th>';
+                        innerHTML += '<td>'+re[i].BCW_kilo+'公斤'+re[i].BCW_gram+'克</th>';
+                        innerHTML += '<td>'+re[i].BEF+'</th>';
+                        innerHTML += '<td>'+re[i].BSI+'</th>';
+                        innerHTML += '<td>'+re[i].BBC+'</th>';
+                        innerHTML += '<td>'+re[i].weight_control+'</th>';
+                        innerHTML += '<td>'+re[i].catfood_select+'</th>';
+                        innerHTML += '<td>'+re[i].BEMAIL+'</th>';
+                        innerHTML += '<td>'+re[i].select_icon+'</th>';
+                        innerHTML += '<td>'+re[i].joint_now+'</th>';
+                        innerHTML += '<td>'+re[i].joint_med+'</th>';
+                        innerHTML += '<td>'+re[i].joint_below+'</th>';
+                        innerHTML += '<td>'+re[i].joint_jump+'</th>';
+                        innerHTML += '<td>'+re[i].joint_daily+'</th>';
+                        innerHTML += '<td>'+re[i].heart_now+'</th>';
+                        innerHTML += '<td>'+re[i].heart_behave+'</th>';
+                        innerHTML += '<td>'+re[i].heart_avgtemp+'</th>';
+                        innerHTML += '<td>'+re[i].mouth_now+'</th>';
+                        innerHTML += '<td>'+re[i].mouth_behave+'</th>';
+                        innerHTML += '<td>'+re[i].mouth_brush+'</th>';
+                        innerHTML += '<td>'+re[i].fur_freq+'</th>';
+                        innerHTML += '<td>'+re[i].fur_behave+'</th>';
+                        innerHTML += '<td>'+re[i].fur_tie+'</th>';
+                        innerHTML += '<td>'+re[i].immu_now+'</th>';
+                        innerHTML += '<td>'+re[i].immu_behave+'</th>';
+                        innerHTML += '<td>'+re[i].immu_behave_before+'</th>';
+                        innerHTML += '<td>'+re[i].immu_spirit+'</th>';
+                        innerHTML += '<td>'+re[i].immu_med+'</th>';
+                        innerHTML += '<td>'+re[i].kidney_now+'</th>';
+                        innerHTML += '<td>'+re[i].kidney_urine+'</th>';
+                        innerHTML += '<td>'+re[i].kidney_health+'</th>';
+                        innerHTML += '<td>'+re[i].urinary_now+'</th>';
+                        innerHTML += '<td>'+re[i].urinary_behave+'</th>';
+                        innerHTML += '<td>'+re[i].urinary_together+'</th>';
+                        innerHTML += '<td>'+re[i].urinary_water+'</th>';
+                        innerHTML += '<td>'+re[i].stoma_problem+'</th>';
+                        innerHTML += '<td>'+re[i].stoma_bathroom+'</th>';
+                        innerHTML += '<td>'+re[i].stoma_strange+'</th>';
+                        innerHTML += '<td>'+re[i].melt_freq+'</th>';
+                        innerHTML += '<td>'+re[i].stress_now+'</th>';
+                        innerHTML += '<td>'+re[i].stress_enviornment+'</th>';
+                        innerHTML += '<td>'+re[i].stress_enviornment_out+'</th>';
+                        innerHTML += '<td>'+re[i].stress_lifestyle+'</th>';
+                        innerHTML += '<td>'+re[i].extra_eatinghabit+'</th>';
+                        innerHTML += '<td>'+re[i].extra_eatingfreq+'</th>';
+                        innerHTML += '<td>'+re[i].extra_weekcan+'</th>';
+                        innerHTML += '<td>'+re[i].extra_freshflesh+'</th>';
+                        innerHTML += '<td>'+re[i].extra_minifish+'</th>';
+                        innerHTML += '<td>'+re[i].extra_killbugs+'</th>';
+                        innerHTML += '<td>'+re[i].extra_vacci+'</th>';
+                        innerHTML += '<td>'+re[i].extra_alergent+'</th>';
+                        innerHTML += '<td>'+re[i].extra_drinking+'</th>';
+                        innerHTML += '<td>'+re[i].extra_cooking+'</th>';
+                        innerHTML += '<td>'+re[i].extra_strangehabit+'</th>';
+                        innerHTML += '<td>'+re[i].extra_place+'</th>';
+                        innerHTML += '<td>'+re[i].extra_knowhow+'</th>';
+                        innerHTML += '</tr>';
                         innerHTML += '<tr><th scope="row">'+re[i].CCMUserqnrPId+'</th><td>'+re[i].BKN_name+'</td><td>'+re[i].BKN_sex+'</td><td>'+re[i].BEMAIL+'</td><td>'+re[i].BCA_ageYear+'.'+re[i].BCA_ageMonth+'</td><td>'+re[i].BSP+'</td><td>'+re[i].BBC+'</td><td>'+re[i].select_icon+'</td><td>'+re[i].extra_place+'</td><td>'+re[i].extra_freshflesh+'</td><td>'+re[i].extra_weekcan+'</td><td>'+re[i].extra_vacci+'</td></tr>';
                     }
                     document.getElementById('questionnaireViewInfo').innerHTML = innerHTML;
