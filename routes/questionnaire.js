@@ -917,7 +917,7 @@ router.get('/extra_minifish',function(req,res,next){
 router.post('/extra_minifish',function(req,res,next){
     req.session.extra_minifish = req.body.name;
     req.session.qnrecordList.push(req.session.qnrecord);
-    res.send('extra_killbugs');
+    res.send('extra_vacci');
 });
 //
 router.get('/extra_killbugs',function(req,res,next){
@@ -932,6 +932,9 @@ router.post('/extra_killbugs',function(req,res,next){
 });
 //
 router.get('/extra_vacci',function(req,res,next){
+    //
+    req.session.extra_killbugs = null;
+    //
     req.session.extra_vacci = null;
     req.session.qnrecord = 'extra_vacci';
     res.render('questionnaire/extra_vacci',{name:req.session.BCN});
