@@ -895,7 +895,7 @@ router.post('/extra_weekcan',function(req,res,next){
     req.session.extra_weekcan_major = req.body.major;
     req.session.extra_weekcan_minor = req.body.minor;
     req.session.qnrecordList.push(req.session.qnrecord);
-    res.send('extra_freshflesh');
+    res.send('extra_vacci');
 });
 //
 router.get('/extra_freshflesh',function(req,res,next){
@@ -933,6 +933,8 @@ router.post('/extra_killbugs',function(req,res,next){
 //
 router.get('/extra_vacci',function(req,res,next){
     //
+    req.session.extra_freshflesh = null;
+    req.session.extra_minifish = null;
     req.session.extra_killbugs = null;
     //
     req.session.extra_vacci = null;
